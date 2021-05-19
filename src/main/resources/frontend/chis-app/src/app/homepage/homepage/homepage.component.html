@@ -1,0 +1,8 @@
+<nz-tabset [(nzSelectedIndex)]="nzSelectedIndex">
+  <nz-tab nzTitle="Newsfeed">
+    <app-newsfeed *ngIf="nzSelectedIndex === 0"></app-newsfeed>
+  </nz-tab>
+  <nz-tab nzTitle="Posts">
+    <app-post-feed *ngIf="nzSelectedIndex === 1"></app-post-feed>
+  </nz-tab>
+</nz-tabset>
