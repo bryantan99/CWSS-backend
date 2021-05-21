@@ -971,29 +971,125 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Plugin>caching_sha2_password</Plugin>
     </user>
     <table id="283" parent="2" name="account"/>
-    <column id="284" parent="283" name="ACCOUNT_USERNAME">
+    <table id="284" parent="2" name="account_role"/>
+    <table id="285" parent="2" name="admin"/>
+    <table id="286" parent="2" name="community_user"/>
+    <column id="287" parent="283" name="USERNAME">
       <Position>1</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="285" parent="283" name="ACCOUNT_PASSWORD">
+    <column id="288" parent="283" name="PW">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="286" parent="283" name="ACCOUNT_STATUS">
+    <column id="289" parent="283" name="IS_ACTIVE">
       <Position>3</Position>
-      <DataType>varchar(8)|0s</DataType>
-      <NotNull>1</NotNull>
+      <DataType>varchar(1)|0s</DataType>
     </column>
-    <column id="287" parent="283" name="LAST_LOGIN_DATE">
+    <column id="290" parent="283" name="LAST_LOGIN_DATE">
       <Position>4</Position>
-      <DataType>date|0s</DataType>
+      <DataType>datetime|0s</DataType>
     </column>
-    <key id="288" parent="283" name="PRIMARY">
+    <key id="291" parent="283" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>ACCOUNT_USERNAME</ColNames>
+      <ColNames>USERNAME</ColNames>
       <Primary>1</Primary>
     </key>
+    <column id="292" parent="284" name="USERNAME">
+      <Position>1</Position>
+      <DataType>varchar(20)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="293" parent="284" name="ROLE_NAME">
+      <Position>2</Position>
+      <DataType>varchar(50)|0s</DataType>
+    </column>
+    <column id="294" parent="284" name="ID">
+      <Position>3</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="295" parent="284" name="FK6maxca7k70niuh7p1mo6duxx9">
+      <ColNames>USERNAME</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="296" parent="284" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="297" parent="284" name="FK6maxca7k70niuh7p1mo6duxx9">
+      <ColNames>USERNAME</ColNames>
+      <RefTableName>account</RefTableName>
+      <RefColNames>USERNAME</RefColNames>
+    </foreign-key>
+    <column id="298" parent="285" name="USERNAME">
+      <Position>1</Position>
+      <DataType>varchar(20)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="299" parent="285" name="FULL_NAME">
+      <Position>2</Position>
+      <DataType>varchar(100)|0s</DataType>
+    </column>
+    <column id="300" parent="285" name="CONTACT_NO">
+      <Position>3</Position>
+      <DataType>varchar(11)|0s</DataType>
+    </column>
+    <column id="301" parent="285" name="EMAIL">
+      <Position>4</Position>
+      <DataType>varchar(50)|0s</DataType>
+    </column>
+    <key id="302" parent="285" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>USERNAME</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="303" parent="285" name="admin_account_ACCOUNT_USERNAME_fk">
+      <ColNames>USERNAME</ColNames>
+      <RefTableName>account</RefTableName>
+      <RefColNames>USERNAME</RefColNames>
+    </foreign-key>
+    <column id="304" parent="286" name="USERNAME">
+      <Position>1</Position>
+      <DataType>varchar(20)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="305" parent="286" name="FULL_NAME">
+      <Position>2</Position>
+      <DataType>varchar(100)|0s</DataType>
+    </column>
+    <column id="306" parent="286" name="NRIC">
+      <Position>3</Position>
+      <DataType>varchar(12)|0s</DataType>
+    </column>
+    <column id="307" parent="286" name="EMAIL">
+      <Position>4</Position>
+      <DataType>varchar(50)|0s</DataType>
+    </column>
+    <column id="308" parent="286" name="GENDER">
+      <Position>5</Position>
+      <DataType>varchar(1)|0s</DataType>
+    </column>
+    <column id="309" parent="286" name="CONTACT_NO">
+      <Position>6</Position>
+      <DataType>varchar(11)|0s</DataType>
+    </column>
+    <column id="310" parent="286" name="ETHNIC">
+      <Position>7</Position>
+      <DataType>varchar(10)|0s</DataType>
+    </column>
+    <key id="311" parent="286" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>USERNAME</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="312" parent="286" name="community_user_account_ACCOUNT_USERNAME_fk">
+      <ColNames>USERNAME</ColNames>
+      <RefTableName>account</RefTableName>
+      <RefColNames>USERNAME</RefColNames>
+    </foreign-key>
   </database-model>
 </dataSource>

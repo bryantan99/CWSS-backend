@@ -1,10 +1,9 @@
 package com.chis.communityhealthis.service;
 
-import com.chis.communityhealthis.model.AccountBean;
-import com.chis.communityhealthis.repository.AccountRepo;
+import com.chis.communityhealthis.bean.AccountBean;
+import com.chis.communityhealthis.repository.AccountDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 
 import javax.transaction.Transactional;
 
@@ -13,17 +12,16 @@ import javax.transaction.Transactional;
 public class AccountServiceImpl implements AccountService{
 
     @Autowired
-    private AccountRepo accountRepo;
-
-    @Override
-    public AccountBean addAccount(AccountBean accountBean) {
-        return accountRepo.saveAndFlush(accountBean);
-    }
+    private AccountDao accountDao;
 
     @Override
     public AccountBean getAccount(String username) {
-        AccountBean accountBean = accountRepo.findAccountByAccountUsername(username);
-        Assert.notNull(accountBean, "Account not found");
-        return accountBean;
+        return accountDao.findAccount(username);
+    }
+
+    @Override
+    @Transactional
+    public AccountBean getAccountWithRoles(String username) {
+        return accountDao.findAccountWithRoles(username);
     }
 }

@@ -16,6 +16,7 @@ import {HomepageModule} from "./homepage/homepage.module";
 import {SharedModule} from "./shared/shared.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {UserModule} from "./user/user.module";
+import {AppService} from "./app.service";
 
 registerLocaleData(en);
 
@@ -37,7 +38,7 @@ registerLocaleData(en);
     ReactiveFormsModule,
     UserModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }],
+  providers: [{ provide: NZ_I18N, useValue: en_US }, AppService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
