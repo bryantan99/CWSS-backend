@@ -15,6 +15,11 @@ public class AccountServiceImpl implements AccountService{
     private AccountDao accountDao;
 
     @Override
+    public void addAccount(AccountBean accountBean) {
+        accountDao.add(accountBean);
+    }
+
+    @Override
     public AccountBean getAccount(String username) {
         return accountDao.findAccount(username);
     }
