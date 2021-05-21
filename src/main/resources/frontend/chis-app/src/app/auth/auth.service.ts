@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {EventEmitter, Injectable, Output} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs/operators";
 
@@ -13,8 +13,7 @@ export class AuthService {
 
   constructor(private http:HttpClient) { }
 
-  // Provide username and password for authentication, and once authentication is successful,
-  //store JWT token in session
+  //  Store JWT Token in session if authentication is successful
   login(loginForm:  {username: string, password: string}) {
     return this.http.post<any>(this.LOGIN, loginForm)
       .pipe(

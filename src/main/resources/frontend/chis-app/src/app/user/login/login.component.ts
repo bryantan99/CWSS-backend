@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CustomValidationService} from "../../shared/services/custom-validation.service";
 import {AuthService} from "../../auth/auth.service";
@@ -35,9 +35,10 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginForm.value)
       .pipe(finalize(() => {
         this.submitted = false;
+        console.log(this.authService.isUserLoggedIn());
       }))
       .subscribe(resp => {
-        this.router.navigate([''])
+        this.router.navigate(['']);
     }, error => {
         this.invalidLogin = true;
         console.log("Encountered problem when logging in.", error);

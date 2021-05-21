@@ -41,8 +41,8 @@
   <nz-row>
     <nz-col [nzSm]="6" nzXs="24"></nz-col>
     <nz-col [nzSm]="18" nzXs="24">
-      <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'" (click)="submitForm()">Log in</button>
-      Or <a [routerLink]="'../signup'"> register now! </a>
+      <button nz-button nzType="primary" [nzLoading]="submitted" (click)="submitForm()">Log In</button>
+      or <a [routerLink]="'../signup'"> register now! </a>
     </nz-col>
   </nz-row>
 
