@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { IconsProviderModule } from './icons-provider.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
@@ -17,6 +17,7 @@ import {SharedModule} from "./shared/shared.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {UserModule} from "./user/user.module";
 import {AppService} from "./app.service";
+import {BasicAuthInterceptorService} from "./shared/services/basic-auth-interceptor.service";
 
 registerLocaleData(en);
 
@@ -38,7 +39,7 @@ registerLocaleData(en);
     ReactiveFormsModule,
     UserModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }, AppService],
+  providers: [{ provide: NZ_I18N, useValue: en_US }, AppService, {provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptorService, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

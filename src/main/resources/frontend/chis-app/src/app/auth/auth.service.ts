@@ -19,7 +19,7 @@ export class AuthService {
       .pipe(
         map(userData => {
           sessionStorage.setItem("username", loginForm.username);
-          let tokenStr = "Bearer " + userData.token;
+          let tokenStr = "Bearer " + userData.jwtToken;
           sessionStorage.setItem("token", tokenStr);
           return userData;
         })

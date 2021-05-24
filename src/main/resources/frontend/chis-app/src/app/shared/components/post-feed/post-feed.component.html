@@ -1,1 +1,25 @@
-<p>post-feed works!</p>
+<nz-spin [nzSpinning]="isLoading">
+  <ng-container *ngIf="adminPost">
+    <nz-card class="mb-4"  *ngFor="let post of adminPost" [nzExtra]="deleteButtonTemplate">
+      <nz-card-meta [nzAvatar]="avatarTemplate" [nzTitle]="titleTemplate" [nzDescription]="descriptionTemplate"></nz-card-meta>
+
+      <ng-template #avatarTemplate>
+        <nz-avatar [nzSrc]="dummyPhotoUrl"></nz-avatar>
+      </ng-template>
+
+      <ng-template #titleTemplate>
+        <span>{{post.adminBean?.fullName}}</span><br>
+        <small>{{post.createdDate | date: 'medium'}}</small>
+      </ng-template>
+
+      <ng-template #descriptionTemplate>
+        <p innerHTML="{{post?.postDescription || '-'}}"></p>
+      </ng-template>
+
+      <ng-template #deleteButtonTemplate>
+        <button nz-button nzType="danger" (click)="deletePost(post?.postId)">Delete</button>
+      </ng-template>
+    </nz-card>
+  </ng-container>
+
+</nz-spin>

@@ -974,122 +974,173 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     <table id="284" parent="2" name="account_role"/>
     <table id="285" parent="2" name="admin"/>
     <table id="286" parent="2" name="community_user"/>
-    <column id="287" parent="283" name="USERNAME">
+    <table id="287" parent="2" name="post"/>
+    <table id="288" parent="2" name="post_media"/>
+    <column id="289" parent="283" name="USERNAME">
       <Position>1</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="288" parent="283" name="PW">
+    <column id="290" parent="283" name="PW">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="289" parent="283" name="IS_ACTIVE">
+    <column id="291" parent="283" name="IS_ACTIVE">
       <Position>3</Position>
       <DataType>varchar(1)|0s</DataType>
     </column>
-    <column id="290" parent="283" name="LAST_LOGIN_DATE">
+    <column id="292" parent="283" name="LAST_LOGIN_DATE">
       <Position>4</Position>
       <DataType>datetime|0s</DataType>
     </column>
-    <key id="291" parent="283" name="PRIMARY">
+    <key id="293" parent="283" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>USERNAME</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="292" parent="284" name="USERNAME">
+    <column id="294" parent="284" name="USERNAME">
       <Position>1</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="293" parent="284" name="ROLE_NAME">
+    <column id="295" parent="284" name="ROLE_NAME">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
     </column>
-    <column id="294" parent="284" name="ID">
+    <column id="296" parent="284" name="ID">
       <Position>3</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="295" parent="284" name="FK6maxca7k70niuh7p1mo6duxx9">
+    <index id="297" parent="284" name="FK6maxca7k70niuh7p1mo6duxx9">
       <ColNames>USERNAME</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="296" parent="284" name="PRIMARY">
+    <key id="298" parent="284" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="297" parent="284" name="FK6maxca7k70niuh7p1mo6duxx9">
+    <foreign-key id="299" parent="284" name="FK6maxca7k70niuh7p1mo6duxx9">
       <ColNames>USERNAME</ColNames>
       <RefTableName>account</RefTableName>
       <RefColNames>USERNAME</RefColNames>
     </foreign-key>
-    <column id="298" parent="285" name="USERNAME">
+    <column id="300" parent="285" name="USERNAME">
       <Position>1</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="299" parent="285" name="FULL_NAME">
+    <column id="301" parent="285" name="FULL_NAME">
       <Position>2</Position>
       <DataType>varchar(100)|0s</DataType>
     </column>
-    <column id="300" parent="285" name="CONTACT_NO">
+    <column id="302" parent="285" name="CONTACT_NO">
       <Position>3</Position>
       <DataType>varchar(11)|0s</DataType>
     </column>
-    <column id="301" parent="285" name="EMAIL">
+    <column id="303" parent="285" name="EMAIL">
       <Position>4</Position>
       <DataType>varchar(50)|0s</DataType>
     </column>
-    <key id="302" parent="285" name="PRIMARY">
+    <key id="304" parent="285" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>USERNAME</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="303" parent="285" name="admin_account_ACCOUNT_USERNAME_fk">
+    <foreign-key id="305" parent="285" name="admin_account_ACCOUNT_USERNAME_fk">
       <ColNames>USERNAME</ColNames>
       <RefTableName>account</RefTableName>
       <RefColNames>USERNAME</RefColNames>
     </foreign-key>
-    <column id="304" parent="286" name="USERNAME">
+    <column id="306" parent="286" name="USERNAME">
       <Position>1</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="305" parent="286" name="FULL_NAME">
+    <column id="307" parent="286" name="FULL_NAME">
       <Position>2</Position>
       <DataType>varchar(100)|0s</DataType>
     </column>
-    <column id="306" parent="286" name="NRIC">
+    <column id="308" parent="286" name="NRIC">
       <Position>3</Position>
       <DataType>varchar(12)|0s</DataType>
     </column>
-    <column id="307" parent="286" name="EMAIL">
+    <column id="309" parent="286" name="EMAIL">
       <Position>4</Position>
       <DataType>varchar(50)|0s</DataType>
     </column>
-    <column id="308" parent="286" name="GENDER">
+    <column id="310" parent="286" name="GENDER">
       <Position>5</Position>
       <DataType>varchar(1)|0s</DataType>
     </column>
-    <column id="309" parent="286" name="CONTACT_NO">
+    <column id="311" parent="286" name="CONTACT_NO">
       <Position>6</Position>
       <DataType>varchar(11)|0s</DataType>
     </column>
-    <column id="310" parent="286" name="ETHNIC">
+    <column id="312" parent="286" name="ETHNIC">
       <Position>7</Position>
       <DataType>varchar(10)|0s</DataType>
     </column>
-    <key id="311" parent="286" name="PRIMARY">
+    <key id="313" parent="286" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>USERNAME</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="312" parent="286" name="community_user_account_ACCOUNT_USERNAME_fk">
+    <foreign-key id="314" parent="286" name="community_user_account_ACCOUNT_USERNAME_fk">
       <ColNames>USERNAME</ColNames>
       <RefTableName>account</RefTableName>
       <RefColNames>USERNAME</RefColNames>
     </foreign-key>
+    <column id="315" parent="287" name="POST_ID">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="316" parent="287" name="POST_DESCRIPTION">
+      <Position>2</Position>
+      <DataType>varchar(2000)|0s</DataType>
+    </column>
+    <column id="317" parent="287" name="CREATED_BY">
+      <Position>3</Position>
+      <DataType>varchar(20)|0s</DataType>
+    </column>
+    <column id="318" parent="287" name="CREATED_DATE">
+      <Position>4</Position>
+      <DataType>datetime|0s</DataType>
+    </column>
+    <key id="319" parent="287" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>POST_ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="320" parent="288" name="MEDIA_ID">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="321" parent="288" name="POST_ID">
+      <Position>2</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="322" parent="288" name="MEDIA_TYPE">
+      <Position>3</Position>
+      <DataType>varchar(3)|0s</DataType>
+    </column>
+    <column id="323" parent="288" name="MEDIA_DIRECTORY">
+      <Position>4</Position>
+      <DataType>varchar(100)|0s</DataType>
+    </column>
+    <index id="324" parent="288" name="POST_MEDIA_post_POST_ID_fk">
+      <ColNames>POST_ID</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="325" parent="288" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>MEDIA_ID</ColNames>
+      <Primary>1</Primary>
+    </key>
   </database-model>
 </dataSource>

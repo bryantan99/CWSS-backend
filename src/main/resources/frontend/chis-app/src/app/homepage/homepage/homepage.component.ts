@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {AppService} from "../../app.service";
-import {HttpClient} from "@angular/common/http";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {PostFeedComponent} from "../../shared/components/post-feed/post-feed.component";
 
 @Component({
   selector: 'app-homepage',
@@ -8,18 +7,28 @@ import {HttpClient} from "@angular/common/http";
 })
 export class HomepageComponent implements OnInit {
 
-  nzSelectedIndex = 0;
+  @ViewChild(PostFeedComponent) postFeedComponent: PostFeedComponent;
 
-  constructor(private app: AppService, private http: HttpClient) {
-    http.get('account/get-account').subscribe(data => {
-      console.log(data);
-    })
+  nzSelectedIndex = 0;
+  newPostModalIsVisible: boolean = false;
+
+  constructor() {
   }
 
   ngOnInit(): void {
   }
 
-  authenticated() {
-    return this.app.authenticated;
+  openNewPostModal() {
+    this.newPostModalIsVisible = true;
+  }
+
+  modalVisibleHasChange(isVisible: boolean) {
+    this.newPostModalIsVisible = isVisible;
+  }
+
+  postListHasChanges(hasNewPost: boolean) {
+    if (hasNewPost) {
+      this.postFeedComponent.getAdminPosts();
+    }
   }
 }

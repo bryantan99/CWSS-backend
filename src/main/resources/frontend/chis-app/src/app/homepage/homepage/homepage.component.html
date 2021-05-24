@@ -1,4 +1,4 @@
-<nz-tabset [(nzSelectedIndex)]="nzSelectedIndex">
+<nz-tabset [(nzSelectedIndex)]="nzSelectedIndex" [nzTabBarExtraContent]="buttonTemplate">
   <nz-tab nzTitle="Newsfeed">
     <app-newsfeed *ngIf="nzSelectedIndex === 0"></app-newsfeed>
   </nz-tab>
@@ -6,3 +6,9 @@
     <app-post-feed *ngIf="nzSelectedIndex === 1"></app-post-feed>
   </nz-tab>
 </nz-tabset>
+
+<ng-template #buttonTemplate>
+  <button nz-button *ngIf="nzSelectedIndex === 1" (click)="openNewPostModal()">Create New Post</button>
+</ng-template>
+
+<app-new-post-modal [isVisible]="newPostModalIsVisible" (modalIsVisibleEmitter)="modalVisibleHasChange($event)" (addNewPostEmitter)="postListHasChanges($event)"></app-new-post-modal>

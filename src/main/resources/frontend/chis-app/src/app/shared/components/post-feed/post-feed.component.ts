@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AdminPostService} from "../../services/admin-post.service";
+import {finalize} from "rxjs/operators";
+import {error} from "@angular/compiler/src/util";
 
 @Component({
   selector: 'app-post-feed',
@@ -6,9 +9,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostFeedComponent implements OnInit {
 
-  constructor() { }
+  adminPost: any[] = [];
+  isLoading: boolean = false;
+  dummyPhotoUrl: string = "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png";
 
-  ngOnInit(): void {
+  constructor(private adminPostService: AdminPostService) {
   }
 
+  ngOnInit(): void {
+    this.getAdminPosts()
+  }
+
+  getAdminPosts() {
+    this.adminPost = [];
+    this.isLoading = true;
+    this.adminPostService.getAdminPost()
+      .pipe(finalize(() => {
+        this.isLoading = false;
+      }))
+      .subscribe(resp => {
+        this.adminPost = resp ? resp : [];
+      }, error => {
+        console.log("There's an error when getting admin posts.", error);
+        this.isLoading = false;
+      })
+
+  }
+
+  deletePost(postId: number) {
+    this.adminPostService.deleteAdminPost(postId)
+      .subscribe(resp => {
+        this.getAdminPosts();
+      }, error => {
+        console.log("There's an error when deleting new post.", error);
+      })
+  }
 }
