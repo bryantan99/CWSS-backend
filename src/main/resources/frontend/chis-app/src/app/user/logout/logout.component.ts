@@ -13,7 +13,6 @@ export class LogoutComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.logOut();
-    console.log(this.authService.isUserLoggedIn());
     this.router.navigate(['login'])
   }
 
