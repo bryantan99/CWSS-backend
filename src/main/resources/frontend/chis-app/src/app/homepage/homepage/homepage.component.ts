@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {PostFeedComponent} from "../../shared/components/post-feed/post-feed.component";
+import {AuthService} from "../../auth/auth.service";
 
 @Component({
   selector: 'app-homepage',
@@ -11,11 +12,13 @@ export class HomepageComponent implements OnInit {
 
   nzSelectedIndex = 0;
   newPostModalIsVisible: boolean = false;
+  hasUserLoggedIn: boolean = false;
 
-  constructor() {
+  constructor(private authService: AuthService) {
   }
 
   ngOnInit(): void {
+    this.hasUserLoggedIn = this.authService.isUserLoggedIn();
   }
 
   openNewPostModal() {

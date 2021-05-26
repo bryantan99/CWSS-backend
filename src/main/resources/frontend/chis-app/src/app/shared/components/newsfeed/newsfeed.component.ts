@@ -31,7 +31,7 @@ export class NewsfeedComponent implements OnInit {
                     this.healthNews = resp.articles;
                 }
             }, error => {
-                console.log(error);
+                console.log("There's an error when using newsAPI to get news.", error);
             })
     }
 }

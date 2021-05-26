@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AdminPostService} from "../../services/admin-post.service";
 import {finalize} from "rxjs/operators";
-import {error} from "@angular/compiler/src/util";
+import {AuthService} from "../../../auth/auth.service";
 
 @Component({
   selector: 'app-post-feed',
@@ -12,12 +12,15 @@ export class PostFeedComponent implements OnInit {
   adminPost: any[] = [];
   isLoading: boolean = false;
   dummyPhotoUrl: string = "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png";
+  hasUserLoggedIn: boolean = false;
 
-  constructor(private adminPostService: AdminPostService) {
+  constructor(private adminPostService: AdminPostService,
+              private authService: AuthService) {
   }
 
   ngOnInit(): void {
-    this.getAdminPosts()
+    this.getAdminPosts();
+    this.hasUserLoggedIn = this.authService.isUserLoggedIn();
   }
 
   getAdminPosts() {

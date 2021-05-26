@@ -4,33 +4,411 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="Added functionalities to add, delete post.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/PostBean.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AdminPostRestController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/PostForm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/PostDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/PostDaoImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/AuthService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/AuthServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/PostService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/PostServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/app/shared/components/new-post-modal/new-post-modal.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/app/shared/components/new-post-modal/new-post-modal.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/app/shared/services/admin-post.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" afterDir="false" />
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="Implement ckeditor4 &amp; replace post form with ckeditor">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/app/shared/constants/ck-editor-constants.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/CHANGES.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/LICENSE.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/adapters/jquery.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/build-config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/ckeditor.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/contents.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/lang/en.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/lang/ms.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/lang/zh-cn.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/lang/zh.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/a11yhelp.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/_translationstatus.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/af.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/ar.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/az.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/bg.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/ca.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/cs.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/cy.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/da.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/de-ch.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/de.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/el.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/en-au.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/en-gb.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/en.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/eo.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/es-mx.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/es.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/et.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/eu.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/fa.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/fi.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/fo.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/fr-ca.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/fr.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/gl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/gu.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/he.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/hi.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/hr.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/hu.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/id.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/it.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/ja.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/km.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/ko.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/ku.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/lt.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/lv.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/mk.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/mn.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/nb.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/nl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/no.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/oc.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/pl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/pt-br.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/pt.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/ro.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/ru.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/si.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/sk.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/sl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/sq.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/sr-latn.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/sr.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/sv.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/th.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/tr.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/tt.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/ug.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/uk.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/vi.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/zh-cn.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/a11yhelp/dialogs/lang/zh.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/about/dialogs/about.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/about/dialogs/hidpi/logo_ckeditor.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/about/dialogs/logo_ckeditor.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/clipboard/dialogs/paste.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/colordialog/dialogs/colordialog.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/colordialog/dialogs/colordialog.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/copyformatting/cursors/cursor-disabled.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/copyformatting/cursors/cursor.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/copyformatting/styles/copyformatting.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/dialog/dialogDefinition.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/dialog/styles/dialog.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/div/dialogs/div.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/CHANGELOG.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/LICENSE.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/plugindefinition.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/tests/_helpers/tools.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/tests/authentication.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/tests/exportpdf.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/tests/manual/configfilename.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/tests/manual/configfilename.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/tests/manual/emptyeditor.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/tests/manual/emptyeditor.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/tests/manual/integration.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/tests/manual/integration.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/tests/manual/integrations/easyimage.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/tests/manual/integrations/easyimage.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/tests/manual/notifications.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/tests/manual/notifications.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/tests/manual/notificationsasync.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/tests/manual/notificationsasync.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/tests/manual/paperformat.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/tests/manual/paperformat.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/tests/manual/readonly.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/tests/manual/readonly.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/tests/manual/stylesheets.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/tests/manual/stylesheets.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/tests/manual/tokenfetching.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/tests/manual/tokenfetching.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/tests/manual/tokentwoeditorscorrect.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/tests/manual/tokentwoeditorscorrect.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/tests/manual/tokentwoeditorswrong.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/tests/manual/tokentwoeditorswrong.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/tests/manual/tokenwithouturl.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/tests/manual/tokenwithouturl.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/tests/manual/wrongendpoint.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/tests/manual/wrongendpoint.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/tests/notification.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/tests/resourcespaths.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/tests/statistics.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/exportpdf/tests/stylesheets.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/find/dialogs/find.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/flash/dialogs/flash.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/flash/images/placeholder.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/forms/dialogs/button.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/forms/dialogs/checkbox.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/forms/dialogs/form.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/forms/dialogs/hiddenfield.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/forms/dialogs/radio.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/forms/dialogs/select.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/forms/dialogs/textarea.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/forms/dialogs/textfield.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/forms/images/hiddenfield.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/icons.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/icons_hidpi.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/iframe/dialogs/iframe.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/iframe/images/placeholder.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/image/dialogs/image.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/image/images/noimage.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/link/dialogs/anchor.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/link/dialogs/link.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/link/images/anchor.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/link/images/hidpi/anchor.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/liststyle/dialogs/liststyle.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/magicline/images/hidpi/icon-rtl.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/magicline/images/hidpi/icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/magicline/images/icon-rtl.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/magicline/images/icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/pagebreak/images/pagebreak.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/pastefromgdocs/filter/default.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/pastefromlibreoffice/filter/default.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/pastefromword/filter/default.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/pastetools/filter/common.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/pastetools/filter/image.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/preview/images/pagebreak.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/preview/preview.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/preview/styles/screen.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/scayt/CHANGELOG.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/scayt/LICENSE.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/scayt/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/scayt/dialogs/dialog.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/scayt/dialogs/options.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/scayt/dialogs/toolbar.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/scayt/skins/moono-lisa/scayt.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/showblocks/images/block_address.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/showblocks/images/block_blockquote.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/showblocks/images/block_div.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/showblocks/images/block_h1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/showblocks/images/block_h2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/showblocks/images/block_h3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/showblocks/images/block_h4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/showblocks/images/block_h5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/showblocks/images/block_h6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/showblocks/images/block_p.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/showblocks/images/block_pre.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/dialogs/smiley.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/angel_smile.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/angel_smile.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/angry_smile.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/angry_smile.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/broken_heart.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/broken_heart.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/confused_smile.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/confused_smile.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/cry_smile.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/cry_smile.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/devil_smile.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/devil_smile.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/embaressed_smile.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/embarrassed_smile.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/embarrassed_smile.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/envelope.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/envelope.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/heart.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/heart.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/kiss.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/kiss.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/lightbulb.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/lightbulb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/omg_smile.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/omg_smile.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/regular_smile.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/regular_smile.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/sad_smile.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/sad_smile.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/shades_smile.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/shades_smile.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/teeth_smile.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/teeth_smile.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/thumbs_down.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/thumbs_down.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/thumbs_up.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/thumbs_up.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/tongue_smile.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/tongue_smile.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/tounge_smile.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/whatchutalkingabout_smile.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/whatchutalkingabout_smile.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/wink_smile.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/smiley/images/wink_smile.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/_translationstatus.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/af.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/ar.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/az.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/bg.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/ca.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/cs.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/cy.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/da.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/de-ch.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/de.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/el.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/en-au.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/en-ca.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/en-gb.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/en.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/eo.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/es-mx.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/es.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/et.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/eu.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/fa.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/fi.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/fr-ca.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/fr.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/gl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/he.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/hr.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/hu.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/id.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/it.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/ja.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/km.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/ko.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/ku.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/lt.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/lv.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/nb.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/nl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/no.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/oc.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/pl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/pt-br.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/pt.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/ro.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/ru.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/si.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/sk.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/sl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/sq.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/sr-latn.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/sr.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/sv.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/th.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/tr.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/tt.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/ug.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/uk.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/vi.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/zh-cn.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/lang/zh.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/specialchar/dialogs/specialchar.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/table/dialogs/table.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/tableselection/styles/tableselection.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/tabletools/dialogs/tableCell.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/templates/dialogs/templates.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/templates/dialogs/templates.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/templates/templates/default.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/templates/templates/images/template1.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/templates/templates/images/template2.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/templates/templates/images/template3.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/widget/images/handle.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/plugins/wordcount/css/wordcount.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/css/samples.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/img/github-top.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/img/header-bg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/img/header-separator.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/img/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/img/logo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/img/navigation-tip.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/js/sample.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/js/sf.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/ajax.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/api.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/appendto.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/assets/inlineall/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/assets/outputxhtml/outputxhtml.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/assets/posteddata.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/assets/sample.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/assets/uilanguages/languages.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/datafiltering.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/dialog/assets/my_dialog.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/dialog/dialog.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/divreplace.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/enterkey/enterkey.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/htmlwriter/assets/outputforflash/outputforflash.fla" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/htmlwriter/assets/outputforflash/outputforflash.swf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/htmlwriter/assets/outputforflash/swfobject.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/htmlwriter/outputforflash.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/htmlwriter/outputhtml.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/inlineall.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/inlinebycode.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/inlinetextarea.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/jquery.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/magicline/magicline.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/readonly.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/replacebyclass.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/replacebycode.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/sample.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/sample.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/sample_posteddata.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/tabindex.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/toolbar/toolbar.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/uicolor.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/uilanguages.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/wordcount/maxParagraphs.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/wordcount/wordcount.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/wordcount/wordcountWithMaxCount.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/wysiwygarea/fullpage.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/old/xhtmlstyle.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/toolbarconfigurator/css/fontello.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/toolbarconfigurator/font/LICENSE.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/toolbarconfigurator/font/config.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/toolbarconfigurator/font/fontello.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/toolbarconfigurator/font/fontello.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/toolbarconfigurator/font/fontello.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/toolbarconfigurator/font/fontello.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/toolbarconfigurator/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/toolbarconfigurator/js/abstracttoolbarmodifier.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/toolbarconfigurator/js/fulltoolbareditor.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/toolbarconfigurator/js/toolbarmodifier.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/toolbarconfigurator/js/toolbartextmodifier.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/toolbarconfigurator/lib/codemirror/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/toolbarconfigurator/lib/codemirror/codemirror.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/toolbarconfigurator/lib/codemirror/codemirror.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/toolbarconfigurator/lib/codemirror/javascript.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/toolbarconfigurator/lib/codemirror/show-hint.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/samples/toolbarconfigurator/lib/codemirror/show-hint.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/skins/moono-lisa/dialog.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/skins/moono-lisa/dialog_ie.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/skins/moono-lisa/dialog_ie8.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/skins/moono-lisa/dialog_iequirks.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/skins/moono-lisa/editor.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/skins/moono-lisa/editor_gecko.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/skins/moono-lisa/editor_ie.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/skins/moono-lisa/editor_ie8.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/skins/moono-lisa/editor_iequirks.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/skins/moono-lisa/icons.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/skins/moono-lisa/icons_hidpi.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/skins/moono-lisa/images/arrow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/skins/moono-lisa/images/close.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/skins/moono-lisa/images/hidpi/close.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/skins/moono-lisa/images/hidpi/lock-open.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/skins/moono-lisa/images/hidpi/lock.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/skins/moono-lisa/images/hidpi/refresh.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/skins/moono-lisa/images/lock-open.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/skins/moono-lisa/images/lock.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/skins/moono-lisa/images/refresh.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/skins/moono-lisa/images/spinner.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/skins/moono-lisa/readme.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/styles.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/assets/ckeditor/vendor/promise.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/communityhealthis.iml" beforeDir="false" afterPath="$PROJECT_DIR$/communityhealthis.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/JwtAuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/JwtAuthenticationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/security/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/security/SecurityConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/app/auth/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/app/auth/auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/app/homepage/homepage/homepage.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/app/homepage/homepage/homepage.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/app/homepage/homepage/homepage.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/app/homepage/homepage/homepage.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/app/shared/components/new-post-modal/new-post-modal.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/app/shared/components/new-post-modal/new-post-modal.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/app/shared/components/new-post-modal/new-post-modal.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/app/shared/components/new-post-modal/new-post-modal.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/app/shared/components/newsfeed/newsfeed.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/app/shared/components/newsfeed/newsfeed.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/app/shared/components/post-feed/post-feed.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/app/shared/components/post-feed/post-feed.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/app/shared/components/post-feed/post-feed.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/app/shared/components/post-feed/post-feed.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/app/shared/services/basic-auth-interceptor.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/app/shared/services/basic-auth-interceptor.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/app/shared/shared.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/chis-app/src/app/shared/shared.module.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -44,6 +422,7 @@
         <option value="spring-beans.schema" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -96,6 +475,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\win 10\IdeaProjects\CHIS\src\main\resources\frontend\chis-app\src\app" />
       <recent name="C:\Users\win 10\IdeaProjects\CHIS\src\main\resources\frontend\chis-app\src\app\shared\services" />
       <recent name="C:\Users\win 10\IdeaProjects\CHIS\src\main\resources\frontend\chis-app\src\app\homepage" />
       <recent name="C:\Users\win 10\IdeaProjects\CHIS\src\main\resources\frontend\chis-app\src\app\shared" />
@@ -164,7 +544,11 @@
       <workItem from="1621575773351" duration="34757000" />
       <workItem from="1621846882974" duration="32000" />
       <workItem from="1621865548672" duration="861000" />
-      <workItem from="1621866591762" duration="16906000" />
+      <workItem from="1621866591762" duration="17501000" />
+      <workItem from="1621909383170" duration="3852000" />
+      <workItem from="1621955118420" duration="9210000" />
+      <workItem from="1621965291445" duration="951000" />
+      <workItem from="1622036320414" duration="7936000" />
     </task>
     <task id="LOCAL-00001" summary="Set up database connection, Add Angular &amp; NG-ZORRO">
       <created>1621365135437</created>
@@ -215,7 +599,21 @@
       <option name="project" value="LOCAL" />
       <updated>1621620663166</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Added functionalities to add, delete post.">
+      <created>1621883718908</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1621883718909</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Removed console log, permitAll() for /post/get-admin-posts">
+      <created>1621911109162</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1621911109162</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -243,7 +641,9 @@
     <MESSAGE value="Add backend login and register" />
     <MESSAGE value="Display sidebar menu items based on logged in status" />
     <MESSAGE value="Added functionalities to add, delete post." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added functionalities to add, delete post." />
+    <MESSAGE value="Removed console log, permitAll() for /post/get-admin-posts" />
+    <MESSAGE value="Implement ckeditor4 &amp; replace post form with ckeditor" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implement ckeditor4 &amp; replace post form with ckeditor" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

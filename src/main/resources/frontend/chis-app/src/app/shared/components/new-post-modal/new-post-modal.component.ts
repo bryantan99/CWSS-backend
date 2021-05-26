@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AdminPostService} from "../../services/admin-post.service";
+import {CkEditorConstants} from "../../constants/ck-editor-constants";
 
 @Component({
   selector: 'app-new-post-modal',
@@ -14,6 +15,8 @@ export class NewPostModalComponent implements OnInit {
   nzTitle: string = "Create New Post";
   postForm: FormGroup;
   isSubmitted: boolean = false;
+  EDITOR_CONFIG = CkEditorConstants.DEFAULT_CONFIG;
+  EDITOR_URL: string = CkEditorConstants.EDITOR_URL;
 
   constructor(private fb: FormBuilder,
               private adminPostService: AdminPostService) { }

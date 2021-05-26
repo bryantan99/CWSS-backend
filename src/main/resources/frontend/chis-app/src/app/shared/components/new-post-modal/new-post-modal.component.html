@@ -1,9 +1,9 @@
-<nz-modal [(nzVisible)]="isVisible" [nzTitle]="nzTitle" (nzOnCancel)="handleCancel()">
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="nzTitle" [nzWidth]="720" (nzOnCancel)="handleCancel()">
   <div *nzModalContent>
     <form nz-form [formGroup]="postForm">
       <nz-form-item>
         <nz-form-control>
-          <textarea rows="4" nz-input formControlName="postDescription"></textarea>
+          <ckeditor [editorUrl]="EDITOR_URL" [config]="EDITOR_CONFIG" formControlName="postDescription"></ckeditor>
         </nz-form-control>
       </nz-form-item>
     </form>

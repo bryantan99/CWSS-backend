@@ -1,6 +1,6 @@
 <nz-spin [nzSpinning]="isLoading">
   <ng-container *ngIf="adminPost">
-    <nz-card class="mb-4"  *ngFor="let post of adminPost" [nzExtra]="deleteButtonTemplate">
+    <nz-card class="mb-4"  *ngFor="let post of adminPost">
       <nz-card-meta [nzAvatar]="avatarTemplate" [nzTitle]="titleTemplate" [nzDescription]="descriptionTemplate"></nz-card-meta>
 
       <ng-template #avatarTemplate>
@@ -8,17 +8,23 @@
       </ng-template>
 
       <ng-template #titleTemplate>
-        <span>{{post.adminBean?.fullName}}</span><br>
-        <small>{{post.createdDate | date: 'medium'}}</small>
+        <nz-row>
+          <nz-col [nzXs]="24" [nzSm]="12">
+            <span>{{post.adminBean?.fullName}}</span><br>
+            <small>{{post.createdDate | date: 'medium'}}</small>
+          </nz-col>
+
+          <nz-col [nzXs]="24" [nzSm]="12" *ngIf="hasUserLoggedIn">
+            <button class="float-end" nz-button nzDanger nz-popconfirm nzPopconfirmTitle="Are you sure you want to delete this post?" (nzOnConfirm)="deletePost(post?.postId)">Delete</button>
+          </nz-col>
+        </nz-row>
+
       </ng-template>
 
       <ng-template #descriptionTemplate>
         <p innerHTML="{{post?.postDescription || '-'}}"></p>
       </ng-template>
 
-      <ng-template #deleteButtonTemplate>
-        <button nz-button nzType="danger" (click)="deletePost(post?.postId)">Delete</button>
-      </ng-template>
     </nz-card>
   </ng-container>
 
