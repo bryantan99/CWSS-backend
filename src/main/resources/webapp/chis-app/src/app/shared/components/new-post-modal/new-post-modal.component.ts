@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AdminPostService} from "../../services/admin-post.service";
 import {CkEditorConstants} from "../../constants/ck-editor-constants";
+import {NzUploadFile} from "ng-zorro-antd/upload";
 
 @Component({
   selector: 'app-new-post-modal',
@@ -14,7 +15,9 @@ export class NewPostModalComponent implements OnInit {
 
   nzTitle: string = "Create New Post";
   postForm: FormGroup;
+  fileList: NzUploadFile[] = [];
   isSubmitted: boolean = false;
+  isUploading: boolean = false;
   EDITOR_CONFIG = CkEditorConstants.DEFAULT_CONFIG;
   EDITOR_URL: string = CkEditorConstants.EDITOR_URL;
 
@@ -30,8 +33,7 @@ export class NewPostModalComponent implements OnInit {
   handleOk(): void {
     if (this.postForm.valid) {
       this.isSubmitted = true;
-
-      this.adminPostService.addAdminPost(this.postForm.value)
+      this.adminPostService.addAdminPost(this.postForm.value, this.fileList)
         .subscribe(resp => {
           if (resp) {
             this.isVisible = false;
@@ -57,8 +59,16 @@ export class NewPostModalComponent implements OnInit {
     this.modalIsVisibleEmitter.emit(this.isVisible);
   }
 
+  beforeUpload = (file: NzUploadFile): boolean => {
+    if (!this.fileList.some(e => e.name === file.name)) {
+      this.fileList = this.fileList.concat(file);
+    }
+    return false;
+  };
+
   private resetForm() {
     this.postForm.reset();
+    this.fileList = [];
   }
 
   private emitAddNewPost() {

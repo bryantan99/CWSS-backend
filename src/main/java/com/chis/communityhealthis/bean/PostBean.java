@@ -3,6 +3,7 @@ package com.chis.communityhealthis.bean;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "POST")
@@ -32,6 +33,10 @@ public class PostBean implements Serializable {
     @ManyToOne
     @JoinColumn(name = CREATED_BY,referencedColumnName = AdminBean.USERNAME, updatable = false, insertable = false)
     private AdminBean adminBean;
+
+    @OneToMany
+    @JoinColumn(name = POST_ID, referencedColumnName = PostMediaBean.POST_ID, updatable = false, insertable = false)
+    private Set<PostMediaBean> postMediaBeanSet;
 
     public Integer getPostId() {
         return postId;
@@ -68,4 +73,12 @@ public class PostBean implements Serializable {
     public AdminBean getAdminBean() { return adminBean; }
 
     public void setAdminBean(AdminBean adminBean) { this.adminBean = adminBean; }
+
+    public Set<PostMediaBean> getPostMediaBeanSet() {
+        return postMediaBeanSet;
+    }
+
+    public void setPostMediaBeanSet(Set<PostMediaBean> postMediaBeanSet) {
+        this.postMediaBeanSet = postMediaBeanSet;
+    }
 }

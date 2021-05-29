@@ -25,4 +25,20 @@ public class PostDaoImpl extends GenericDaoImpl<PostBean, Integer> implements Po
         Query<PostBean> query = currentSession().createQuery(criteriaQuery);
         return query.list();
     }
+
+    @Override
+    public List<PostBean> getPostsWithMedia() {
+        CriteriaBuilder criteriaBuilder = currentSession().getCriteriaBuilder();
+        CriteriaQuery<PostBean> criteriaQuery = criteriaBuilder.createQuery(PostBean.class);
+        Root<PostBean> root = criteriaQuery.from(PostBean.class);
+        root.fetch("adminBean", JoinType.INNER);
+        root.fetch("postMediaBeanSet", JoinType.LEFT);
+
+        List<Order> orderList = new ArrayList();
+        orderList.add(criteriaBuilder.desc(root.get("createdDate")));
+
+        criteriaQuery.select(root).distinct(true).orderBy(orderList);
+        Query<PostBean> query = currentSession().createQuery(criteriaQuery);
+        return query.list();
+    }
 }

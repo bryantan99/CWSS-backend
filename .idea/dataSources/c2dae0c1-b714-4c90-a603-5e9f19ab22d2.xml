@@ -1120,6 +1120,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
     </column>
     <column id="321" parent="288" name="POST_ID">
       <Position>2</Position>
@@ -1127,7 +1128,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </column>
     <column id="322" parent="288" name="MEDIA_TYPE">
       <Position>3</Position>
-      <DataType>varchar(3)|0s</DataType>
+      <DataType>varchar(15)|0s</DataType>
     </column>
     <column id="323" parent="288" name="MEDIA_DIRECTORY">
       <Position>4</Position>

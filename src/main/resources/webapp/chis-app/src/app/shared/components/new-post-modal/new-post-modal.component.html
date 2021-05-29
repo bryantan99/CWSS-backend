@@ -6,6 +6,14 @@
           <ckeditor [editorUrl]="EDITOR_URL" [config]="EDITOR_CONFIG" formControlName="postDescription"></ckeditor>
         </nz-form-control>
       </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-control>
+          <nz-upload [(nzFileList)]="fileList" [nzBeforeUpload]="beforeUpload">
+            <button nz-button><i nz-icon nzType="upload"></i>Select File</button>
+          </nz-upload>
+        </nz-form-control>
+      </nz-form-item>
     </form>
   </div>
   <div *nzModalFooter>
