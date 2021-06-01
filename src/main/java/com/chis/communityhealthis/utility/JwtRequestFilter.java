@@ -1,6 +1,6 @@
 package com.chis.communityhealthis.utility;
 
-import com.chis.communityhealthis.security.UserDetailsServiceImpl;
+import com.chis.communityhealthis.security.ChisUserDetailsService;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,7 +20,7 @@ import java.io.IOException;
 public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Autowired
-    private UserDetailsServiceImpl jwtUserDetailsService;
+    private ChisUserDetailsService jwtUserDetailsService;
 
     @Autowired
     private JwtTokenUtil jwtTokenUtil;

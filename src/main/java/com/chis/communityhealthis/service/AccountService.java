@@ -1,9 +1,9 @@
 package com.chis.communityhealthis.service;
 
 import com.chis.communityhealthis.bean.AccountBean;
+import com.chis.communityhealthis.model.signup.AccountRegistrationForm;
 
 public interface AccountService {
-    void addAccount(AccountBean accountBean);
-    AccountBean getAccount(String username);
+    boolean addAccount(AccountRegistrationForm form);
     AccountBean getAccountWithRoles(String username);
 }

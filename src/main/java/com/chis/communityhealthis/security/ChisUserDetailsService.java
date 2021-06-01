@@ -2,7 +2,11 @@ package com.chis.communityhealthis.security;
 
 import com.chis.communityhealthis.bean.AccountBean;
 import com.chis.communityhealthis.model.UserDtoModel;
+import com.chis.communityhealthis.model.signup.AccountRegistrationForm;
+import com.chis.communityhealthis.model.signup.PersonalDetailForm;
 import com.chis.communityhealthis.service.AccountService;
+import io.jsonwebtoken.lang.Assert;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,13 +18,10 @@ import javax.transaction.Transactional;
 
 @Service
 @Transactional
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class ChisUserDetailsService implements UserDetailsService {
 
     @Autowired
     private AccountService accountService;
-
-    @Autowired
-    private PasswordEncoder bcryptEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -32,13 +33,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return model;
     }
 
-    public AccountBean save(UserDtoModel userDtoModel) {
-        AccountBean bean = new AccountBean();
-        bean.setUsername(userDtoModel.getUsername());
-        bean.setPw(bcryptEncoder.encode(userDtoModel.getPassword()));
-        bean.setIsActive("N");
-        accountService.addAccount(bean);
-        return bean;
+    public boolean createAccount(AccountRegistrationForm form) {
+        return accountService.addAccount(form);
     }
 
 }

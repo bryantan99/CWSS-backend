@@ -2,8 +2,8 @@ package com.chis.communityhealthis.controller;
 
 import com.chis.communityhealthis.model.JwtRequestModel;
 import com.chis.communityhealthis.model.JwtResponseModel;
-import com.chis.communityhealthis.model.UserDtoModel;
-import com.chis.communityhealthis.security.UserDetailsServiceImpl;
+import com.chis.communityhealthis.model.signup.AccountRegistrationForm;
+import com.chis.communityhealthis.security.ChisUserDetailsService;
 import com.chis.communityhealthis.utility.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +24,7 @@ public class JwtAuthenticationController {
     private JwtTokenUtil jwtTokenUtil;
 
     @Autowired
-    private UserDetailsServiceImpl userDetailsService;
+    private ChisUserDetailsService userDetailsService;
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequestModel authenticationRequest) throws Exception {
@@ -35,8 +35,12 @@ public class JwtAuthenticationController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ResponseEntity<?> saveUser(@RequestBody UserDtoModel userDtoModel) throws Exception {
-        return ResponseEntity.ok(userDetailsService.save(userDtoModel));
+    public ResponseEntity<?> saveUser(@RequestBody AccountRegistrationForm accountRegistrationForm) throws Exception {
+        boolean creationStatus = userDetailsService.createAccount(accountRegistrationForm);
+        if (creationStatus) {
+            return ResponseEntity.ok().body("User account is created.");
+        }
+        return ResponseEntity.badRequest().body("There's an error when creating new user account.");
     }
 
     private void authenticate(String username, String password) throws Exception {
