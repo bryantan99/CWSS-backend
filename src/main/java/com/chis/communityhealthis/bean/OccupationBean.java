@@ -14,7 +14,7 @@ public class OccupationBean implements Serializable {
     private static final long serialVersionUID = -6531027889635304041L;
 
     public static final String USERNAME = "USERNAME";
-    public static final String OCCUPATION_TYPE = "OCCUPATION_TYPE";
+    public static final String EMPLOYMENT_TYPE = "EMPLOYMENT_TYPE";
     public static final String OCCUPATION_NAME = "OCCUPATION_NAME";
     public static final String SALARY = "SALARY";
     public static final String EMPLOYER_COMPANY = "EMPLOYER_COMPANY";
@@ -26,8 +26,8 @@ public class OccupationBean implements Serializable {
     @Column(name = USERNAME)
     private String username;
 
-    @Column(name = OCCUPATION_TYPE)
-    private String occupationType;
+    @Column(name = EMPLOYMENT_TYPE)
+    private String employmentType;
 
     @Column(name = OCCUPATION_NAME)
     private String occupationName;
@@ -55,12 +55,12 @@ public class OccupationBean implements Serializable {
         this.username = username;
     }
 
-    public String getOccupationType() {
-        return occupationType;
+    public String getEmploymentType() {
+        return employmentType;
     }
 
-    public void setOccupationType(String occupationType) {
-        this.occupationType = occupationType;
+    public void setEmploymentType(String occupationType) {
+        this.employmentType = occupationType;
     }
 
     public String getOccupationName() {

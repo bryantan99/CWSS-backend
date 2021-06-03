@@ -3,9 +3,12 @@ package com.chis.communityhealthis.repository;
 import com.chis.communityhealthis.bean.AccountBean;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.CollectionUtils;
 
 import javax.persistence.criteria.*;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 @Repository
@@ -32,6 +35,30 @@ public class AccountDaoImpl extends GenericDaoImpl<AccountBean, String> implemen
 
         Query<AccountBean> query = currentSession().createQuery(criteriaQuery);
         return query.uniqueResult();
+    }
+
+    @Override
+    public List<AccountBean> findAccounts(Collection<String> usernames) {
+        if (CollectionUtils.isEmpty(usernames)) {
+            return new ArrayList<>();
+        }
+
+        CriteriaBuilder criteriaBuilder = currentSession().getCriteriaBuilder();
+        CriteriaQuery<AccountBean> criteriaQuery = criteriaBuilder.createQuery(AccountBean.class);
+        Root<AccountBean> root = criteriaQuery.from(AccountBean.class);
+
+        List<Selection<?>> columns = Arrays.asList(root.get(VAR_USERNAME), root.get(VAR_PASSWORD), root.get(VAR_IS_ACTIVE), root.get(VAR_LAST_LOGIN_DATE));
+        CriteriaBuilder.In<String> inClause = criteriaBuilder.in(root.get(VAR_USERNAME));
+
+        for (String username: usernames) {
+            inClause.value(username);
+        }
+
+        criteriaQuery.multiselect(columns)
+                .where(inClause);
+
+        Query<AccountBean> query = currentSession().createQuery(criteriaQuery);
+        return query.list();
     }
 
     @Override

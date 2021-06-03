@@ -4,42 +4,45 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="Add form child components (personal detail, address, occupation, health)">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_12_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/AddressBean.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/OccupationBean.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/signup/AccountRegistrationForm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/signup/AddressForm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/signup/OccupationForm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/signup/PersonalDetailForm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/address/AddressDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/address/AddressDaoImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/communityuser/CommunityUserDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/communityuser/CommunityUserDaoImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/occupation/OccupationDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/occupation/OccupationDaoImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/utility/CommunityServiceCentreConstant.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup.service.ts" afterDir="false" />
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="Update registration form child components, update backend create account">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/CommunityUserRestController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/user/CommunityUserProfileModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/user/CommunityUserTableModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/utility/FlagConstant.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/constants/dropdown-constant.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/constants/state-constant.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/models/community-user-table-model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/models/table-column-item-model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/pipes/employment-type.pipe.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/pipes/gender.pipe.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/pipes/state.pipe.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/services/community-user.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/community-user-profile/community-user-profile.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/community-user-profile/community-user-profile.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/community-user/community-user.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/community-user/community-user.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/communityhealthis.iml" beforeDir="false" afterPath="$PROJECT_DIR$/communityhealthis.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/OccupationBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/OccupationBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AccountRestController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/HomeRestController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/JwtAuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/JwtAuthenticationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/security/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/security/SecurityConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/security/UserDetailsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/security/ChisUserDetailsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/AccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/AccountService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/JwtResponseModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/JwtResponseModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/AccountDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/AccountDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/AccountDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/AccountDaoImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/AccountServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/AccountServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/utility/JwtRequestFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/utility/JwtRequestFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-address-form/signup-address-form.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-address-form/signup-address-form.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/auth/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/auth/auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/shared.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/shared.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-address-form/signup-address-form.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-address-form/signup-address-form.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-health-form/signup-health-form.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-health-form/signup-health-form.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-health-form/signup-health-form.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-health-form/signup-health-form.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-occupation-form/signup-occupation-form.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-occupation-form/signup-occupation-form.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-occupation-form/signup-occupation-form.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-occupation-form/signup-occupation-form.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-personal-detail-form/signup-personal-detail-form.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-personal-detail-form/signup-personal-detail-form.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-personal-detail-form/signup-personal-detail-form.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-personal-detail-form/signup-personal-detail-form.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup/signup.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup/signup.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup/signup.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup/signup.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/user.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/user.module.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,7 +188,12 @@
       <workItem from="1622286402487" duration="1063000" />
       <workItem from="1622477181866" duration="12962000" />
       <workItem from="1622527453901" duration="1352000" />
-      <workItem from="1622540406376" duration="12417000" />
+      <workItem from="1622540406376" duration="21771000" />
+      <workItem from="1622615912659" duration="5090000" />
+      <workItem from="1622623251569" duration="1305000" />
+      <workItem from="1622625394805" duration="679000" />
+      <workItem from="1622726906668" duration="105000" />
+      <workItem from="1622727247970" duration="11921000" />
     </task>
     <task id="LOCAL-00001" summary="Set up database connection, Add Angular &amp; NG-ZORRO">
       <created>1621365135437</created>
@@ -278,7 +286,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622490238721</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Update registration form child components, update backend create account">
+      <created>1622565751982</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1622565751982</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -312,7 +327,8 @@
     <MESSAGE value="Display empty when there's no admin posts" />
     <MESSAGE value="Update layout sidebar" />
     <MESSAGE value="Add form child components (personal detail, address, occupation, health)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add form child components (personal detail, address, occupation, health)" />
+    <MESSAGE value="Update registration form child components, update backend create account" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update registration form child components, update backend create account" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

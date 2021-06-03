@@ -97,7 +97,7 @@ public class AccountServiceImpl implements AccountService{
     private OccupationBean createOccupationBean(String username, OccupationForm occupationForm) {
         OccupationBean bean = new OccupationBean();
         bean.setUsername(username);
-        bean.setOccupationType(occupationForm.getOccupationType());
+        bean.setEmploymentType(occupationForm.getOccupationType());
         bean.setOccupationName(occupationForm.getOccupationName());
         bean.setSalary(occupationForm.getSalary());
         bean.setEmployerCompany(occupationForm.getCompanyName());
