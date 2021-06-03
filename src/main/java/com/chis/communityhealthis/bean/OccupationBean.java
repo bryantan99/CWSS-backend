@@ -22,6 +22,11 @@ public class OccupationBean implements Serializable {
     public static final String APPROVED_BY = "APPROVED_BY";
     public static final String APPROVED_DATE = "APPROVED_DATE";
 
+    public static final String EMPLOYMENT_TYPE_UNEMPLOYED = "-";
+    public static final String EMPLOYMENT_TYPE_SELF_UNEMPLOYED = "S/E";
+    public static final String EMPLOYMENT_TYPE_GOVERNMENT = "GOVT";
+    public static final String EMPLOYMENT_TYPE_PRIVATE = "PVT";
+
     @Id
     @Column(name = USERNAME)
     private String username;
