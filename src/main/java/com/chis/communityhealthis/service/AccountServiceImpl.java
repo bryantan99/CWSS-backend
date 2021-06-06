@@ -63,6 +63,12 @@ public class AccountServiceImpl implements AccountService{
         return accountDao.findAccountWithRoles(username);
     }
 
+    @Override
+    public Boolean isValidUsername(String username) {
+        AccountBean accountBean = accountDao.find(username);
+        return accountBean == null;
+    }
+
     private AccountBean createAccountBean(PersonalDetailForm personalDetail) {
         Assert.isTrue(StringUtils.equals(personalDetail.getPassword(), personalDetail.getConfirmPassword()), "Password does not matched");
         AccountBean bean = new AccountBean();

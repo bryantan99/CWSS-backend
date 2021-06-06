@@ -6,4 +6,5 @@ import com.chis.communityhealthis.model.signup.AccountRegistrationForm;
 public interface AccountService {
     boolean addAccount(AccountRegistrationForm form);
     AccountBean getAccountWithRoles(String username);
+    Boolean isValidUsername(String username);
 }
