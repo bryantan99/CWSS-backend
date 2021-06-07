@@ -2,6 +2,7 @@ package com.chis.communityhealthis.security;
 
 import com.chis.communityhealthis.bean.AccountBean;
 import com.chis.communityhealthis.model.UserDtoModel;
+import com.chis.communityhealthis.model.account.AccountModel;
 import com.chis.communityhealthis.model.signup.AccountRegistrationForm;
 import com.chis.communityhealthis.model.signup.PersonalDetailForm;
 import com.chis.communityhealthis.service.AccountService;
@@ -33,7 +34,7 @@ public class ChisUserDetailsService implements UserDetailsService {
         return model;
     }
 
-    public boolean createAccount(AccountRegistrationForm form) {
+    public AccountModel createAccount(AccountRegistrationForm form) {
         return accountService.addAccount(form);
     }
 

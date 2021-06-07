@@ -4,6 +4,7 @@ import com.chis.communityhealthis.bean.AccountBean;
 import com.chis.communityhealthis.bean.AddressBean;
 import com.chis.communityhealthis.bean.CommunityUserBean;
 import com.chis.communityhealthis.bean.OccupationBean;
+import com.chis.communityhealthis.model.account.AccountModel;
 import com.chis.communityhealthis.model.signup.AccountRegistrationForm;
 import com.chis.communityhealthis.model.signup.AddressForm;
 import com.chis.communityhealthis.model.signup.OccupationForm;
@@ -42,7 +43,7 @@ public class AccountServiceImpl implements AccountService{
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public boolean addAccount(AccountRegistrationForm form) {
+    public AccountModel addAccount(AccountRegistrationForm form) {
         AccountBean accountBean = createAccountBean(form.getPersonalDetail());
         String username = accountDao.add(accountBean);
 
@@ -55,7 +56,7 @@ public class AccountServiceImpl implements AccountService{
         OccupationBean occupationBean = createOccupationBean(username, form.getOccupation());
         occupationDao.add(occupationBean);
 
-        return true;
+        return new AccountModel(accountBean.getUsername(), accountBean.getIsActive());
     }
 
     @Override
