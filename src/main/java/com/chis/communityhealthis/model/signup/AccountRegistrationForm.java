@@ -4,6 +4,7 @@ public class AccountRegistrationForm {
     private PersonalDetailForm personalDetail;
     private AddressForm address;
     private OccupationForm occupation;
+    private HealthForm health;
 
     public PersonalDetailForm getPersonalDetail() {
         return personalDetail;
@@ -27,5 +28,13 @@ public class AccountRegistrationForm {
 
     public void setOccupation(OccupationForm occupation) {
         this.occupation = occupation;
+    }
+
+    public HealthForm getHealth() {
+        return health;
+    }
+
+    public void setHealth(HealthForm health) {
+        this.health = health;
     }
 }

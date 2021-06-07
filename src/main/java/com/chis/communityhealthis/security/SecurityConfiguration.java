@@ -43,7 +43,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         // We don't need CSRF for this example
         http.csrf().disable().cors().and()
                 .authorizeRequests()
-                    .antMatchers("/authenticate", "/register", "/post/get-admin-posts", "/account/is-valid-username")
+                    .antMatchers("/authenticate", "/register", "/post/get-admin-posts", "/account/is-valid-username", "/dropdown/get-disease-choice-list")
                     .permitAll()
                     .and()
                 .authorizeRequests()

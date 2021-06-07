@@ -1,17 +1,12 @@
 package com.chis.communityhealthis.service;
 
-import com.chis.communityhealthis.bean.AccountBean;
-import com.chis.communityhealthis.bean.AddressBean;
-import com.chis.communityhealthis.bean.CommunityUserBean;
-import com.chis.communityhealthis.bean.OccupationBean;
+import com.chis.communityhealthis.bean.*;
 import com.chis.communityhealthis.model.account.AccountModel;
-import com.chis.communityhealthis.model.signup.AccountRegistrationForm;
-import com.chis.communityhealthis.model.signup.AddressForm;
-import com.chis.communityhealthis.model.signup.OccupationForm;
-import com.chis.communityhealthis.model.signup.PersonalDetailForm;
+import com.chis.communityhealthis.model.signup.*;
 import com.chis.communityhealthis.repository.AccountDao;
 import com.chis.communityhealthis.repository.address.AddressDao;
 import com.chis.communityhealthis.repository.communityuser.CommunityUserDao;
+import com.chis.communityhealthis.repository.healthIssue.HealthIssueDao;
 import com.chis.communityhealthis.repository.occupation.OccupationDao;
 import com.chis.communityhealthis.utility.CommunityServiceCentreConstant;
 import com.chis.communityhealthis.utility.FlagConstant;
@@ -20,8 +15,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 
 @Service
 @Transactional
@@ -40,6 +37,9 @@ public class AccountServiceImpl implements AccountService{
     private OccupationDao occupationDao;
 
     @Autowired
+    private HealthIssueDao healthIssueDao;
+
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
@@ -55,6 +55,13 @@ public class AccountServiceImpl implements AccountService{
 
         OccupationBean occupationBean = createOccupationBean(username, form.getOccupation());
         occupationDao.add(occupationBean);
+
+        if (!CollectionUtils.isEmpty(form.getHealth().getDiseaseList())) {
+            for (HealthDiseaseModel diseaseModel : form.getHealth().getDiseaseList()) {
+                HealthIssueBean healthIssueBean = createHealthIssueBean(username, diseaseModel);
+                healthIssueDao.add(healthIssueBean);
+            }
+        }
 
         return new AccountModel(accountBean.getUsername(), accountBean.getIsActive());
     }
@@ -113,6 +120,16 @@ public class AccountServiceImpl implements AccountService{
             bean.setEmployerContactNo(occupationForm.getCompanyContactNo());
         }
 
+        return bean;
+    }
+
+    private HealthIssueBean createHealthIssueBean(String username, HealthDiseaseModel diseaseModel) {
+        HealthIssueBean bean = new HealthIssueBean();
+        bean.setUsername(username);
+        bean.setDiseaseId(diseaseModel.getDiseaseId());
+        bean.setIssueDescription(diseaseModel.getDescription());
+        bean.setCreatedBy(username);
+        bean.setCreatedDate(new Date());
         return bean;
     }
 
