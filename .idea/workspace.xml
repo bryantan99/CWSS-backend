@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="Add signup info page">
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="Display create new post and delete post button based on role">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/auth/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/auth/auth.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/homepage/homepage/homepage.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/homepage/homepage/homepage.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/homepage/homepage/homepage.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/homepage/homepage/homepage.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/components/post-feed/post-feed.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/components/post-feed/post-feed.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/components/post-feed/post-feed.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/components/post-feed/post-feed.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-personal-detail-form/signup-personal-detail-form.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-personal-detail-form/signup-personal-detail-form.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,19 +81,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.CommunityhealthisApplication">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="E2E Tests (chis-app)" type="JavaScriptTestRunnerProtractor">
       <config-file value="$PROJECT_DIR$/src/main/resources/frontend/chis-app/e2e/protractor.conf.js" />
       <node-interpreter value="project" />
@@ -169,6 +152,8 @@
       <workItem from="1622984953462" duration="3000" />
       <workItem from="1622994186050" duration="11912000" />
       <workItem from="1623036026754" duration="3151000" />
+      <workItem from="1623127895208" duration="95000" />
+      <workItem from="1623133883109" duration="2866000" />
     </task>
     <task id="LOCAL-00001" summary="Set up database connection, Add Angular &amp; NG-ZORRO">
       <created>1621365135437</created>
@@ -338,7 +323,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623090316034</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Display create new post and delete post button based on role">
+      <created>1623090626578</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1623090626578</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -382,7 +374,8 @@
     <MESSAGE value="Redirect to login page when successfully submit registration form" />
     <MESSAGE value="Add dropdown choice rest controller, update registration form to handle disease" />
     <MESSAGE value="Add signup info page" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add signup info page" />
+    <MESSAGE value="Display create new post and delete post button based on role" />
+    <option name="LAST_COMMIT_MESSAGE" value="Display create new post and delete post button based on role" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
