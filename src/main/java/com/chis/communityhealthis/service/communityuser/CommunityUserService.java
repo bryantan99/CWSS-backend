@@ -9,4 +9,5 @@ public interface CommunityUserService {
     List<CommunityUserTableModel> getCommunityUsers();
     CommunityUserProfileModel getCommunityUserProfile(String username);
     Boolean approveUserAccount(String username, String adminUsername);
+    void deleteUserAccount(String username);
 }

@@ -108,6 +108,28 @@ public class CommunityUserServiceImpl implements CommunityUserService{
         return true;
     }
 
+    @Override
+    public void deleteUserAccount(String username) {
+        OccupationBean occupationBean = occupationDao.find(username);
+        occupationDao.remove(occupationBean);
+
+        AddressBean addressBean = addressDao.find(username);
+        addressDao.remove(addressBean);
+
+        List<HealthIssueBean> healthIssueBeans = healthIssueDao.findHealthIssueBeans(username);
+        if (!CollectionUtils.isEmpty(healthIssueBeans)) {
+            for (HealthIssueBean bean : healthIssueBeans) {
+                healthIssueDao.remove(bean);
+            }
+        }
+
+        CommunityUserBean communityUserBean = communityUserDao.find(username);
+        communityUserDao.remove(communityUserBean);
+
+        AccountBean accountBean = accountDao.find(username);
+        accountDao.remove(accountBean);
+    }
+
     private CommunityUserProfileModel toCommunityUserProfileModel(CommunityUserBean communityUserBean, AddressBean addressBean, OccupationBean occupationBean, List<HealthIssueBean> healthIssueBeans) {
         CommunityUserProfileModel model = new CommunityUserProfileModel();
         model.setPersonalDetail(communityUserBean);

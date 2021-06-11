@@ -36,4 +36,10 @@ public class CommunityUserRestController {
         communityUserService.approveUserAccount(username, authService.getCurrentLoggedInUsername());
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/delete-user/{username}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteUserAccount(@PathVariable String username) {
+        communityUserService.deleteUserAccount(username);
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
 }
