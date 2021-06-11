@@ -4,11 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="Update NewsAPI">
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="Fix numbering issue">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/AssistanceBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AssistanceRestController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/assistance/AssistanceRecordTableModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/assistance/AssistanceDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/assistance/AssistanceDaoImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/assistance/AssistanceService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/assistance/AssistanceServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/admin-assistance/admin-assistance.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/admin-assistance/admin-assistance.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance-record/assistance-record.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance-record/assistance-record.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/community-user-assistance/community-user-assistance.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/community-user-assistance/community-user-assistance.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/models/assistance-record-model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/auth/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/auth/auth.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-personal-detail-form/signup-personal-detail-form.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-personal-detail-form/signup-personal-detail-form.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup/signup.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup/signup.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app.module.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,17 +101,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.CommunityhealthisApplication">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="E2E Tests (chis-app)" type="JavaScriptTestRunnerProtractor">
       <config-file value="$PROJECT_DIR$/src/main/resources/frontend/chis-app/e2e/protractor.conf.js" />
       <node-interpreter value="project" />
@@ -167,7 +174,11 @@
       <workItem from="1623036026754" duration="3151000" />
       <workItem from="1623127895208" duration="95000" />
       <workItem from="1623133883109" duration="6519000" />
-      <workItem from="1623148938235" duration="5486000" />
+      <workItem from="1623148938235" duration="12295000" />
+      <workItem from="1623221759644" duration="1247000" />
+      <workItem from="1623260790982" duration="2052000" />
+      <workItem from="1623341458370" duration="1360000" />
+      <workItem from="1623380221907" duration="331000" />
     </task>
     <task id="LOCAL-00001" summary="Set up database connection, Add Angular &amp; NG-ZORRO">
       <created>1621365135437</created>
@@ -358,7 +369,21 @@
       <option name="project" value="LOCAL" />
       <updated>1623173415049</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Code refactor">
+      <created>1623175356480</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1623175356480</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Fix numbering issue">
+      <created>1623262614900</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1623262614900</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -378,8 +403,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Add login, signup, about component. Move zorro modules into separate file." />
-    <MESSAGE value="Added working hours &amp; contact.no" />
     <MESSAGE value="Add GenericDao, GenericDaoImpl, AccountDao, AccountDaoImpl." />
     <MESSAGE value="Add backend login and register" />
     <MESSAGE value="Display sidebar menu items based on logged in status" />
@@ -403,7 +426,9 @@
     <MESSAGE value="Display create new post and delete post button based on role" />
     <MESSAGE value="Add unique username validator" />
     <MESSAGE value="Update NewsAPI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update NewsAPI" />
+    <MESSAGE value="Code refactor" />
+    <MESSAGE value="Fix numbering issue" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix numbering issue" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
