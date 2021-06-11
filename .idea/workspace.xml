@@ -100,7 +100,18 @@
       <recent name="C:\Users\win 10\IdeaProjects\CHIS\src\main\resources\frontend\chis-app\src\app\homepage" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.CommunityhealthisApplication">
+  <component name="RunManager" selected="npm.Angular CLI Server">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="E2E Tests (chis-app)" type="JavaScriptTestRunnerProtractor">
       <config-file value="$PROJECT_DIR$/src/main/resources/frontend/chis-app/e2e/protractor.conf.js" />
       <node-interpreter value="project" />
