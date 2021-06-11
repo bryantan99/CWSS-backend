@@ -4,16 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="Add NRIC column into community table">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/services/notification.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" afterDir="false" />
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="Add delete community user account feature">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/CommunityUserRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/CommunityUserRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/services/community-user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/services/community-user.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/community-user/community-user.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/community-user/community-user.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/community-user/community-user.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/community-user/community-user.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/community-user-profile/community-user-profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/community-user-profile/community-user-profile.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/community-user-profile/community-user-profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/community-user-profile/community-user-profile.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -424,7 +418,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623432084641</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="Add delete community user account feature">
+      <created>1623435400107</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1623435400107</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -444,7 +445,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Display empty when there's no admin posts" />
     <MESSAGE value="Update layout sidebar" />
     <MESSAGE value="Add form child components (personal detail, address, occupation, health)" />
     <MESSAGE value="Update registration form child components, update backend create account" />
@@ -469,7 +469,8 @@
     <MESSAGE value="Update NG-ZORRO to v11.4.2, fix nz-tabset" />
     <MESSAGE value="Update NG-ZORRO to v11.4.2, fix nz-tabset, fix sidebar" />
     <MESSAGE value="Add NRIC column into community table" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add NRIC column into community table" />
+    <MESSAGE value="Add delete community user account feature" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add delete community user account feature" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
