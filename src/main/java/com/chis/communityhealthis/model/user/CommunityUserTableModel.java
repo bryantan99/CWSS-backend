@@ -3,6 +3,7 @@ package com.chis.communityhealthis.model.user;
 public class CommunityUserTableModel implements Comparable<CommunityUserTableModel> {
     private String username;
     private String fullName;
+    private String nricNo;
     private String email;
     private String isActive;
 
@@ -21,6 +22,10 @@ public class CommunityUserTableModel implements Comparable<CommunityUserTableMod
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
+
+    public String getNricNo() { return nricNo; }
+
+    public void setNricNo(String nricNo) { this.nricNo = nricNo; }
 
     public String getEmail() {
         return email;

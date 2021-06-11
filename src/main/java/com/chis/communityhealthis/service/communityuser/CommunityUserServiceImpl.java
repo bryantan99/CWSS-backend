@@ -59,6 +59,7 @@ public class CommunityUserServiceImpl implements CommunityUserService{
             CommunityUserTableModel model = new CommunityUserTableModel();
             model.setUsername(communityUserBean.getUsername());
             model.setFullName(communityUserBean.getFullName());
+            model.setNricNo(communityUserBean.getNric());
             model.setEmail(communityUserBean.getEmail());
             model.setIsActive(accountStatusMap.get(communityUserBean.getUsername()));
             list.add(model);
