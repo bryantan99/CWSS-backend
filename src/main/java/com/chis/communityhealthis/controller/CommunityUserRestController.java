@@ -2,6 +2,7 @@ package com.chis.communityhealthis.controller;
 
 import com.chis.communityhealthis.model.user.CommunityUserProfileModel;
 import com.chis.communityhealthis.model.user.CommunityUserTableModel;
+import com.chis.communityhealthis.service.AuthService;
 import com.chis.communityhealthis.service.communityuser.CommunityUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,9 @@ public class CommunityUserRestController {
     @Autowired
     private CommunityUserService communityUserService;
 
+    @Autowired
+    private AuthService authService;
+
     @RequestMapping(value = "/view-profile", method = RequestMethod.GET)
     public ResponseEntity<CommunityUserProfileModel> getCommunityUsers(@RequestParam String username) {
         return new ResponseEntity<>(communityUserService.getCommunityUserProfile(username), HttpStatus.OK);
@@ -29,7 +33,7 @@ public class CommunityUserRestController {
 
     @RequestMapping(value = "/approve-user", method = RequestMethod.GET)
     public ResponseEntity<String> approveUserAccount(@RequestParam String username) {
-        communityUserService.approveUserAccount(username);
+        communityUserService.approveUserAccount(username, authService.getCurrentLoggedInUsername());
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 }

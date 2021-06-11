@@ -45,6 +45,14 @@ public class HealthIssueBean implements Serializable {
     @Column(name = APPROVED_DATE)
     private Date approvedDate;
 
+    @OneToOne
+    @JoinColumn(name = DISEASE_ID, referencedColumnName = DiseaseBean.DISEASE_ID, updatable = false, insertable = false)
+    private DiseaseBean diseaseBean;
+
+    @OneToOne
+    @JoinColumn(name = APPROVED_BY, referencedColumnName = AdminBean.USERNAME, updatable = false, insertable = false)
+    private AdminBean adminBean;
+
     public Integer getIssueId() {
         return issueId;
     }
@@ -108,4 +116,12 @@ public class HealthIssueBean implements Serializable {
     public void setApprovedDate(Date approvedDate) {
         this.approvedDate = approvedDate;
     }
+
+    public DiseaseBean getDiseaseBean() { return diseaseBean; }
+
+    public void setDiseaseBean(DiseaseBean diseaseBean) { this.diseaseBean = diseaseBean; }
+
+    public AdminBean getAdminBean() { return adminBean; }
+
+    public void setAdminBean(AdminBean adminBean) { this.adminBean = adminBean; }
 }

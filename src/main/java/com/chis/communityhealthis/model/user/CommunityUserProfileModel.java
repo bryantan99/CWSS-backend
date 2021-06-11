@@ -3,12 +3,16 @@ package com.chis.communityhealthis.model.user;
 import com.chis.communityhealthis.bean.AddressBean;
 import com.chis.communityhealthis.bean.CommunityUserBean;
 import com.chis.communityhealthis.bean.OccupationBean;
+import com.chis.communityhealthis.model.health.HealthModel;
+
+import java.util.List;
 
 public class CommunityUserProfileModel {
     private String accIsActivate;
     private CommunityUserBean personalDetail;
     private AddressBean address;
     private OccupationBean occupation;
+    private List<HealthModel> healthModelList;
 
     public String getAccIsActivate() { return accIsActivate; }
 
@@ -37,4 +41,8 @@ public class CommunityUserProfileModel {
     public void setOccupation(OccupationBean occupation) {
         this.occupation = occupation;
     }
+
+    public List<HealthModel> getHealthModelList() { return healthModelList; }
+
+    public void setHealthModelList(List<HealthModel> healthModelList) { this.healthModelList = healthModelList; }
 }

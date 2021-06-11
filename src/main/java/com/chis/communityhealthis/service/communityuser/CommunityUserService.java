@@ -8,5 +8,5 @@ import java.util.List;
 public interface CommunityUserService {
     List<CommunityUserTableModel> getCommunityUsers();
     CommunityUserProfileModel getCommunityUserProfile(String username);
-    Boolean approveUserAccount(String username);
+    Boolean approveUserAccount(String username, String adminUsername);
 }
