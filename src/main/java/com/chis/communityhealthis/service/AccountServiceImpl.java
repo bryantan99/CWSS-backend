@@ -56,7 +56,7 @@ public class AccountServiceImpl implements AccountService{
         OccupationBean occupationBean = createOccupationBean(username, form.getOccupation());
         occupationDao.add(occupationBean);
 
-        if (!CollectionUtils.isEmpty(form.getHealth().getDiseaseList())) {
+        if (form.getHealth() != null && !CollectionUtils.isEmpty(form.getHealth().getDiseaseList())) {
             for (HealthDiseaseModel diseaseModel : form.getHealth().getDiseaseList()) {
                 HealthIssueBean healthIssueBean = createHealthIssueBean(username, diseaseModel);
                 healthIssueDao.add(healthIssueBean);
