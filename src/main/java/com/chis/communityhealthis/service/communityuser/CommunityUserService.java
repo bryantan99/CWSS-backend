@@ -1,5 +1,6 @@
 package com.chis.communityhealthis.service.communityuser;
 
+import com.chis.communityhealthis.model.signup.AccountRegistrationForm;
 import com.chis.communityhealthis.model.user.CommunityUserProfileModel;
 import com.chis.communityhealthis.model.user.CommunityUserTableModel;
 
@@ -10,4 +11,5 @@ public interface CommunityUserService {
     CommunityUserProfileModel getCommunityUserProfile(String username);
     Boolean approveUserAccount(String username, String adminUsername);
     void deleteUserAccount(String username);
+    void updateUserAccount(AccountRegistrationForm form);
 }

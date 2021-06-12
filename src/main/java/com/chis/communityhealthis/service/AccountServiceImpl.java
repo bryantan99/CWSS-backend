@@ -57,7 +57,7 @@ public class AccountServiceImpl implements AccountService{
         occupationDao.add(occupationBean);
 
         if (form.getHealth() != null && !CollectionUtils.isEmpty(form.getHealth().getDiseaseList())) {
-            for (HealthDiseaseModel diseaseModel : form.getHealth().getDiseaseList()) {
+            for (HealthIssueModel diseaseModel : form.getHealth().getDiseaseList()) {
                 HealthIssueBean healthIssueBean = createHealthIssueBean(username, diseaseModel);
                 healthIssueDao.add(healthIssueBean);
             }
@@ -112,18 +112,18 @@ public class AccountServiceImpl implements AccountService{
     private OccupationBean createOccupationBean(String username, OccupationForm occupationForm) {
         OccupationBean bean = new OccupationBean();
         bean.setUsername(username);
-        bean.setEmploymentType(occupationForm.getOccupationType());
+        bean.setEmploymentType(occupationForm.getEmploymentType());
         bean.setOccupationName(StringUtils.toRootUpperCase(occupationForm.getOccupationName()));
         bean.setSalary(occupationForm.getSalary());
         if (isGovtEmployee(bean.getEmploymentType()) || isPrivateEmployee(bean.getEmploymentType())) {
-            bean.setEmployerCompany(StringUtils.toRootUpperCase(occupationForm.getCompanyName()));
-            bean.setEmployerContactNo(occupationForm.getCompanyContactNo());
+            bean.setEmployerCompany(StringUtils.toRootUpperCase(occupationForm.getEmployerCompany()));
+            bean.setEmployerContactNo(occupationForm.getEmployerContactNo());
         }
 
         return bean;
     }
 
-    private HealthIssueBean createHealthIssueBean(String username, HealthDiseaseModel diseaseModel) {
+    private HealthIssueBean createHealthIssueBean(String username, HealthIssueModel diseaseModel) {
         HealthIssueBean bean = new HealthIssueBean();
         bean.setUsername(username);
         bean.setDiseaseId(diseaseModel.getDiseaseId());

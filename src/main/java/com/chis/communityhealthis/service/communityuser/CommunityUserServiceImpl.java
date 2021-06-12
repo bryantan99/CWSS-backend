@@ -2,6 +2,7 @@ package com.chis.communityhealthis.service.communityuser;
 
 import com.chis.communityhealthis.bean.*;
 import com.chis.communityhealthis.model.health.HealthModel;
+import com.chis.communityhealthis.model.signup.*;
 import com.chis.communityhealthis.model.user.CommunityUserProfileModel;
 import com.chis.communityhealthis.model.user.CommunityUserTableModel;
 import com.chis.communityhealthis.repository.AccountDao;
@@ -11,6 +12,7 @@ import com.chis.communityhealthis.repository.healthIssue.HealthIssueDao;
 import com.chis.communityhealthis.repository.occupation.OccupationDao;
 import com.chis.communityhealthis.utility.FlagConstant;
 import io.jsonwebtoken.lang.Assert;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -128,6 +130,68 @@ public class CommunityUserServiceImpl implements CommunityUserService{
 
         AccountBean accountBean = accountDao.find(username);
         accountDao.remove(accountBean);
+    }
+
+    @Override
+    public void updateUserAccount(AccountRegistrationForm form) {
+        String username = form.getPersonalDetail().getUsername();
+
+        CommunityUserBean communityUserBean = communityUserDao.find(username);
+        updateCommunityUserBean(communityUserBean, form.getPersonalDetail());
+
+        AddressBean addressBean = addressDao.find(username);
+        updateAddressBean(addressBean, form.getAddress());
+
+        OccupationBean occupationBean = occupationDao.find(username);
+        updateOccupationBean(occupationBean, form.getOccupation());
+
+        if (form.getHealth() != null && !CollectionUtils.isEmpty(form.getHealth().getDiseaseList())) {
+            List<HealthIssueBean> healthIssueBeans = healthIssueDao.findHealthIssueBeans(username);
+            updateHealthIssueBeans(healthIssueBeans, form.getHealth());
+        }
+    }
+
+    private void updateHealthIssueBeans(List<HealthIssueBean> healthIssueBeans, HealthForm health) {
+        //  ToDo: Update Health Issue Beans
+    }
+
+    private void updateOccupationBean(OccupationBean occupationBean, OccupationForm form) {
+        occupationBean.setEmploymentType(form.getEmploymentType());
+
+        if (StringUtils.equals("-", form.getEmploymentType())) {
+            occupationBean.setSalary(0.00);
+            occupationBean.setOccupationName(null);
+            occupationBean.setEmployerCompany(null);
+            occupationBean.setEmployerContactNo(null);
+        } else {
+            occupationBean.setSalary(form.getSalary());
+            occupationBean.setOccupationName(form.getOccupationName());
+
+            if (!StringUtils.equals("S/E", form.getEmploymentType())) {
+                occupationBean.setEmployerCompany(form.getEmployerCompany());
+                occupationBean.setEmployerContactNo(form.getEmployerContactNo());
+            }
+        }
+
+        occupationDao.saveOrUpdate(occupationBean);
+    }
+
+    private void updateAddressBean(AddressBean addressBean, AddressForm address) {
+        addressBean.setAddressLine1(address.getAddressLine1());
+        addressBean.setAddressLine2(address.getAddressLine2());
+        addressBean.setPostcode(address.getPostcode());
+        addressBean.setCity(address.getCity());
+        addressBean.setState(address.getState());
+        addressDao.saveOrUpdate(addressBean);
+    }
+
+    private void updateCommunityUserBean(CommunityUserBean communityUserBean, PersonalDetailForm personalDetail) {
+        communityUserBean.setEmail(personalDetail.getEmail());
+        communityUserBean.setContactNo(personalDetail.getContactNo());
+        communityUserBean.setNric(personalDetail.getNric());
+        communityUserBean.setGender(personalDetail.getGender());
+        communityUserBean.setEthnic(personalDetail.getEthnic());
+        communityUserDao.saveOrUpdate(communityUserBean);
     }
 
     private CommunityUserProfileModel toCommunityUserProfileModel(CommunityUserBean communityUserBean, AddressBean addressBean, OccupationBean occupationBean, List<HealthIssueBean> healthIssueBeans) {

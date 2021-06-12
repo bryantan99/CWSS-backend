@@ -1,8 +1,13 @@
 package com.chis.communityhealthis.model.signup;
 
-public class HealthDiseaseModel {
+public class HealthIssueModel {
+    private Integer healthIssueId;
     private Integer diseaseId;
     private String description;
+
+    public Integer getHealthIssueId() { return healthIssueId; }
+
+    public void setHealthIssueId(Integer healthIssueId) { this.healthIssueId = healthIssueId; }
 
     public Integer getDiseaseId() {
         return diseaseId;

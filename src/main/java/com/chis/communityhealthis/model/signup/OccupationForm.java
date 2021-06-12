@@ -1,18 +1,18 @@
 package com.chis.communityhealthis.model.signup;
 
 public class OccupationForm {
-    private String occupationType;
+    private String employmentType;
     private String occupationName;
     private Double salary;
-    private String companyName;
-    private String companyContactNo;
+    private String employerCompany;
+    private String employerContactNo;
 
-    public String getOccupationType() {
-        return occupationType;
+    public String getEmploymentType() {
+        return employmentType;
     }
 
-    public void setOccupationType(String occupationType) {
-        this.occupationType = occupationType;
+    public void setEmploymentType(String employmentType) {
+        this.employmentType = employmentType;
     }
 
     public String getOccupationName() {
@@ -31,19 +31,19 @@ public class OccupationForm {
         this.salary = salary;
     }
 
-    public String getCompanyName() {
-        return companyName;
+    public String getEmployerCompany() {
+        return employerCompany;
     }
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
+    public void setEmployerCompany(String employerCompany) {
+        this.employerCompany = employerCompany;
     }
 
-    public String getCompanyContactNo() {
-        return companyContactNo;
+    public String getEmployerContactNo() {
+        return employerContactNo;
     }
 
-    public void setCompanyContactNo(String companyContactNo) {
-        this.companyContactNo = companyContactNo;
+    public void setEmployerContactNo(String employerContactNo) {
+        this.employerContactNo = employerContactNo;
     }
 }

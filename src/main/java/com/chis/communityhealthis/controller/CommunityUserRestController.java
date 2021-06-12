@@ -1,5 +1,6 @@
 package com.chis.communityhealthis.controller;
 
+import com.chis.communityhealthis.model.signup.AccountRegistrationForm;
 import com.chis.communityhealthis.model.user.CommunityUserProfileModel;
 import com.chis.communityhealthis.model.user.CommunityUserTableModel;
 import com.chis.communityhealthis.service.AuthService;
@@ -22,7 +23,7 @@ public class CommunityUserRestController {
     private AuthService authService;
 
     @RequestMapping(value = "/view-profile", method = RequestMethod.GET)
-    public ResponseEntity<CommunityUserProfileModel> getCommunityUsers(@RequestParam String username) {
+    public ResponseEntity<CommunityUserProfileModel> getCommunityUser(@RequestParam String username) {
         return new ResponseEntity<>(communityUserService.getCommunityUserProfile(username), HttpStatus.OK);
     }
 
@@ -41,5 +42,11 @@ public class CommunityUserRestController {
     public ResponseEntity<?> deleteUserAccount(@PathVariable String username) {
         communityUserService.deleteUserAccount(username);
         return new ResponseEntity<>(null, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/update-user", method = RequestMethod.POST)
+    public ResponseEntity<Boolean> updateUserAccount(@RequestBody AccountRegistrationForm form) {
+        communityUserService.updateUserAccount(form);
+        return new ResponseEntity<>(true, HttpStatus.OK);
     }
 }

@@ -4,10 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="Fix signup async, add update profile">
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="Fix occupation form">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/CommunityUserRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/CommunityUserRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/signup/HealthDiseaseModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/signup/HealthIssueModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/signup/HealthForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/signup/HealthForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/signup/OccupationForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/signup/OccupationForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/AccountServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/AccountServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/pipes/gender.pipe.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/pipes/gender.pipe.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/community-user-profile/community-user-profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/community-user-profile/community-user-profile.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-occupation-form/signup-occupation-form.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-occupation-form/signup-occupation-form.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-occupation-form/signup-occupation-form.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-occupation-form/signup-occupation-form.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-personal-detail-form/signup-personal-detail-form.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-personal-detail-form/signup-personal-detail-form.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-personal-detail-form/signup-personal-detail-form.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-personal-detail-form/signup-personal-detail-form.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/update-profile/update-profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/update-profile/update-profile.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,7 +186,7 @@
       <workItem from="1623341458370" duration="1360000" />
       <workItem from="1623380221907" duration="331000" />
       <workItem from="1623405205633" duration="7033000" />
-      <workItem from="1623479689773" duration="11970000" />
+      <workItem from="1623479689773" duration="17001000" />
     </task>
     <task id="LOCAL-00001" summary="Set up database connection, Add Angular &amp; NG-ZORRO">
       <created>1621365135437</created>
@@ -449,7 +461,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623495680221</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="Fix occupation form">
+      <created>1623506294427</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1623506294427</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -469,7 +488,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Add community user profile, community user table, approve and reject community user account, pipes (Gender, state, employment type)" />
     <MESSAGE value="Save uppercase form value during registration, update fullName filter" />
     <MESSAGE value="Add Health Child Form Component" />
     <MESSAGE value="Display error input field (signup and login)" />
@@ -494,7 +512,8 @@
     <MESSAGE value="Fix community user profile alert message, add loading indicator and notification" />
     <MESSAGE value="Add Community User's Profile title" />
     <MESSAGE value="Fix signup async, add update profile" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix signup async, add update profile" />
+    <MESSAGE value="Fix occupation form" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix occupation form" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
