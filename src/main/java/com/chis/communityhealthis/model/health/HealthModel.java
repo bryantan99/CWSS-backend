@@ -3,6 +3,7 @@ package com.chis.communityhealthis.model.health;
 import java.util.Date;
 
 public class HealthModel {
+    private Integer issueId;
     private Integer diseaseId;
     private String diseaseName;
     private String username;
@@ -11,6 +12,14 @@ public class HealthModel {
     private String approvedBy;
     private String approvedByUsername;
     private Date approvedDate;
+
+    public Integer getIssueId() {
+        return issueId;
+    }
+
+    public void setIssueId(Integer issueId) {
+        this.issueId = issueId;
+    }
 
     public Integer getDiseaseId() {
         return diseaseId;

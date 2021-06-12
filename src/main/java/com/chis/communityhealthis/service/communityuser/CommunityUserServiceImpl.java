@@ -211,6 +211,7 @@ public class CommunityUserServiceImpl implements CommunityUserService{
 
     private HealthModel toHealthModel(HealthIssueBean bean) {
         HealthModel model = new HealthModel();
+        model.setIssueId(bean.getIssueId());
         model.setDiseaseId(bean.getDiseaseId());
         model.setDiseaseName(bean.getDiseaseBean().getDiseaseName());
         model.setDiseaseDescription(bean.getIssueDescription());
