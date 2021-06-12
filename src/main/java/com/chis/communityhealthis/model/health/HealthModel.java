@@ -7,6 +7,7 @@ public class HealthModel {
     private String diseaseName;
     private String username;
     private String userFullName;
+    private String diseaseDescription;
     private String approvedBy;
     private String approvedByUsername;
     private Date approvedDate;
@@ -65,5 +66,13 @@ public class HealthModel {
 
     public void setApprovedDate(Date approvedDate) {
         this.approvedDate = approvedDate;
+    }
+
+    public String getDiseaseDescription() {
+        return diseaseDescription;
+    }
+
+    public void setDiseaseDescription(String diseaseDescription) {
+        this.diseaseDescription = diseaseDescription;
     }
 }
