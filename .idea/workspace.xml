@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="Add alt for news image">
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="Responsive table for community user profile">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/health/HealthModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/health/HealthModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/community-user-profile/community-user-profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/community-user-profile/community-user-profile.component.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -175,7 +173,7 @@
       <workItem from="1623341458370" duration="1360000" />
       <workItem from="1623380221907" duration="331000" />
       <workItem from="1623405205633" duration="7033000" />
-      <workItem from="1623479689773" duration="23275000" />
+      <workItem from="1623479689773" duration="23816000" />
     </task>
     <task id="LOCAL-00001" summary="Set up database connection, Add Angular &amp; NG-ZORRO">
       <created>1621365135437</created>
@@ -499,7 +497,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623514930388</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="Responsive table for community user profile">
+      <created>1623521157832</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1623521157832</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -519,7 +524,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Redirect to login page when successfully submit registration form" />
     <MESSAGE value="Add dropdown choice rest controller, update registration form to handle disease" />
     <MESSAGE value="Add signup info page" />
     <MESSAGE value="Display create new post and delete post button based on role" />
@@ -544,7 +548,8 @@
     <MESSAGE value="Change web title to Health Support System (HSS)" />
     <MESSAGE value="Add news placeholder for news without image" />
     <MESSAGE value="Add alt for news image" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add alt for news image" />
+    <MESSAGE value="Responsive table for community user profile" />
+    <option name="LAST_COMMIT_MESSAGE" value="Responsive table for community user profile" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
