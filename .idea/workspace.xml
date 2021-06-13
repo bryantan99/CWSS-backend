@@ -4,13 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="Responsive table for community user table">
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="Add issueId to HealthModel, fix healthForm mapping issue">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/health/HealthModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/health/HealthModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-health-form/signup-health-form.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-health-form/signup-health-form.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-health-form/signup-health-form.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-health-form/signup-health-form.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/update-profile/update-profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/update-profile/update-profile.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,20 +79,7 @@
       <recent name="C:\Users\win 10\IdeaProjects\CHIS\src\main\resources\frontend\chis-app\src\app\homepage" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.CommunityhealthisApplication">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="npm.Angular CLI Server">
     <configuration name="E2E Tests (chis-app)" type="JavaScriptTestRunnerProtractor">
       <config-file value="$PROJECT_DIR$/src/main/resources/frontend/chis-app/e2e/protractor.conf.js" />
       <node-interpreter value="project" />
@@ -177,14 +159,8 @@
       <workItem from="1623341458370" duration="1360000" />
       <workItem from="1623380221907" duration="331000" />
       <workItem from="1623405205633" duration="7033000" />
-      <workItem from="1623479689773" duration="25515000" />
-    </task>
-    <task id="LOCAL-00001" summary="Set up database connection, Add Angular &amp; NG-ZORRO">
-      <created>1621365135437</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1621365135438</updated>
+      <workItem from="1623479689773" duration="26158000" />
+      <workItem from="1623563507153" duration="236000" />
     </task>
     <task id="LOCAL-00002" summary="add homepage, newsfeed, post component">
       <created>1621443079489</created>
@@ -522,7 +498,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623521870685</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="Add issueId to HealthModel, fix healthForm mapping issue">
+      <created>1623523521202</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1623523521233</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -542,7 +525,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Add signup info page" />
     <MESSAGE value="Display create new post and delete post button based on role" />
     <MESSAGE value="Add unique username validator" />
     <MESSAGE value="Update NewsAPI" />
@@ -567,7 +549,8 @@
     <MESSAGE value="Add alt for news image" />
     <MESSAGE value="Responsive table for community user profile" />
     <MESSAGE value="Responsive table for community user table" />
-    <option name="LAST_COMMIT_MESSAGE" value="Responsive table for community user table" />
+    <MESSAGE value="Add issueId to HealthModel, fix healthForm mapping issue" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add issueId to HealthModel, fix healthForm mapping issue" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
