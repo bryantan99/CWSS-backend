@@ -111,6 +111,12 @@ public class CommunityUserServiceImpl implements CommunityUserService{
     }
 
     @Override
+    public Boolean rejectUserAccount(String username) {
+        deleteUserAccount(username);
+        return true;
+    }
+
+    @Override
     public void deleteUserAccount(String username) {
         OccupationBean occupationBean = occupationDao.find(username);
         occupationDao.remove(occupationBean);

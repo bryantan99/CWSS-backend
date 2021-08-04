@@ -38,6 +38,11 @@ public class CommunityUserRestController {
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/reject-user", method = RequestMethod.GET)
+    public ResponseEntity<Boolean> rejectUserAccount(@RequestParam String username) {
+        return new ResponseEntity<Boolean>(communityUserService.rejectUserAccount(username), HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/delete-user/{username}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteUserAccount(@PathVariable String username) {
         communityUserService.deleteUserAccount(username);
