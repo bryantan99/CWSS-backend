@@ -37,6 +37,21 @@ public class PostServiceImpl implements PostService{
     private PostMediaDao postMediaDao;
 
     @Override
+    public PostBean getPostWithMedia(Integer postId) {return postDao.getPostWithMedia(postId);}
+
+    @Override
+    public PostBean updatePost(PostForm postForm) {
+        PostBean postBean = postDao.getPostWithMedia(postForm.getPostId());
+        Assert.notNull(postBean, "PostBean with ID: " + postForm.getPostId() + " was not found.");
+
+        postBean.setPostDescription(postForm.getPostDescription());
+        postDao.update(postBean);
+
+        // ToDo: Handle Image Update
+        return postBean;
+    }
+
+    @Override
     public List<PostBean> getPostsWithMedia() {
         return postDao.getPostsWithMedia();
     }

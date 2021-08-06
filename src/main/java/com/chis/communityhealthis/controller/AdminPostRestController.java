@@ -24,6 +24,11 @@ public class AdminPostRestController {
     @Autowired
     private AuthService authService;
 
+    @RequestMapping(value = "/get-post", method = RequestMethod.GET)
+    public ResponseEntity<PostBean> getPostById(@RequestParam Integer postId) {
+        return new ResponseEntity<>(postService.getPostWithMedia(postId), HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/get-admin-posts", method = RequestMethod.GET)
     public ResponseEntity<List<PostBean>> getAdminPosts() {
         return new ResponseEntity<>(postService.getPostsWithMedia(), HttpStatus.OK);
@@ -41,5 +46,13 @@ public class AdminPostRestController {
     public ResponseEntity<?> deleteAdminPost(@PathVariable Integer postId) {
         postService.deletePost(postId);
         return new ResponseEntity<>(null, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/update-post", method = RequestMethod.POST)
+    public ResponseEntity<?> updatePost(@RequestParam(value = "form") String postForm, @RequestParam(value = "files", required = false) List<MultipartFile> multipartFileList) throws IOException {
+        PostForm postFormObj = new ObjectMapper().readValue(postForm, PostForm.class);
+        postFormObj.setCreatedBy(authService.getCurrentLoggedInUsername());
+        postFormObj.setFileList(multipartFileList);
+        return new ResponseEntity<>(postService.updatePost(postFormObj), HttpStatus.OK);
     }
 }

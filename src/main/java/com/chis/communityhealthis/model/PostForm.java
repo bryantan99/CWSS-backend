@@ -5,9 +5,14 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 public class PostForm {
+    private Integer postId;
     private String postDescription;
     private String createdBy;
     private List<MultipartFile> fileList;
+
+    public Integer getPostId() {return postId;}
+
+    public void setPostId(Integer postId) {this.postId = postId;}
 
     public String getPostDescription() {
         return postDescription;
