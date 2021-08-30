@@ -8,4 +8,5 @@ public interface AccountService {
     AccountModel addAccount(AccountRegistrationForm form);
     AccountBean getAccountWithRoles(String username);
     Boolean isValidUsername(String username);
+    void updateLastLogin(String username);
 }

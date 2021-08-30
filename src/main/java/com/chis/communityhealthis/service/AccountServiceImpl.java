@@ -77,6 +77,14 @@ public class AccountServiceImpl implements AccountService{
         return accountBean == null;
     }
 
+    @Override
+    public void updateLastLogin(String username) {
+        AccountBean accountBean = accountDao.find(username);
+        Assert.notNull(accountBean, "Account with username: " + username + " is not found.");
+        accountBean.setLastLoginDate(new Date());
+        accountDao.update(accountBean);
+    }
+
     private AccountBean createAccountBean(PersonalDetailForm personalDetail) {
         Assert.isTrue(StringUtils.equals(personalDetail.getPassword(), personalDetail.getConfirmPassword()), "Password does not matched");
         AccountBean bean = new AccountBean();
