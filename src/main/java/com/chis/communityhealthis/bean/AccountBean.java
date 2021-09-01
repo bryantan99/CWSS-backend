@@ -1,9 +1,5 @@
 package com.chis.communityhealthis.bean;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -35,8 +31,7 @@ public class AccountBean implements Serializable {
     private Date lastLoginDate;
 
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = AccountRoleBean.USERNAME, referencedColumnName = USERNAME)
-    @JsonManagedReference
+    @JoinColumn(name = USERNAME, referencedColumnName = AccountRoleBean.USERNAME, updatable = false, insertable = false)
     private Set<AccountRoleBean> roles = new HashSet<>();
 
     public AccountBean() {

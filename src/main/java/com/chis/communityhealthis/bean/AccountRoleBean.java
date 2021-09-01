@@ -1,10 +1,5 @@
 package com.chis.communityhealthis.bean;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -19,7 +14,8 @@ public class AccountRoleBean implements Serializable {
     public static final String ROLE_NAME = "ROLE_NAME";
 
     @Id
-    @Column(name = ID)
+    @Column(name = ID, nullable = false, updatable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = USERNAME)
@@ -27,11 +23,6 @@ public class AccountRoleBean implements Serializable {
 
     @Column(name = ROLE_NAME)
     private String roleName;
-
-    @ManyToOne
-    @JoinColumn(name = AccountBean.USERNAME, referencedColumnName = USERNAME, insertable = false, updatable = false)
-    @JsonBackReference
-    private AccountBean accountBean;
 
     public Integer getId() {
         return id;
@@ -55,13 +46,5 @@ public class AccountRoleBean implements Serializable {
 
     public void setRoleName(String roleName) {
         this.roleName = roleName;
-    }
-
-    public AccountBean getAccountBean() {
-        return accountBean;
-    }
-
-    public void setAccountBean(AccountBean accountBean) {
-        this.accountBean = accountBean;
     }
 }
