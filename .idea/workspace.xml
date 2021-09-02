@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="Add emailService, send email with generatedPw for staff first time login">
-      <change afterPath="$PROJECT_DIR$/bfg.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -187,13 +186,6 @@
       <workItem from="1630398789034" duration="17233000" />
       <workItem from="1630480460308" duration="12409000" />
       <workItem from="1630564926540" duration="10239000" />
-    </task>
-    <task id="LOCAL-00009" summary="Removed console log, permitAll() for /post/get-admin-posts">
-      <created>1621911109162</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1621911109162</updated>
     </task>
     <task id="LOCAL-00010" summary="Modify GenericDao and GenericDaoImpl add() to return PK">
       <created>1622051846408</created>
@@ -531,7 +523,14 @@
       <option name="project" value="LOCAL" />
       <updated>1630577077756</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="Add emailService, send email with generatedPw for staff first time login">
+      <created>1630585967408</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1630585967408</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
