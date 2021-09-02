@@ -3,13 +3,17 @@ package com.chis.communityhealthis.service.admin;
 import com.chis.communityhealthis.bean.AccountBean;
 import com.chis.communityhealthis.bean.AccountRoleBean;
 import com.chis.communityhealthis.bean.AdminBean;
+import com.chis.communityhealthis.model.email.MailRequest;
 import com.chis.communityhealthis.model.signup.AdminForm;
 import com.chis.communityhealthis.model.user.CommunityUserTableModel;
 import com.chis.communityhealthis.repository.AccountDao;
 import com.chis.communityhealthis.repository.accountRole.AccountRoleDao;
 import com.chis.communityhealthis.repository.admin.AdminDao;
+import com.chis.communityhealthis.service.email.EmailService;
 import com.chis.communityhealthis.utility.FlagConstant;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -29,6 +33,12 @@ public class AdminServiceImpl implements AdminService{
 
     @Autowired
     private AccountRoleDao accountRoleDao;
+
+    @Autowired
+    private EmailService emailService;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public List<CommunityUserTableModel> findAllAdmins() {
@@ -62,6 +72,9 @@ public class AdminServiceImpl implements AdminService{
 
     @Override
     public AdminBean addStaff(AdminForm form) {
+        String generatedPw = RandomStringUtils.randomAlphanumeric(8, 12);
+        form.setPassword(generatedPw);
+
         AccountBean accountBean = createAccountBean(form);
         accountDao.add(accountBean);
 
@@ -74,7 +87,24 @@ public class AdminServiceImpl implements AdminService{
             roleBean.setRoleName(role);
             accountRoleDao.add(roleBean);
         }
+
+        sendAccountCreationEmail(adminBean, generatedPw);
         return adminBean;
+    }
+
+    private void sendAccountCreationEmail(AdminBean adminBean, String generatedPw) {
+        MailRequest mailRequest = new MailRequest();
+        mailRequest.setTemplateFileName("staff-account-creation.ftl");
+        mailRequest.setTo(adminBean.getEmail());
+        mailRequest.setFrom("communityservicecentre.aulong@gmail.com");
+        mailRequest.setSubject("Creation of Staff Account");
+
+        Map<String, Object> model = new HashMap<>();
+        model.put("fullName", adminBean.getFullName());
+        model.put("username", adminBean.getUsername());
+        model.put("defaultPw", generatedPw);
+
+        emailService.sendEmailWithTemplate(mailRequest, model);
     }
 
     @Override
@@ -97,7 +127,7 @@ public class AdminServiceImpl implements AdminService{
         AccountBean bean = new AccountBean();
         bean.setUsername(form.getUsername());
         bean.setIsActive(FlagConstant.YES);
-        bean.setPw("DUMMY_PASSWORD");
+        bean.setPw(bCryptPasswordEncoder.encode(form.getPassword()));
         return bean;
     }
 

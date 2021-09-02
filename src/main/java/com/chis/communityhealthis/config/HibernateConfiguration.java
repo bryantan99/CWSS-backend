@@ -1,4 +1,4 @@
-package com.chis.communityhealthis;
+package com.chis.communityhealthis.config;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
