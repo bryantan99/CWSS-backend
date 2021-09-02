@@ -5,6 +5,7 @@ import com.chis.communityhealthis.bean.AccountRoleBean;
 import com.chis.communityhealthis.bean.AdminBean;
 import com.chis.communityhealthis.model.email.MailRequest;
 import com.chis.communityhealthis.model.signup.AdminForm;
+import com.chis.communityhealthis.model.user.AdminDetailModel;
 import com.chis.communityhealthis.model.user.CommunityUserTableModel;
 import com.chis.communityhealthis.repository.AccountDao;
 import com.chis.communityhealthis.repository.accountRole.AccountRoleDao;
@@ -41,28 +42,20 @@ public class AdminServiceImpl implements AdminService{
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public List<CommunityUserTableModel> findAllAdmins() {
-        List<CommunityUserTableModel> list = new ArrayList<>();
+    public List<AdminDetailModel> findAllAdmins() {
+        List<AdminDetailModel> list = new ArrayList<>();
 
         List<AdminBean> adminBeans = adminDao.getAll();
         if (CollectionUtils.isEmpty(adminBeans)) {
             return list;
         }
 
-        List<String> usernames = adminBeans.stream()
-                .map(AdminBean::getUsername)
-                .collect(Collectors.toList());
-
-        List<AccountBean> accountBeans = accountDao.findAccounts(usernames);
-        Map<String, String> accountStatusMap = accountBeans.stream()
-                .collect(Collectors.toMap(AccountBean::getUsername, AccountBean::getIsActive, (x,y)-> x + ", " + y, LinkedHashMap::new));
-
         for (AdminBean adminBean : adminBeans) {
-            CommunityUserTableModel model = new CommunityUserTableModel();
+            AdminDetailModel model = new AdminDetailModel();
             model.setUsername(adminBean.getUsername());
             model.setFullName(adminBean.getFullName());
             model.setEmail(adminBean.getEmail());
-            model.setIsActive(accountStatusMap.get(adminBean.getUsername()));
+            model.setContactNo(adminBean.getContactNo());
             list.add(model);
         }
 
