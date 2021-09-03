@@ -15,7 +15,6 @@ public class AdminBean implements Serializable {
     public static final String USERNAME = "USERNAME";
     public static final String FULL_NAME = "FULL_NAME";
     public static final String CONTACT_NO = "CONTACT_NO";
-    public static final String EMAIL = "EMAIL";
 
     @Id
     @Column(name = USERNAME)
@@ -26,9 +25,6 @@ public class AdminBean implements Serializable {
 
     @Column(name = CONTACT_NO)
     private String contactNo;
-
-    @Column(name = EMAIL)
-    private String email;
 
     public String getUsername() {
         return username;
@@ -52,13 +48,5 @@ public class AdminBean implements Serializable {
 
     public void setContactNo(String contactNo) {
         this.contactNo = contactNo;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 }

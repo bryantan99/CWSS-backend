@@ -9,6 +9,7 @@ import java.util.List;
 
 public class CommunityUserProfileModel {
     private String accIsActivate;
+    private String email;
     private CommunityUserBean personalDetail;
     private AddressBean address;
     private OccupationBean occupation;
@@ -17,6 +18,14 @@ public class CommunityUserProfileModel {
     public String getAccIsActivate() { return accIsActivate; }
 
     public void setAccIsActivate(String accIsActivate) { this.accIsActivate = accIsActivate; }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public CommunityUserBean getPersonalDetail() {
         return personalDetail;

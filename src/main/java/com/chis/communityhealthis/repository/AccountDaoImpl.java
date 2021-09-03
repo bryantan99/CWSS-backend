@@ -19,23 +19,9 @@ public class AccountDaoImpl extends GenericDaoImpl<AccountBean, String> implemen
     public static final String VAR_PASSWORD = "pw";
     public static final String VAR_IS_ACTIVE = "isActive";
     public static final String VAR_LAST_LOGIN_DATE = "lastLoginDate";
+    public static final String VAR_EMAIL = "email";
 
     public static final String JOIN_VAR_ROLES = "roles";
-
-    @Override
-    public AccountBean findAccount(String username) {
-        CriteriaBuilder criteriaBuilder = currentSession().getCriteriaBuilder();
-        CriteriaQuery<AccountBean> criteriaQuery = criteriaBuilder.createQuery(AccountBean.class);
-        Root<AccountBean> root = criteriaQuery.from(AccountBean.class);
-
-        List<Selection<?>> columns = Arrays.asList(root.get(VAR_USERNAME), root.get(VAR_PASSWORD), root.get(VAR_IS_ACTIVE), root.get(VAR_LAST_LOGIN_DATE));
-
-        criteriaQuery.multiselect(columns)
-                .where(criteriaBuilder.equal(root.get(VAR_USERNAME), username));
-
-        Query<AccountBean> query = currentSession().createQuery(criteriaQuery);
-        return query.uniqueResult();
-    }
 
     @Override
     public List<AccountBean> findAccounts(Collection<String> usernames) {
@@ -47,7 +33,7 @@ public class AccountDaoImpl extends GenericDaoImpl<AccountBean, String> implemen
         CriteriaQuery<AccountBean> criteriaQuery = criteriaBuilder.createQuery(AccountBean.class);
         Root<AccountBean> root = criteriaQuery.from(AccountBean.class);
 
-        List<Selection<?>> columns = Arrays.asList(root.get(VAR_USERNAME), root.get(VAR_PASSWORD), root.get(VAR_IS_ACTIVE), root.get(VAR_LAST_LOGIN_DATE));
+        List<Selection<?>> columns = Arrays.asList(root.get(VAR_USERNAME), root.get(VAR_PASSWORD), root.get(VAR_IS_ACTIVE), root.get(VAR_LAST_LOGIN_DATE), root.get(VAR_EMAIL));
         CriteriaBuilder.In<String> inClause = criteriaBuilder.in(root.get(VAR_USERNAME));
 
         for (String username: usernames) {

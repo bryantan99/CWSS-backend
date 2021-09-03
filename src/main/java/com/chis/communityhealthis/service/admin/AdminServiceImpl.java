@@ -4,9 +4,9 @@ import com.chis.communityhealthis.bean.AccountBean;
 import com.chis.communityhealthis.bean.AccountRoleBean;
 import com.chis.communityhealthis.bean.AdminBean;
 import com.chis.communityhealthis.model.email.MailRequest;
+import com.chis.communityhealthis.model.email.template.StaffAccountCreationEmailTemplateModel;
 import com.chis.communityhealthis.model.signup.AdminForm;
 import com.chis.communityhealthis.model.user.AdminDetailModel;
-import com.chis.communityhealthis.model.user.CommunityUserTableModel;
 import com.chis.communityhealthis.repository.AccountDao;
 import com.chis.communityhealthis.repository.accountRole.AccountRoleDao;
 import com.chis.communityhealthis.repository.admin.AdminDao;
@@ -50,11 +50,25 @@ public class AdminServiceImpl implements AdminService{
             return list;
         }
 
+        List<String> usernames = adminBeans.stream().map(AdminBean::getUsername).collect(Collectors.toList());
+        List<AccountBean> accountBeans = accountDao.findAccounts(usernames);
+        if (CollectionUtils.isEmpty(accountBeans)) {
+            return list;
+        }
+        Map<String, AccountBean> map = new HashMap<>();
+        for (AccountBean accountBean: accountBeans) {
+            if (!map.containsKey(accountBean.getUsername())) {
+                map.put(accountBean.getUsername(), accountBean);
+            }
+        }
+
         for (AdminBean adminBean : adminBeans) {
+            AccountBean accountBean = map.get(adminBean.getUsername());
+
             AdminDetailModel model = new AdminDetailModel();
             model.setUsername(adminBean.getUsername());
             model.setFullName(adminBean.getFullName());
-            model.setEmail(adminBean.getEmail());
+            model.setEmail(accountBean.getEmail());
             model.setContactNo(adminBean.getContactNo());
             list.add(model);
         }
@@ -81,23 +95,24 @@ public class AdminServiceImpl implements AdminService{
             accountRoleDao.add(roleBean);
         }
 
-        sendAccountCreationEmail(adminBean, generatedPw);
+        StaffAccountCreationEmailTemplateModel model = new StaffAccountCreationEmailTemplateModel(form.getFullName(), form.getUsername(), generatedPw);
+        sendAccountCreationEmail(form.getEmail(), model);
         return adminBean;
     }
 
-    private void sendAccountCreationEmail(AdminBean adminBean, String generatedPw) {
+    private void sendAccountCreationEmail(String recipientEmail, StaffAccountCreationEmailTemplateModel model) {
         MailRequest mailRequest = new MailRequest();
         mailRequest.setTemplateFileName("staff-account-creation.ftl");
-        mailRequest.setTo(adminBean.getEmail());
+        mailRequest.setTo(recipientEmail);
         mailRequest.setFrom("communityservicecentre.aulong@gmail.com");
         mailRequest.setSubject("Creation of Staff Account");
 
-        Map<String, Object> model = new HashMap<>();
-        model.put("fullName", adminBean.getFullName());
-        model.put("username", adminBean.getUsername());
-        model.put("defaultPw", generatedPw);
+        Map<String, Object> map = new HashMap<>();
+        map.put("fullName", model.getFullName());
+        map.put("username", model.getUsername());
+        map.put("defaultPw", model.getGeneratedPw());
 
-        emailService.sendEmailWithTemplate(mailRequest, model);
+        emailService.sendEmailWithTemplate(mailRequest, map);
     }
 
     @Override
@@ -121,6 +136,7 @@ public class AdminServiceImpl implements AdminService{
         bean.setUsername(form.getUsername());
         bean.setIsActive(FlagConstant.YES);
         bean.setPw(bCryptPasswordEncoder.encode(form.getPassword()));
+        bean.setEmail(form.getEmail());
         return bean;
     }
 
@@ -128,7 +144,6 @@ public class AdminServiceImpl implements AdminService{
         AdminBean bean = new AdminBean();
         bean.setFullName(form.getFullName());
         bean.setUsername(form.getUsername());
-        bean.setEmail(form.getEmail());
         bean.setContactNo(form.getContactNo());
         return bean;
     }

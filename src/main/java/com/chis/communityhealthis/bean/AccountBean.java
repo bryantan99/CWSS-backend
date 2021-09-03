@@ -16,6 +16,7 @@ public class AccountBean implements Serializable {
     public final static String PW = "PW";
     public final static String IS_ACTIVE = "IS_ACTIVE";
     public final static String LAST_LOGIN_DATE = "LAST_LOGIN_DATE";
+    public final static String EMAIL = "EMAIL";
 
     @Id
     @Column(name = USERNAME)
@@ -30,6 +31,9 @@ public class AccountBean implements Serializable {
     @Column(name = LAST_LOGIN_DATE)
     private Date lastLoginDate;
 
+    @Column(name = EMAIL)
+    private String email;
+
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = USERNAME, referencedColumnName = AccountRoleBean.USERNAME, updatable = false, insertable = false)
     private Set<AccountRoleBean> roles = new HashSet<>();
@@ -37,11 +41,12 @@ public class AccountBean implements Serializable {
     public AccountBean() {
     }
 
-    public AccountBean(String username, String pw, String isActive, Date lastLoginDate) {
+    public AccountBean(String username, String pw, String isActive, Date lastLoginDate, String email) {
         this.username = username;
         this.pw = pw;
         this.isActive = isActive;
         this.lastLoginDate = lastLoginDate;
+        this.email = email;
     }
 
     public String getUsername() {
@@ -79,4 +84,8 @@ public class AccountBean implements Serializable {
     public Set<AccountRoleBean> getRoles() { return roles; }
 
     public void setRoles(Set<AccountRoleBean> accountRoleBeanList) { this.roles = accountRoleBeanList; }
+
+    public String getEmail() {return email;}
+
+    public void setEmail(String email) {this.email = email;}
 }

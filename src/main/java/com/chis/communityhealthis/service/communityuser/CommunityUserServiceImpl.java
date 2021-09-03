@@ -54,16 +54,22 @@ public class CommunityUserServiceImpl implements CommunityUserService{
                 .collect(Collectors.toList());
 
         List<AccountBean> accountBeans = accountDao.findAccounts(usernames);
-        Map<String, String> accountStatusMap = accountBeans.stream()
-                .collect(Collectors.toMap(AccountBean::getUsername, AccountBean::getIsActive, (x,y)-> x + ", " + y, LinkedHashMap::new));
+        Map<String, AccountBean> accountBeanMap = new HashMap<>();
+        for (AccountBean accountBean: accountBeans) {
+            if (!accountBeanMap.containsKey(accountBean.getUsername())) {
+                accountBeanMap.put(accountBean.getUsername(), accountBean);
+            }
+        }
 
         for (CommunityUserBean communityUserBean : communityUserBeans) {
+            AccountBean accountBean = accountBeanMap.get(communityUserBean.getUsername());
+
             CommunityUserTableModel model = new CommunityUserTableModel();
             model.setUsername(communityUserBean.getUsername());
             model.setFullName(communityUserBean.getFullName());
             model.setNricNo(communityUserBean.getNric());
-            model.setEmail(communityUserBean.getEmail());
-            model.setIsActive(accountStatusMap.get(communityUserBean.getUsername()));
+            model.setEmail(accountBean.getEmail());
+            model.setIsActive(accountBean.getIsActive());
             list.add(model);
         }
 
@@ -73,7 +79,7 @@ public class CommunityUserServiceImpl implements CommunityUserService{
 
     @Override
     public CommunityUserProfileModel getCommunityUserProfile(String username) {
-        AccountBean accountBean = accountDao.findAccount(username);
+        AccountBean accountBean = accountDao.find(username);
         Assert.notNull(accountBean, "Account [username: " + username + "] was not found.");
         CommunityUserBean communityUserBean = communityUserDao.find(username);
         AddressBean addressBean = addressDao.find(username);
@@ -82,6 +88,7 @@ public class CommunityUserServiceImpl implements CommunityUserService{
 
         CommunityUserProfileModel profileModel = toCommunityUserProfileModel(communityUserBean, addressBean, occupationBean, healthIssueBeans);
         profileModel.setAccIsActivate(accountBean.getIsActive());
+        profileModel.setEmail(accountBean.getEmail());
         return profileModel;
     }
 
@@ -142,6 +149,10 @@ public class CommunityUserServiceImpl implements CommunityUserService{
     public void updateUserAccount(AccountRegistrationForm form) {
         String username = form.getPersonalDetail().getUsername();
 
+        AccountBean accountBean = accountDao.find(username);
+        accountBean.setEmail(form.getPersonalDetail().getEmail());
+        accountDao.saveOrUpdate(accountBean);
+
         CommunityUserBean communityUserBean = communityUserDao.find(username);
         updateCommunityUserBean(communityUserBean, form.getPersonalDetail());
 
@@ -192,7 +203,6 @@ public class CommunityUserServiceImpl implements CommunityUserService{
     }
 
     private void updateCommunityUserBean(CommunityUserBean communityUserBean, PersonalDetailForm personalDetail) {
-        communityUserBean.setEmail(personalDetail.getEmail());
         communityUserBean.setContactNo(personalDetail.getContactNo());
         communityUserBean.setNric(personalDetail.getNric());
         communityUserBean.setGender(personalDetail.getGender());

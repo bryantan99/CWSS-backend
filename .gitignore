@@ -1,2 +1,3 @@
 /target/
 /src/main/resources/frontend/chis-app/node_modules/
+/src/main/resources/application-local.properties

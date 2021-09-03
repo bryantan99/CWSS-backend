@@ -12,7 +12,6 @@ public class CommunityUserBean implements Serializable {
     public static final String USERNAME = "USERNAME";
     public static final String FULL_NAME = "FULL_NAME";
     public static final String NRIC = "NRIC";
-    public static final String EMAIL = "EMAIL";
     public static final String GENDER = "GENDER";
     public static final String CONTACT_NO = "CONTACT_NO";
     public static final String ETHNIC = "ETHNIC";
@@ -26,9 +25,6 @@ public class CommunityUserBean implements Serializable {
 
     @Column(name = NRIC)
     private String nric;
-
-    @Column(name = EMAIL)
-    private String email;
 
     @Column(name = GENDER)
     private String gender;
@@ -61,14 +57,6 @@ public class CommunityUserBean implements Serializable {
 
     public void setNric(String nric) {
         this.nric = nric;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getGender() {

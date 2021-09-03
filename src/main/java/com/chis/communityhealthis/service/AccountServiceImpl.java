@@ -91,6 +91,7 @@ public class AccountServiceImpl implements AccountService{
         bean.setUsername(personalDetail.getUsername());
         bean.setPw(bCryptPasswordEncoder.encode(personalDetail.getPassword()));
         bean.setIsActive(FlagConstant.NO);
+        bean.setEmail(StringUtils.isNotBlank(personalDetail.getEmail()) ? personalDetail.getEmail() : CommunityServiceCentreConstant.DEFAULT_EMAIL);
         return bean;
     }
 
@@ -102,7 +103,6 @@ public class AccountServiceImpl implements AccountService{
         communityUserBean.setNric(personalDetail.getNric());
         communityUserBean.setGender(StringUtils.toRootUpperCase(personalDetail.getGender()));
         communityUserBean.setEthnic(StringUtils.toRootUpperCase(personalDetail.getEthnic()));
-        communityUserBean.setEmail(StringUtils.isNotBlank(personalDetail.getEmail()) ? personalDetail.getEmail() : CommunityServiceCentreConstant.DEFAULT_EMAIL);
         return communityUserBean;
     }
 
