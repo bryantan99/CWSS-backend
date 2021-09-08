@@ -1,23 +1,58 @@
 package com.chis.communityhealthis.controller;
 
+import com.chis.communityhealthis.model.account.PasswordResetRequestModel;
+import com.chis.communityhealthis.model.response.ResponseHandler;
 import com.chis.communityhealthis.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping( "/account")
+@RequestMapping("/account")
 public class AccountRestController {
 
     @Autowired
     private AccountService accountService;
 
     @RequestMapping(value = "/is-valid-username", method = RequestMethod.GET)
-    public ResponseEntity<Boolean> isValidUsername(@RequestParam String username) {
-        return new ResponseEntity<>(this.accountService.isValidUsername(username), HttpStatus.OK);
+    public ResponseEntity<Object> isValidUsername(@RequestParam String username) {
+        try {
+            Boolean isValid = this.accountService.isValidUsername(username);
+            return ResponseHandler.generateResponse("Successfully validate username.", HttpStatus.OK, isValid);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
+    @PostMapping(value = "/request-password-reset")
+    public ResponseEntity<Object> requestPasswordReset(@RequestBody PasswordResetRequestModel model) {
+        try {
+            accountService.requestResetPassword(model.getEmail());
+            return ResponseHandler.generateResponse("Successfully requested for password reset.", HttpStatus.OK, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.MULTI_STATUS, null);
+        }
+    }
+
+    @PostMapping(value = "/validate-otp")
+    public ResponseEntity<Object> validateOtp(@RequestBody PasswordResetRequestModel model) {
+        try {
+            Boolean isValid = accountService.validateOtp(model);
+            return ResponseHandler.generateResponse("Successfully validated OTP.", HttpStatus.OK, isValid);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
+    @PostMapping(value = "/reset-password")
+    public ResponseEntity<Object> resetPassword(@RequestBody PasswordResetRequestModel model) {
+        try {
+            accountService.resetPassword(model);
+            return ResponseHandler.generateResponse("Successfully reset password.", HttpStatus.OK, true);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
     }
 }

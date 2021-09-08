@@ -2,23 +2,33 @@ package com.chis.communityhealthis.service;
 
 import com.chis.communityhealthis.bean.*;
 import com.chis.communityhealthis.model.account.AccountModel;
+import com.chis.communityhealthis.model.account.PasswordResetRequestModel;
+import com.chis.communityhealthis.model.email.MailRequest;
 import com.chis.communityhealthis.model.signup.*;
 import com.chis.communityhealthis.repository.AccountDao;
 import com.chis.communityhealthis.repository.address.AddressDao;
 import com.chis.communityhealthis.repository.communityuser.CommunityUserDao;
 import com.chis.communityhealthis.repository.healthIssue.HealthIssueDao;
 import com.chis.communityhealthis.repository.occupation.OccupationDao;
+import com.chis.communityhealthis.repository.resetPasswordRequest.ResetPasswordRequestDao;
+import com.chis.communityhealthis.service.email.EmailService;
 import com.chis.communityhealthis.utility.CommunityServiceCentreConstant;
 import com.chis.communityhealthis.utility.FlagConstant;
+import freemarker.template.utility.DateUtil;
 import io.jsonwebtoken.lang.Assert;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import javax.transaction.Transactional;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -38,6 +48,12 @@ public class AccountServiceImpl implements AccountService{
 
     @Autowired
     private HealthIssueDao healthIssueDao;
+
+    @Autowired
+    private ResetPasswordRequestDao resetPasswordRequestDao;
+
+    @Autowired
+    private EmailService emailService;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -83,6 +99,60 @@ public class AccountServiceImpl implements AccountService{
         Assert.notNull(accountBean, "Account with username: " + username + " is not found.");
         accountBean.setLastLoginDate(new Date());
         accountDao.update(accountBean);
+    }
+
+    @Override
+    public void requestResetPassword(String email) {
+        AccountBean accountBean = accountDao.findAccountByEmail(email);
+        Assert.notNull(accountBean, "Account with email : " + email + " was not found!");
+
+        ResetPasswordRequestBean bean = new ResetPasswordRequestBean();
+        bean.setUsername(accountBean.getUsername());
+        bean.setOtp(RandomStringUtils.randomNumeric(6, 7));
+
+        Calendar currentTime = Calendar.getInstance();
+        currentTime.add(Calendar.MINUTE, 15);
+        Date expiryDate = currentTime.getTime();
+        bean.setOtpExpiryDate(expiryDate);
+        resetPasswordRequestDao.saveOrUpdate(bean);
+
+        MailRequest mailRequest = new MailRequest();
+        mailRequest.setTo(email);
+        mailRequest.setFrom(CommunityServiceCentreConstant.DEFAULT_EMAIL);
+        mailRequest.setSubject("Request for password reset");
+        mailRequest.setTemplateFileName("reset-password.ftl");
+
+        Map<String, Object> model = new HashMap<>();
+        model.put("otp", bean.getOtp());
+        emailService.sendEmailWithTemplate(mailRequest, model);
+    }
+
+    @Override
+    public Boolean validateOtp(PasswordResetRequestModel model) {
+        AccountBean accountBean = accountDao.findAccountByEmail(model.getEmail());
+        Assert.notNull(accountBean, "Account with email: " + model.getEmail() + " was not found.");
+
+        ResetPasswordRequestBean passwordRequestBean = resetPasswordRequestDao.find(accountBean.getUsername());
+        Assert.notNull(passwordRequestBean, "User with username : " + accountBean.getUsername() + " has not requested password reset.");
+
+        Date currentDatetime = new Date();
+
+        return model.getOtp().equals(passwordRequestBean.getOtp()) && currentDatetime.before(passwordRequestBean.getOtpExpiryDate());
+    }
+
+    @Override
+    public void resetPassword(PasswordResetRequestModel model) {
+        Assert.isTrue(StringUtils.equals(model.getPassword(), model.getConfirmPassword()), "Password and confirm password are mismatched.");
+
+        AccountBean accountBean = accountDao.findAccountByEmail(model.getEmail());
+        Assert.notNull(accountBean, "Account with email: " + model.getEmail() + " was not found.");
+
+        String encryptedPw = bCryptPasswordEncoder.encode(model.getPassword());
+        accountBean.setPw(encryptedPw);
+        accountDao.saveOrUpdate(accountBean);
+
+        ResetPasswordRequestBean resetPasswordRequestBean = resetPasswordRequestDao.find(accountBean.getUsername());
+        resetPasswordRequestDao.remove(resetPasswordRequestBean);
     }
 
     private AccountBean createAccountBean(PersonalDetailForm personalDetail) {

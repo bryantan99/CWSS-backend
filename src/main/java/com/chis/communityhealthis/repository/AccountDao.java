@@ -8,4 +8,5 @@ import java.util.List;
 public interface AccountDao extends GenericDao<AccountBean, String> {
     List<AccountBean> findAccounts (Collection<String> usernames);
     AccountBean findAccountWithRoles(String username);
+    AccountBean findAccountByEmail(String email);
 }

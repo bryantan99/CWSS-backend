@@ -12,7 +12,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Repository
-public class AccountDaoImpl extends GenericDaoImpl<AccountBean, String> implements AccountDao{
+public class AccountDaoImpl extends GenericDaoImpl<AccountBean, String> implements AccountDao {
 
     //  AccountBean's variable name in AccountBean.class
     public static final String VAR_USERNAME = "username";
@@ -36,7 +36,7 @@ public class AccountDaoImpl extends GenericDaoImpl<AccountBean, String> implemen
         List<Selection<?>> columns = Arrays.asList(root.get(VAR_USERNAME), root.get(VAR_PASSWORD), root.get(VAR_IS_ACTIVE), root.get(VAR_LAST_LOGIN_DATE), root.get(VAR_EMAIL));
         CriteriaBuilder.In<String> inClause = criteriaBuilder.in(root.get(VAR_USERNAME));
 
-        for (String username: usernames) {
+        for (String username : usernames) {
             inClause.value(username);
         }
 
@@ -55,6 +55,18 @@ public class AccountDaoImpl extends GenericDaoImpl<AccountBean, String> implemen
         root.fetch(JOIN_VAR_ROLES, JoinType.LEFT);
         criteriaQuery.select(root)
                 .where(criteriaBuilder.equal(root.get(VAR_USERNAME), username));
+
+        Query<AccountBean> query = currentSession().createQuery(criteriaQuery);
+        return query.uniqueResult();
+    }
+
+    @Override
+    public AccountBean findAccountByEmail(String email) {
+        CriteriaBuilder criteriaBuilder = currentSession().getCriteriaBuilder();
+        CriteriaQuery<AccountBean> criteriaQuery = criteriaBuilder.createQuery(AccountBean.class);
+        Root<AccountBean> root = criteriaQuery.from(AccountBean.class);
+        criteriaQuery.select(root)
+                .where(criteriaBuilder.equal(root.get(VAR_EMAIL), email));
 
         Query<AccountBean> query = currentSession().createQuery(criteriaQuery);
         return query.uniqueResult();
