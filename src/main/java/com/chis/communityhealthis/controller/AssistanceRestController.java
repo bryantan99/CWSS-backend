@@ -6,6 +6,7 @@ import com.chis.communityhealthis.model.assistance.AssistanceRequestForm;
 import com.chis.communityhealthis.model.response.ResponseHandler;
 import com.chis.communityhealthis.service.AuthService;
 import com.chis.communityhealthis.service.assistance.AssistanceService;
+import io.jsonwebtoken.lang.Assert;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -69,6 +70,17 @@ public class AssistanceRestController {
         String currentLoggedInUsername = authService.getCurrentLoggedInUsername();
         try {
             return ResponseHandler.generateResponse("Successfully retrieved details of assistance request ID: " + assistanceId.toString() + ".", HttpStatus.OK, assistanceService.getAssistanceRecordDetail(assistanceId, currentLoggedInUsername));
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
+    @GetMapping(value = "")
+    public ResponseEntity<Object> findAllAssistanceRecords() {
+        try {
+            Assert.isTrue(authService.currentLoggedInUserIsAdmin(), "Unauthorized access.");
+            List<AssistanceRecordTableModel> list = assistanceService.findAllAssistanceRecords();
+            return ResponseHandler.generateResponse("Successfully retrieved " + list.size() + " assistance request record(s).", HttpStatus.OK, list);
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }

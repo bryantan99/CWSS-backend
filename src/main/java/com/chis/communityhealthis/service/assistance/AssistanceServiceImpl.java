@@ -96,15 +96,34 @@ public class AssistanceServiceImpl implements AssistanceService {
         return assistanceBean;
     }
 
+    @Override
+    public List<AssistanceRecordTableModel> findAllAssistanceRecords() {
+        List<AssistanceBean> assistanceBeans = assistanceDao.getAll();
+        List<AssistanceRecordTableModel> list = new ArrayList<>();
+        if (CollectionUtils.isEmpty(assistanceBeans)) {
+            return list;
+        }
+        for (AssistanceBean bean : assistanceBeans) {
+            list.add(toAssistanceRecordTableModel(bean));
+        }
+        return list;
+    }
+
     private AssistanceRecordTableModel toAssistanceRecordTableModel(AssistanceBean bean) {
         AssistanceRecordTableModel model = new AssistanceRecordTableModel();
         model.setAssistanceId(bean.getAssistanceId());
         model.setUsername(bean.getUsername());
-        model.setUserFullName(null);
         model.setAssistanceTitle(bean.getAssistanceTitle());
-        model.setAdminFullName(null);
         model.setStatus(bean.getAssistanceStatus());
         model.setCreatedDate(bean.getCreatedDate());
+
+        if (bean.getCommunityUserBean() != null) {
+            model.setUserFullName(bean.getCommunityUserBean().getFullName());
+        }
+
+        if (bean.getAdminBean() != null) {
+            model.setAdminFullName(bean.getAdminBean().getFullName());
+        }
         return model;
     }
 }
