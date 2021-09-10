@@ -10,9 +10,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -33,7 +33,8 @@ public class AssistanceRestController {
     @GetMapping(value = "/current-user")
     public ResponseEntity<Object> findUserAssistanceRecords(@RequestParam String username) {
         try {
-            return ResponseHandler.generateResponse("Successfully searched user assistance records.", HttpStatus.OK, assistanceService.findUserAssistanceRecords(username));
+            List<AssistanceRecordTableModel> list = assistanceService.findUserAssistanceRecords(username);
+            return ResponseHandler.generateResponse("Successfully searched user assistance records. Found " + (CollectionUtils.isEmpty(list) ? "0" : list.size() + " record(s)."), HttpStatus.OK, list);
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
@@ -57,7 +58,17 @@ public class AssistanceRestController {
         String currentLoggedInUsername = authService.getCurrentLoggedInUsername();
         try {
             assistanceService.deleteAssistance(assistanceId, currentLoggedInUsername);
-            return ResponseHandler.generateResponse("Successfully deleted assistance.", HttpStatus.OK, null);
+            return ResponseHandler.generateResponse("Successfully deleted assistance request ID: " + assistanceId.toString() + ".", HttpStatus.OK, null);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
+    @GetMapping(value = "/{assistanceId}/detail")
+    public ResponseEntity<Object> getAssistanceRecordDetail(@PathVariable Integer assistanceId) {
+        String currentLoggedInUsername = authService.getCurrentLoggedInUsername();
+        try {
+            return ResponseHandler.generateResponse("Successfully retrieved details of assistance request ID: " + assistanceId.toString() + ".", HttpStatus.OK, assistanceService.getAssistanceRecordDetail(assistanceId, currentLoggedInUsername));
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }

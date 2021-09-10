@@ -11,4 +11,5 @@ public interface AssistanceService {
     List<AssistanceRecordTableModel> findUserAssistanceRecords(String username);
     AssistanceBean addAssistanceRequest(AssistanceRequestForm form);
     void deleteAssistance(Integer assistanceId, String actionMakerUsername) throws Exception;
+    AssistanceBean getAssistanceRecordDetail(Integer assistanceId, String actionMakerUsername) throws Exception;
 }

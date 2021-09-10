@@ -18,13 +18,13 @@ import java.util.List;
 
 @Service
 @Transactional
-public class AssistanceServiceImpl implements AssistanceService{
+public class AssistanceServiceImpl implements AssistanceService {
 
     @Autowired
     private AssistanceDao assistanceDao;
 
     @Autowired
-    private AdminDao  adminDao;
+    private AdminDao adminDao;
 
     @Override
     public List<AssistanceRecordTableModel> getAssistanceRecords() {
@@ -32,7 +32,7 @@ public class AssistanceServiceImpl implements AssistanceService{
         List<AssistanceRecordTableModel> list = new ArrayList<>();
 
         if (!CollectionUtils.isEmpty(beans)) {
-            for (AssistanceBean bean: beans) {
+            for (AssistanceBean bean : beans) {
                 list.add(toAssistanceRecordTableModel(bean));
             }
         }
@@ -46,7 +46,7 @@ public class AssistanceServiceImpl implements AssistanceService{
         List<AssistanceBean> assistanceBeans = assistanceDao.findUserAssistanceRecords(username);
 
         if (!CollectionUtils.isEmpty(assistanceBeans)) {
-            for (AssistanceBean assistanceBean: assistanceBeans) {
+            for (AssistanceBean assistanceBean : assistanceBeans) {
                 list.add(toAssistanceRecordTableModel(assistanceBean));
             }
         }
@@ -81,6 +81,19 @@ public class AssistanceServiceImpl implements AssistanceService{
         } else {
             throw new Exception("Unauthorized to delete assistance! Action maker is not admin / assistance request applicant.");
         }
+    }
+
+    @Override
+    public AssistanceBean getAssistanceRecordDetail(Integer assistanceId, String actionMakerUsername) throws Exception {
+        AssistanceBean assistanceBean = assistanceDao.find(assistanceId);
+        Assert.notNull(assistanceBean, "Assistance bean with Id: " + assistanceId.toString() + " was not found!");
+
+        AdminBean adminBean = adminDao.find(actionMakerUsername);
+        if (adminBean == null && !assistanceBean.getUsername().equals(actionMakerUsername)) {
+            throw new Exception("Unauthorized to retrieve assistance detail! Action maker is not admin / assistance request applicant.");
+        }
+
+        return assistanceBean;
     }
 
     private AssistanceRecordTableModel toAssistanceRecordTableModel(AssistanceBean bean) {
