@@ -145,22 +145,22 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Current>1</Current>
       <Collation>utf8mb4_0900_ai_ci</Collation>
     </schema>
-    <schema id="3" parent="1" name="information_schema">
-      <Collation>utf8_general_ci</Collation>
-    </schema>
-    <schema id="4" parent="1" name="mysql">
-      <Collation>utf8mb4_0900_ai_ci</Collation>
-    </schema>
-    <schema id="5" parent="1" name="performance_schema">
-      <Collation>utf8mb4_0900_ai_ci</Collation>
-    </schema>
-    <schema id="6" parent="1" name="sys">
-      <Collation>utf8mb4_0900_ai_ci</Collation>
-    </schema>
-    <schema id="7" parent="1" name="hardware">
+    <schema id="3" parent="1" name="hardware">
       <Collation>utf8mb4_general_ci</Collation>
     </schema>
-    <schema id="8" parent="1" name="phpmyadmin">
+    <schema id="4" parent="1" name="information_schema">
+      <Collation>utf8_general_ci</Collation>
+    </schema>
+    <schema id="5" parent="1" name="mysql">
+      <Collation>utf8mb4_0900_ai_ci</Collation>
+    </schema>
+    <schema id="6" parent="1" name="performance_schema">
+      <Collation>utf8mb4_0900_ai_ci</Collation>
+    </schema>
+    <schema id="7" parent="1" name="phpmyadmin">
+      <Collation>utf8mb4_0900_ai_ci</Collation>
+    </schema>
+    <schema id="8" parent="1" name="sys">
       <Collation>utf8mb4_0900_ai_ci</Collation>
     </schema>
     <collation id="9" parent="1" name="armscii8_bin">
@@ -1032,11 +1032,11 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Host>localhost</Host>
       <Plugin>caching_sha2_password</Plugin>
     </user>
-    <user id="284" parent="1" name="root">
-      <Host>localhost</Host>
+    <user id="284" parent="1" name="pma">
       <Plugin>caching_sha2_password</Plugin>
     </user>
-    <user id="285" parent="1" name="pma">
+    <user id="285" parent="1" name="root">
+      <Host>localhost</Host>
       <Plugin>caching_sha2_password</Plugin>
     </user>
     <table id="286" parent="2" name="account"/>

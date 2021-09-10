@@ -3,6 +3,7 @@ package com.chis.communityhealthis.controller;
 import com.chis.communityhealthis.model.account.PasswordResetRequestModel;
 import com.chis.communityhealthis.model.response.ResponseHandler;
 import com.chis.communityhealthis.service.AccountService;
+import com.chis.communityhealthis.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,9 @@ public class AccountRestController {
 
     @Autowired
     private AccountService accountService;
+
+    @Autowired
+    private AuthService authService;
 
     @RequestMapping(value = "/is-valid-username", method = RequestMethod.GET)
     public ResponseEntity<Object> isValidUsername(@RequestParam String username) {
@@ -51,6 +55,15 @@ public class AccountRestController {
         try {
             accountService.resetPassword(model);
             return ResponseHandler.generateResponse("Successfully reset password.", HttpStatus.OK, true);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
+    @GetMapping(value = "/current-username")
+    public ResponseEntity<Object> getCurrentUsername() {
+        try {
+            return ResponseHandler.generateResponse("Successfully identified logged in user.", HttpStatus.OK, authService.getCurrentLoggedInUsername());
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }

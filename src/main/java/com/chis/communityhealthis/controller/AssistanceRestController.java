@@ -1,14 +1,18 @@
 package com.chis.communityhealthis.controller;
 
+import com.chis.communityhealthis.bean.AssistanceBean;
 import com.chis.communityhealthis.model.assistance.AssistanceRecordTableModel;
+import com.chis.communityhealthis.model.assistance.AssistanceRequestForm;
+import com.chis.communityhealthis.model.response.ResponseHandler;
+import com.chis.communityhealthis.service.AuthService;
 import com.chis.communityhealthis.service.assistance.AssistanceService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -18,8 +22,44 @@ public class AssistanceRestController {
     @Autowired
     private AssistanceService assistanceService;
 
+    @Autowired
+    private AuthService authService;
+
     @RequestMapping(value = "/get-assistance-records", method = RequestMethod.GET)
     public ResponseEntity<List<AssistanceRecordTableModel>> getAssistanceRecords() {
         return new ResponseEntity<>(assistanceService.getAssistanceRecords(), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/current-user")
+    public ResponseEntity<Object> findUserAssistanceRecords(@RequestParam String username) {
+        try {
+            return ResponseHandler.generateResponse("Successfully searched user assistance records.", HttpStatus.OK, assistanceService.findUserAssistanceRecords(username));
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
+    @PostMapping(value = "/new-request")
+    public ResponseEntity<Object> addNewAssistance(@RequestBody AssistanceRequestForm form) {
+        try {
+            String currentUserUsername = authService.getCurrentLoggedInUsername();
+            form.setCreatedBy(currentUserUsername);
+            form.setUsername(StringUtils.isNotBlank(form.getUsername()) ? form.getUsername() : currentUserUsername);
+            AssistanceBean bean = assistanceService.addAssistanceRequest(form);
+            return ResponseHandler.generateResponse("Successfully added assistance.", HttpStatus.CREATED, bean);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
+    @DeleteMapping(value = "/{assistanceId}")
+    public ResponseEntity<Object> deleteAssistance(@PathVariable Integer assistanceId) {
+        String currentLoggedInUsername = authService.getCurrentLoggedInUsername();
+        try {
+            assistanceService.deleteAssistance(assistanceId, currentLoggedInUsername);
+            return ResponseHandler.generateResponse("Successfully deleted assistance.", HttpStatus.OK, null);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
     }
 }

@@ -52,6 +52,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                             "/account/request-password-reset",
                             "/account/validate-otp",
                             "/account/reset-password",
+                            "/account/current-user",
                             "/dropdown/get-disease-choice-list")
                     .permitAll()
                     .and()

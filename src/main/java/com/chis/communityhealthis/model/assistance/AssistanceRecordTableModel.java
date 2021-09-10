@@ -1,13 +1,16 @@
 package com.chis.communityhealthis.model.assistance;
 
+import java.util.Date;
+
 public class AssistanceRecordTableModel {
     private Integer assistanceId;
-    private String issueTitle;
-    private String applicantUsername;
-    private String applicantName;
+    private String assistanceTitle;
+    private String username;
+    private String userFullName;
     private String adminUsername;
-    private String adminName;
+    private String adminFullName;
     private String status;
+    private Date createdDate;
 
     public Integer getAssistanceId() {
         return assistanceId;
@@ -17,28 +20,28 @@ public class AssistanceRecordTableModel {
         this.assistanceId = assistanceId;
     }
 
-    public String getIssueTitle() {
-        return issueTitle;
+    public String getAssistanceTitle() {
+        return assistanceTitle;
     }
 
-    public void setIssueTitle(String issueTitle) {
-        this.issueTitle = issueTitle;
+    public void setAssistanceTitle(String assistanceTitle) {
+        this.assistanceTitle = assistanceTitle;
     }
 
-    public String getApplicantUsername() {
-        return applicantUsername;
+    public String getUsername() {
+        return username;
     }
 
-    public void setApplicantUsername(String applicantUsername) {
-        this.applicantUsername = applicantUsername;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getApplicantName() {
-        return applicantName;
+    public String getUserFullName() {
+        return userFullName;
     }
 
-    public void setApplicantName(String applicantName) {
-        this.applicantName = applicantName;
+    public void setUserFullName(String userFullName) {
+        this.userFullName = userFullName;
     }
 
     public String getAdminUsername() {
@@ -49,12 +52,12 @@ public class AssistanceRecordTableModel {
         this.adminUsername = adminUsername;
     }
 
-    public String getAdminName() {
-        return adminName;
+    public String getAdminFullName() {
+        return adminFullName;
     }
 
-    public void setAdminName(String adminName) {
-        this.adminName = adminName;
+    public void setAdminFullName(String adminFullName) {
+        this.adminFullName = adminFullName;
     }
 
     public String getStatus() {
@@ -63,5 +66,13 @@ public class AssistanceRecordTableModel {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 }
