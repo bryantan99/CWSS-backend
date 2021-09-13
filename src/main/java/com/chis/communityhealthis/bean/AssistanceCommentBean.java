@@ -1,5 +1,8 @@
 package com.chis.communityhealthis.bean;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -32,6 +35,16 @@ public class AssistanceCommentBean implements Serializable {
 
     @Column(name = CREATED_DATE)
     private Date createdDate;
+
+    @OneToOne
+    @JoinColumn(name = CREATED_BY, referencedColumnName = AdminBean.USERNAME, insertable = false, updatable = false)
+    @NotFound(action=NotFoundAction.IGNORE)
+    private AdminBean adminBean;
+
+    @OneToOne
+    @JoinColumn(name = CREATED_BY, referencedColumnName = CommunityUserBean.USERNAME, insertable = false, updatable = false)
+    @NotFound(action= NotFoundAction.IGNORE)
+    private CommunityUserBean communityUserBean;
 
     public Integer getAssistanceCommentId() {
         return assistanceCommentId;
@@ -71,5 +84,21 @@ public class AssistanceCommentBean implements Serializable {
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
+    }
+
+    public AdminBean getAdminBean() {
+        return adminBean;
+    }
+
+    public void setAdminBean(AdminBean adminBean) {
+        this.adminBean = adminBean;
+    }
+
+    public CommunityUserBean getCommunityUserBean() {
+        return communityUserBean;
+    }
+
+    public void setCommunityUserBean(CommunityUserBean userBean) {
+        this.communityUserBean = userBean;
     }
 }

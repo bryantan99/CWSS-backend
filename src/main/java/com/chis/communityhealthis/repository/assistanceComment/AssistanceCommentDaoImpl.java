@@ -17,6 +17,8 @@ public class AssistanceCommentDaoImpl extends GenericDaoImpl<AssistanceCommentBe
         CriteriaBuilder criteriaBuilder = currentSession().getCriteriaBuilder();
         CriteriaQuery<AssistanceCommentBean> criteriaQuery = criteriaBuilder.createQuery(AssistanceCommentBean.class);
         Root<AssistanceCommentBean> root = criteriaQuery.from(AssistanceCommentBean.class);
+        root.fetch("adminBean", JoinType.LEFT);
+        root.fetch("communityUserBean", JoinType.LEFT);
 
         List<Order> orderList = new ArrayList<>();
         orderList.add(criteriaBuilder.desc(root.get("createdDate")));

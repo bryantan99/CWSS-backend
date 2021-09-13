@@ -2,6 +2,7 @@ package com.chis.communityhealthis.controller;
 
 import com.chis.communityhealthis.bean.AssistanceCommentBean;
 import com.chis.communityhealthis.model.assistanceComment.AssistanceCommentForm;
+import com.chis.communityhealthis.model.assistanceComment.AssistanceCommentModel;
 import com.chis.communityhealthis.model.response.ResponseHandler;
 import com.chis.communityhealthis.service.AuthService;
 import com.chis.communityhealthis.service.assistanceComment.AssistanceCommentService;
@@ -26,7 +27,7 @@ public class AssistanceCommentRestController {
     @GetMapping(value = "/{assistanceId}/comment")
     public ResponseEntity<Object> findAssistanceComments(@PathVariable Integer assistanceId) {
         try {
-            List<AssistanceCommentBean> list = assistanceCommentService.findComments(assistanceId);
+            List<AssistanceCommentModel> list = assistanceCommentService.findComments(assistanceId);
             String respMsg = "Successfully retrieved " + list.size() + " comment(s) for assistance record ID : " + assistanceId.toString() + ".";
             return ResponseHandler.generateResponse(respMsg, HttpStatus.OK, list);
         } catch (Exception e) {
