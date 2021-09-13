@@ -4,16 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="Allow user to view their own assistance request detail">
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="Add comment drawer into assistance detail, retrieve comments based on assistance ID and add new comment">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/AssistanceCommentBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AssistanceCommentRestController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/assistanceComment/AssistanceCommentForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/assistanceComment/AssistanceCommentDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/assistanceComment/AssistanceCommentDaoImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/assistanceComment/AssistanceCommentService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/assistanceComment/AssistanceCommentServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance-comment/assistance-comment.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance-comment/assistance-comment.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AssistanceRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AssistanceRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/AuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/AuthServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/AuthServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/assistance/AssistanceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/assistance/AssistanceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/assistance/AssistanceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/assistance/AssistanceServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/admin-assistance/admin-assistance.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/admin-assistance/admin-assistance.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/admin-assistance/admin-assistance.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/admin-assistance/admin-assistance.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/ng-zorro-antd/back-top/back-top.component.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/ng-zorro-antd/back-top/back-top.component.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/ng-zorro-antd/back-top/back-top.module.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/ng-zorro-antd/back-top/back-top.module.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/ng-zorro-antd/back-top/ng-zorro-antd-back-top.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/ng-zorro-antd/back-top/ng-zorro-antd-back-top.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/ng-zorro-antd/back-top/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/ng-zorro-antd/back-top/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/ng-zorro-antd/comment/comment-cells.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/ng-zorro-antd/comment/comment-cells.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/ng-zorro-antd/comment/comment.component.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/ng-zorro-antd/comment/comment.component.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/ng-zorro-antd/comment/comment.module.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/ng-zorro-antd/comment/comment.module.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/ng-zorro-antd/comment/ng-zorro-antd-comment.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/ng-zorro-antd/comment/ng-zorro-antd-comment.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/ng-zorro-antd/comment/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/ng-zorro-antd/comment/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance-detail/assistance-detail.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance-detail/assistance-detail.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance-detail/assistance-detail.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance-detail/assistance-detail.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/shared-zorro.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/shared-zorro.module.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,8 +41,8 @@
       <list>
         <option value="spring-beans.schema" />
         <option value="JavaScript File" />
-        <option value="Interface" />
         <option value="TypeScript File" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -201,14 +217,8 @@
       <workItem from="1631001714825" duration="591000" />
       <workItem from="1631086190490" duration="7435000" />
       <workItem from="1631203865430" duration="5293000" />
-      <workItem from="1631266237459" duration="15914000" />
-    </task>
-    <task id="LOCAL-00016" summary="Save uppercase form value during registration, update fullName filter">
-      <created>1622743106366</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1622743106366</updated>
+      <workItem from="1631266237459" duration="16031000" />
+      <workItem from="1631520919603" duration="8167000" />
     </task>
     <task id="LOCAL-00017" summary="Add Health Child Form Component">
       <created>1622972506260</created>
@@ -546,7 +556,14 @@
       <option name="project" value="LOCAL" />
       <updated>1631294232228</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="Allow admin to view user submitted assistance requests and specific request's detail">
+      <created>1631296185330</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1631296185330</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -566,8 +583,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Fix community user profile alert message, add loading indicator and notification" />
-    <MESSAGE value="Add Community User's Profile title" />
     <MESSAGE value="Fix signup async, add update profile" />
     <MESSAGE value="Fix occupation form" />
     <MESSAGE value="Add update user profile (except Health), fix gender pipe" />
@@ -591,7 +606,9 @@
     <MESSAGE value="Add forgot password feature, Create custom response model" />
     <MESSAGE value="Allow community user to add / delete assistance request" />
     <MESSAGE value="Allow user to view their own assistance request detail" />
-    <option name="LAST_COMMIT_MESSAGE" value="Allow user to view their own assistance request detail" />
+    <MESSAGE value="Allow admin to view user submitted assistance requests and specific request's detail" />
+    <MESSAGE value="Add comment drawer into assistance detail, retrieve comments based on assistance ID and add new comment" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add comment drawer into assistance detail, retrieve comments based on assistance ID and add new comment" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
