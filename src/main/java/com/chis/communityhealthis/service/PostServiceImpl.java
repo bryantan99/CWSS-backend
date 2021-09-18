@@ -42,14 +42,34 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostBean updatePost(PostForm postForm) {
+    public PostBean updatePost(PostForm postForm) throws IOException {
         PostBean postBean = postDao.getPostWithMedia(postForm.getPostId());
         Assert.notNull(postBean, "PostBean with ID: " + postForm.getPostId() + " was not found.");
 
         postBean.setPostDescription(postForm.getPostDescription());
         postDao.update(postBean);
 
-        // ToDo: Handle Image Update
+        if (!CollectionUtils.isEmpty(postForm.getPostMediaIdsToBeDeleted())) {
+            for (Integer mediaId: postForm.getPostMediaIdsToBeDeleted()) {
+                PostMediaBean mediaBean = postMediaDao.find(mediaId);
+                Assert.notNull(mediaBean, "PostMediaBean ID: " + mediaId.toString() + " was not found!");
+
+                File file = new File(POST_MEDIA_DIRECTORY.concat("/").concat(postForm.getPostId().toString()).concat("/").concat(mediaBean.getMediaDirectory()));
+                Assert.isTrue(file.exists(),file.getName() + " does not exists in " + file.getAbsolutePath());
+                boolean fileIsDeleted = file.delete();
+                if (fileIsDeleted) {
+                    postMediaDao.remove(mediaBean);
+                }
+            }
+        }
+
+        if (!CollectionUtils.isEmpty(postForm.getFileList())) {
+            String directoryName = generateDirectoryName(postForm.getPostId());
+            List<String> filesUploaded = uploadPostMedia(directoryName, postForm.getFileList());
+            Assert.isTrue(filesUploaded.size() == postForm.getFileList().size(), "There's an error when uploading files to folder.");
+            saveMediaDetail(postForm.getPostId(), postForm.getFileList());
+        }
+
         return postBean;
     }
 
@@ -114,7 +134,7 @@ public class PostServiceImpl implements PostService {
     }
 
     private String createFolder(Integer postId) {
-        String directoryName = POST_MEDIA_DIRECTORY.concat("/").concat(postId.toString());
+        String directoryName = generateDirectoryName(postId);
 
         File directory = new File(directoryName);
         if (!directory.exists()) {
@@ -152,5 +172,9 @@ public class PostServiceImpl implements PostService {
         bean.setMediaType(file.getContentType());
         bean.setMediaDirectory(StringUtils.cleanPath(file.getOriginalFilename()));
         return bean;
+    }
+
+    private String generateDirectoryName(Integer postId) {
+        return POST_MEDIA_DIRECTORY.concat("/").concat(postId.toString());
     }
 }

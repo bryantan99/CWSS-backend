@@ -11,5 +11,5 @@ public interface PostService {
     PostBean addPost(PostForm postForm) throws IOException;
     void deletePost(Integer postId);
     PostBean getPostWithMedia(Integer postId);
-    PostBean updatePost(PostForm postFormObj);
+    PostBean updatePost(PostForm postFormObj) throws IOException;
 }

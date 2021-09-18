@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/post")
-public class AdminPostRestController {
+public class PostRestController {
 
     @Autowired
     private PostService postService;
@@ -25,17 +25,27 @@ public class AdminPostRestController {
     @Autowired
     private AuthService authService;
 
-    @RequestMapping(value = "/get-post", method = RequestMethod.GET)
-    public ResponseEntity<PostBean> getPostById(@RequestParam Integer postId) {
-        return new ResponseEntity<>(postService.getPostWithMedia(postId), HttpStatus.OK);
+    @GetMapping(value = "/{postId}")
+    public ResponseEntity<Object> getPostById(@PathVariable Integer postId) {
+        try {
+            PostBean postBean = postService.getPostWithMedia(postId);
+            return ResponseHandler.generateResponse("Successfully retrieved post with ID: " + postId.toString() + ".", HttpStatus.OK, postBean);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
     }
 
-    @RequestMapping(value = "/get-admin-posts", method = RequestMethod.GET)
-    public ResponseEntity<List<PostBean>> getAdminPosts() {
-        return new ResponseEntity<>(postService.getPostsWithMedia(), HttpStatus.OK);
+    @GetMapping
+    public ResponseEntity<Object> getPosts() {
+        try {
+            List<PostBean> list = postService.getPostsWithMedia();
+            return ResponseHandler.generateResponse("Successfully retrieved " + list.size() + " post(s).", HttpStatus.OK, list);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
     }
 
-    @PostMapping(value = "/add-admin-post")
+    @PostMapping
     public ResponseEntity<Object> addAdminPosts(@RequestParam(value = "form") String postForm,
                                                 @RequestParam(value = "files", required = false) List<MultipartFile> multipartFileList) throws IOException {
         PostForm postFormObj = new ObjectMapper().readValue(postForm, PostForm.class);
@@ -60,11 +70,18 @@ public class AdminPostRestController {
         }
     }
 
-    @RequestMapping(value = "/update-post", method = RequestMethod.POST)
-    public ResponseEntity<?> updatePost(@RequestParam(value = "form") String postForm, @RequestParam(value = "files", required = false) List<MultipartFile> multipartFileList) throws IOException {
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public ResponseEntity<?> updatePost(@RequestParam(value = "form") String postForm,
+                                        @RequestParam(value = "files", required = false) List<MultipartFile> multipartFileList) throws IOException {
         PostForm postFormObj = new ObjectMapper().readValue(postForm, PostForm.class);
         postFormObj.setCreatedBy(authService.getCurrentLoggedInUsername());
         postFormObj.setFileList(multipartFileList);
-        return new ResponseEntity<>(postService.updatePost(postFormObj), HttpStatus.OK);
+
+        try {
+            PostBean updatedPostBean = postService.updatePost(postFormObj);
+            return ResponseHandler.generateResponse("Successfully updated post ID: " + postFormObj.getPostId() + ".", HttpStatus.OK, updatedPostBean);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
     }
 }

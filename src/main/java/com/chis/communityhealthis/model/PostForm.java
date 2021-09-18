@@ -9,6 +9,7 @@ public class PostForm {
     private String postDescription;
     private String createdBy;
     private List<MultipartFile> fileList;
+    private List<Integer> postMediaIdsToBeDeleted;
 
     public Integer getPostId() {return postId;}
 
@@ -33,4 +34,12 @@ public class PostForm {
     public List<MultipartFile> getFileList() { return fileList; }
 
     public void setFileList(List<MultipartFile> fileList) { this.fileList = fileList; }
+
+    public List<Integer> getPostMediaIdsToBeDeleted() {
+        return postMediaIdsToBeDeleted;
+    }
+
+    public void setPostMediaIdsToBeDeleted(List<Integer> postMediaIdsToBeDeleted) {
+        this.postMediaIdsToBeDeleted = postMediaIdsToBeDeleted;
+    }
 }
