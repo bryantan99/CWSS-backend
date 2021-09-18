@@ -26,9 +26,9 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 @Service
 @Transactional
-public class PostServiceImpl implements PostService{
+public class PostServiceImpl implements PostService {
 
-    private static final String POST_MEDIA_DIRECTORY = "./uploads/Post Media";
+    private static final String POST_MEDIA_DIRECTORY = System.getProperty("user.home") + "/Downloads/uploads/post";
 
     @Autowired
     private PostDao postDao;
@@ -37,7 +37,9 @@ public class PostServiceImpl implements PostService{
     private PostMediaDao postMediaDao;
 
     @Override
-    public PostBean getPostWithMedia(Integer postId) {return postDao.getPostWithMedia(postId);}
+    public PostBean getPostWithMedia(Integer postId) {
+        return postDao.getPostWithMedia(postId);
+    }
 
     @Override
     public PostBean updatePost(PostForm postForm) {
@@ -81,11 +83,34 @@ public class PostServiceImpl implements PostService{
 
     @Override
     public void deletePost(Integer postId) {
-        PostBean postBean = postDao.find(postId);
-        if (postBean == null) {
-            return;
+        List<PostMediaBean> postMediaBeans = postMediaDao.findMedias(postId);
+        if (!CollectionUtils.isEmpty(postMediaBeans)) {
+            File directory = new File(POST_MEDIA_DIRECTORY.concat("/").concat(postId.toString()));
+            deleteDirectory(directory);
+            for (PostMediaBean mediaBean : postMediaBeans) {
+                postMediaDao.remove(mediaBean);
+            }
         }
+
+        PostBean postBean = postDao.find(postId);
+        Assert.notNull(postBean, "PostBean with ID: " + postId.toString() + " was not found!");
         postDao.remove(postBean);
+    }
+
+    private void deleteDirectory(File directory) {
+        if (directory.exists()) {
+            File[] files = directory.listFiles();
+            if (files != null) {
+                for (File file : files) {
+                    if (file.isDirectory()) {
+                        deleteDirectory(file);
+                    } else {
+                        file.delete();
+                    }
+                }
+            }
+            directory.delete();
+        }
     }
 
     private String createFolder(Integer postId) {
@@ -114,22 +139,18 @@ public class PostServiceImpl implements PostService{
 
     private void saveMediaDetail(Integer postId, List<MultipartFile> fileList) {
         if (!CollectionUtils.isEmpty(fileList)) {
-            String directoryName = POST_MEDIA_DIRECTORY.concat("/").concat(postId.toString());
             for (MultipartFile file : fileList) {
-                PostMediaBean bean = createPostMediaBean(file, directoryName);
+                PostMediaBean bean = createPostMediaBean(file);
                 bean.setPostId(postId);
                 postMediaDao.add(bean);
             }
         }
     }
 
-    private PostMediaBean createPostMediaBean(MultipartFile file, String directoryName) {
-        String filename = StringUtils.cleanPath(file.getOriginalFilename());
-        directoryName = directoryName.concat("/").concat(filename);
-
+    private PostMediaBean createPostMediaBean(MultipartFile file) {
         PostMediaBean bean = new PostMediaBean();
         bean.setMediaType(file.getContentType());
-        bean.setMediaDirectory(directoryName);
+        bean.setMediaDirectory(StringUtils.cleanPath(file.getOriginalFilename()));
         return bean;
     }
 }

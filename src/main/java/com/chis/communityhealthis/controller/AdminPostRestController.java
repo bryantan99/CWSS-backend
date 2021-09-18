@@ -2,6 +2,7 @@ package com.chis.communityhealthis.controller;
 
 import com.chis.communityhealthis.bean.PostBean;
 import com.chis.communityhealthis.model.PostForm;
+import com.chis.communityhealthis.model.response.ResponseHandler;
 import com.chis.communityhealthis.service.AuthService;
 import com.chis.communityhealthis.service.PostService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,18 +35,29 @@ public class AdminPostRestController {
         return new ResponseEntity<>(postService.getPostsWithMedia(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/add-admin-post", method = RequestMethod.POST)
-    public ResponseEntity<?> addAdminPosts(@RequestParam(value = "form") String postForm, @RequestParam(value = "files", required = false) List<MultipartFile> multipartFileList) throws IOException {
+    @PostMapping(value = "/add-admin-post")
+    public ResponseEntity<Object> addAdminPosts(@RequestParam(value = "form") String postForm,
+                                                @RequestParam(value = "files", required = false) List<MultipartFile> multipartFileList) throws IOException {
         PostForm postFormObj = new ObjectMapper().readValue(postForm, PostForm.class);
         postFormObj.setCreatedBy(authService.getCurrentLoggedInUsername());
         postFormObj.setFileList(multipartFileList);
-        return new ResponseEntity<>(postService.addPost(postFormObj), HttpStatus.OK);
+
+        try {
+            PostBean postBean = postService.addPost(postFormObj);
+            return ResponseHandler.generateResponse("Successfully added new post.", HttpStatus.OK, postBean);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
     }
 
-    @RequestMapping(value = "/delete-admin-post/{postId}", method = RequestMethod.DELETE)
-    public ResponseEntity<?> deleteAdminPost(@PathVariable Integer postId) {
-        postService.deletePost(postId);
-        return new ResponseEntity<>(null, HttpStatus.OK);
+    @DeleteMapping(value = "/{postId}")
+    public ResponseEntity<Object> deleteAdminPost(@PathVariable Integer postId) {
+        try {
+            postService.deletePost(postId);
+            return ResponseHandler.generateResponse("Successfully deleted post ID: " + postId.toString() + ".", HttpStatus.OK, null);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
     }
 
     @RequestMapping(value = "/update-post", method = RequestMethod.POST)

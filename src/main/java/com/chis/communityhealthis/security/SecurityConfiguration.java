@@ -53,6 +53,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                             "/account/validate-otp",
                             "/account/reset-password",
                             "/account/current-user",
+                            "/image/post/**",
                             "/dropdown/get-disease-choice-list")
                     .permitAll()
                     .and()
