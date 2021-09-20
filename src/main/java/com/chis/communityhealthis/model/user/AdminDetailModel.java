@@ -6,6 +6,7 @@ public class AdminDetailModel implements Comparable<AdminDetailModel>{
     private String fullName;
     private String email;
     private String contactNo;
+    private Boolean isDeletable;
 
     public String getUsername() {
         return username;
@@ -38,6 +39,10 @@ public class AdminDetailModel implements Comparable<AdminDetailModel>{
     public void setContactNo(String contactNo) {
         this.contactNo = contactNo;
     }
+
+    public Boolean getDeletable() {return isDeletable;}
+
+    public void setDeletable(Boolean deletable) {isDeletable = deletable;}
 
     @Override
     public int compareTo(AdminDetailModel o) {

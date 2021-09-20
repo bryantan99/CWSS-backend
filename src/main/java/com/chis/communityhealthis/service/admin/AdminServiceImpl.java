@@ -10,9 +10,12 @@ import com.chis.communityhealthis.model.user.AdminDetailModel;
 import com.chis.communityhealthis.repository.AccountDao;
 import com.chis.communityhealthis.repository.accountRole.AccountRoleDao;
 import com.chis.communityhealthis.repository.admin.AdminDao;
+import com.chis.communityhealthis.service.AuthService;
 import com.chis.communityhealthis.service.email.EmailService;
 import com.chis.communityhealthis.utility.FlagConstant;
+import com.chis.communityhealthis.utility.RoleConstant;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -39,10 +42,16 @@ public class AdminServiceImpl implements AdminService{
     private EmailService emailService;
 
     @Autowired
+    private AuthService authService;
+
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public List<AdminDetailModel> findAllAdmins() {
+        Boolean isSuperAdmin = authService.hasRole(RoleConstant.SUPER_ADMIN);
+        String currentLoggedInUsername = authService.getCurrentLoggedInUsername();
+
         List<AdminDetailModel> list = new ArrayList<>();
 
         List<AdminBean> adminBeans = adminDao.getAll();
@@ -70,6 +79,9 @@ public class AdminServiceImpl implements AdminService{
             model.setFullName(adminBean.getFullName());
             model.setEmail(accountBean.getEmail());
             model.setContactNo(adminBean.getContactNo());
+
+            Boolean deletable = isSuperAdmin && !StringUtils.equals(currentLoggedInUsername, adminBean.getUsername());
+            model.setDeletable(deletable);
             list.add(model);
         }
 
