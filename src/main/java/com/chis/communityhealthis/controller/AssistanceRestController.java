@@ -3,6 +3,7 @@ package com.chis.communityhealthis.controller;
 import com.chis.communityhealthis.bean.AssistanceBean;
 import com.chis.communityhealthis.model.assistance.AssistanceRecordTableModel;
 import com.chis.communityhealthis.model.assistance.AssistanceRequestForm;
+import com.chis.communityhealthis.model.assistance.AssistanceUpdateForm;
 import com.chis.communityhealthis.model.response.ResponseHandler;
 import com.chis.communityhealthis.service.AuthService;
 import com.chis.communityhealthis.service.assistance.AssistanceService;
@@ -14,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -81,6 +83,18 @@ public class AssistanceRestController {
             Assert.isTrue(authService.currentLoggedInUserIsAdmin(), "Unauthorized access.");
             List<AssistanceRecordTableModel> list = assistanceService.findAllAssistanceRecords();
             return ResponseHandler.generateResponse("Successfully retrieved " + list.size() + " assistance request record(s).", HttpStatus.OK, list);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
+    @PostMapping(value = "/update")
+    public ResponseEntity<Object> updateAssistanceRecord(@RequestBody AssistanceUpdateForm form) {
+        try {
+            form.setUpdatedBy(authService.getCurrentLoggedInUsername());
+            form.setUpdatedDate(new Date());
+            assistanceService.updateRecord(form);
+            return ResponseHandler.generateResponse("Successfully updated assistance request [ID: " + form.getAssistanceId().toString() + "].", HttpStatus.OK, null);
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }

@@ -3,6 +3,7 @@ package com.chis.communityhealthis.service.assistance;
 import com.chis.communityhealthis.bean.AssistanceBean;
 import com.chis.communityhealthis.model.assistance.AssistanceRecordTableModel;
 import com.chis.communityhealthis.model.assistance.AssistanceRequestForm;
+import com.chis.communityhealthis.model.assistance.AssistanceUpdateForm;
 
 import java.util.List;
 
@@ -13,4 +14,5 @@ public interface AssistanceService {
     void deleteAssistance(Integer assistanceId, String actionMakerUsername) throws Exception;
     AssistanceBean getAssistanceRecordDetail(Integer assistanceId, String actionMakerUsername) throws Exception;
     List<AssistanceRecordTableModel> findAllAssistanceRecords();
+    void updateRecord(AssistanceUpdateForm form);
 }

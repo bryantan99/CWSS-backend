@@ -4,6 +4,7 @@ import com.chis.communityhealthis.bean.AdminBean;
 import com.chis.communityhealthis.bean.AssistanceBean;
 import com.chis.communityhealthis.model.assistance.AssistanceRecordTableModel;
 import com.chis.communityhealthis.model.assistance.AssistanceRequestForm;
+import com.chis.communityhealthis.model.assistance.AssistanceUpdateForm;
 import com.chis.communityhealthis.repository.admin.AdminDao;
 import com.chis.communityhealthis.repository.assistance.AssistanceDao;
 import io.jsonwebtoken.lang.Assert;
@@ -107,6 +108,18 @@ public class AssistanceServiceImpl implements AssistanceService {
             list.add(toAssistanceRecordTableModel(bean));
         }
         return list;
+    }
+
+    @Override
+    public void updateRecord(AssistanceUpdateForm form) {
+        AssistanceBean assistanceBean = assistanceDao.find(form.getAssistanceId());
+        Assert.notNull(assistanceBean, "Assistance Bean [ID: " + form.getAssistanceId().toString() + "] was not found!");
+
+        assistanceBean.setAssistanceStatus(form.getStatus());
+        assistanceBean.setAdminUsername(form.getPersonInCharge());
+        assistanceBean.setLastUpdatedBy(form.getUpdatedBy());
+        assistanceBean.setLastUpdatedDate(form.getUpdatedDate());
+        assistanceDao.saveOrUpdate(assistanceBean);
     }
 
     private AssistanceRecordTableModel toAssistanceRecordTableModel(AssistanceBean bean) {
