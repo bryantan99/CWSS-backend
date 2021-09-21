@@ -94,6 +94,12 @@ public class AccountServiceImpl implements AccountService{
     }
 
     @Override
+    public Boolean isValidEmail(String email) {
+        AccountBean accountBean = accountDao.findAccountByEmail(email);
+        return accountBean == null;
+    }
+
+    @Override
     public void updateLastLogin(String username) {
         AccountBean accountBean = accountDao.find(username);
         Assert.notNull(accountBean, "Account with username: " + username + " is not found.");

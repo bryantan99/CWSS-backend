@@ -9,6 +9,7 @@ public interface AccountService {
     AccountModel addAccount(AccountRegistrationForm form);
     AccountBean getAccountWithRoles(String username);
     Boolean isValidUsername(String username);
+    Boolean isValidEmail(String email);
     void updateLastLogin(String username);
     void requestResetPassword(String email);
     Boolean validateOtp(PasswordResetRequestModel model);

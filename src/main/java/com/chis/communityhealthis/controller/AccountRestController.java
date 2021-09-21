@@ -19,11 +19,21 @@ public class AccountRestController {
     @Autowired
     private AuthService authService;
 
-    @RequestMapping(value = "/is-valid-username", method = RequestMethod.GET)
+    @GetMapping(value = "/validation/username")
     public ResponseEntity<Object> isValidUsername(@RequestParam String username) {
         try {
             Boolean isValid = this.accountService.isValidUsername(username);
-            return ResponseHandler.generateResponse("Successfully validate username.", HttpStatus.OK, isValid);
+            return ResponseHandler.generateResponse(username + " is " + (isValid ? " valid." : " invalid."), HttpStatus.OK, isValid);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
+    @GetMapping(value = "/validation/email")
+    public ResponseEntity<Object> isValidEmail(@RequestParam String email) {
+        try {
+            Boolean isValid = this.accountService.isValidEmail(email);
+            return ResponseHandler.generateResponse(email + " is " + (isValid ? " valid." : " invalid."), HttpStatus.OK, isValid);
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
@@ -40,7 +50,7 @@ public class AccountRestController {
         }
     }
 
-    @PostMapping(value = "/validate-otp")
+    @PostMapping(value = "/validation/otp")
     public ResponseEntity<Object> validateOtp(@RequestBody PasswordResetRequestModel model) {
         try {
             Boolean isValid = accountService.validateOtp(model);
