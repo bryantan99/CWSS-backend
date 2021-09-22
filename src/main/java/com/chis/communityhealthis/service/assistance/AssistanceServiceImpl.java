@@ -8,6 +8,7 @@ import com.chis.communityhealthis.model.assistance.AssistanceUpdateForm;
 import com.chis.communityhealthis.repository.admin.AdminDao;
 import com.chis.communityhealthis.repository.assistance.AssistanceDao;
 import io.jsonwebtoken.lang.Assert;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -111,12 +112,24 @@ public class AssistanceServiceImpl implements AssistanceService {
     }
 
     @Override
-    public void updateRecord(AssistanceUpdateForm form) {
+    public void updateRecord(AssistanceUpdateForm form) throws Exception {
         AssistanceBean assistanceBean = assistanceDao.find(form.getAssistanceId());
         Assert.notNull(assistanceBean, "Assistance Bean [ID: " + form.getAssistanceId().toString() + "] was not found!");
 
-        assistanceBean.setAssistanceStatus(form.getStatus());
-        assistanceBean.setAdminUsername(form.getPersonInCharge());
+        boolean isAdmin = adminDao.find(form.getUpdatedBy()) != null;
+
+        if (!isAdmin && !StringUtils.equals(assistanceBean.getAssistanceStatus(), "pending")) {
+            throw new Exception("Assistance request is in " + assistanceBean.getAssistanceStatus() + " mode and cannot further edit by community user.");
+        }
+
+        if (isAdmin) {
+            assistanceBean.setAssistanceStatus(form.getStatus());
+            assistanceBean.setAdminUsername(form.getPersonInCharge());
+        } else {
+            assistanceBean.setAssistanceTitle(form.getTitle());
+            assistanceBean.setAssistanceDescription(form.getDescription());
+        }
+
         assistanceBean.setLastUpdatedBy(form.getUpdatedBy());
         assistanceBean.setLastUpdatedDate(form.getUpdatedDate());
         assistanceDao.saveOrUpdate(assistanceBean);
