@@ -47,7 +47,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .antMatchers(
                             "/authenticate",
                             "/register",
-                            "/post/get-admin-posts",
+                            "/post",
                             "/account/validation/**",
                             "/account/request-password-reset",
                             "/account/reset-password",
