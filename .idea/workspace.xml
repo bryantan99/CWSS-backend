@@ -4,13 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="Delete logout component, add user behaviorSubject for user authentication to display sidebar menu based on role">
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="Allow community user to update assistance request's title &amp; description if the form is still in pending.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/assistance/AssistanceUpdateForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/assistance/AssistanceUpdateForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/assistance/AssistanceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/assistance/AssistanceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/assistance/AssistanceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/assistance/AssistanceServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance-detail/assistance-detail.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance-detail/assistance-detail.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance-detail/assistance-detail.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance-detail/assistance-detail.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/security/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/security/SecurityConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/admin-assistance/admin-assistance.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/admin-assistance/admin-assistance.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/user-assistance/user-assistance.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/user-assistance/user-assistance.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup/signup.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup/signup.component.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +88,7 @@
       <recent name="C:\Users\win 10\IdeaProjects\CHIS\src\main\resources\frontend\chis-app\src\app" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.CommunityhealthisApplication">
+  <component name="RunManager" selected="npm.Angular CLI Server">
     <configuration name="E2E Tests (chis-app)" type="JavaScriptTestRunnerProtractor">
       <config-file value="$PROJECT_DIR$/src/main/resources/webapp/chis-app/e2e/protractor.conf.js" />
       <node-interpreter value="project" />
@@ -206,14 +207,8 @@
       <workItem from="1632119131169" duration="17001000" />
       <workItem from="1632146899138" duration="47000" />
       <workItem from="1632203470267" duration="22936000" />
-      <workItem from="1632315885477" duration="3556000" />
-    </task>
-    <task id="LOCAL-00030" summary="Update workspace.xml">
-      <created>1623381320816</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1623381320816</updated>
+      <workItem from="1632315885477" duration="6170000" />
+      <workItem from="1632322279504" duration="483000" />
     </task>
     <task id="LOCAL-00031" summary="Update to Angular 11">
       <created>1623384780454</created>
@@ -551,7 +546,14 @@
       <option name="project" value="LOCAL" />
       <updated>1632240522652</updated>
     </task>
-    <option name="localTasksCounter" value="79" />
+    <task id="LOCAL-00079" summary="Allow community user to update assistance request's title &amp; description if the form is still in pending.">
+      <created>1632319608730</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1632319608730</updated>
+    </task>
+    <option name="localTasksCounter" value="80" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -571,7 +573,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Add feature: Edit post" />
     <MESSAGE value="Update last login date for successful login" />
     <MESSAGE value="Add admin management &amp; detail component, Add add/delete staff feature" />
     <MESSAGE value="Add emailService, send email with generatedPw for staff first time login" />
@@ -596,7 +597,8 @@
     <MESSAGE value="Update password &amp; confirm Password validation, disable next &amp; submit button if signup's child form is not valid" />
     <MESSAGE value="Update isAdminLoggedIn() method" />
     <MESSAGE value="Delete logout component, add user behaviorSubject for user authentication to display sidebar menu based on role" />
-    <option name="LAST_COMMIT_MESSAGE" value="Delete logout component, add user behaviorSubject for user authentication to display sidebar menu based on role" />
+    <MESSAGE value="Allow community user to update assistance request's title &amp; description if the form is still in pending." />
+    <option name="LAST_COMMIT_MESSAGE" value="Allow community user to update assistance request's title &amp; description if the form is still in pending." />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
