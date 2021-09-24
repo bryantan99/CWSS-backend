@@ -5,22 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="Added appointment route, allow retrieve appointment list, cancel and update appointment's datetime">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/AppointmentBean.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AppointmentRestController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/appointment/UpdateDatetimeForm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/appointment/AppointmentDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/appointment/AppointmentDaoImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/appointment/AppointmentService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/appointment/AppointmentServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-mngmt/appointment-mngmt.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-mngmt/appointment-mngmt.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment.module.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/appointment/ConfirmationForm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/AppointmentBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/AppointmentBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AppointmentRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AppointmentRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/appointment/AppointmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/appointment/AppointmentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/appointment/AppointmentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/appointment/AppointmentServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-mngmt/appointment-mngmt.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-mngmt/appointment-mngmt.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-mngmt/appointment-mngmt.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-mngmt/appointment-mngmt.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/components/newsfeed/newsfeed.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/components/newsfeed/newsfeed.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -221,14 +215,7 @@
       <workItem from="1632322279504" duration="998000" />
       <workItem from="1632327511115" duration="3523000" />
       <workItem from="1632382270699" duration="20450000" />
-      <workItem from="1632465239783" duration="1361000" />
-    </task>
-    <task id="LOCAL-00036" summary="Add delete community user account feature">
-      <created>1623435400107</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1623435400107</updated>
+      <workItem from="1632465239783" duration="3849000" />
     </task>
     <task id="LOCAL-00037" summary="Fix community user profile alert message, add loading indicator and notification">
       <created>1623435935497</created>
@@ -566,7 +553,14 @@
       <option name="project" value="LOCAL" />
       <updated>1632323254976</updated>
     </task>
-    <option name="localTasksCounter" value="85" />
+    <task id="LOCAL-00085" summary="Added appointment route, allow retrieve appointment list, cancel and update appointment's datetime">
+      <created>1632475463566</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1632475463566</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -1,6 +1,7 @@
 package com.chis.communityhealthis.controller;
 
 import com.chis.communityhealthis.bean.AppointmentBean;
+import com.chis.communityhealthis.model.appointment.ConfirmationForm;
 import com.chis.communityhealthis.model.appointment.UpdateDatetimeForm;
 import com.chis.communityhealthis.model.response.ResponseHandler;
 import com.chis.communityhealthis.service.AuthService;
@@ -83,6 +84,19 @@ public class AppointmentRestController {
             form.setUpdatedDate(new Date());
             appointmentService.updateDatetime(form);
             String msg = "Successfully updated datetime for appointment [ID: " + form.getAppointmentId().toString() + "].";
+            return ResponseHandler.generateResponse(msg, HttpStatus.OK, null);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
+    @PostMapping(value = "/confirm")
+    public ResponseEntity<Object> confirmAppointment(@RequestBody ConfirmationForm form) {
+        try {
+            form.setConfirmedBy(authService.getCurrentLoggedInUsername());
+            form.setConfirmedDate(new Date());
+            appointmentService.confirmAppointment(form);
+            String msg = "Successfully confirmed appointment [ID: " + form.getAppointmentId().toString() + "].";
             return ResponseHandler.generateResponse(msg, HttpStatus.OK, null);
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);

@@ -22,6 +22,12 @@ public class AppointmentBean implements Serializable {
     public static final String LAST_UPDATED_BY = "LAST_UPDATED_BY";
     public static final String LAST_UPDATED_DATE = "LAST_UPDATED_DATE";
 
+    public static final String APPOINTMENT_STATUS_PENDING_USER = "pending_user";
+    public static final String APPOINTMENT_STATUS_PENDING_ADMIN = "pending_admin";
+    public static final String APPOINTMENT_STATUS_CANCELLED = "cancelled";
+    public static final String APPOINTMENT_STATUS_CONFIRMED = "confirmed";
+    public static final String APPOINTMENT_STATUS_COMPLETED = "completed";
+
     @Id
     @Column(name = APPOINTMENT_ID)
     @GeneratedValue(strategy = GenerationType.IDENTITY)

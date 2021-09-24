@@ -2,6 +2,7 @@ package com.chis.communityhealthis.service.appointment;
 
 import com.chis.communityhealthis.bean.AdminBean;
 import com.chis.communityhealthis.bean.AppointmentBean;
+import com.chis.communityhealthis.model.appointment.ConfirmationForm;
 import com.chis.communityhealthis.model.appointment.UpdateDatetimeForm;
 import com.chis.communityhealthis.repository.admin.AdminDao;
 import com.chis.communityhealthis.repository.appointment.AppointmentDao;
@@ -43,7 +44,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         boolean isAdmin = adminDao.find(actionMakerUsername) != null;
 
         if (!isAdmin && !StringUtils.equals(actionMakerUsername, appointmentBean.getUsername())) {
-            throw new Exception(actionMakerUsername + " is unauthorized to cancel appointment [ID: " + appointmentId.toString() + ".");
+            throw new Exception(actionMakerUsername + " is unauthorized to cancel appointment [ID: " + appointmentId + ".");
         }
 
         appointmentBean.setAppointmentStatus("cancelled");
@@ -68,8 +69,27 @@ public class AppointmentServiceImpl implements AppointmentService {
         appointmentBean.setAppointmentStartTime(form.getDatetime());
         appointmentBean.setAppointmentEndTime(endCalendar.getTime());
 
+        boolean isAdmin = adminDao.find(form.getUpdatedBy()) != null;
+        String status = isAdmin ? AppointmentBean.APPOINTMENT_STATUS_PENDING_USER : AppointmentBean.APPOINTMENT_STATUS_PENDING_ADMIN;
+        appointmentBean.setAppointmentStatus(status);
+
         appointmentBean.setLastUpdatedBy(form.getUpdatedBy());
         appointmentBean.setLastUpdatedDate(form.getUpdatedDate());
+
+        appointmentDao.saveOrUpdate(appointmentBean);
+    }
+
+    @Override
+    public void confirmAppointment(ConfirmationForm form) {
+        AppointmentBean appointmentBean = appointmentDao.find(form.getAppointmentId());
+        Assert.notNull(appointmentBean, "AppointmentBean [ID: " + form.getAppointmentId().toString() + " ] was not found.");
+
+        boolean isAdmin = adminDao.find(form.getConfirmedBy()) != null;
+        Assert.isTrue(isAdmin || StringUtils.equals(form.getConfirmedBy(), appointmentBean.getUsername()), "Unauthorized user to confirm appointment.");
+
+        appointmentBean.setAppointmentStatus(AppointmentBean.APPOINTMENT_STATUS_CONFIRMED);
+        appointmentBean.setLastUpdatedBy(form.getConfirmedBy());
+        appointmentBean.setLastUpdatedDate(form.getConfirmedDate());
 
         appointmentDao.saveOrUpdate(appointmentBean);
     }
