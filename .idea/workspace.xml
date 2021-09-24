@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="Change appointment status pending into pending_user and pending_admin, allow user to confirm appointment">
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="Fix appointment tab in sidebar">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/homepage/about/about.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/homepage/about/about.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/components/newsfeed/newsfeed.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/components/newsfeed/newsfeed.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -207,14 +207,7 @@
       <workItem from="1632322279504" duration="998000" />
       <workItem from="1632327511115" duration="3523000" />
       <workItem from="1632382270699" duration="20450000" />
-      <workItem from="1632465239783" duration="5747000" />
-    </task>
-    <task id="LOCAL-00038" summary="Add Community User's Profile title">
-      <created>1623437215616</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1623437215616</updated>
+      <workItem from="1632465239783" duration="6825000" />
     </task>
     <task id="LOCAL-00039" summary="Fix signup async, add update profile">
       <created>1623495680221</created>
@@ -552,7 +545,14 @@
       <option name="project" value="LOCAL" />
       <updated>1632484375430</updated>
     </task>
-    <option name="localTasksCounter" value="87" />
+    <task id="LOCAL-00087" summary="Fix appointment tab in sidebar">
+      <created>1632486614801</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1632486614801</updated>
+    </task>
+    <option name="localTasksCounter" value="88" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -572,7 +572,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Allow community user to add / delete assistance request" />
     <MESSAGE value="Allow user to view their own assistance request detail" />
     <MESSAGE value="Allow admin to view user submitted assistance requests and specific request's detail" />
     <MESSAGE value="Add comment drawer into assistance detail, retrieve comments based on assistance ID and add new comment" />
@@ -597,7 +596,8 @@
     <MESSAGE value="Wrap sidebar menu items in nzDrawerContent" />
     <MESSAGE value="Added appointment route, allow retrieve appointment list, cancel and update appointment's datetime" />
     <MESSAGE value="Change appointment status pending into pending_user and pending_admin, allow user to confirm appointment" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change appointment status pending into pending_user and pending_admin, allow user to confirm appointment" />
+    <MESSAGE value="Fix appointment tab in sidebar" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix appointment tab in sidebar" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
