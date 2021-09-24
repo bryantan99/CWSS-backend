@@ -4,9 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="Remove nz-steps in signup form">
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="Added appointment route, allow retrieve appointment list, cancel and update appointment's datetime">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/AppointmentBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AppointmentRestController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/appointment/UpdateDatetimeForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/appointment/AppointmentDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/appointment/AppointmentDaoImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/appointment/AppointmentService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/appointment/AppointmentServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-mngmt/appointment-mngmt.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-mngmt/appointment-mngmt.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app-routing.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/components/newsfeed/newsfeed.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/components/newsfeed/newsfeed.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -203,14 +218,10 @@
       <workItem from="1632146899138" duration="47000" />
       <workItem from="1632203470267" duration="22936000" />
       <workItem from="1632315885477" duration="6170000" />
-      <workItem from="1632322279504" duration="878000" />
-    </task>
-    <task id="LOCAL-00035" summary="Add NRIC column into community table">
-      <created>1623432084641</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1623432084641</updated>
+      <workItem from="1632322279504" duration="998000" />
+      <workItem from="1632327511115" duration="3523000" />
+      <workItem from="1632382270699" duration="20450000" />
+      <workItem from="1632465239783" duration="1361000" />
     </task>
     <task id="LOCAL-00036" summary="Add delete community user account feature">
       <created>1623435400107</created>
@@ -548,7 +559,14 @@
       <option name="project" value="LOCAL" />
       <updated>1632322985138</updated>
     </task>
-    <option name="localTasksCounter" value="84" />
+    <task id="LOCAL-00084" summary="Wrap sidebar menu items in nzDrawerContent">
+      <created>1632323254976</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1632323254976</updated>
+    </task>
+    <option name="localTasksCounter" value="85" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -568,8 +586,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Update application.properties" />
-    <MESSAGE value="Move email column from community_user &amp; admin tables to account table" />
     <MESSAGE value="Add forgot password feature, Create custom response model" />
     <MESSAGE value="Allow community user to add / delete assistance request" />
     <MESSAGE value="Allow user to view their own assistance request detail" />
@@ -593,7 +609,9 @@
     <MESSAGE value="Allow getPosts() API to be called with authorization" />
     <MESSAGE value="Replace nz-sider with nz-drawer, add minimizeSidebar() after clicking menu item" />
     <MESSAGE value="Remove nz-steps in signup form" />
-    <option name="LAST_COMMIT_MESSAGE" value="Remove nz-steps in signup form" />
+    <MESSAGE value="Wrap sidebar menu items in nzDrawerContent" />
+    <MESSAGE value="Added appointment route, allow retrieve appointment list, cancel and update appointment's datetime" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added appointment route, allow retrieve appointment list, cancel and update appointment's datetime" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
