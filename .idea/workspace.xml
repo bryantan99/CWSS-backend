@@ -4,18 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="Add role-based authorization for route">
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="Merge userAssistance and adminAssistance component, delete assistanceRecordComponent">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/admin-assistance/admin-assistance.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/admin-assistance/admin-assistance.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance-record/assistance-record.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance-record/assistance-record.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/user-assistance/user-assistance.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance-mngmt/assistance-mngmt.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/user-assistance/user-assistance.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance-mngmt/assistance-mngmt.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/JwtAuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/JwtAuthenticationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/auth/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/auth/auth.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/components/newsfeed/newsfeed.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/components/newsfeed/newsfeed.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/constants/http-status-constant.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/constants/http-status-constant.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/login/login.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/login/login.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,8 +24,8 @@
         <option value="spring-beans.schema" />
         <option value="JavaScript File" />
         <option value="Interface" />
-        <option value="Class" />
         <option value="TypeScript File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -217,14 +213,7 @@
       <workItem from="1632382270699" duration="20450000" />
       <workItem from="1632465239783" duration="10940000" />
       <workItem from="1632534169498" duration="8473000" />
-      <workItem from="1632576839670" duration="3497000" />
-    </task>
-    <task id="LOCAL-00044" summary="Change web title to Health Support System (HSS)">
-      <created>1623512573247</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1623512573247</updated>
+      <workItem from="1632576839670" duration="6805000" />
     </task>
     <task id="LOCAL-00045" summary="Add news placeholder for news without image">
       <created>1623514521490</created>
@@ -562,7 +551,14 @@
       <option name="project" value="LOCAL" />
       <updated>1632543031583</updated>
     </task>
-    <option name="localTasksCounter" value="93" />
+    <task id="LOCAL-00093" summary="Merge userAssistance and adminAssistance component, delete assistanceRecordComponent">
+      <created>1632580691879</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1632580691880</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -582,7 +578,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Update new post modal interface," />
     <MESSAGE value="Handle post media changes when editing post" />
     <MESSAGE value="Handle post media changes when editing post, Update PostRestController API endpoints and return type for custom response model" />
     <MESSAGE value="Update AdminRestController API to return type for custom response model, display delete staff action for authorized user only" />
@@ -607,7 +602,8 @@
     <MESSAGE value="Add imageService" />
     <MESSAGE value="Use environment variable for APP_URL" />
     <MESSAGE value="Add role-based authorization for route" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add role-based authorization for route" />
+    <MESSAGE value="Merge userAssistance and adminAssistance component, delete assistanceRecordComponent" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge userAssistance and adminAssistance component, delete assistanceRecordComponent" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

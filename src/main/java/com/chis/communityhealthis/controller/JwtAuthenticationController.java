@@ -3,6 +3,7 @@ package com.chis.communityhealthis.controller;
 import com.chis.communityhealthis.model.JwtRequestModel;
 import com.chis.communityhealthis.model.JwtResponseModel;
 import com.chis.communityhealthis.model.account.AccountModel;
+import com.chis.communityhealthis.model.response.ResponseHandler;
 import com.chis.communityhealthis.model.signup.AccountRegistrationForm;
 import com.chis.communityhealthis.security.ChisUserDetailsService;
 import com.chis.communityhealthis.service.AccountService;
@@ -36,12 +37,20 @@ public class JwtAuthenticationController {
     private AccountService accountService;
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequestModel authenticationRequest) throws Exception {
-        authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
-        final String token = jwtTokenUtil.generateToken(userDetails);
-        accountService.updateLastLogin(userDetails.getUsername());
-        return ResponseEntity.ok(new JwtResponseModel(userDetails, token));
+    public ResponseEntity<Object> createAuthenticationToken(@RequestBody JwtRequestModel authenticationRequest) throws Exception {
+        try {
+            authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+            final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+            final String token = jwtTokenUtil.generateToken(userDetails);
+            accountService.updateLastLogin(userDetails.getUsername());
+            return ResponseHandler.generateResponse("Successfully authenticated user.", HttpStatus.OK, new JwtResponseModel(userDetails, token));
+        } catch (Exception e) {
+            if (e instanceof BadCredentialsException || e instanceof DisabledException) {
+                return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.UNAUTHORIZED, null);
+            } else {
+                return ResponseHandler.generateResponse("Internal server error.", HttpStatus.INTERNAL_SERVER_ERROR, null);
+            }
+        }
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -49,13 +58,13 @@ public class JwtAuthenticationController {
         return new ResponseEntity<>(userDetailsService.createAccount(accountRegistrationForm), HttpStatus.CREATED);
     }
 
-    private void authenticate(String username, String password) throws Exception {
+    private void authenticate(String username, String password) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         } catch (DisabledException e) {
-            throw new Exception("USER_DISABLED", e);
+            throw new DisabledException("User account has not been activated.", e);
         } catch (BadCredentialsException e) {
-            throw new Exception("INVALID_CREDENTIALS", e);
+            throw new BadCredentialsException("Incorrect username / password.", e);
         }
     }
 }
