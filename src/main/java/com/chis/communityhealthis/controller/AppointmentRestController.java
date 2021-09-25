@@ -2,6 +2,7 @@ package com.chis.communityhealthis.controller;
 
 import com.chis.communityhealthis.bean.AppointmentBean;
 import com.chis.communityhealthis.model.appointment.ConfirmationForm;
+import com.chis.communityhealthis.model.appointment.ScheduleAppointmentForm;
 import com.chis.communityhealthis.model.appointment.UpdateDatetimeForm;
 import com.chis.communityhealthis.model.response.ResponseHandler;
 import com.chis.communityhealthis.service.AuthService;
@@ -103,4 +104,16 @@ public class AppointmentRestController {
         }
     }
 
+    @PostMapping
+    public ResponseEntity<Object> scheduleAppointment(@RequestBody ScheduleAppointmentForm form) {
+        try {
+            String actionMakerUsername = authService.getCurrentLoggedInUsername();
+            form.setCreatedBy(actionMakerUsername);
+            Integer appointmentId = appointmentService.scheduleAppointment(form);
+            String msg = "Successfully scheduled appointment [ID: " + appointmentId  + "].";
+            return ResponseHandler.generateResponse(msg, HttpStatus.OK, null);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
 }

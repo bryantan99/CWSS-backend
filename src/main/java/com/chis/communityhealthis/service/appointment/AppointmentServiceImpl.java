@@ -1,8 +1,8 @@
 package com.chis.communityhealthis.service.appointment;
 
-import com.chis.communityhealthis.bean.AdminBean;
 import com.chis.communityhealthis.bean.AppointmentBean;
 import com.chis.communityhealthis.model.appointment.ConfirmationForm;
+import com.chis.communityhealthis.model.appointment.ScheduleAppointmentForm;
 import com.chis.communityhealthis.model.appointment.UpdateDatetimeForm;
 import com.chis.communityhealthis.repository.admin.AdminDao;
 import com.chis.communityhealthis.repository.appointment.AppointmentDao;
@@ -47,7 +47,7 @@ public class AppointmentServiceImpl implements AppointmentService {
             throw new Exception(actionMakerUsername + " is unauthorized to cancel appointment [ID: " + appointmentId + ".");
         }
 
-        appointmentBean.setAppointmentStatus("cancelled");
+        appointmentBean.setAppointmentStatus(AppointmentBean.APPOINTMENT_STATUS_CANCELLED);
         appointmentBean.setLastUpdatedBy(actionMakerUsername);
         appointmentBean.setLastUpdatedDate(new Date());
         appointmentDao.saveOrUpdate(appointmentBean);
@@ -63,11 +63,9 @@ public class AppointmentServiceImpl implements AppointmentService {
         AppointmentBean appointmentBean = appointmentDao.find(form.getAppointmentId());
         Assert.notNull(appointmentBean, "AppointmentBean [ID: " + form.getAppointmentId().toString() + " ] was not found.");
 
-        Calendar endCalendar = Calendar.getInstance();
-        endCalendar.setTime(form.getDatetime());
-        endCalendar.add(Calendar.HOUR_OF_DAY, 1);
+        Date endTime = calculateEndDatetime(form.getDatetime());
         appointmentBean.setAppointmentStartTime(form.getDatetime());
-        appointmentBean.setAppointmentEndTime(endCalendar.getTime());
+        appointmentBean.setAppointmentEndTime(endTime);
 
         boolean isAdmin = adminDao.find(form.getUpdatedBy()) != null;
         String status = isAdmin ? AppointmentBean.APPOINTMENT_STATUS_PENDING_USER : AppointmentBean.APPOINTMENT_STATUS_PENDING_ADMIN;
@@ -92,5 +90,30 @@ public class AppointmentServiceImpl implements AppointmentService {
         appointmentBean.setLastUpdatedDate(form.getConfirmedDate());
 
         appointmentDao.saveOrUpdate(appointmentBean);
+    }
+
+    @Override
+    public Integer scheduleAppointment(ScheduleAppointmentForm form) {
+        boolean isAdmin = adminDao.find(form.getCreatedBy()) != null;
+        String status = isAdmin ? AppointmentBean.APPOINTMENT_STATUS_PENDING_USER : AppointmentBean.APPOINTMENT_STATUS_PENDING_ADMIN;
+
+        AppointmentBean bean = new AppointmentBean();
+        bean.setAppointmentPurpose(form.getPurpose());
+        bean.setAppointmentStartTime(form.getDatetime());
+        bean.setAppointmentEndTime(calculateEndDatetime(form.getDatetime()));
+        bean.setAppointmentStatus(status);
+        bean.setCreatedBy(form.getCreatedBy());
+        bean.setCreatedDate(new Date());
+        bean.setAdminUsername(form.getAdminUsername());
+        bean.setUsername(isAdmin ? form.getUsername() : form.getCreatedBy());
+
+        return appointmentDao.add(bean);
+    }
+
+    private Date calculateEndDatetime(Date startDatetime) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(startDatetime);
+        calendar.add(Calendar.HOUR_OF_DAY, 1);
+        return calendar.getTime();
     }
 }

@@ -49,7 +49,7 @@ public class AppointmentBean implements Serializable {
     private String createdBy;
 
     @Column(name = CREATED_DATE)
-    private String createdDate;
+    private Date createdDate;
 
     @Column(name = ADMIN_USERNAME)
     private String adminUsername;
@@ -111,11 +111,11 @@ public class AppointmentBean implements Serializable {
         this.createdBy = createdBy;
     }
 
-    public String getCreatedDate() {
+    public Date getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(String createdDate) {
+    public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
 

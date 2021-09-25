@@ -34,4 +34,14 @@ public class DropdownChoiceRestController {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, new ArrayList<DropdownChoiceModel>());
         }
     }
+
+    @RequestMapping(value = "/community-user", method = RequestMethod.GET)
+    public ResponseEntity<Object> getCommunityUserUsernameList() {
+        try {
+            List<DropdownChoiceModel> list = dropdownChoiceService.getCommunityUserUsernameList();
+            return ResponseHandler.generateResponse("Successfully retrieved " + list.size() + " record(s).", HttpStatus.OK, list);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, new ArrayList<DropdownChoiceModel>());
+        }
+    }
 }

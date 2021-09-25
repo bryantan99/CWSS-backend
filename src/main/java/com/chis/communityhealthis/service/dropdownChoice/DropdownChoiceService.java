@@ -7,4 +7,5 @@ import java.util.List;
 public interface DropdownChoiceService {
     List<DropdownChoiceModel> getDiseaseDropdownList();
     List<DropdownChoiceModel> getAdminUsernameList();
+    List<DropdownChoiceModel> getCommunityUserUsernameList();
 }
