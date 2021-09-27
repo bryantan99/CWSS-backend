@@ -2,10 +2,12 @@ package com.chis.communityhealthis.service.dropdownChoice;
 
 import com.chis.communityhealthis.model.dropdown.DropdownChoiceModel;
 
+import java.util.Date;
 import java.util.List;
 
 public interface DropdownChoiceService {
-    List<DropdownChoiceModel> getDiseaseDropdownList();
-    List<DropdownChoiceModel> getAdminUsernameList();
-    List<DropdownChoiceModel> getCommunityUserUsernameList();
+    List<DropdownChoiceModel<String>> getDiseaseDropdownList();
+    List<DropdownChoiceModel<String>> getAdminUsernameList();
+    List<DropdownChoiceModel<String>> getCommunityUserUsernameList();
+    List<DropdownChoiceModel<Date>> getAppointmentAvailableTimeslot(Date date, String adminUsername);
 }

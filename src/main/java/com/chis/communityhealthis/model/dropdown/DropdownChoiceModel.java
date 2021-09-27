@@ -1,13 +1,13 @@
 package com.chis.communityhealthis.model.dropdown;
 
-public class DropdownChoiceModel {
+public class DropdownChoiceModel<T> {
     private String text;
-    private String value;
+    private T value;
 
     public DropdownChoiceModel() {
     }
 
-    public DropdownChoiceModel(String value, String text) {
+    public DropdownChoiceModel(T value, String text) {
         this.value = value;
         this.text = text;
     }
@@ -20,11 +20,11 @@ public class DropdownChoiceModel {
         this.text = text;
     }
 
-    public String getValue() {
+    public T getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(T value) {
         this.value = value;
     }
 }
