@@ -1,5 +1,8 @@
 package com.chis.communityhealthis.bean;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -62,6 +65,16 @@ public class AppointmentBean implements Serializable {
 
     @Column(name = LAST_UPDATED_DATE)
     private Date lastUpdatedDate;
+
+    @OneToOne
+    @JoinColumn(name = ADMIN_USERNAME, referencedColumnName = AdminBean.USERNAME, insertable = false, updatable = false)
+    @NotFound(action = NotFoundAction.IGNORE)
+    private AdminBean adminBean;
+
+    @OneToOne
+    @JoinColumn(name = USERNAME, referencedColumnName = CommunityUserBean.USERNAME, insertable = false, updatable = false)
+    @NotFound(action = NotFoundAction.IGNORE)
+    private CommunityUserBean communityUserBean;
 
     public Integer getAppointmentId() {
         return appointmentId;
@@ -149,5 +162,21 @@ public class AppointmentBean implements Serializable {
 
     public void setLastUpdatedDate(Date lastUpdatedDate) {
         this.lastUpdatedDate = lastUpdatedDate;
+    }
+
+    public AdminBean getAdminBean() {
+        return adminBean;
+    }
+
+    public void setAdminBean(AdminBean adminBean) {
+        this.adminBean = adminBean;
+    }
+
+    public CommunityUserBean getCommunityUserBean() {
+        return communityUserBean;
+    }
+
+    public void setCommunityUserBean(CommunityUserBean communityUserBean) {
+        this.communityUserBean = communityUserBean;
     }
 }

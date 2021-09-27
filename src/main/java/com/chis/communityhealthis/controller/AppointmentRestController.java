@@ -10,6 +10,7 @@ import com.chis.communityhealthis.service.appointment.AppointmentService;
 import io.jsonwebtoken.lang.Assert;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -112,6 +113,19 @@ public class AppointmentRestController {
             Integer appointmentId = appointmentService.scheduleAppointment(form);
             String msg = "Successfully scheduled appointment [ID: " + appointmentId  + "].";
             return ResponseHandler.generateResponse(msg, HttpStatus.OK, null);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
+    @GetMapping(value = "/upcoming")
+    public ResponseEntity<Object> getConfirmedAppointments(@RequestParam(required = false) @DateTimeFormat(pattern = "yyyyMMdd") Date date) {
+        try {
+            String username = authService.getCurrentLoggedInUsername();
+            boolean isAdmin = authService.currentLoggedInUserIsAdmin();
+
+            List<AppointmentBean> upcomingAppointmentStringList = appointmentService.getConfirmedAppointments(username, isAdmin, date);
+            return ResponseHandler.generateResponse("Successfully retrieved " + upcomingAppointmentStringList.size() + " record(s).", HttpStatus.OK, upcomingAppointmentStringList);
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }

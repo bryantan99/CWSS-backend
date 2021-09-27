@@ -5,6 +5,7 @@ import com.chis.communityhealthis.model.appointment.ConfirmationForm;
 import com.chis.communityhealthis.model.appointment.ScheduleAppointmentForm;
 import com.chis.communityhealthis.model.appointment.UpdateDatetimeForm;
 
+import java.util.Date;
 import java.util.List;
 
 public interface AppointmentService {
@@ -15,4 +16,5 @@ public interface AppointmentService {
     void updateDatetime(UpdateDatetimeForm form);
     void confirmAppointment(ConfirmationForm form);
     Integer scheduleAppointment(ScheduleAppointmentForm form);
+    List<AppointmentBean> getConfirmedAppointments(String username, boolean isAdmin, Date date);
 }

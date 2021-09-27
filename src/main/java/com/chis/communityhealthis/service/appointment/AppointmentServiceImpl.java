@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -108,6 +109,11 @@ public class AppointmentServiceImpl implements AppointmentService {
         bean.setUsername(isAdmin ? form.getUsername() : form.getCreatedBy());
 
         return appointmentDao.add(bean);
+    }
+
+    @Override
+    public List<AppointmentBean> getConfirmedAppointments(String username, boolean isAdmin, Date date) {
+        return appointmentDao.getConfirmedAppointments(username, isAdmin, date);
     }
 
     private Date calculateEndDatetime(Date startDatetime) {
