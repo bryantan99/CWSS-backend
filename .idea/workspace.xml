@@ -4,22 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="Add HolidayRestController to import holiday records using excel, replace nz-time-picker with nz-select in appointment form">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-schedule/appointment-schedule.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-schedule/appointment-schedule.component.ts" afterDir="false" />
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="Add appointment schedule component to display confirmed appointment based on selected date, installed moment.js">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_8_6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_github_classgraph_classgraph_4_8_78.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_javers_javers_core_6_2_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_picocontainer_picocontainer_2_15.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/TestRestController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/utility/BeanComparator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/AppointmentBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/AppointmentBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AppointmentRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AppointmentRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/appointment/AppointmentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/appointment/AppointmentDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/appointment/AppointmentDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/appointment/AppointmentDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/appointment/AppointmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/appointment/AppointmentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/appointment/AppointmentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/appointment/AppointmentServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-mngmt/appointment-mngmt.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-mngmt/appointment-mngmt.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-mngmt/appointment-mngmt.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-mngmt/appointment-mngmt.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/communityhealthis.iml" beforeDir="false" afterPath="$PROJECT_DIR$/communityhealthis.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/components/newsfeed/newsfeed.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/components/newsfeed/newsfeed.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -224,14 +218,7 @@
       <workItem from="1632534169498" duration="8473000" />
       <workItem from="1632576839670" duration="18327000" />
       <workItem from="1632641545508" duration="23333000" />
-      <workItem from="1632717892283" duration="11825000" />
-    </task>
-    <task id="LOCAL-00051" summary="Hide file upload in new post modal.">
-      <created>1623563921323</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1623563921324</updated>
+      <workItem from="1632717892283" duration="19491000" />
     </task>
     <task id="LOCAL-00052" summary="Add Ethnic pipe, add ethnic dropdown constant">
       <created>1623596952082</created>
@@ -569,7 +556,14 @@
       <option name="project" value="LOCAL" />
       <updated>1632734273431</updated>
     </task>
-    <option name="localTasksCounter" value="100" />
+    <task id="LOCAL-00100" summary="Add appointment schedule component to display confirmed appointment based on selected date, installed moment.js">
+      <created>1632742986476</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1632742986476</updated>
+    </task>
+    <option name="localTasksCounter" value="101" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -589,7 +583,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Create and add async-email validator into personal detail form and admin form" />
     <MESSAGE value="Update password &amp; confirm Password validation, disable next &amp; submit button if signup's child form is not valid" />
     <MESSAGE value="Update isAdminLoggedIn() method" />
     <MESSAGE value="Delete logout component, add user behaviorSubject for user authentication to display sidebar menu based on role" />
@@ -614,7 +607,8 @@
     <MESSAGE value="Allow user/admin to schedule appointment, add user dropdown choices" />
     <MESSAGE value="Standardize action dropdown button &amp; date format" />
     <MESSAGE value="Add HolidayRestController to import holiday records using excel, replace nz-time-picker with nz-select in appointment form" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add HolidayRestController to import holiday records using excel, replace nz-time-picker with nz-select in appointment form" />
+    <MESSAGE value="Add appointment schedule component to display confirmed appointment based on selected date, installed moment.js" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add appointment schedule component to display confirmed appointment based on selected date, installed moment.js" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
