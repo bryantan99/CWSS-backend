@@ -4,16 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="Add appointment schedule component to display confirmed appointment based on selected date, installed moment.js">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_8_6.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_github_classgraph_classgraph_4_8_78.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_javers_javers_core_6_2_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_picocontainer_picocontainer_2_15.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/TestRestController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/utility/BeanComparator.java" afterDir="false" />
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="Add BeanComparator to compare object for auditing using Javers">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/AuditActionBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/AuditBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/audit/AuditLogDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/audit/AuditLogDaoImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/auditaction/AuditActionDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/auditaction/AuditActionDaoImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/utility/AuditConstant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/communityhealthis.iml" beforeDir="false" afterPath="$PROJECT_DIR$/communityhealthis.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/PostRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/PostRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/PostService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/PostServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/PostServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/utility/BeanComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/utility/BeanComparator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/components/new-post-modal/new-post-modal.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/components/new-post-modal/new-post-modal.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/components/newsfeed/newsfeed.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/components/newsfeed/newsfeed.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -218,14 +223,8 @@
       <workItem from="1632534169498" duration="8473000" />
       <workItem from="1632576839670" duration="18327000" />
       <workItem from="1632641545508" duration="23333000" />
-      <workItem from="1632717892283" duration="19491000" />
-    </task>
-    <task id="LOCAL-00052" summary="Add Ethnic pipe, add ethnic dropdown constant">
-      <created>1623596952082</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1623596952084</updated>
+      <workItem from="1632717892283" duration="21522000" />
+      <workItem from="1632811736905" duration="10519000" />
     </task>
     <task id="LOCAL-00053" summary="Add reject user account, incorrect login details error msg.">
       <created>1628046127204</created>
@@ -563,7 +562,14 @@
       <option name="project" value="LOCAL" />
       <updated>1632742986476</updated>
     </task>
-    <option name="localTasksCounter" value="101" />
+    <task id="LOCAL-00101" summary="Add BeanComparator to compare object for auditing using Javers">
+      <created>1632764961532</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1632764961532</updated>
+    </task>
+    <option name="localTasksCounter" value="102" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -583,7 +589,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Update password &amp; confirm Password validation, disable next &amp; submit button if signup's child form is not valid" />
     <MESSAGE value="Update isAdminLoggedIn() method" />
     <MESSAGE value="Delete logout component, add user behaviorSubject for user authentication to display sidebar menu based on role" />
     <MESSAGE value="Allow community user to update assistance request's title &amp; description if the form is still in pending." />
@@ -608,7 +613,8 @@
     <MESSAGE value="Standardize action dropdown button &amp; date format" />
     <MESSAGE value="Add HolidayRestController to import holiday records using excel, replace nz-time-picker with nz-select in appointment form" />
     <MESSAGE value="Add appointment schedule component to display confirmed appointment based on selected date, installed moment.js" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add appointment schedule component to display confirmed appointment based on selected date, installed moment.js" />
+    <MESSAGE value="Add BeanComparator to compare object for auditing using Javers" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add BeanComparator to compare object for auditing using Javers" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

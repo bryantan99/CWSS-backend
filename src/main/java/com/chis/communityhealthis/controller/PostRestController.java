@@ -63,7 +63,8 @@ public class PostRestController {
     @DeleteMapping(value = "/{postId}")
     public ResponseEntity<Object> deleteAdminPost(@PathVariable Integer postId) {
         try {
-            postService.deletePost(postId);
+            String actionMaker = authService.getCurrentLoggedInUsername();
+            postService.deletePost(postId, actionMaker);
             return ResponseHandler.generateResponse("Successfully deleted post ID: " + postId.toString() + ".", HttpStatus.OK, null);
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
