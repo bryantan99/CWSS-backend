@@ -1,12 +1,12 @@
 package com.chis.communityhealthis.controller;
 
-import com.chis.communityhealthis.model.JwtRequestModel;
-import com.chis.communityhealthis.model.JwtResponseModel;
+import com.chis.communityhealthis.model.jwt.JwtRequestModel;
+import com.chis.communityhealthis.model.jwt.JwtResponseModel;
 import com.chis.communityhealthis.model.account.AccountModel;
 import com.chis.communityhealthis.model.response.ResponseHandler;
 import com.chis.communityhealthis.model.signup.AccountRegistrationForm;
 import com.chis.communityhealthis.security.ChisUserDetailsService;
-import com.chis.communityhealthis.service.AccountService;
+import com.chis.communityhealthis.service.account.AccountService;
 import com.chis.communityhealthis.utility.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

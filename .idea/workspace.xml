@@ -4,21 +4,50 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="Add BeanComparator to compare object for auditing using Javers">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/AuditActionBean.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/AuditBean.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/audit/AuditLogDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/audit/AuditLogDaoImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/auditaction/AuditActionDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/auditaction/AuditActionDaoImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/utility/AuditConstant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" afterDir="false" />
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="Standardize package naming, reorganize files in repository, service, model">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AccountRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AccountRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AdminRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AdminRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AppointmentRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AppointmentRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AssistanceCommentRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AssistanceCommentRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AssistanceRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AssistanceRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/CommunityUserRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/CommunityUserRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/DropdownChoiceRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/DropdownChoiceRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/JwtAuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/JwtAuthenticationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/PostRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/PostRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/PostService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/PostServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/PostServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/utility/BeanComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/utility/BeanComparator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/components/new-post-modal/new-post-modal.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/components/new-post-modal/new-post-modal.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/JwtRequestModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/jwt/JwtRequestModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/JwtResponseModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/jwt/JwtResponseModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/PostForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/post/PostForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/UserDtoModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/account/UserDtoModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/assistanceComment/AssistanceCommentForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/assistancecomment/AssistanceCommentForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/assistanceComment/AssistanceCommentModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/assistancecomment/AssistanceCommentModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/AccountDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/account/AccountDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/AccountDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/account/AccountDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/PostDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/post/PostDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/PostDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/post/PostDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/PostMediaDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/postmedia/PostMediaDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/PostMediaDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/postmedia/PostMediaDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/accountRole/AccountRoleDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/accountrole/AccountRoleDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/accountRole/AccountRoleDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/accountrole/AccountRoleDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/assistanceComment/AssistanceCommentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/assistancecomment/AssistanceCommentDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/assistanceComment/AssistanceCommentDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/assistancecomment/AssistanceCommentDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/healthIssue/HealthIssueDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/healthissue/HealthIssueDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/healthIssue/HealthIssueDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/healthissue/HealthIssueDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/resetPasswordRequest/ResetPasswordRequestDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/resetpasswordrequest/ResetPasswordRequestDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/resetPasswordRequest/ResetPasswordRequestDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/resetpasswordrequest/ResetPasswordRequestDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/security/ChisUserDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/security/ChisUserDetailsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/AccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/account/AccountService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/AccountServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/account/AccountServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/auth/AuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/AuthServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/auth/AuthServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/post/PostService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/PostServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/post/PostServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/admin/AdminServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/admin/AdminServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/assistanceComment/AssistanceCommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/assistancecomment/AssistanceCommentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/assistanceComment/AssistanceCommentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/assistancecomment/AssistanceCommentServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/dropdownChoice/DropdownChoiceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/dropdownchoice/DropdownChoiceService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/dropdownChoice/DropdownChoiceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/dropdownchoice/DropdownChoiceServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/components/newsfeed/newsfeed.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/components/newsfeed/newsfeed.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -224,28 +253,7 @@
       <workItem from="1632576839670" duration="18327000" />
       <workItem from="1632641545508" duration="23333000" />
       <workItem from="1632717892283" duration="21522000" />
-      <workItem from="1632811736905" duration="10519000" />
-    </task>
-    <task id="LOCAL-00053" summary="Add reject user account, incorrect login details error msg.">
-      <created>1628046127204</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1628046127204</updated>
-    </task>
-    <task id="LOCAL-00054" summary="Add feature: Edit post">
-      <created>1628233007183</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1628233007188</updated>
-    </task>
-    <task id="LOCAL-00055" summary="Update last login date for successful login">
-      <created>1630314020219</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1630314020219</updated>
+      <workItem from="1632811736905" duration="11367000" />
     </task>
     <task id="LOCAL-00056" summary="Add admin management &amp; detail component, Add add/delete staff feature">
       <created>1630482868712</created>
@@ -569,7 +577,28 @@
       <option name="project" value="LOCAL" />
       <updated>1632764961532</updated>
     </task>
-    <option name="localTasksCounter" value="102" />
+    <task id="LOCAL-00102" summary="Update new-post-modal to handle postMediaIds to be deleted">
+      <created>1632822896725</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1632822896726</updated>
+    </task>
+    <task id="LOCAL-00103" summary="Add hasChanges() for BeanComparator">
+      <created>1632822924855</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1632822924855</updated>
+    </task>
+    <task id="LOCAL-00104" summary="Create AuditBean and AuditActionBean, add audit for post module">
+      <created>1632822993559</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1632822993559</updated>
+    </task>
+    <option name="localTasksCounter" value="105" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -589,10 +618,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Update isAdminLoggedIn() method" />
-    <MESSAGE value="Delete logout component, add user behaviorSubject for user authentication to display sidebar menu based on role" />
-    <MESSAGE value="Allow community user to update assistance request's title &amp; description if the form is still in pending." />
-    <MESSAGE value="Allow assistance table to be scrollable" />
     <MESSAGE value="Allow getPosts() API to be called with authorization" />
     <MESSAGE value="Replace nz-sider with nz-drawer, add minimizeSidebar() after clicking menu item" />
     <MESSAGE value="Remove nz-steps in signup form" />
@@ -614,7 +639,11 @@
     <MESSAGE value="Add HolidayRestController to import holiday records using excel, replace nz-time-picker with nz-select in appointment form" />
     <MESSAGE value="Add appointment schedule component to display confirmed appointment based on selected date, installed moment.js" />
     <MESSAGE value="Add BeanComparator to compare object for auditing using Javers" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add BeanComparator to compare object for auditing using Javers" />
+    <MESSAGE value="Update new-post-modal to handle postMediaIds to be deleted" />
+    <MESSAGE value="Add hasChanges() for BeanComparator" />
+    <MESSAGE value="Create AuditBean and AuditActionBean, add audit for post module" />
+    <MESSAGE value="Standardize package naming, reorganize files in repository, service, model" />
+    <option name="LAST_COMMIT_MESSAGE" value="Standardize package naming, reorganize files in repository, service, model" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

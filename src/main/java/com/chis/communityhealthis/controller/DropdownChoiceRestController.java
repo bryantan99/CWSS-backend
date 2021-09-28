@@ -2,7 +2,7 @@ package com.chis.communityhealthis.controller;
 
 import com.chis.communityhealthis.model.dropdown.DropdownChoiceModel;
 import com.chis.communityhealthis.model.response.ResponseHandler;
-import com.chis.communityhealthis.service.dropdownChoice.DropdownChoiceService;
+import com.chis.communityhealthis.service.dropdownchoice.DropdownChoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;

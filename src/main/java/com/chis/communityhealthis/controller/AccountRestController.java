@@ -2,8 +2,8 @@ package com.chis.communityhealthis.controller;
 
 import com.chis.communityhealthis.model.account.PasswordResetRequestModel;
 import com.chis.communityhealthis.model.response.ResponseHandler;
-import com.chis.communityhealthis.service.AccountService;
-import com.chis.communityhealthis.service.AuthService;
+import com.chis.communityhealthis.service.account.AccountService;
+import com.chis.communityhealthis.service.auth.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

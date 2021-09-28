@@ -1,11 +1,11 @@
 package com.chis.communityhealthis.controller;
 
 import com.chis.communityhealthis.bean.AssistanceCommentBean;
-import com.chis.communityhealthis.model.assistanceComment.AssistanceCommentForm;
-import com.chis.communityhealthis.model.assistanceComment.AssistanceCommentModel;
+import com.chis.communityhealthis.model.assistancecomment.AssistanceCommentForm;
+import com.chis.communityhealthis.model.assistancecomment.AssistanceCommentModel;
 import com.chis.communityhealthis.model.response.ResponseHandler;
-import com.chis.communityhealthis.service.AuthService;
-import com.chis.communityhealthis.service.assistanceComment.AssistanceCommentService;
+import com.chis.communityhealthis.service.auth.AuthService;
+import com.chis.communityhealthis.service.assistancecomment.AssistanceCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,10 +1,10 @@
 package com.chis.communityhealthis.controller;
 
 import com.chis.communityhealthis.bean.PostBean;
-import com.chis.communityhealthis.model.PostForm;
+import com.chis.communityhealthis.model.post.PostForm;
 import com.chis.communityhealthis.model.response.ResponseHandler;
-import com.chis.communityhealthis.service.AuthService;
-import com.chis.communityhealthis.service.PostService;
+import com.chis.communityhealthis.service.auth.AuthService;
+import com.chis.communityhealthis.service.post.PostService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

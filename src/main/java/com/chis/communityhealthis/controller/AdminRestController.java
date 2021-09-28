@@ -4,7 +4,7 @@ import com.chis.communityhealthis.bean.AdminBean;
 import com.chis.communityhealthis.model.response.ResponseHandler;
 import com.chis.communityhealthis.model.signup.AdminForm;
 import com.chis.communityhealthis.model.user.AdminDetailModel;
-import com.chis.communityhealthis.service.AuthService;
+import com.chis.communityhealthis.service.auth.AuthService;
 import com.chis.communityhealthis.service.admin.AdminService;
 import com.chis.communityhealthis.utility.RoleConstant;
 import io.jsonwebtoken.lang.Assert;

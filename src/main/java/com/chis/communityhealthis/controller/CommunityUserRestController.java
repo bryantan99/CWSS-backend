@@ -3,7 +3,7 @@ package com.chis.communityhealthis.controller;
 import com.chis.communityhealthis.model.signup.AccountRegistrationForm;
 import com.chis.communityhealthis.model.user.CommunityUserProfileModel;
 import com.chis.communityhealthis.model.user.CommunityUserTableModel;
-import com.chis.communityhealthis.service.AuthService;
+import com.chis.communityhealthis.service.auth.AuthService;
 import com.chis.communityhealthis.service.communityuser.CommunityUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -5,7 +5,7 @@ import com.chis.communityhealthis.model.appointment.ConfirmationForm;
 import com.chis.communityhealthis.model.appointment.ScheduleAppointmentForm;
 import com.chis.communityhealthis.model.appointment.UpdateDatetimeForm;
 import com.chis.communityhealthis.model.response.ResponseHandler;
-import com.chis.communityhealthis.service.AuthService;
+import com.chis.communityhealthis.service.auth.AuthService;
 import com.chis.communityhealthis.service.appointment.AppointmentService;
 import io.jsonwebtoken.lang.Assert;
 import org.apache.commons.lang3.StringUtils;
