@@ -58,7 +58,11 @@ public class BeanComparator {
         this.changeList = diff.getChangesByType(ValueChange.class);
     }
 
+    public boolean hasChanges() {
+        return this.changeList.size() > 0;
+    }
+
     public String toPrettyString() {
-        return this.diff.prettyPrint();
+        return hasChanges() ? this.diff.prettyPrint() : null;
     }
 }
