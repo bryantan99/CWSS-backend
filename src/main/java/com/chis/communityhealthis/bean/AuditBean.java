@@ -38,6 +38,16 @@ public class AuditBean implements Serializable {
     @JoinColumn(name = AUDIT_ID, referencedColumnName = AuditActionBean.AUDIT_ID, updatable = false, insertable = false)
     private Set<AuditActionBean> auditActionBeans;
 
+    public AuditBean() {
+    }
+
+    public AuditBean(String module, String actionName, String actionBy) {
+        this.module = module;
+        this.actionName = actionName;
+        this.actionBy = actionBy;
+        this.actionDate = new Date();
+    }
+
     public Integer getAuditId() {
         return auditId;
     }

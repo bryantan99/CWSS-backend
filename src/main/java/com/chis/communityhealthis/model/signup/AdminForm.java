@@ -9,6 +9,7 @@ public class AdminForm {
     private String contactNo;
     private List<String> roleList;
     private String password;
+    private String createdBy;
 
     public String getFullName() {
         return fullName;
@@ -56,5 +57,13 @@ public class AdminForm {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
     }
 }

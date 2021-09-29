@@ -1,8 +1,6 @@
 package com.chis.communityhealthis.service.admin;
 
-import com.chis.communityhealthis.bean.AccountBean;
-import com.chis.communityhealthis.bean.AccountRoleBean;
-import com.chis.communityhealthis.bean.AdminBean;
+import com.chis.communityhealthis.bean.*;
 import com.chis.communityhealthis.model.email.MailRequest;
 import com.chis.communityhealthis.model.email.template.StaffAccountCreationEmailTemplateModel;
 import com.chis.communityhealthis.model.signup.AdminForm;
@@ -10,11 +8,17 @@ import com.chis.communityhealthis.model.user.AdminDetailModel;
 import com.chis.communityhealthis.repository.account.AccountDao;
 import com.chis.communityhealthis.repository.accountrole.AccountRoleDao;
 import com.chis.communityhealthis.repository.admin.AdminDao;
+import com.chis.communityhealthis.repository.audit.AuditLogDao;
+import com.chis.communityhealthis.repository.auditaction.AuditActionDao;
 import com.chis.communityhealthis.service.auth.AuthService;
 import com.chis.communityhealthis.service.email.EmailService;
+import com.chis.communityhealthis.utility.AuditConstant;
+import com.chis.communityhealthis.utility.BeanComparator;
 import com.chis.communityhealthis.utility.FlagConstant;
 import com.chis.communityhealthis.utility.RoleConstant;
+import io.jsonwebtoken.lang.Assert;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.SerializationUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -39,6 +43,12 @@ public class AdminServiceImpl implements AdminService{
     private AccountRoleDao accountRoleDao;
 
     @Autowired
+    private AuditLogDao auditLogDao;
+
+    @Autowired
+    private AuditActionDao auditActionDao;
+
+    @Autowired
     private EmailService emailService;
 
     @Autowired
@@ -46,6 +56,29 @@ public class AdminServiceImpl implements AdminService{
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Override
+    public AdminDetailModel getAdmin(String username) {
+        String currentLoggedInUsername = authService.getCurrentLoggedInUsername();
+        Boolean isSuperAdmin = authService.hasRole(RoleConstant.SUPER_ADMIN);
+
+        AdminBean adminBean = adminDao.find(username);
+        Assert.notNull(adminBean, "AdminBean [username: " + username + "] was not found!");
+
+        AccountBean accountBean = accountDao.find(username);
+        Assert.notNull(accountBean, "AccountBean [username: " + username + "] was not found!");
+
+        AdminDetailModel adminDetailModel = new AdminDetailModel();
+        adminDetailModel.setUsername(username);
+        adminDetailModel.setFullName(adminBean.getFullName());
+        adminDetailModel.setEmail(accountBean.getEmail());
+        adminDetailModel.setContactNo(adminBean.getContactNo());
+
+        Boolean deletable = isSuperAdmin && !StringUtils.equals(currentLoggedInUsername, adminBean.getUsername());
+        adminDetailModel.setDeletable(deletable);
+
+        return adminDetailModel;
+    }
 
     @Override
     public List<AdminDetailModel> findAllAdmins() {
@@ -141,6 +174,48 @@ public class AdminServiceImpl implements AdminService{
 
         AccountBean accountBean = accountDao.find(username);
         accountDao.remove(accountBean);
+    }
+
+    @Override
+    public void updateAdmin(AdminForm adminForm) {
+        AuditBean auditBean = new AuditBean(
+                AuditConstant.MODULE_ADMIN,
+                StringUtils.replace(AuditConstant.ACTION_UPDATE_ADMIN, "%username%", adminForm.getUsername()),
+                adminForm.getCreatedBy()
+        );
+        List<AuditActionBean> auditActionBeans = new ArrayList<>();
+
+        AdminBean adminBean = adminDao.find(adminForm.getUsername());
+        Assert.notNull(adminBean, "AdminBean [username: " + adminForm.getUsername() + "] was not found!");
+        AdminBean adminBeanDeepCopy = SerializationUtils.clone(adminBean);
+
+        AccountBean accountBean = accountDao.findAccount(adminForm.getUsername());
+        Assert.notNull(accountBean, "AccountBean [username: " + adminForm.getUsername() + "] was not found!");
+        AccountBean accountBeanDeepCopy = SerializationUtils.clone(accountBean);
+
+        adminBean.setContactNo(adminForm.getContactNo());
+        adminDao.update(adminBean);
+        BeanComparator adminBeanComparator = new BeanComparator(adminBeanDeepCopy, adminBean);
+
+        accountBean.setEmail(adminForm.getEmail());
+        accountDao.update(accountBean);
+        BeanComparator accountBeanComparator = new BeanComparator(accountBeanDeepCopy, accountBean);
+
+        auditActionBeans.add(new AuditActionBean(adminBeanComparator.toPrettyString()));
+        auditActionBeans.add(new AuditActionBean(accountBeanComparator.toPrettyString()));
+        saveLog(auditBean, auditActionBeans);
+    }
+
+    private void saveLog(AuditBean auditBean, List<AuditActionBean> auditActionBeans) {
+        Integer auditId = auditLogDao.add(auditBean);
+        if (!CollectionUtils.isEmpty(auditActionBeans)) {
+            for (AuditActionBean bean : auditActionBeans) {
+                if (StringUtils.isNotBlank(bean.getActionDescription())) {
+                    bean.setAuditId(auditId);
+                    auditActionDao.add(bean);
+                }
+            }
+        }
     }
 
     private AccountBean createAccountBean(AdminForm form) {

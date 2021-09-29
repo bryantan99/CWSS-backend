@@ -1,5 +1,6 @@
 package com.chis.communityhealthis.controller;
 
+import com.chis.communityhealthis.model.response.ResponseHandler;
 import com.chis.communityhealthis.model.signup.AccountRegistrationForm;
 import com.chis.communityhealthis.model.user.CommunityUserProfileModel;
 import com.chis.communityhealthis.model.user.CommunityUserTableModel;
@@ -22,9 +23,14 @@ public class CommunityUserRestController {
     @Autowired
     private AuthService authService;
 
-    @RequestMapping(value = "/view-profile", method = RequestMethod.GET)
-    public ResponseEntity<CommunityUserProfileModel> getCommunityUser(@RequestParam String username) {
-        return new ResponseEntity<>(communityUserService.getCommunityUserProfile(username), HttpStatus.OK);
+    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    public ResponseEntity<Object> getCommunityUser(@RequestParam String username) {
+        try {
+            CommunityUserProfileModel model = communityUserService.getCommunityUserProfile(username);
+            return ResponseHandler.generateResponse("Successfully retrieved " + username + " profile.", HttpStatus.OK, model);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
     }
 
     @RequestMapping(value = "/get-community-users", method = RequestMethod.GET)
@@ -33,14 +39,25 @@ public class CommunityUserRestController {
     }
 
     @RequestMapping(value = "/approve-user", method = RequestMethod.GET)
-    public ResponseEntity<String> approveUserAccount(@RequestParam String username) {
-        communityUserService.approveUserAccount(username, authService.getCurrentLoggedInUsername());
-        return new ResponseEntity<>(null, HttpStatus.OK);
+    public ResponseEntity<Object> approveUserAccount(@RequestParam String username) {
+        try {
+            communityUserService.approveUserAccount(username, authService.getCurrentLoggedInUsername());
+            String msg = "Successfully approved " + username + " profile.";
+            return ResponseHandler.generateResponse(msg, HttpStatus.OK, null);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
     }
 
     @RequestMapping(value = "/reject-user", method = RequestMethod.GET)
-    public ResponseEntity<Boolean> rejectUserAccount(@RequestParam String username) {
-        return new ResponseEntity<Boolean>(communityUserService.rejectUserAccount(username), HttpStatus.OK);
+    public ResponseEntity<Object> rejectUserAccount(@RequestParam String username) {
+        try {
+            communityUserService.rejectUserAccount(username);
+            String msg = "Successfully rejected " + username + " profile.";
+            return ResponseHandler.generateResponse(msg, HttpStatus.OK, null);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
     }
 
     @RequestMapping(value = "/delete-user/{username}", method = RequestMethod.DELETE)

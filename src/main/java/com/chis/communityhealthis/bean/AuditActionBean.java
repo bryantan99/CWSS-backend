@@ -25,6 +25,13 @@ public class AuditActionBean implements Serializable {
     @Column(name = ACTION_DESCRIPTION)
     private String actionDescription;
 
+    public AuditActionBean() {
+    }
+
+    public AuditActionBean(String actionDescription) {
+        this.actionDescription = actionDescription;
+    }
+
     public Integer getAuditActionId() {
         return auditActionId;
     }

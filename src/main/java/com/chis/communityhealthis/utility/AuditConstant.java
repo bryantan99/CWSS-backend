@@ -11,4 +11,7 @@ public class AuditConstant {
 
     public static final String MODULE_ASSISTANCE = "ASSISTANCE";
     public static final String MODULE_APPOINTMENT = "APPOINTMENT";
+
+    public static final String MODULE_ADMIN = "ADMIN";
+    public static final String ACTION_UPDATE_ADMIN = "Update admin [username: %username%]";
 }

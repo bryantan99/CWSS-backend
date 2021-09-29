@@ -35,6 +35,16 @@ public class AdminRestController {
         }
     }
 
+    @GetMapping("/admin/profile")
+    public ResponseEntity<Object> getAdminProfile(@RequestParam String username) {
+        try {
+            AdminDetailModel adminDetailModel = adminService.getAdmin(username);
+            return ResponseHandler.generateResponse("Successfully retrieved " + username + " profile.", HttpStatus.OK, adminDetailModel);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
     @PostMapping("/admin")
     public ResponseEntity<Object> addStaff(@RequestBody AdminForm form) {
         try {
@@ -54,6 +64,18 @@ public class AdminRestController {
             Assert.isTrue(!StringUtils.equals(currentLoggedInUser, username), "User is attempting to delete self account.");
             adminService.deleteStaff(username);
             return ResponseHandler.generateResponse("Successfully deleted admin [username: " + username + "]", HttpStatus.OK, null);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
+    @PostMapping(value = "/admin/profile")
+    public ResponseEntity<Object> updateAdmin(@RequestBody AdminForm adminForm) {
+        try {
+            adminForm.setCreatedBy(authService.getCurrentLoggedInUsername());
+            adminService.updateAdmin(adminForm);
+            String msg = "Successfully updated " + adminForm.getUsername() + " profile.";
+            return ResponseHandler.generateResponse(msg, HttpStatus.OK, null);
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }

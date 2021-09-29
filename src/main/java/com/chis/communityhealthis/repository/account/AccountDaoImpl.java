@@ -25,6 +25,19 @@ public class AccountDaoImpl extends GenericDaoImpl<AccountBean, String> implemen
     public static final String JOIN_VAR_ROLES = "roles";
 
     @Override
+    public AccountBean findAccount(String username) {
+        CriteriaBuilder criteriaBuilder = currentSession().getCriteriaBuilder();
+        CriteriaQuery<AccountBean> criteriaQuery = criteriaBuilder.createQuery(AccountBean.class);
+        Root<AccountBean> root = criteriaQuery.from(AccountBean.class);
+
+        List<Selection<?>> columns = Arrays.asList(root.get(VAR_USERNAME), root.get(VAR_PASSWORD), root.get(VAR_IS_ACTIVE), root.get(VAR_LAST_LOGIN_DATE), root.get(VAR_EMAIL));
+        criteriaQuery.multiselect(columns).where(criteriaBuilder.equal(root.get("username"), username));
+
+        Query<AccountBean> query = currentSession().createQuery(criteriaQuery);
+        return query.uniqueResult();
+    }
+
+    @Override
     public List<AccountBean> findAccounts(Collection<String> usernames) {
         if (CollectionUtils.isEmpty(usernames)) {
             return new ArrayList<>();
