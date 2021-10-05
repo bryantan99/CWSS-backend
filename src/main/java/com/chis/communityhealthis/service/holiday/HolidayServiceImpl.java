@@ -53,6 +53,9 @@ public class HolidayServiceImpl implements HolidayService {
                         case 1:
                             holidayBean.setHolidayDate(currentCell.getDateCellValue());
                             break;
+                        case 2:
+                            holidayBean.setYear(currentCell.getStringCellValue());
+                            break;
                         default:
                             break;
                     }
