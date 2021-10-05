@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="Add action dropdown button in ProfileComponent, Update UpdateProfileComponent to handle email &amp; receive ResponseModel">
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="Add year column in HolidayBean">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/components/newsfeed/newsfeed.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/components/newsfeed/newsfeed.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/HolidayBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/HolidayBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/holiday/HolidayServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/holiday/HolidayServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-schedule/appointment-schedule.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-schedule/appointment-schedule.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/profile/profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/profile/profile.component.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -213,21 +216,11 @@
       <workItem from="1632641545508" duration="23333000" />
       <workItem from="1632717892283" duration="21522000" />
       <workItem from="1632811736905" duration="21701000" />
-      <workItem from="1632900184078" duration="5873000" />
-    </task>
-    <task id="LOCAL-00059" summary="Display staff's contact number">
-      <created>1630599024896</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1630599024897</updated>
-    </task>
-    <task id="LOCAL-00060" summary="Update application.properties">
-      <created>1630665045677</created>
-      <option name="number" value="00060" />
-      <option name="presentableId" value="LOCAL-00060" />
-      <option name="project" value="LOCAL" />
-      <updated>1630665045678</updated>
+      <workItem from="1632900184078" duration="7709000" />
+      <workItem from="1633091850809" duration="549000" />
+      <workItem from="1633139766167" duration="2757000" />
+      <workItem from="1633147486365" duration="1202000" />
+      <workItem from="1633423117641" duration="7738000" />
     </task>
     <task id="LOCAL-00061" summary="Move email column from community_user &amp; admin tables to account table">
       <created>1630665389188</created>
@@ -558,7 +551,21 @@
       <option name="project" value="LOCAL" />
       <updated>1632909501474</updated>
     </task>
-    <option name="localTasksCounter" value="108" />
+    <task id="LOCAL-00108" summary="Add sidebar menu item - profile">
+      <created>1632910606801</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1632910606801</updated>
+    </task>
+    <task id="LOCAL-00109" summary="Add year column in HolidayBean">
+      <created>1633439216221</created>
+      <option name="number" value="00109" />
+      <option name="presentableId" value="LOCAL-00109" />
+      <option name="project" value="LOCAL" />
+      <updated>1633439216222</updated>
+    </task>
+    <option name="localTasksCounter" value="110" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -578,8 +585,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Remove nz-steps in signup form" />
-    <MESSAGE value="Wrap sidebar menu items in nzDrawerContent" />
     <MESSAGE value="Added appointment route, allow retrieve appointment list, cancel and update appointment's datetime" />
     <MESSAGE value="Change appointment status pending into pending_user and pending_admin, allow user to confirm appointment" />
     <MESSAGE value="Fix appointment tab in sidebar" />
@@ -603,7 +608,9 @@
     <MESSAGE value="Standardize package naming, reorganize files in repository, service, model" />
     <MESSAGE value="Replaced CommunityUserProfileComponent with ProfileComponent, Allow update admin profile &amp;&amp; audit changes" />
     <MESSAGE value="Add action dropdown button in ProfileComponent, Update UpdateProfileComponent to handle email &amp; receive ResponseModel" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add action dropdown button in ProfileComponent, Update UpdateProfileComponent to handle email &amp; receive ResponseModel" />
+    <MESSAGE value="Add sidebar menu item - profile" />
+    <MESSAGE value="Add year column in HolidayBean" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add year column in HolidayBean" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
