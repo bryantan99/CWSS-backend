@@ -1,3 +1,4 @@
 /target/
 /src/main/resources/frontend/chis-app/node_modules/
 /src/main/resources/application-local.properties
+/src/main/resources/webapp/chis-app/src/index-dev.html
