@@ -1,7 +1,7 @@
 package com.chis.communityhealthis.service.communityuser;
 
 import com.chis.communityhealthis.bean.*;
-import com.chis.communityhealthis.model.filter.CommunityUserBeanJoinFilter;
+import com.chis.communityhealthis.model.filter.CommunityUserBeanQuery;
 import com.chis.communityhealthis.model.health.HealthModel;
 import com.chis.communityhealthis.model.signup.*;
 import com.chis.communityhealthis.model.user.CommunityUserProfileModel;
@@ -41,9 +41,9 @@ public class CommunityUserServiceImpl implements CommunityUserService{
     private HealthIssueDao healthIssueDao;
 
     @Override
-    public List<CommunityUserProfileModel> getCommunityUsers(CommunityUserBeanJoinFilter filter) {
+    public List<CommunityUserProfileModel> getCommunityUsers(CommunityUserBeanQuery filter) {
         List<CommunityUserProfileModel> list = new ArrayList<>();
-        List<CommunityUserBean> communityUserBeans = communityUserDao.getAll();
+        List<CommunityUserBean> communityUserBeans = communityUserDao.getCommunityUsers(filter);
         if (!CollectionUtils.isEmpty(communityUserBeans)) {
             List<String> usernameList = communityUserBeans.stream()
                     .map(CommunityUserBean::getUsername)

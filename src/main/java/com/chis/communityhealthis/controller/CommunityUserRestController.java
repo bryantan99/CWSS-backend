@@ -1,6 +1,6 @@
 package com.chis.communityhealthis.controller;
 
-import com.chis.communityhealthis.model.filter.CommunityUserBeanJoinFilter;
+import com.chis.communityhealthis.model.filter.CommunityUserBeanQuery;
 import com.chis.communityhealthis.model.response.ResponseHandler;
 import com.chis.communityhealthis.model.signup.AccountRegistrationForm;
 import com.chis.communityhealthis.model.user.CommunityUserProfileModel;
@@ -36,11 +36,19 @@ public class CommunityUserRestController {
     }
 
     @GetMapping
-    public ResponseEntity<Object> getCommunityUsers(@RequestParam(required = false) String address,
+    public ResponseEntity<Object> getCommunityUsers(@RequestParam(required = false) String name,
+                                                    @RequestParam(required = false) String nric,
+                                                    @RequestParam(required = false) String gender,
+                                                    @RequestParam(required = false) String ethnic,
+                                                    @RequestParam(required = false) String address,
                                                     @RequestParam(required = false) String occupation,
                                                     @RequestParam(required = false) String healthIssue) {
         try {
-            CommunityUserBeanJoinFilter filter = new CommunityUserBeanJoinFilter();
+            CommunityUserBeanQuery filter = new CommunityUserBeanQuery();
+            filter.setName(StringUtils.isBlank(name) ? null : name);
+            filter.setNric(StringUtils.isBlank(nric) ? null : nric);
+            filter.setGender(StringUtils.isBlank(gender) ? null : gender);
+            filter.setEthnic(StringUtils.isBlank(ethnic) ? null : ethnic);
             filter.setIncludeAddress(!StringUtils.isBlank(address) && StringUtils.equals(FlagConstant.YES, address));
             filter.setIncludeOccupation(!StringUtils.isBlank(occupation) && StringUtils.equals(FlagConstant.YES, occupation));
             filter.setIncludeHealthIssue(!StringUtils.isBlank(healthIssue) && StringUtils.equals(FlagConstant.YES, healthIssue));
