@@ -4,13 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="Add year column in HolidayBean">
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Replaced HomepageComponent with PostfeedComponent&#10;- Replaced ETHNIC_DROPDOWN choice">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_maps_google_maps_services_1_0_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_squareup_okhttp3_okhttp_3_14_9.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_squareup_okio_okio_1_17_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_grpc_grpc_context_1_25_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_opencensus_opencensus_api_0_25_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_simple_1_7_25.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/TestRestController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/geoccoding/GeocodingService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/geoccoding/GeocodingServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/services/holiday.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/HolidayBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/HolidayBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/holiday/HolidayServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/holiday/HolidayServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-schedule/appointment-schedule.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-schedule/appointment-schedule.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/profile/profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/profile/profile.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/communityhealthis.iml" beforeDir="false" afterPath="$PROJECT_DIR$/communityhealthis.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/services/community-user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/services/community-user.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/shared.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/shared.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/community-user/community-user.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/community-user/community-user.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/community-user/community-user.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/community-user/community-user.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +83,8 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/webapp/chis-app/package.json" />
+    <property name="database.data.extractors.current.export.id" value="Excel (xlsx)" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs.protractor.protractor_package" value="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/protractor" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -79,6 +95,9 @@
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\IntelliJ IDEA 2021.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\win 10\IdeaProjects\CHIS\src\main\resources\webapp\chis-app\src" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\win 10\IdeaProjects\CHIS\src\main\resources\templates\email" />
       <recent name="C:\Users\win 10\IdeaProjects\CHIS\src\main\resources\webapp\chis-app\src\app\user\admin" />
@@ -87,7 +106,7 @@
       <recent name="C:\Users\win 10\IdeaProjects\CHIS\src\main\resources\frontend\chis-app\src\app" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.CommunityhealthisApplication">
+  <component name="RunManager" selected="npm.Angular CLI Server">
     <configuration name="E2E Tests (chis-app)" type="JavaScriptTestRunnerProtractor">
       <config-file value="$PROJECT_DIR$/src/main/resources/webapp/chis-app/e2e/protractor.conf.js" />
       <node-interpreter value="project" />
@@ -220,42 +239,12 @@
       <workItem from="1633091850809" duration="549000" />
       <workItem from="1633139766167" duration="2757000" />
       <workItem from="1633147486365" duration="1202000" />
-      <workItem from="1633423117641" duration="7738000" />
-    </task>
-    <task id="LOCAL-00061" summary="Move email column from community_user &amp; admin tables to account table">
-      <created>1630665389188</created>
-      <option name="number" value="00061" />
-      <option name="presentableId" value="LOCAL-00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1630665389188</updated>
-    </task>
-    <task id="LOCAL-00062" summary="Add forgot password feature, Create custom response model">
-      <created>1631092372205</created>
-      <option name="number" value="00062" />
-      <option name="presentableId" value="LOCAL-00062" />
-      <option name="project" value="LOCAL" />
-      <updated>1631092372221</updated>
-    </task>
-    <task id="LOCAL-00063" summary="Allow community user to add / delete assistance request">
-      <created>1631274342612</created>
-      <option name="number" value="00063" />
-      <option name="presentableId" value="LOCAL-00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1631274342612</updated>
-    </task>
-    <task id="LOCAL-00064" summary="Allow user to view their own assistance request detail">
-      <created>1631294232228</created>
-      <option name="number" value="00064" />
-      <option name="presentableId" value="LOCAL-00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1631294232228</updated>
-    </task>
-    <task id="LOCAL-00065" summary="Allow admin to view user submitted assistance requests and specific request's detail">
-      <created>1631296185330</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1631296185330</updated>
+      <workItem from="1633423117641" duration="21333000" />
+      <workItem from="1633484224158" duration="1917000" />
+      <workItem from="1633532522768" duration="3000" />
+      <workItem from="1633535470709" duration="219000" />
+      <workItem from="1633575830868" duration="21596000" />
+      <workItem from="1633764199262" duration="5164000" />
     </task>
     <task id="LOCAL-00066" summary="Add comment drawer into assistance detail, retrieve comments based on assistance ID and add new comment">
       <created>1631529213872</created>
@@ -565,7 +554,42 @@
       <option name="project" value="LOCAL" />
       <updated>1633439216222</updated>
     </task>
-    <option name="localTasksCounter" value="110" />
+    <task id="LOCAL-00110" summary="Disable update button if form is not touched / not dirty">
+      <created>1633439351998</created>
+      <option name="number" value="00110" />
+      <option name="presentableId" value="LOCAL-00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1633439351998</updated>
+    </task>
+    <task id="LOCAL-00111" summary="Update gitignore to ignore index-dev.html">
+      <created>1633446157848</created>
+      <option name="number" value="00111" />
+      <option name="presentableId" value="LOCAL-00111" />
+      <option name="project" value="LOCAL" />
+      <updated>1633446157849</updated>
+    </task>
+    <task id="LOCAL-00112" summary="Update angular.json to use index-dev.html">
+      <created>1633446303622</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1633446303622</updated>
+    </task>
+    <task id="LOCAL-00113" summary="Add latitude &amp; longitude for AddressBean,&#10;Update AddressDao, OccupationDao, HealthIssueDao,&#10;Update getCommunityUsers() to query based on CommunityUserBeanJoinFilter,&#10;Delete CommunityUserTableModel">
+      <created>1633771712281</created>
+      <option name="number" value="00113" />
+      <option name="presentableId" value="LOCAL-00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1633771712281</updated>
+    </task>
+    <task id="LOCAL-00114" summary="- Replaced HomepageComponent with PostfeedComponent&#10;- Replaced ETHNIC_DROPDOWN choice">
+      <created>1633771920095</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1633771920095</updated>
+    </task>
+    <option name="localTasksCounter" value="115" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -585,12 +609,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Added appointment route, allow retrieve appointment list, cancel and update appointment's datetime" />
-    <MESSAGE value="Change appointment status pending into pending_user and pending_admin, allow user to confirm appointment" />
-    <MESSAGE value="Fix appointment tab in sidebar" />
-    <MESSAGE value="Replace nz-description with nz-form-item for AboutComponent" />
-    <MESSAGE value="Add appointment's datetime and status filter into table, Update TableColumnItemModel" />
-    <MESSAGE value="Add imageService" />
     <MESSAGE value="Use environment variable for APP_URL" />
     <MESSAGE value="Add role-based authorization for route" />
     <MESSAGE value="Merge userAssistance and adminAssistance component, delete assistanceRecordComponent" />
@@ -610,7 +628,13 @@
     <MESSAGE value="Add action dropdown button in ProfileComponent, Update UpdateProfileComponent to handle email &amp; receive ResponseModel" />
     <MESSAGE value="Add sidebar menu item - profile" />
     <MESSAGE value="Add year column in HolidayBean" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add year column in HolidayBean" />
+    <MESSAGE value="Disable update button if form is not touched / dirty" />
+    <MESSAGE value="Disable update button if form is not touched / not dirty" />
+    <MESSAGE value="Update gitignore to ignore index-dev.html" />
+    <MESSAGE value="Update angular.json to use index-dev.html" />
+    <MESSAGE value="Add latitude &amp; longitude for AddressBean,&#10;Update AddressDao, OccupationDao, HealthIssueDao,&#10;Update getCommunityUsers() to query based on CommunityUserBeanJoinFilter,&#10;Delete CommunityUserTableModel" />
+    <MESSAGE value="- Replaced HomepageComponent with PostfeedComponent&#10;- Replaced ETHNIC_DROPDOWN choice" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Replaced HomepageComponent with PostfeedComponent&#10;- Replaced ETHNIC_DROPDOWN choice" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
