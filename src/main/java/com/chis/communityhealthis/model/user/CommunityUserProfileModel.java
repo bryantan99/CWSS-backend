@@ -7,7 +7,7 @@ import com.chis.communityhealthis.model.health.HealthModel;
 
 import java.util.List;
 
-public class CommunityUserProfileModel {
+public class CommunityUserProfileModel implements Comparable<CommunityUserProfileModel> {
     private String accIsActivate;
     private String email;
     private CommunityUserBean personalDetail;
@@ -54,4 +54,9 @@ public class CommunityUserProfileModel {
     public List<HealthModel> getHealthModelList() { return healthModelList; }
 
     public void setHealthModelList(List<HealthModel> healthModelList) { this.healthModelList = healthModelList; }
+
+    @Override
+    public int compareTo(CommunityUserProfileModel o) {
+        return this.personalDetail.getFullName().compareTo(o.getPersonalDetail().getFullName());
+    }
 }

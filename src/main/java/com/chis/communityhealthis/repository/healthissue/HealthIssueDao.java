@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface HealthIssueDao extends GenericDao<HealthIssueBean, Integer> {
     List<HealthIssueBean> findHealthIssueBeans(String username);
+    List<HealthIssueBean> getUsersHealthIssues(List<String> usernameList);
 }

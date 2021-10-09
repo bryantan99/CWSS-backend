@@ -1,11 +1,13 @@
 package com.chis.communityhealthis.controller;
 
+import com.chis.communityhealthis.model.filter.CommunityUserBeanJoinFilter;
 import com.chis.communityhealthis.model.response.ResponseHandler;
 import com.chis.communityhealthis.model.signup.AccountRegistrationForm;
 import com.chis.communityhealthis.model.user.CommunityUserProfileModel;
-import com.chis.communityhealthis.model.user.CommunityUserTableModel;
 import com.chis.communityhealthis.service.auth.AuthService;
 import com.chis.communityhealthis.service.communityuser.CommunityUserService;
+import com.chis.communityhealthis.utility.FlagConstant;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,9 +35,21 @@ public class CommunityUserRestController {
         }
     }
 
-    @RequestMapping(value = "/get-community-users", method = RequestMethod.GET)
-    public ResponseEntity<List<CommunityUserTableModel>> getCommunityUsers() {
-        return new ResponseEntity<>(communityUserService.getCommunityUsers(), HttpStatus.OK);
+    @GetMapping
+    public ResponseEntity<Object> getCommunityUsers(@RequestParam(required = false) String address,
+                                                    @RequestParam(required = false) String occupation,
+                                                    @RequestParam(required = false) String healthIssue) {
+        try {
+            CommunityUserBeanJoinFilter filter = new CommunityUserBeanJoinFilter();
+            filter.setIncludeAddress(!StringUtils.isBlank(address) && StringUtils.equals(FlagConstant.YES, address));
+            filter.setIncludeOccupation(!StringUtils.isBlank(occupation) && StringUtils.equals(FlagConstant.YES, occupation));
+            filter.setIncludeHealthIssue(!StringUtils.isBlank(healthIssue) && StringUtils.equals(FlagConstant.YES, healthIssue));
+
+            List<CommunityUserProfileModel> list = communityUserService.getCommunityUsers(filter);
+            return ResponseHandler.generateResponse("Successfully retrieved " + list.size() + " user record(s).", HttpStatus.OK, list);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
     }
 
     @RequestMapping(value = "/approve-user", method = RequestMethod.GET)

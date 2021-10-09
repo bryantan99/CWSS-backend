@@ -18,6 +18,8 @@ public class AddressBean implements Serializable {
     public static final String POSTCODE = "POSTCODE";
     public static final String CITY = "CITY";
     public static final String STATE = "STATE";
+    public static final String LATITUDE = "LATITUDE";
+    public static final String LONGITUDE = "LONGITUDE";
 
     @Id
     @Column(name = USERNAME)
@@ -37,6 +39,12 @@ public class AddressBean implements Serializable {
 
     @Column(name = STATE)
     private String state;
+
+    @Column(name = LATITUDE)
+    private Double latitude;
+
+    @Column(name = LONGITUDE)
+    private Double longitude;
 
     public String getUsername() {
         return username;
@@ -84,5 +92,21 @@ public class AddressBean implements Serializable {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 }

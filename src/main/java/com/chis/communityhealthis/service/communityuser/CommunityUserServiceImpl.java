@@ -1,10 +1,10 @@
 package com.chis.communityhealthis.service.communityuser;
 
 import com.chis.communityhealthis.bean.*;
+import com.chis.communityhealthis.model.filter.CommunityUserBeanJoinFilter;
 import com.chis.communityhealthis.model.health.HealthModel;
 import com.chis.communityhealthis.model.signup.*;
 import com.chis.communityhealthis.model.user.CommunityUserProfileModel;
-import com.chis.communityhealthis.model.user.CommunityUserTableModel;
 import com.chis.communityhealthis.repository.account.AccountDao;
 import com.chis.communityhealthis.repository.address.AddressDao;
 import com.chis.communityhealthis.repository.communityuser.CommunityUserDao;
@@ -41,39 +41,61 @@ public class CommunityUserServiceImpl implements CommunityUserService{
     private HealthIssueDao healthIssueDao;
 
     @Override
-    public List<CommunityUserTableModel> getCommunityUsers() {
-        List<CommunityUserTableModel> list = new ArrayList<>();
-
+    public List<CommunityUserProfileModel> getCommunityUsers(CommunityUserBeanJoinFilter filter) {
+        List<CommunityUserProfileModel> list = new ArrayList<>();
         List<CommunityUserBean> communityUserBeans = communityUserDao.getAll();
-        if (CollectionUtils.isEmpty(communityUserBeans)) {
-            return list;
-        }
+        if (!CollectionUtils.isEmpty(communityUserBeans)) {
+            List<String> usernameList = communityUserBeans.stream()
+                    .map(CommunityUserBean::getUsername)
+                    .collect(Collectors.toList());
 
-        List<String> usernames = communityUserBeans.stream()
-                .map(CommunityUserBean::getUsername)
-                .collect(Collectors.toList());
+            Map<String, AddressBean> addressBeanMap = new HashMap<>();
+            Map<String, OccupationBean> occupationMap = new HashMap<>();
+            Map<String, List<HealthIssueBean>> healthIssueMap = new HashMap<>();
+            Map<String, AccountBean> accountBeanMap = new HashMap<>();
 
-        List<AccountBean> accountBeans = accountDao.findAccounts(usernames);
-        Map<String, AccountBean> accountBeanMap = new HashMap<>();
-        for (AccountBean accountBean: accountBeans) {
-            if (!accountBeanMap.containsKey(accountBean.getUsername())) {
-                accountBeanMap.put(accountBean.getUsername(), accountBean);
+            if (filter.isIncludeAddress()) {
+                List<AddressBean> addressBeans = addressDao.getUsersAddress(usernameList);
+                for (AddressBean addressBean : addressBeans) {
+                    addressBeanMap.put(addressBean.getUsername(), addressBean);
+                }
             }
+
+            if (filter.isIncludeOccupation()) {
+                List<OccupationBean> occupationBeans = occupationDao.getUsersOccupation(usernameList);
+                for (OccupationBean occupationBean : occupationBeans) {
+                    occupationMap.put(occupationBean.getUsername(), occupationBean);
+                }
+            }
+
+            if (filter.isIncludeHealthIssue()) {
+                List<HealthIssueBean> healthIssueBeans = healthIssueDao.getUsersHealthIssues(usernameList);
+                for (HealthIssueBean healthIssueBean : healthIssueBeans) {
+                    if (!healthIssueMap.containsKey(healthIssueBean.getUsername())) {
+                        healthIssueMap.put(healthIssueBean.getUsername(), new ArrayList<>());
+                    }
+                    healthIssueMap.get(healthIssueBean.getUsername()).add(healthIssueBean);
+                }
+            }
+
+            List<AccountBean> accountBeans = accountDao.findAccounts(usernameList);
+            if (!CollectionUtils.isEmpty(accountBeans)) {
+                for (AccountBean accountBean : accountBeans) {
+                    accountBeanMap.put(accountBean.getUsername(), accountBean);
+                }
+            }
+
+            for (CommunityUserBean communityUserBean : communityUserBeans) {
+                String username = communityUserBean.getUsername();
+                AccountBean accountBean = accountBeanMap.getOrDefault(username, null);
+                AddressBean addressBean = addressBeanMap.getOrDefault(username, null);
+                OccupationBean occupationBean = occupationMap.getOrDefault(username, null);
+                List<HealthIssueBean> healthIssueBeans = healthIssueMap.getOrDefault(username, null);
+                CommunityUserProfileModel model = toCommunityUserProfileModel(accountBean, communityUserBean, addressBean, occupationBean, healthIssueBeans);
+                list.add(model);
+            }
+            Collections.sort(list);
         }
-
-        for (CommunityUserBean communityUserBean : communityUserBeans) {
-            AccountBean accountBean = accountBeanMap.get(communityUserBean.getUsername());
-
-            CommunityUserTableModel model = new CommunityUserTableModel();
-            model.setUsername(communityUserBean.getUsername());
-            model.setFullName(communityUserBean.getFullName());
-            model.setNricNo(communityUserBean.getNric());
-            model.setEmail(accountBean.getEmail());
-            model.setIsActive(accountBean.getIsActive());
-            list.add(model);
-        }
-
-        Collections.sort(list);
         return list;
     }
 
@@ -86,10 +108,7 @@ public class CommunityUserServiceImpl implements CommunityUserService{
         OccupationBean occupationBean = occupationDao.find(username);
         List<HealthIssueBean> healthIssueBeans = healthIssueDao.findHealthIssueBeans(username);
 
-        CommunityUserProfileModel profileModel = toCommunityUserProfileModel(communityUserBean, addressBean, occupationBean, healthIssueBeans);
-        profileModel.setAccIsActivate(accountBean.getIsActive());
-        profileModel.setEmail(accountBean.getEmail());
-        return profileModel;
+        return toCommunityUserProfileModel(accountBean, communityUserBean, addressBean, occupationBean, healthIssueBeans);
     }
 
     @Override
@@ -210,8 +229,14 @@ public class CommunityUserServiceImpl implements CommunityUserService{
         communityUserDao.saveOrUpdate(communityUserBean);
     }
 
-    private CommunityUserProfileModel toCommunityUserProfileModel(CommunityUserBean communityUserBean, AddressBean addressBean, OccupationBean occupationBean, List<HealthIssueBean> healthIssueBeans) {
+    private CommunityUserProfileModel toCommunityUserProfileModel(AccountBean accountBean,
+                                                                  CommunityUserBean communityUserBean,
+                                                                  AddressBean addressBean,
+                                                                  OccupationBean occupationBean,
+                                                                  List<HealthIssueBean> healthIssueBeans) {
         CommunityUserProfileModel model = new CommunityUserProfileModel();
+        model.setAccIsActivate(accountBean.getIsActive());
+        model.setEmail(accountBean.getEmail());
         model.setPersonalDetail(communityUserBean);
         model.setAddress(addressBean);
         model.setOccupation(occupationBean);
