@@ -21,15 +21,20 @@ public class DropdownChoiceRestController {
     private DropdownChoiceService dropdownChoiceService;
 
     @RequestMapping(value = "/get-disease-choice-list", method = RequestMethod.GET)
-    public ResponseEntity<List<DropdownChoiceModel<String>>> getDiseaseChoiceList() {
-        return new ResponseEntity<>(dropdownChoiceService.getDiseaseDropdownList(), HttpStatus.OK);
+    public ResponseEntity<Object> getDiseaseChoiceList() {
+        try {
+            List<DropdownChoiceModel<String>> list = dropdownChoiceService.getDiseaseDropdownList();
+            return ResponseHandler.generateResponse("Successfully retrieved" + list.size() + " choice(s).", HttpStatus.OK, list);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
     }
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public ResponseEntity<Object> getAdminUsernameList() {
         try {
             List<DropdownChoiceModel<String>> list = dropdownChoiceService.getAdminUsernameList();
-            return ResponseHandler.generateResponse("Successfully retrieved " + list.size() + " record(s).", HttpStatus.OK, list);
+            return ResponseHandler.generateResponse("Successfully retrieved " + list.size() + " choice(s).", HttpStatus.OK, list);
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, new ArrayList<DropdownChoiceModel<String>>());
         }
@@ -39,7 +44,7 @@ public class DropdownChoiceRestController {
     public ResponseEntity<Object> getCommunityUserUsernameList() {
         try {
             List<DropdownChoiceModel<String>> list = dropdownChoiceService.getCommunityUserUsernameList();
-            return ResponseHandler.generateResponse("Successfully retrieved " + list.size() + " record(s).", HttpStatus.OK, list);
+            return ResponseHandler.generateResponse("Successfully retrieved " + list.size() + " choice(s).", HttpStatus.OK, list);
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, new ArrayList<DropdownChoiceModel<String>>());
         }
@@ -50,7 +55,7 @@ public class DropdownChoiceRestController {
                                                                   @RequestParam(required = false) String adminUsername) {
         try {
             List<DropdownChoiceModel<Date>> list = dropdownChoiceService.getAppointmentAvailableTimeslot(date, adminUsername);
-            return ResponseHandler.generateResponse("Successfully retrieved " + list.size() + " record(s).", HttpStatus.OK, list);
+            return ResponseHandler.generateResponse("Successfully retrieved " + list.size() + " choice(s).", HttpStatus.OK, list);
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, new ArrayList<DropdownChoiceModel<Date>>());
         }

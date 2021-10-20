@@ -2,6 +2,7 @@ package com.chis.communityhealthis.bean;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "COMMUNITY_USER")
@@ -34,6 +35,18 @@ public class CommunityUserBean implements Serializable {
 
     @Column(name = ETHNIC)
     private String ethnic;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = USERNAME, referencedColumnName = AddressBean.USERNAME, insertable = false, updatable = false)
+    private AddressBean addressBean;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = USERNAME, referencedColumnName = OccupationBean.USERNAME, insertable = false, updatable = false)
+    private OccupationBean occupationBean;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = USERNAME, referencedColumnName = HealthIssueBean.USERNAME, insertable = false, updatable = false)
+    private Set<HealthIssueBean> healthIssueBeans;
 
     public String getUsername() {
         return username;
@@ -81,5 +94,29 @@ public class CommunityUserBean implements Serializable {
 
     public void setEthnic(String ethnic) {
         this.ethnic = ethnic;
+    }
+
+    public AddressBean getAddressBean() {
+        return addressBean;
+    }
+
+    public void setAddressBean(AddressBean addressBean) {
+        this.addressBean = addressBean;
+    }
+
+    public OccupationBean getOccupationBean() {
+        return occupationBean;
+    }
+
+    public void setOccupationBean(OccupationBean occupationBean) {
+        this.occupationBean = occupationBean;
+    }
+
+    public Set<HealthIssueBean> getHealthIssueBeans() {
+        return healthIssueBeans;
+    }
+
+    public void setHealthIssueBeans(Set<HealthIssueBean> healthIssueBeans) {
+        this.healthIssueBeans = healthIssueBeans;
     }
 }

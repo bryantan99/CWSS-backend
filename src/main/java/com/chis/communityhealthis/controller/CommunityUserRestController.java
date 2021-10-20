@@ -3,6 +3,7 @@ package com.chis.communityhealthis.controller;
 import com.chis.communityhealthis.model.filter.CommunityUserBeanQuery;
 import com.chis.communityhealthis.model.response.ResponseHandler;
 import com.chis.communityhealthis.model.signup.AccountRegistrationForm;
+import com.chis.communityhealthis.model.user.CommunityUserModel;
 import com.chis.communityhealthis.model.user.CommunityUserProfileModel;
 import com.chis.communityhealthis.service.auth.AuthService;
 import com.chis.communityhealthis.service.communityuser.CommunityUserService;
@@ -40,6 +41,7 @@ public class CommunityUserRestController {
                                                     @RequestParam(required = false) String nric,
                                                     @RequestParam(required = false) String gender,
                                                     @RequestParam(required = false) String ethnic,
+                                                    @RequestParam(required = false) Integer diseaseId,
                                                     @RequestParam(required = false) String address,
                                                     @RequestParam(required = false) String occupation,
                                                     @RequestParam(required = false) String healthIssue) {
@@ -49,11 +51,12 @@ public class CommunityUserRestController {
             filter.setNric(StringUtils.isBlank(nric) ? null : nric);
             filter.setGender(StringUtils.isBlank(gender) ? null : gender);
             filter.setEthnic(StringUtils.isBlank(ethnic) ? null : ethnic);
+            filter.setDiseaseId(diseaseId);
             filter.setIncludeAddress(!StringUtils.isBlank(address) && StringUtils.equals(FlagConstant.YES, address));
             filter.setIncludeOccupation(!StringUtils.isBlank(occupation) && StringUtils.equals(FlagConstant.YES, occupation));
             filter.setIncludeHealthIssue(!StringUtils.isBlank(healthIssue) && StringUtils.equals(FlagConstant.YES, healthIssue));
 
-            List<CommunityUserProfileModel> list = communityUserService.getCommunityUsers(filter);
+            List<CommunityUserModel> list = communityUserService.getCommunityUsers(filter);
             return ResponseHandler.generateResponse("Successfully retrieved " + list.size() + " user record(s).", HttpStatus.OK, list);
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);

@@ -1,9 +1,11 @@
 package com.chis.communityhealthis.service.communityuser;
 
 import com.chis.communityhealthis.bean.*;
+import com.chis.communityhealthis.model.address.AddressModel;
 import com.chis.communityhealthis.model.filter.CommunityUserBeanQuery;
 import com.chis.communityhealthis.model.health.HealthModel;
 import com.chis.communityhealthis.model.signup.*;
+import com.chis.communityhealthis.model.user.CommunityUserModel;
 import com.chis.communityhealthis.model.user.CommunityUserProfileModel;
 import com.chis.communityhealthis.repository.account.AccountDao;
 import com.chis.communityhealthis.repository.address.AddressDao;
@@ -11,6 +13,7 @@ import com.chis.communityhealthis.repository.communityuser.CommunityUserDao;
 import com.chis.communityhealthis.repository.healthissue.HealthIssueDao;
 import com.chis.communityhealthis.repository.occupation.OccupationDao;
 import com.chis.communityhealthis.utility.FlagConstant;
+import com.google.maps.model.LatLng;
 import io.jsonwebtoken.lang.Assert;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +26,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
-public class CommunityUserServiceImpl implements CommunityUserService{
+public class CommunityUserServiceImpl implements CommunityUserService {
 
     @Autowired
     private AccountDao accountDao;
@@ -41,43 +44,15 @@ public class CommunityUserServiceImpl implements CommunityUserService{
     private HealthIssueDao healthIssueDao;
 
     @Override
-    public List<CommunityUserProfileModel> getCommunityUsers(CommunityUserBeanQuery filter) {
-        List<CommunityUserProfileModel> list = new ArrayList<>();
+    public List<CommunityUserModel> getCommunityUsers(CommunityUserBeanQuery filter) {
+        List<CommunityUserModel> list = new ArrayList<>();
         List<CommunityUserBean> communityUserBeans = communityUserDao.getCommunityUsers(filter);
         if (!CollectionUtils.isEmpty(communityUserBeans)) {
+
             List<String> usernameList = communityUserBeans.stream()
                     .map(CommunityUserBean::getUsername)
                     .collect(Collectors.toList());
-
-            Map<String, AddressBean> addressBeanMap = new HashMap<>();
-            Map<String, OccupationBean> occupationMap = new HashMap<>();
-            Map<String, List<HealthIssueBean>> healthIssueMap = new HashMap<>();
             Map<String, AccountBean> accountBeanMap = new HashMap<>();
-
-            if (filter.isIncludeAddress()) {
-                List<AddressBean> addressBeans = addressDao.getUsersAddress(usernameList);
-                for (AddressBean addressBean : addressBeans) {
-                    addressBeanMap.put(addressBean.getUsername(), addressBean);
-                }
-            }
-
-            if (filter.isIncludeOccupation()) {
-                List<OccupationBean> occupationBeans = occupationDao.getUsersOccupation(usernameList);
-                for (OccupationBean occupationBean : occupationBeans) {
-                    occupationMap.put(occupationBean.getUsername(), occupationBean);
-                }
-            }
-
-            if (filter.isIncludeHealthIssue()) {
-                List<HealthIssueBean> healthIssueBeans = healthIssueDao.getUsersHealthIssues(usernameList);
-                for (HealthIssueBean healthIssueBean : healthIssueBeans) {
-                    if (!healthIssueMap.containsKey(healthIssueBean.getUsername())) {
-                        healthIssueMap.put(healthIssueBean.getUsername(), new ArrayList<>());
-                    }
-                    healthIssueMap.get(healthIssueBean.getUsername()).add(healthIssueBean);
-                }
-            }
-
             List<AccountBean> accountBeans = accountDao.findAccounts(usernameList);
             if (!CollectionUtils.isEmpty(accountBeans)) {
                 for (AccountBean accountBean : accountBeans) {
@@ -85,18 +60,58 @@ public class CommunityUserServiceImpl implements CommunityUserService{
                 }
             }
 
-            for (CommunityUserBean communityUserBean : communityUserBeans) {
-                String username = communityUserBean.getUsername();
-                AccountBean accountBean = accountBeanMap.getOrDefault(username, null);
-                AddressBean addressBean = addressBeanMap.getOrDefault(username, null);
-                OccupationBean occupationBean = occupationMap.getOrDefault(username, null);
-                List<HealthIssueBean> healthIssueBeans = healthIssueMap.getOrDefault(username, null);
-                CommunityUserProfileModel model = toCommunityUserProfileModel(accountBean, communityUserBean, addressBean, occupationBean, healthIssueBeans);
-                list.add(model);
+            for (CommunityUserBean userBean : communityUserBeans) {
+                AccountBean accountBean = accountBeanMap.getOrDefault(userBean.getUsername(), null);
+                list.add(toCommunityUserModel(userBean, accountBean));
             }
-            Collections.sort(list);
         }
+        Collections.sort(list);
         return list;
+    }
+
+    private CommunityUserModel toCommunityUserModel(CommunityUserBean userBean, AccountBean accountBean) {
+        CommunityUserModel model = new CommunityUserModel();
+        model.setAccIsActivate(accountBean.getIsActive());
+        model.setEmail(accountBean.getEmail());
+        model.setUsername(userBean.getUsername());
+        model.setFullName(userBean.getFullName());
+        model.setEthnic(userBean.getEthnic());
+        model.setGender(userBean.getGender());
+        model.setNric(userBean.getNric());
+        model.setContactNo(userBean.getContactNo());
+
+        if (userBean.getAddressBean() != null) {
+            model.setAddress(toAddressModel(userBean.getAddressBean()));
+        }
+
+        if (!CollectionUtils.isEmpty(userBean.getHealthIssueBeans())) {
+            List<HealthModel> healthModelList = new ArrayList<>();
+            for (HealthIssueBean bean : userBean.getHealthIssueBeans()) {
+                healthModelList.add(toHealthModel(bean));
+            }
+            model.setHealthIssues(healthModelList);
+        }
+        return model;
+    }
+
+    private AddressModel toAddressModel(AddressBean addressBean) {
+        AddressModel model = new AddressModel();
+        model.setLine1(addressBean.getAddressLine1());
+        model.setLine2(addressBean.getAddressLine2());
+        model.setPostcode(addressBean.getPostcode());
+        model.setCity(addressBean.getCity());
+        model.setState(addressBean.getState());
+
+        if (addressBean.getLatitude() != null && addressBean.getLongitude() != null) {
+            LatLng latLng = new LatLng(addressBean.getLatitude(), addressBean.getLongitude());
+            model.setLatLng(latLng);
+        }
+
+        String fullAddress =
+                addressBean.getAddressLine1() + " " + addressBean.getAddressLine2() + " " +
+                        addressBean.getPostcode() + " " + addressBean.getCity() + " " + addressBean.getState();
+        model.setFullAddress(fullAddress);
+        return model;
     }
 
     @Override
@@ -126,7 +141,7 @@ public class CommunityUserServiceImpl implements CommunityUserService{
 
         List<HealthIssueBean> healthIssueBeans = healthIssueDao.findHealthIssueBeans(username);
         if (!CollectionUtils.isEmpty(healthIssueBeans)) {
-            for (HealthIssueBean bean: healthIssueBeans) {
+            for (HealthIssueBean bean : healthIssueBeans) {
                 bean.setApprovedBy(adminUsername);
                 bean.setApprovedDate(new Date());
                 healthIssueDao.saveOrUpdate(bean);

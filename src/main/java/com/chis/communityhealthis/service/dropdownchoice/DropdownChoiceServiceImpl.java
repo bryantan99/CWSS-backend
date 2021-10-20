@@ -44,7 +44,7 @@ public class DropdownChoiceServiceImpl implements DropdownChoiceService {
         List<DropdownChoiceModel<String>> list = new ArrayList<>();
         if (!CollectionUtils.isEmpty(beans)) {
             for (DiseaseBean bean : beans) {
-                list.add(new DropdownChoiceModel<String>(bean.getDiseaseId().toString(), bean.getDiseaseName().toUpperCase()));
+                list.add(new DropdownChoiceModel<String>(bean.getDiseaseId().toString(), StringUtils.capitalize(bean.getDiseaseName())));
             }
         }
         return list;
