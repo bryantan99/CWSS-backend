@@ -12,6 +12,7 @@ import com.chis.communityhealthis.repository.address.AddressDao;
 import com.chis.communityhealthis.repository.communityuser.CommunityUserDao;
 import com.chis.communityhealthis.repository.healthissue.HealthIssueDao;
 import com.chis.communityhealthis.repository.occupation.OccupationDao;
+import com.chis.communityhealthis.utility.AddressUtil;
 import com.chis.communityhealthis.utility.FlagConstant;
 import com.google.maps.model.LatLng;
 import io.jsonwebtoken.lang.Assert;
@@ -48,7 +49,6 @@ public class CommunityUserServiceImpl implements CommunityUserService {
         List<CommunityUserModel> list = new ArrayList<>();
         List<CommunityUserBean> communityUserBeans = communityUserDao.getCommunityUsers(filter);
         if (!CollectionUtils.isEmpty(communityUserBeans)) {
-
             List<String> usernameList = communityUserBeans.stream()
                     .map(CommunityUserBean::getUsername)
                     .collect(Collectors.toList());
@@ -101,22 +101,18 @@ public class CommunityUserServiceImpl implements CommunityUserService {
         model.setPostcode(addressBean.getPostcode());
         model.setCity(addressBean.getCity());
         model.setState(addressBean.getState());
-
+        model.setFullAddress(AddressUtil.generateFullAddress(addressBean));
         if (addressBean.getLatitude() != null && addressBean.getLongitude() != null) {
             LatLng latLng = new LatLng(addressBean.getLatitude(), addressBean.getLongitude());
             model.setLatLng(latLng);
         }
 
-        String fullAddress =
-                addressBean.getAddressLine1() + " " + addressBean.getAddressLine2() + " " +
-                        addressBean.getPostcode() + " " + addressBean.getCity() + " " + addressBean.getState();
-        model.setFullAddress(fullAddress);
         return model;
     }
 
     @Override
     public CommunityUserProfileModel getCommunityUserProfile(String username) {
-        AccountBean accountBean = accountDao.find(username);
+        AccountBean accountBean = accountDao.findAccount(username);
         Assert.notNull(accountBean, "Account [username: " + username + "] was not found.");
         CommunityUserBean communityUserBean = communityUserDao.find(username);
         AddressBean addressBean = addressDao.find(username);

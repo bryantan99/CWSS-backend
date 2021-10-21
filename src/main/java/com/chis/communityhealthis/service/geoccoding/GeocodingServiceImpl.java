@@ -2,11 +2,13 @@ package com.chis.communityhealthis.service.geoccoding;
 
 import com.chis.communityhealthis.bean.AddressBean;
 import com.chis.communityhealthis.repository.address.AddressDao;
+import com.chis.communityhealthis.utility.AddressUtil;
 import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
 import com.google.maps.errors.ApiException;
 import com.google.maps.model.GeocodingResult;
 import com.google.maps.model.LatLng;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,13 +46,15 @@ public class GeocodingServiceImpl implements GeocodingService {
         List<AddressBean> addressBeans = addressDao.getAll();
         if (!CollectionUtils.isEmpty(addressBeans)) {
             for (AddressBean addressBean : addressBeans) {
-                String fullAddress = getFullAddress(addressBean);
-                LatLng latLng = googleGeocode(fullAddress);
-                if (latLng != null) {
-                    addressBean.setLatitude(latLng.lat);
-                    addressBean.setLongitude(latLng.lng);
-                    addressDao.update(addressBean);
-                    map.put(fullAddress, latLng);
+                String fullAddress = AddressUtil.generateFullAddress(addressBean);
+                if (StringUtils.isNotBlank(fullAddress)) {
+                    LatLng latLng = googleGeocode(fullAddress);
+                    if (latLng != null) {
+                        addressBean.setLatitude(latLng.lat);
+                        addressBean.setLongitude(latLng.lng);
+                        addressDao.update(addressBean);
+                        map.put(fullAddress, latLng);
+                    }
                 }
             }
         }
@@ -61,56 +65,9 @@ public class GeocodingServiceImpl implements GeocodingService {
         GeoApiContext context = new GeoApiContext.Builder().apiKey("AIzaSyDM52dfVP_MjYHd6UB24KHPMhSACq-d6wA").build();
         try {
             GeocodingResult[] results = GeocodingApi.geocode(context, address).await();
-            return results[0].geometry.location;
+            return results != null && results.length > 0 ? results[0].geometry.location : null;
         } catch (ApiException | InterruptedException | IOException e) {
             throw new Exception(e.getMessage());
-        }
-    }
-
-    private String getFullAddress(AddressBean addressBean) {
-        return addressBean.getAddressLine1() + " " +
-                addressBean.getAddressLine2() + " " +
-                addressBean.getPostcode() + " " +
-                addressBean.getCity() + " " +
-                getFullStateName(addressBean.getState());
-    }
-
-    private String getFullStateName(String state) {
-        switch (state) {
-            case "PLS":
-                return "Perlis";
-            case "KDH":
-                return "Kedah";
-            case "PNG":
-                return "Pulau Pinang";
-            case "PRK":
-                return "Perak";
-            case "SGR":
-                return "Selangor";
-            case "NSN":
-                return "Negeri Sembilan";
-            case "MLK":
-                return "Melaka";
-            case "JHR":
-                return "Johor";
-            case "KTN":
-                return "Kelantan";
-            case "PHG":
-                return "Pahang";
-            case "TRG":
-                return "Terengganu";
-            case "SBH":
-                return "Sabah";
-            case "SWK":
-                return "Sarawak";
-            case "KUL":
-                return "Kuala Lumpur";
-            case "LBN":
-                return "Labuan";
-            case "PJY":
-                return "Putrajaya";
-            default:
-                return null;
         }
     }
 }

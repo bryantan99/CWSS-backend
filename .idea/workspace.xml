@@ -6,28 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Add disease form field to query community user&#10;- Move charts into CommunityUserGraphComponent&#10;- Update getCommunityUsers() to join disease, address and occupation in DAO&#10;- Add CommunityUserModel, EthnicUtil and GenderUtil">
       <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/TestRestController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/user/CommunityUserModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/utilities/ethnicUtil.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/utilities/genderUtil.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/community-user-graph/community-user-graph.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/community-user-graph/community-user-graph.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/utility/AddressUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/CommunityUserBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/CommunityUserBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/CommunityUserRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/CommunityUserRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/DropdownChoiceRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/DropdownChoiceRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/filter/CommunityUserBeanQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/filter/CommunityUserBeanQuery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/communityuser/CommunityUserDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/communityuser/CommunityUserDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/dropdownchoice/DropdownChoiceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/dropdownchoice/DropdownChoiceServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/services/community-user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/services/community-user.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/services/dropdown-choice.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/services/dropdown-choice.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/geoccoding/GeocodingServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/geoccoding/GeocodingServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/community-user/community-user.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/community-user/community-user.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/community-user/community-user.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/community-user/community-user.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-health-form/signup-health-form.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-health-form/signup-health-form.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/user.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/user.module.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -252,14 +236,9 @@
       <workItem from="1634023021293" duration="27222000" />
       <workItem from="1634628256369" duration="25000" />
       <workItem from="1634724186510" duration="290000" />
-      <workItem from="1634724695177" duration="15141000" />
-    </task>
-    <task id="LOCAL-00068" summary="Display post medias, update add &amp; delete API to return ResponseModel">
-      <created>1631942548927</created>
-      <option name="number" value="00068" />
-      <option name="presentableId" value="LOCAL-00068" />
-      <option name="project" value="LOCAL" />
-      <updated>1631942548927</updated>
+      <workItem from="1634724695177" duration="15406000" />
+      <workItem from="1634795813173" duration="5854000" />
+      <workItem from="1634829117268" duration="3595000" />
     </task>
     <task id="LOCAL-00069" summary="Update new post modal interface,">
       <created>1631945463493</created>
@@ -597,7 +576,14 @@
       <option name="project" value="LOCAL" />
       <updated>1633793259743</updated>
     </task>
-    <option name="localTasksCounter" value="117" />
+    <task id="LOCAL-00117" summary="- Add disease form field to query community user&#10;- Move charts into CommunityUserGraphComponent&#10;- Update getCommunityUsers() to join disease, address and occupation in DAO&#10;- Add CommunityUserModel, EthnicUtil and GenderUtil">
+      <created>1634748165643</created>
+      <option name="number" value="00117" />
+      <option name="presentableId" value="LOCAL-00117" />
+      <option name="project" value="LOCAL" />
+      <updated>1634748165643</updated>
+    </task>
+    <option name="localTasksCounter" value="118" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -645,6 +631,20 @@
     <option name="LAST_COMMIT_MESSAGE" value="- Add disease form field to query community user&#10;- Move charts into CommunityUserGraphComponent&#10;- Update getCommunityUsers() to join disease, address and occupation in DAO&#10;- Add CommunityUserModel, EthnicUtil and GenderUtil" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserServiceImpl.java</url>
+          <line>50</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/communityuser/CommunityUserDaoImpl.java</url>
+          <line>27</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="SpringBootApplicationConfigurationType">
         <watch expression="((HeaderWriterRequest)request).request" custom="org.springframework.security.web.header.HeaderWriterFilter.HeaderWriterRequest" />
