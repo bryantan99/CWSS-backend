@@ -53,4 +53,21 @@ public class CommunityUserDaoImpl extends GenericDaoImpl<CommunityUserBean, Stri
         Query<CommunityUserBean> query = currentSession().createQuery(criteriaQuery);
         return query.getResultList();
     }
+
+    @Override
+    public CommunityUserBean getCommunityUser(String username) {
+        CriteriaBuilder criteriaBuilder = currentSession().getCriteriaBuilder();
+        CriteriaQuery<CommunityUserBean> criteriaQuery = criteriaBuilder.createQuery(CommunityUserBean.class);
+        Root<CommunityUserBean> root = criteriaQuery.from(CommunityUserBean.class);
+
+        Fetch<CommunityUserBean, AddressBean> addressBeanFetch = root.fetch("addressBean", JoinType.LEFT);
+        Fetch<CommunityUserBean, OccupationBean> occupationBeanFetch = root.fetch("occupationBean", JoinType.LEFT);
+        Fetch<CommunityUserBean, HealthIssueBean> healthIssueBeanFetch = root.fetch("healthIssueBeans", JoinType.LEFT);
+        Fetch<HealthIssueBean, AdminBean> adminBeanFetch = healthIssueBeanFetch.fetch("adminBean", JoinType.LEFT);
+        Fetch<HealthIssueBean, DiseaseBean> diseaseBeanFetch = healthIssueBeanFetch.fetch("diseaseBean", JoinType.LEFT);
+
+        criteriaQuery.select(root).distinct(true).where(criteriaBuilder.equal(root.get("username"), username));
+        Query<CommunityUserBean> query = currentSession().createQuery(criteriaQuery);
+        return query.getSingleResult();
+    }
 }

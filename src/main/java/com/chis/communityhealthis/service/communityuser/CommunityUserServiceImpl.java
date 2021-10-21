@@ -4,9 +4,11 @@ import com.chis.communityhealthis.bean.*;
 import com.chis.communityhealthis.model.address.AddressModel;
 import com.chis.communityhealthis.model.filter.CommunityUserBeanQuery;
 import com.chis.communityhealthis.model.health.HealthModel;
+import com.chis.communityhealthis.model.occupation.OccupationModel;
 import com.chis.communityhealthis.model.signup.*;
 import com.chis.communityhealthis.model.user.CommunityUserModel;
 import com.chis.communityhealthis.model.user.CommunityUserProfileModel;
+import com.chis.communityhealthis.model.user.PersonalDetailModel;
 import com.chis.communityhealthis.repository.account.AccountDao;
 import com.chis.communityhealthis.repository.address.AddressDao;
 import com.chis.communityhealthis.repository.communityuser.CommunityUserDao;
@@ -94,32 +96,12 @@ public class CommunityUserServiceImpl implements CommunityUserService {
         return model;
     }
 
-    private AddressModel toAddressModel(AddressBean addressBean) {
-        AddressModel model = new AddressModel();
-        model.setLine1(addressBean.getAddressLine1());
-        model.setLine2(addressBean.getAddressLine2());
-        model.setPostcode(addressBean.getPostcode());
-        model.setCity(addressBean.getCity());
-        model.setState(addressBean.getState());
-        model.setFullAddress(AddressUtil.generateFullAddress(addressBean));
-        if (addressBean.getLatitude() != null && addressBean.getLongitude() != null) {
-            LatLng latLng = new LatLng(addressBean.getLatitude(), addressBean.getLongitude());
-            model.setLatLng(latLng);
-        }
-
-        return model;
-    }
-
     @Override
     public CommunityUserProfileModel getCommunityUserProfile(String username) {
         AccountBean accountBean = accountDao.findAccount(username);
         Assert.notNull(accountBean, "Account [username: " + username + "] was not found.");
-        CommunityUserBean communityUserBean = communityUserDao.find(username);
-        AddressBean addressBean = addressDao.find(username);
-        OccupationBean occupationBean = occupationDao.find(username);
-        List<HealthIssueBean> healthIssueBeans = healthIssueDao.findHealthIssueBeans(username);
-
-        return toCommunityUserProfileModel(accountBean, communityUserBean, addressBean, occupationBean, healthIssueBeans);
+        CommunityUserBean communityUserBean = communityUserDao.getCommunityUser(username);
+        return toCommunityUserProfileModel(accountBean, communityUserBean);
     }
 
     @Override
@@ -240,24 +222,80 @@ public class CommunityUserServiceImpl implements CommunityUserService {
         communityUserDao.saveOrUpdate(communityUserBean);
     }
 
-    private CommunityUserProfileModel toCommunityUserProfileModel(AccountBean accountBean,
-                                                                  CommunityUserBean communityUserBean,
-                                                                  AddressBean addressBean,
-                                                                  OccupationBean occupationBean,
-                                                                  List<HealthIssueBean> healthIssueBeans) {
+    private CommunityUserProfileModel toCommunityUserProfileModel(AccountBean accountBean, CommunityUserBean communityUserBean) {
         CommunityUserProfileModel model = new CommunityUserProfileModel();
-        model.setAccIsActivate(accountBean.getIsActive());
-        model.setEmail(accountBean.getEmail());
-        model.setPersonalDetail(communityUserBean);
-        model.setAddress(addressBean);
-        model.setOccupation(occupationBean);
-        if (!CollectionUtils.isEmpty(healthIssueBeans)) {
-            List<HealthModel> list = new ArrayList<>();
-            for (HealthIssueBean bean : healthIssueBeans) {
-                list.add(toHealthModel(bean));
-            }
-            model.setHealthModelList(list);
+
+        AddressBean addressBean = null;
+        OccupationBean occupationBean = null;
+        Set<HealthIssueBean> healthIssueBeans = null;
+        if (communityUserBean != null) {
+            addressBean = communityUserBean.getAddressBean();
+            occupationBean = communityUserBean.getOccupationBean();
+            healthIssueBeans = communityUserBean.getHealthIssueBeans();
         }
+
+        if (accountBean != null) {
+            model.setUsername(accountBean.getUsername());
+            model.setAccIsActivate(accountBean.getIsActive());
+            model.setEmail(accountBean.getEmail());
+        }
+
+        if (communityUserBean != null) {
+            model.setPersonalDetail(toPersonalDetailModel(communityUserBean));
+        }
+
+        if (addressBean != null) {
+            model.setAddress(toAddressModel(addressBean));
+        }
+
+        if (occupationBean != null) {
+            model.setOccupation(toOccupationModel(occupationBean));
+        }
+
+        if (!CollectionUtils.isEmpty(healthIssueBeans)) {
+            List<HealthModel> healthModelList = new ArrayList<>();
+            for (HealthIssueBean bean : communityUserBean.getHealthIssueBeans()) {
+                healthModelList.add(toHealthModel(bean));
+            }
+            model.setHealthModelList(healthModelList);
+        }
+
+        return model;
+    }
+
+    private PersonalDetailModel toPersonalDetailModel(CommunityUserBean communityUserBean) {
+        PersonalDetailModel model = new PersonalDetailModel();
+        model.setFullName(communityUserBean.getFullName());
+        model.setNric(communityUserBean.getNric());
+        model.setGender(communityUserBean.getGender());
+        model.setContactNo(communityUserBean.getContactNo());
+        model.setEthnic(communityUserBean.getEthnic());
+        return model;
+    }
+
+    private AddressModel toAddressModel(AddressBean addressBean) {
+        AddressModel model = new AddressModel();
+        model.setLine1(addressBean.getAddressLine1());
+        model.setLine2(addressBean.getAddressLine2());
+        model.setPostcode(addressBean.getPostcode());
+        model.setCity(addressBean.getCity());
+        model.setState(addressBean.getState());
+        model.setFullAddress(AddressUtil.generateFullAddress(addressBean));
+        if (addressBean.getLatitude() != null && addressBean.getLongitude() != null) {
+            LatLng latLng = new LatLng(addressBean.getLatitude(), addressBean.getLongitude());
+            model.setLatLng(latLng);
+        }
+
+        return model;
+    }
+
+    private OccupationModel toOccupationModel(OccupationBean occupationBean) {
+        OccupationModel model = new OccupationModel();
+        model.setEmploymentStatus(occupationBean.getEmploymentType());
+        model.setOccupationName(occupationBean.getOccupationName());
+        model.setSalary(occupationBean.getSalary());
+        model.setEmployerCompany(occupationBean.getEmployerCompany());
+        model.setEmployerContactNo(occupationBean.getEmployerContactNo());
         return model;
     }
 

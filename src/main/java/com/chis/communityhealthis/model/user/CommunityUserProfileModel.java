@@ -1,23 +1,27 @@
 package com.chis.communityhealthis.model.user;
 
-import com.chis.communityhealthis.bean.AddressBean;
-import com.chis.communityhealthis.bean.CommunityUserBean;
-import com.chis.communityhealthis.bean.OccupationBean;
+import com.chis.communityhealthis.model.address.AddressModel;
 import com.chis.communityhealthis.model.health.HealthModel;
+import com.chis.communityhealthis.model.occupation.OccupationModel;
 
 import java.util.List;
 
 public class CommunityUserProfileModel implements Comparable<CommunityUserProfileModel> {
+    private String username;
     private String accIsActivate;
     private String email;
-    private CommunityUserBean personalDetail;
-    private AddressBean address;
-    private OccupationBean occupation;
+    private PersonalDetailModel personalDetail;
+    private AddressModel address;
+    private OccupationModel occupation;
     private List<HealthModel> healthModelList;
 
-    public String getAccIsActivate() { return accIsActivate; }
+    public String getUsername() {
+        return username;
+    }
 
-    public void setAccIsActivate(String accIsActivate) { this.accIsActivate = accIsActivate; }
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public String getEmail() {
         return email;
@@ -27,27 +31,31 @@ public class CommunityUserProfileModel implements Comparable<CommunityUserProfil
         this.email = email;
     }
 
-    public CommunityUserBean getPersonalDetail() {
+    public String getAccIsActivate() { return accIsActivate; }
+
+    public void setAccIsActivate(String accIsActivate) { this.accIsActivate = accIsActivate; }
+
+    public PersonalDetailModel getPersonalDetail() {
         return personalDetail;
     }
 
-    public void setPersonalDetail(CommunityUserBean personalDetail) {
+    public void setPersonalDetail(PersonalDetailModel personalDetail) {
         this.personalDetail = personalDetail;
     }
 
-    public AddressBean getAddress() {
+    public AddressModel getAddress() {
         return address;
     }
 
-    public void setAddress(AddressBean address) {
+    public void setAddress(AddressModel address) {
         this.address = address;
     }
 
-    public OccupationBean getOccupation() {
+    public OccupationModel getOccupation() {
         return occupation;
     }
 
-    public void setOccupation(OccupationBean occupation) {
+    public void setOccupation(OccupationModel occupation) {
         this.occupation = occupation;
     }
 
