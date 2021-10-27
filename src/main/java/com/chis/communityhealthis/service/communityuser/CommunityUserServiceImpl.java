@@ -285,6 +285,7 @@ public class CommunityUserServiceImpl implements CommunityUserService {
             LatLng latLng = new LatLng(addressBean.getLatitude(), addressBean.getLongitude());
             model.setLatLng(latLng);
         }
+        model.setZoneName(addressBean.getZoneBean().getZoneName());
 
         return model;
     }

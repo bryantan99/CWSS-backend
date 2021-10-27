@@ -10,6 +10,8 @@ public class AddressModel {
     private String state;
     private String fullAddress;
     private LatLng latLng;
+    private Integer zoneId;
+    private String zoneName;
 
     public String getLine1() {
         return line1;
@@ -65,5 +67,21 @@ public class AddressModel {
 
     public void setLatLng(LatLng latLng) {
         this.latLng = latLng;
+    }
+
+    public Integer getZoneId() {
+        return zoneId;
+    }
+
+    public void setZoneId(Integer zoneId) {
+        this.zoneId = zoneId;
+    }
+
+    public String getZoneName() {
+        return zoneName;
+    }
+
+    public void setZoneName(String zoneName) {
+        this.zoneName = zoneName;
     }
 }

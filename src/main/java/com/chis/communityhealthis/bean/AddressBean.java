@@ -1,9 +1,6 @@
 package com.chis.communityhealthis.bean;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -20,6 +17,7 @@ public class AddressBean implements Serializable {
     public static final String STATE = "STATE";
     public static final String LATITUDE = "LATITUDE";
     public static final String LONGITUDE = "LONGITUDE";
+    public static final String ZONE_ID = "ZONE_ID";
 
     @Id
     @Column(name = USERNAME)
@@ -45,6 +43,10 @@ public class AddressBean implements Serializable {
 
     @Column(name = LONGITUDE)
     private Double longitude;
+
+    @OneToOne
+    @JoinColumn(name = ZONE_ID, referencedColumnName = ZoneBean.ZONE_ID, insertable = false, updatable = false)
+    private ZoneBean zoneBean;
 
     public String getUsername() {
         return username;
@@ -108,5 +110,13 @@ public class AddressBean implements Serializable {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
+    }
+
+    public ZoneBean getZoneBean() {
+        return zoneBean;
+    }
+
+    public void setZoneBean(ZoneBean zoneBean) {
+        this.zoneBean = zoneBean;
     }
 }

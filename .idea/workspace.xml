@@ -4,16 +4,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Create AddressUtil&#10;- Add margin below Google Maps&#10;- Fix initMarker()">
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Add ZoneBean, ZoneDao and ZoneImpl&#10;- Join AddressBean with ZoneBean @OneToOne&#10;- Add filter by zoneId in CommunityUserComponent">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/ZoneBean.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/TestRestController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/occupation/OccupationModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/user/PersonalDetailModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/zone/ZoneDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/zone/ZoneDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/user/CommunityUserProfileModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/user/CommunityUserProfileModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/communityuser/CommunityUserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/communityuser/CommunityUserDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/communityhealthis.iml" beforeDir="false" afterPath="$PROJECT_DIR$/communityhealthis.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/AddressBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/AddressBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/CommunityUserRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/CommunityUserRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/DropdownChoiceRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/DropdownChoiceRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/address/AddressModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/address/AddressModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/dropdown/DropdownChoiceModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/dropdown/DropdownChoiceModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/filter/CommunityUserBeanQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/filter/CommunityUserBeanQuery.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/communityuser/CommunityUserDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/communityuser/CommunityUserDaoImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/profile/profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/profile/profile.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/dropdownchoice/DropdownChoiceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/dropdownchoice/DropdownChoiceService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/dropdownchoice/DropdownChoiceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/dropdownchoice/DropdownChoiceServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/services/community-user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/services/community-user.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/services/dropdown-choice.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/services/dropdown-choice.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/community-user-graph/community-user-graph.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/community-user-graph/community-user-graph.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/community-user/community-user.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/community-user/community-user.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/community-user/community-user.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/community-user/community-user.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,8 +39,8 @@
       <list>
         <option value="spring-beans.schema" />
         <option value="JavaScript File" />
-        <option value="Interface" />
         <option value="TypeScript File" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -240,14 +254,12 @@
       <workItem from="1634724186510" duration="290000" />
       <workItem from="1634724695177" duration="15406000" />
       <workItem from="1634795813173" duration="5854000" />
-      <workItem from="1634829117268" duration="6105000" />
-    </task>
-    <task id="LOCAL-00070" summary="Handle post media changes when editing post, Update PostRestController API endpoints and return type for custom response model">
-      <created>1631969655125</created>
-      <option name="number" value="00070" />
-      <option name="presentableId" value="LOCAL-00070" />
-      <option name="project" value="LOCAL" />
-      <updated>1631969655125</updated>
+      <workItem from="1634829117268" duration="6722000" />
+      <workItem from="1634867896249" duration="1001000" />
+      <workItem from="1635147259323" duration="2432000" />
+      <workItem from="1635235342426" duration="2139000" />
+      <workItem from="1635256774595" duration="2195000" />
+      <workItem from="1635344363247" duration="9356000" />
     </task>
     <task id="LOCAL-00071" summary="Update AdminRestController API to return type for custom response model, display delete staff action for authorized user only">
       <created>1632125220673</created>
@@ -585,7 +597,14 @@
       <option name="project" value="LOCAL" />
       <updated>1634832882213</updated>
     </task>
-    <option name="localTasksCounter" value="119" />
+    <task id="LOCAL-00119" summary="- Add getCommunityUser() in DAO&#10;- Update CommunityUserProfileModel&#10;- Add OccupationModel, PersonalDetailModel&#10;- Update ProfileComponent">
+      <created>1634835492984</created>
+      <option name="number" value="00119" />
+      <option name="presentableId" value="LOCAL-00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1634835492984</updated>
+    </task>
+    <option name="localTasksCounter" value="120" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -605,8 +624,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Update login template" />
-    <MESSAGE value="Update postfeed template" />
     <MESSAGE value="Allow user/admin to schedule appointment, add user dropdown choices" />
     <MESSAGE value="Standardize action dropdown button &amp; date format" />
     <MESSAGE value="Add HolidayRestController to import holiday records using excel, replace nz-time-picker with nz-select in appointment form" />
@@ -630,7 +647,9 @@
     <MESSAGE value="- Install Highcharts&#10;- Update getCommunityUsers() API to filter results&#10;- Add gender, ethnic and location pie chart" />
     <MESSAGE value="- Add disease form field to query community user&#10;- Move charts into CommunityUserGraphComponent&#10;- Update getCommunityUsers() to join disease, address and occupation in DAO&#10;- Add CommunityUserModel, EthnicUtil and GenderUtil" />
     <MESSAGE value="- Create AddressUtil&#10;- Add margin below Google Maps&#10;- Fix initMarker()" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Create AddressUtil&#10;- Add margin below Google Maps&#10;- Fix initMarker()" />
+    <MESSAGE value="- Add getCommunityUser() in DAO&#10;- Update CommunityUserProfileModel&#10;- Add OccupationModel, PersonalDetailModel&#10;- Update ProfileComponent" />
+    <MESSAGE value="- Add ZoneBean, ZoneDao and ZoneImpl&#10;- Join AddressBean with ZoneBean @OneToOne&#10;- Add filter by zoneId in CommunityUserComponent" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Add ZoneBean, ZoneDao and ZoneImpl&#10;- Join AddressBean with ZoneBean @OneToOne&#10;- Add filter by zoneId in CommunityUserComponent" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

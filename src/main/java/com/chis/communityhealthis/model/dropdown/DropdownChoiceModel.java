@@ -1,6 +1,6 @@
 package com.chis.communityhealthis.model.dropdown;
 
-public class DropdownChoiceModel<T> {
+public class DropdownChoiceModel<T> implements Comparable<DropdownChoiceModel<T>> {
     private String text;
     private T value;
 
@@ -26,5 +26,10 @@ public class DropdownChoiceModel<T> {
 
     public void setValue(T value) {
         this.value = value;
+    }
+
+    @Override
+    public int compareTo(DropdownChoiceModel o) {
+        return getText().compareTo(o.getText());
     }
 }

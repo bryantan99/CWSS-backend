@@ -60,4 +60,14 @@ public class DropdownChoiceRestController {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, new ArrayList<DropdownChoiceModel<Date>>());
         }
     }
+
+    @GetMapping(value = "/zoneId")
+    public ResponseEntity<Object> getZoneIdDropdownChoices() {
+        try {
+            List<DropdownChoiceModel<String>> list = dropdownChoiceService.getZoneIdsList();
+            return ResponseHandler.generateResponse("Successfully retrieved " + list.size() + " choice(s).", HttpStatus.OK, list);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
 }

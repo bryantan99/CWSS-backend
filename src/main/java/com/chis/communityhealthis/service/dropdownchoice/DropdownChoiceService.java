@@ -10,4 +10,5 @@ public interface DropdownChoiceService {
     List<DropdownChoiceModel<String>> getAdminUsernameList();
     List<DropdownChoiceModel<String>> getCommunityUserUsernameList();
     List<DropdownChoiceModel<Date>> getAppointmentAvailableTimeslot(Date date, String adminUsername);
+    List<DropdownChoiceModel<String>> getZoneIdsList();
 }

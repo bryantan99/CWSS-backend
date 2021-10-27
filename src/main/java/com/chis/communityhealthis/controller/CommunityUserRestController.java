@@ -42,6 +42,7 @@ public class CommunityUserRestController {
                                                     @RequestParam(required = false) String gender,
                                                     @RequestParam(required = false) String ethnic,
                                                     @RequestParam(required = false) Integer diseaseId,
+                                                    @RequestParam(required = false) Integer zoneId,
                                                     @RequestParam(required = false) String address,
                                                     @RequestParam(required = false) String occupation,
                                                     @RequestParam(required = false) String healthIssue) {
@@ -52,6 +53,7 @@ public class CommunityUserRestController {
             filter.setGender(StringUtils.isBlank(gender) ? null : gender);
             filter.setEthnic(StringUtils.isBlank(ethnic) ? null : ethnic);
             filter.setDiseaseId(diseaseId);
+            filter.setZoneId(zoneId);
             filter.setIncludeAddress(!StringUtils.isBlank(address) && StringUtils.equals(FlagConstant.YES, address));
             filter.setIncludeOccupation(!StringUtils.isBlank(occupation) && StringUtils.equals(FlagConstant.YES, occupation));
             filter.setIncludeHealthIssue(!StringUtils.isBlank(healthIssue) && StringUtils.equals(FlagConstant.YES, healthIssue));

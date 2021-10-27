@@ -6,6 +6,7 @@ public class CommunityUserBeanQuery {
     private String gender;
     private String ethnic;
     private Integer diseaseId;
+    private Integer zoneId;
     private boolean includeAddress;
     private boolean includeOccupation;
     private boolean includeHealthIssue;
@@ -48,6 +49,14 @@ public class CommunityUserBeanQuery {
 
     public void setDiseaseId(Integer diseaseId) {
         this.diseaseId = diseaseId;
+    }
+
+    public Integer getZoneId() {
+        return zoneId;
+    }
+
+    public void setZoneId(Integer zoneId) {
+        this.zoneId = zoneId;
     }
 
     public boolean isIncludeAddress() {
