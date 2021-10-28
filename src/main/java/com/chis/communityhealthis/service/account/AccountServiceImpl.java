@@ -2,6 +2,7 @@ package com.chis.communityhealthis.service.account;
 
 import com.chis.communityhealthis.bean.*;
 import com.chis.communityhealthis.model.account.AccountModel;
+import com.chis.communityhealthis.model.account.ChangePasswordRequestModel;
 import com.chis.communityhealthis.model.account.PasswordResetRequestModel;
 import com.chis.communityhealthis.model.email.MailRequest;
 import com.chis.communityhealthis.model.signup.*;
@@ -18,7 +19,9 @@ import io.jsonwebtoken.lang.Assert;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -30,7 +33,7 @@ import java.util.Map;
 
 @Service
 @Transactional
-public class AccountServiceImpl implements AccountService{
+public class AccountServiceImpl implements AccountService {
 
     @Autowired
     private AccountDao accountDao;
@@ -55,6 +58,9 @@ public class AccountServiceImpl implements AccountService{
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public AccountModel addAccount(AccountRegistrationForm form) {
@@ -157,6 +163,21 @@ public class AccountServiceImpl implements AccountService{
 
         ResetPasswordRequestBean resetPasswordRequestBean = resetPasswordRequestDao.find(accountBean.getUsername());
         resetPasswordRequestDao.remove(resetPasswordRequestBean);
+    }
+
+    @Override
+    public void changePassword(ChangePasswordRequestModel model) {
+        AccountBean accountBean = accountDao.findAccount(model.getUsername());
+        Assert.notNull(accountBean, "Account [username: " + model.getUsername() + "] was not found!");
+
+        if (!passwordEncoder.matches(model.getOldPassword(), accountBean.getPw())) {
+            throw new BadCredentialsException("Old password is incorrect!");
+        }
+
+        Assert.isTrue(StringUtils.equals(model.getNewPassword(), model.getConfirmPassword()), "New password and confirm password are mismatched.");
+        String newEncryptedPw = bCryptPasswordEncoder.encode(model.getNewPassword());
+        accountBean.setPw(newEncryptedPw);
+        accountDao.update(accountBean);
     }
 
     private AccountBean createAccountBean(PersonalDetailForm personalDetail) {

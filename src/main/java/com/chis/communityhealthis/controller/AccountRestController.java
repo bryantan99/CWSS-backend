@@ -1,5 +1,6 @@
 package com.chis.communityhealthis.controller;
 
+import com.chis.communityhealthis.model.account.ChangePasswordRequestModel;
 import com.chis.communityhealthis.model.account.PasswordResetRequestModel;
 import com.chis.communityhealthis.model.response.ResponseHandler;
 import com.chis.communityhealthis.service.account.AccountService;
@@ -7,6 +8,7 @@ import com.chis.communityhealthis.service.auth.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -67,6 +69,20 @@ public class AccountRestController {
             return ResponseHandler.generateResponse("Successfully reset password.", HttpStatus.OK, true);
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
+    @PostMapping(value = "/change-password")
+    public ResponseEntity<Object> resetPassword(@RequestBody ChangePasswordRequestModel model) {
+        try {
+            accountService.changePassword(model);
+            return ResponseHandler.generateResponse("Successfully changed password.", HttpStatus.OK, true);
+        } catch (Exception e) {
+            if (e instanceof BadCredentialsException) {
+                return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.UNAUTHORIZED, null);
+            } else {
+                return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+            }
         }
     }
 
