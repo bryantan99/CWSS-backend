@@ -193,6 +193,7 @@ public class AdminServiceImpl implements AdminService{
         Assert.notNull(accountBean, "AccountBean [username: " + adminForm.getUsername() + "] was not found!");
         AccountBean accountBeanDeepCopy = SerializationUtils.clone(accountBean);
 
+        adminBean.setFullName(adminForm.getFullName());
         adminBean.setContactNo(adminForm.getContactNo());
         adminDao.update(adminBean);
         BeanComparator adminBeanComparator = new BeanComparator(adminBeanDeepCopy, adminBean);

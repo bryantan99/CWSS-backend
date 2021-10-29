@@ -4,27 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Add ZoneBean, ZoneDao and ZoneImpl&#10;- Join AddressBean with ZoneBean @OneToOne&#10;- Add filter by zoneId in CommunityUserComponent&#10;- Update location column chart to display by zone">
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Add create post button on PostFeedComponent">
       <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/TestRestController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/account/ChangePasswordRequestModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/settings/account-setting/account-setting.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/settings/account-setting/account-setting.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/settings/settings.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/settings/settings.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/settings/settings.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AccountRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AccountRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/account/AccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/account/AccountService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/account/AccountServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/account/AccountServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/constants/http-status-constant.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/constants/http-status-constant.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/services/password-reset.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/services/password-reset.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/signup/AdminForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/signup/AdminForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/admin/AdminServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/admin/AdminServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/components/post-feed/post-feed.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/components/post-feed/post-feed.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/components/post-feed/post-feed.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/components/post-feed/post-feed.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/profile/profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/profile/profile.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/user.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/user.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/profile/profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/profile/profile.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +68,6 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="database.data.extractors.current.export.id" value="Excel (xlsx)" />
@@ -257,14 +245,8 @@
       <workItem from="1635235342426" duration="2139000" />
       <workItem from="1635256774595" duration="2195000" />
       <workItem from="1635344363247" duration="9682000" />
-      <workItem from="1635428822040" duration="16449000" />
-    </task>
-    <task id="LOCAL-00072" summary="Include roleList claim into JWT payload">
-      <created>1632144055230</created>
-      <option name="number" value="00072" />
-      <option name="presentableId" value="LOCAL-00072" />
-      <option name="project" value="LOCAL" />
-      <updated>1632144055230</updated>
+      <workItem from="1635428822040" duration="17027000" />
+      <workItem from="1635484447534" duration="8703000" />
     </task>
     <task id="LOCAL-00073" summary="Remove saving roleList into session storage, add decodeJwt() and update hasRole()">
       <created>1632207630933</created>
@@ -602,7 +584,14 @@
       <option name="project" value="LOCAL" />
       <updated>1635360230907</updated>
     </task>
-    <option name="localTasksCounter" value="121" />
+    <task id="LOCAL-00121" summary="- Add SettingsComponent and AccountSettingsComponent&#10;- Add settings routerLink into sidemenu&#10;- Add changePassword()&#10;- Add Commons Text dependency">
+      <created>1635448465658</created>
+      <option name="number" value="00121" />
+      <option name="presentableId" value="LOCAL-00121" />
+      <option name="project" value="LOCAL" />
+      <updated>1635448465658</updated>
+    </task>
+    <option name="localTasksCounter" value="122" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -622,8 +611,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Standardize action dropdown button &amp; date format" />
-    <MESSAGE value="Add HolidayRestController to import holiday records using excel, replace nz-time-picker with nz-select in appointment form" />
     <MESSAGE value="Add appointment schedule component to display confirmed appointment based on selected date, installed moment.js" />
     <MESSAGE value="Add BeanComparator to compare object for auditing using Javers" />
     <MESSAGE value="Update new-post-modal to handle postMediaIds to be deleted" />
@@ -647,7 +634,9 @@
     <MESSAGE value="- Add getCommunityUser() in DAO&#10;- Update CommunityUserProfileModel&#10;- Add OccupationModel, PersonalDetailModel&#10;- Update ProfileComponent" />
     <MESSAGE value="- Add ZoneBean, ZoneDao and ZoneImpl&#10;- Join AddressBean with ZoneBean @OneToOne&#10;- Add filter by zoneId in CommunityUserComponent" />
     <MESSAGE value="- Add ZoneBean, ZoneDao and ZoneImpl&#10;- Join AddressBean with ZoneBean @OneToOne&#10;- Add filter by zoneId in CommunityUserComponent&#10;- Update location column chart to display by zone" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Add ZoneBean, ZoneDao and ZoneImpl&#10;- Join AddressBean with ZoneBean @OneToOne&#10;- Add filter by zoneId in CommunityUserComponent&#10;- Update location column chart to display by zone" />
+    <MESSAGE value="- Add SettingsComponent and AccountSettingsComponent&#10;- Add settings routerLink into sidemenu&#10;- Add changePassword()&#10;- Add Commons Text dependency" />
+    <MESSAGE value="- Add create post button on PostFeedComponent" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Add create post button on PostFeedComponent" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
