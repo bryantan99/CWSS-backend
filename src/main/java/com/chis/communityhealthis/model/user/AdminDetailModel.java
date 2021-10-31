@@ -6,6 +6,7 @@ public class AdminDetailModel implements Comparable<AdminDetailModel>{
     private String fullName;
     private String email;
     private String contactNo;
+    private String profilePicDirectory;
     private Boolean isDeletable;
 
     public String getUsername() {
@@ -41,6 +42,14 @@ public class AdminDetailModel implements Comparable<AdminDetailModel>{
     }
 
     public Boolean getDeletable() {return isDeletable;}
+
+    public String getProfilePicDirectory() {
+        return profilePicDirectory;
+    }
+
+    public void setProfilePicDirectory(String profilePicDirectory) {
+        this.profilePicDirectory = profilePicDirectory;
+    }
 
     public void setDeletable(Boolean deletable) {isDeletable = deletable;}
 

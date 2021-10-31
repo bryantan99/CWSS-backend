@@ -1,5 +1,7 @@
 package com.chis.communityhealthis.model.signup;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 public class AdminForm {
@@ -10,6 +12,7 @@ public class AdminForm {
     private List<String> roleList;
     private String password;
     private String createdBy;
+    private MultipartFile profilePicFile;
 
     public String getFullName() {
         return fullName;
@@ -65,5 +68,13 @@ public class AdminForm {
 
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
+    }
+
+    public MultipartFile getProfilePicFile() {
+        return profilePicFile;
+    }
+
+    public void setProfilePicFile(MultipartFile profilePicFile) {
+        this.profilePicFile = profilePicFile;
     }
 }

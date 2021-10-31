@@ -15,6 +15,7 @@ public class AdminBean implements Serializable {
     public static final String USERNAME = "USERNAME";
     public static final String FULL_NAME = "FULL_NAME";
     public static final String CONTACT_NO = "CONTACT_NO";
+    public static final String PROFILE_PIC_DIRECTORY = "PROFILE_PIC_DIRECTORY";
 
     @Id
     @Column(name = USERNAME)
@@ -25,6 +26,9 @@ public class AdminBean implements Serializable {
 
     @Column(name = CONTACT_NO)
     private String contactNo;
+
+    @Column(name = PROFILE_PIC_DIRECTORY)
+    private String profilePicDirectory;
 
     public String getUsername() {
         return username;
@@ -48,5 +52,13 @@ public class AdminBean implements Serializable {
 
     public void setContactNo(String contactNo) {
         this.contactNo = contactNo;
+    }
+
+    public String getProfilePicDirectory() {
+        return profilePicDirectory;
+    }
+
+    public void setProfilePicDirectory(String profilePicDirectory) {
+        this.profilePicDirectory = profilePicDirectory;
     }
 }

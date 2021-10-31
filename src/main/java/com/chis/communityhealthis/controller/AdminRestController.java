@@ -4,15 +4,18 @@ import com.chis.communityhealthis.bean.AdminBean;
 import com.chis.communityhealthis.model.response.ResponseHandler;
 import com.chis.communityhealthis.model.signup.AdminForm;
 import com.chis.communityhealthis.model.user.AdminDetailModel;
-import com.chis.communityhealthis.service.auth.AuthService;
 import com.chis.communityhealthis.service.admin.AdminService;
+import com.chis.communityhealthis.service.auth.AuthService;
 import com.chis.communityhealthis.utility.RoleConstant;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.lang.Assert;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -46,10 +49,16 @@ public class AdminRestController {
     }
 
     @PostMapping("/admin")
-    public ResponseEntity<Object> addStaff(@RequestBody AdminForm form) {
+    public ResponseEntity<Object> addStaff(@RequestParam(value = "form") String form,
+                                           @RequestParam(value = "files", required = false)List<MultipartFile> multipartFileList) {
         try {
-            AdminBean adminBean = adminService.addStaff(form);
-            return ResponseHandler.generateResponse("Successfully created new staff [username: " + form.getUsername() + "].", HttpStatus.OK, adminBean);
+            AdminForm adminForm = new ObjectMapper().readValue(form, AdminForm.class);
+            adminForm.setCreatedBy(authService.getCurrentLoggedInUsername());
+            if (!CollectionUtils.isEmpty(multipartFileList)) {
+                adminForm.setProfilePicFile(multipartFileList.get(0));
+            }
+            AdminBean adminBean = adminService.addStaff(adminForm);
+            return ResponseHandler.generateResponse("Successfully created new staff [username: " + adminForm.getUsername() + "].", HttpStatus.OK, adminBean);
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
@@ -70,9 +79,14 @@ public class AdminRestController {
     }
 
     @PostMapping(value = "/admin/profile")
-    public ResponseEntity<Object> updateAdmin(@RequestBody AdminForm adminForm) {
+    public ResponseEntity<Object> updateAdmin(@RequestParam(value = "form") String form,
+                                              @RequestParam(value = "files", required = false)List<MultipartFile> multipartFileList) {
         try {
+            AdminForm adminForm = new ObjectMapper().readValue(form, AdminForm.class);
             adminForm.setCreatedBy(authService.getCurrentLoggedInUsername());
+            if (!CollectionUtils.isEmpty(multipartFileList)) {
+                adminForm.setProfilePicFile(multipartFileList.get(0));
+            }
             adminService.updateAdmin(adminForm);
             String msg = "Successfully updated " + adminForm.getUsername() + " profile.";
             return ResponseHandler.generateResponse(msg, HttpStatus.OK, null);
