@@ -1,5 +1,9 @@
 package com.chis.communityhealthis.model.user;
 
+import com.chis.communityhealthis.model.role.RoleModel;
+
+import java.util.Collection;
+
 public class AdminDetailModel implements Comparable<AdminDetailModel>{
 
     private String username;
@@ -8,6 +12,7 @@ public class AdminDetailModel implements Comparable<AdminDetailModel>{
     private String contactNo;
     private String profilePicDirectory;
     private Boolean isDeletable;
+    private Collection<RoleModel> roleList;
 
     public String getUsername() {
         return username;
@@ -52,6 +57,14 @@ public class AdminDetailModel implements Comparable<AdminDetailModel>{
     }
 
     public void setDeletable(Boolean deletable) {isDeletable = deletable;}
+
+    public Collection<RoleModel> getRoleList() {
+        return roleList;
+    }
+
+    public void setRoleList(Collection<RoleModel> roleList) {
+        this.roleList = roleList;
+    }
 
     @Override
     public int compareTo(AdminDetailModel o) {

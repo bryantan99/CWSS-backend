@@ -3,6 +3,7 @@ package com.chis.communityhealthis.service.admin;
 import com.chis.communityhealthis.bean.*;
 import com.chis.communityhealthis.model.email.MailRequest;
 import com.chis.communityhealthis.model.email.template.StaffAccountCreationEmailTemplateModel;
+import com.chis.communityhealthis.model.role.RoleModel;
 import com.chis.communityhealthis.model.signup.AdminForm;
 import com.chis.communityhealthis.model.user.AdminDetailModel;
 import com.chis.communityhealthis.repository.account.AccountDao;
@@ -72,16 +73,10 @@ public class AdminServiceImpl implements AdminService {
         AdminBean adminBean = adminDao.find(username);
         Assert.notNull(adminBean, "AdminBean [username: " + username + "] was not found!");
 
-        AccountBean accountBean = accountDao.find(username);
+        AccountBean accountBean = accountDao.findAccountWithRoles(username);
         Assert.notNull(accountBean, "AccountBean [username: " + username + "] was not found!");
 
-        AdminDetailModel adminDetailModel = new AdminDetailModel();
-        adminDetailModel.setUsername(username);
-        adminDetailModel.setFullName(adminBean.getFullName());
-        adminDetailModel.setEmail(accountBean.getEmail());
-        adminDetailModel.setContactNo(adminBean.getContactNo());
-        adminDetailModel.setProfilePicDirectory(adminBean.getProfilePicDirectory());
-
+        AdminDetailModel adminDetailModel = toAdminDetailModel(accountBean, adminBean);
         Boolean deletable = isSuperAdmin && !StringUtils.equals(currentLoggedInUsername, adminBean.getUsername());
         adminDetailModel.setDeletable(deletable);
 
@@ -114,14 +109,7 @@ public class AdminServiceImpl implements AdminService {
 
         for (AdminBean adminBean : adminBeans) {
             AccountBean accountBean = map.get(adminBean.getUsername());
-
-            AdminDetailModel model = new AdminDetailModel();
-            model.setUsername(adminBean.getUsername());
-            model.setFullName(adminBean.getFullName());
-            model.setEmail(accountBean.getEmail());
-            model.setContactNo(adminBean.getContactNo());
-            model.setProfilePicDirectory(adminBean.getProfilePicDirectory());
-
+            AdminDetailModel model = toAdminDetailModel(accountBean, adminBean);
             Boolean deletable = isSuperAdmin && !StringUtils.equals(currentLoggedInUsername, adminBean.getUsername());
             model.setDeletable(deletable);
             list.add(model);
@@ -226,9 +214,15 @@ public class AdminServiceImpl implements AdminService {
         Assert.notNull(adminBean, "AdminBean [username: " + adminForm.getUsername() + "] was not found!");
         AdminBean adminBeanDeepCopy = SerializationUtils.clone(adminBean);
 
-        AccountBean accountBean = accountDao.findAccount(adminForm.getUsername());
+        AccountBean accountBean = accountDao.findAccountWithRoles(adminForm.getUsername());
         Assert.notNull(accountBean, "AccountBean [username: " + adminForm.getUsername() + "] was not found!");
         AccountBean accountBeanDeepCopy = SerializationUtils.clone(accountBean);
+
+        List<String> roleIds = accountBean.getRoles().stream().map(AccountRoleBean::getRoleName).collect(Collectors.toList());
+        List<String> newRoleIds = adminForm.getRoleList();
+        List<String> rolesToDelete = differenceBetweenList(roleIds, newRoleIds);
+        List<String> rolesToAdd = differenceBetweenList(newRoleIds, roleIds);
+        updateAdminRoles(adminBean.getUsername(), rolesToAdd, rolesToDelete);
 
         adminBean.setFullName(adminForm.getFullName());
         adminBean.setContactNo(adminForm.getContactNo());
@@ -258,6 +252,30 @@ public class AdminServiceImpl implements AdminService {
         auditActionBeans.add(new AuditActionBean(adminBeanComparator.toPrettyString()));
         auditActionBeans.add(new AuditActionBean(accountBeanComparator.toPrettyString()));
         saveLog(auditBean, auditActionBeans);
+    }
+
+    private void updateAdminRoles(String username, List<String> rolesToAdd, List<String> rolesToDelete) {
+        List<AccountRoleBean> list = accountRoleDao.findUserRoles(username);
+        if (!CollectionUtils.isEmpty(list)) {
+            for (AccountRoleBean bean : list) {
+                if (rolesToDelete.contains(bean.getRoleName())) {
+                    accountRoleDao.remove(bean);
+                }
+            }
+        }
+
+        for (String newRole: rolesToAdd) {
+            AccountRoleBean roleBean = new AccountRoleBean();
+            roleBean.setUsername(username);
+            roleBean.setRoleName(newRole);
+            accountRoleDao.add(roleBean);
+        }
+    }
+
+    private List<String> differenceBetweenList(List<String> list1, List<String> list2) {
+        List<String> differences = new ArrayList<>(list1);
+        differences.removeAll(list2);
+        return differences;
     }
 
     private void deleteProfilePicture(String directoryName) {
@@ -302,5 +320,27 @@ public class AdminServiceImpl implements AdminService {
             bean.setProfilePicDirectory(profilePicDirectory);
         }
         return bean;
+    }
+
+    private AdminDetailModel toAdminDetailModel(AccountBean accountBean, AdminBean adminBean) {
+        AdminDetailModel adminDetailModel = new AdminDetailModel();
+        adminDetailModel.setUsername(accountBean.getUsername());
+        adminDetailModel.setFullName(adminBean.getFullName());
+        adminDetailModel.setEmail(accountBean.getEmail());
+        adminDetailModel.setContactNo(adminBean.getContactNo());
+        adminDetailModel.setProfilePicDirectory(adminBean.getProfilePicDirectory());
+        if (!CollectionUtils.isEmpty(accountBean.getRoles())) {
+            List<RoleModel> roleList = new ArrayList<>();
+            RoleConstant roleConstant = new RoleConstant();
+            for (AccountRoleBean roleBean : accountBean.getRoles()) {
+                String formattedName = roleConstant.getRoleFullName(roleBean.getRoleName());
+                RoleModel roleModel = new RoleModel();
+                roleModel.setRoleId(roleBean.getRoleName());
+                roleModel.setRoleName(formattedName);
+                roleList.add(roleModel);
+            }
+            adminDetailModel.setRoleList(roleList);
+        }
+        return adminDetailModel;
     }
 }
