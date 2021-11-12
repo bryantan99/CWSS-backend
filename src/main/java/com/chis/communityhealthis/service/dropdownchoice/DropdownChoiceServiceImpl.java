@@ -130,12 +130,12 @@ public class DropdownChoiceServiceImpl implements DropdownChoiceService {
                 Date value = startCalendar.getTime();
                 Calendar endCalendar = Calendar.getInstance();
                 endCalendar.setTime(startCalendar.getTime());
-                endCalendar.add(Calendar.HOUR_OF_DAY, 1);
+                endCalendar.add(Calendar.MINUTE, 30);
 
                 String text = DatetimeUtil.to12HourString(startCalendar) + " - " + DatetimeUtil.to12HourString(endCalendar);
                 list.add(new DropdownChoiceModel<>(value, text));
             }
-            startCalendar.add(Calendar.HOUR_OF_DAY, 1);
+            startCalendar.add(Calendar.MINUTE, 30);
         }
 
         return list;

@@ -5,11 +5,12 @@ import com.chis.communityhealthis.service.holiday.HolidayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/holiday")
@@ -28,4 +29,13 @@ public class HolidayRestController {
         }
     }
 
+    @GetMapping
+    public ResponseEntity<Object> getHolidayDates(@RequestParam (required = false) String year) {
+        try {
+            List<Date> holidays = holidayService.getHolidayDates();
+            return ResponseHandler.generateResponse("Successfully retrieved " + holidays.size() + " date(s).", HttpStatus.OK, holidays);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
 }

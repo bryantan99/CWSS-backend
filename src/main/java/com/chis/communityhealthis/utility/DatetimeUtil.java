@@ -16,6 +16,9 @@ public class DatetimeUtil {
             hour = String.valueOf(startCalendar.get(Calendar.HOUR));
         }
         String minute = String.valueOf(startCalendar.get(Calendar.MINUTE));
+        if (startCalendar.get(Calendar.MINUTE) < 10) {
+            minute = "0" + startCalendar.get(Calendar.MINUTE);
+        }
         String unit = startCalendar.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
         return hour + ":" + minute + " " + unit;
     }

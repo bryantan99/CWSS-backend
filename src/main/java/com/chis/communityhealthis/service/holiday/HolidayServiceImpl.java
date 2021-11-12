@@ -10,10 +10,14 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 
 @Service
 @Transactional
@@ -71,5 +75,17 @@ public class HolidayServiceImpl implements HolidayService {
             throw new Exception(e.getMessage());
         }
         return insertedRecord;
+    }
+
+    @Override
+    public List<Date> getHolidayDates() {
+        List<HolidayBean> holidayBeans = holidayDao.getAll();
+        List<Date> list = new ArrayList<>();
+        if (!CollectionUtils.isEmpty(holidayBeans)) {
+            for (HolidayBean holidayBean: holidayBeans) {
+                list.add(holidayBean.getHolidayDate());
+            }
+        }
+        return list;
     }
 }
