@@ -4,17 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Allow Super Admin to update account roles for admin">
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Change appointment duration to 30 minutes&#10;- Update date-picker to disable public holiday and weekend">
       <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/TestRestController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/services/holiday.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/HolidayRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/HolidayRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/dropdownchoice/DropdownChoiceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/dropdownchoice/DropdownChoiceServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/holiday/HolidayService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/holiday/HolidayService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/holiday/HolidayServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/holiday/HolidayServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/utility/DatetimeUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/utility/DatetimeUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-form/appointment-form.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-form/appointment-form.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-form/appointment-form.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-form/appointment-form.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/appointment/AppointmentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/appointment/AppointmentServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-mngmt/appointment-mngmt.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-mngmt/appointment-mngmt.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-mngmt/appointment-mngmt.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-mngmt/appointment-mngmt.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -252,14 +247,7 @@
       <workItem from="1635816297844" duration="357000" />
       <workItem from="1635922073661" duration="2808000" />
       <workItem from="1636644569469" duration="5987000" />
-      <workItem from="1636725642412" duration="4779000" />
-    </task>
-    <task id="LOCAL-00080" summary="Allow assistance table to be scrollable">
-      <created>1632322841196</created>
-      <option name="number" value="00080" />
-      <option name="presentableId" value="LOCAL-00080" />
-      <option name="project" value="LOCAL" />
-      <updated>1632322841196</updated>
+      <workItem from="1636725642412" duration="7257000" />
     </task>
     <task id="LOCAL-00081" summary="Allow getPosts() API to be called with authorization">
       <created>1632322882776</created>
@@ -597,7 +585,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636646957996</updated>
     </task>
-    <option name="localTasksCounter" value="129" />
+    <task id="LOCAL-00129" summary="- Change appointment duration to 30 minutes&#10;- Update date-picker to disable public holiday and weekend">
+      <created>1636733084950</created>
+      <option name="number" value="00129" />
+      <option name="presentableId" value="LOCAL-00129" />
+      <option name="project" value="LOCAL" />
+      <updated>1636733084951</updated>
+    </task>
+    <option name="localTasksCounter" value="130" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -617,7 +612,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Replaced CommunityUserProfileComponent with ProfileComponent, Allow update admin profile &amp;&amp; audit changes" />
     <MESSAGE value="Add action dropdown button in ProfileComponent, Update UpdateProfileComponent to handle email &amp; receive ResponseModel" />
     <MESSAGE value="Add sidebar menu item - profile" />
     <MESSAGE value="Add year column in HolidayBean" />
@@ -642,7 +636,8 @@
     <MESSAGE value="- Fix ProfileComponent to not update display when parameter changed" />
     <MESSAGE value="- Fix Settings menu item" />
     <MESSAGE value="- Allow Super Admin to update account roles for admin" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Allow Super Admin to update account roles for admin" />
+    <MESSAGE value="- Change appointment duration to 30 minutes&#10;- Update date-picker to disable public holiday and weekend" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Change appointment duration to 30 minutes&#10;- Update date-picker to disable public holiday and weekend" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

@@ -119,7 +119,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     private Date calculateEndDatetime(Date startDatetime) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(startDatetime);
-        calendar.add(Calendar.HOUR_OF_DAY, 1);
+        calendar.add(Calendar.MINUTE, 30);
         return calendar.getTime();
     }
 }
