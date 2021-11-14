@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class ConfirmationForm {
     private Integer appointmentId;
+    private Date appointmentLastUpdatedDate;
     private String confirmedBy;
     private Date confirmedDate;
 
@@ -14,6 +15,10 @@ public class ConfirmationForm {
     public void setAppointmentId(Integer appointmentId) {
         this.appointmentId = appointmentId;
     }
+
+    public Date getAppointmentLastUpdatedDate() {return appointmentLastUpdatedDate;}
+
+    public void setAppointmentLastUpdatedDate(Date appointmentLastUpdatedDate) {this.appointmentLastUpdatedDate = appointmentLastUpdatedDate;}
 
     public String getConfirmedBy() {
         return confirmedBy;

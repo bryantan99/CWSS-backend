@@ -2,6 +2,7 @@ package com.chis.communityhealthis.utility;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 public class DatetimeUtil {
     public static String to12HourString(Calendar startCalendar) {
@@ -33,5 +34,15 @@ public class DatetimeUtil {
 
         int day = calendar.get(Calendar.DAY_OF_WEEK);
         return day == Calendar.SATURDAY || day == Calendar.SUNDAY;
+    }
+
+    public static boolean isEqualDatetime(Date date1, Date date2) {
+        if (date1 == null && date2 == null) {
+            return true;
+        } else if (date1 == null || date2 == null) {
+            return false;
+        } else {
+            return Objects.equals(date1.getTime(), date2.getTime());
+        }
     }
 }

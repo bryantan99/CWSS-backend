@@ -4,10 +4,34 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Change appointment duration to 30 minutes&#10;- Update change appointment datetime modal">
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Update AppointmentMngmtComponent (pending, my appointment, staff appointment)&#10;- Update confirmAppointment() and rescheduleAppointment() to handle exceptions&#10;- Add AppointmentTableComponent, RescheduleAppointmentComponent, PendingAppointmentComponent, MyAppointmentComponent&#10;- Remove feature for user to choose admin when scheduling appointment&#10;- Update AppointmentRestController to return AppointmentModel instead of AppointmentBean">
       <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/TestRestController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/appointment/AppointmentModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-reschedule/appointment-reschedule.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-reschedule/appointment-reschedule.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-table/appointment-table.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-table/appointment-table.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/my-appointment/my-appointment.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/my-appointment/my-appointment.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/pending-appointment/pending-appointment.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/pending-appointment/pending-appointment.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AppointmentRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AppointmentRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/appointment/ConfirmationForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/appointment/ConfirmationForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/appointment/UpdateDatetimeForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/appointment/UpdateDatetimeForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/appointment/AppointmentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/appointment/AppointmentDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/appointment/AppointmentDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/appointment/AppointmentDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/appointment/AppointmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/appointment/AppointmentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/appointment/AppointmentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/appointment/AppointmentServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/utility/DatetimeUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/utility/DatetimeUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-form/appointment-form.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-form/appointment-form.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-mngmt/appointment-mngmt.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-mngmt/appointment-mngmt.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-mngmt/appointment-mngmt.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-mngmt/appointment-mngmt.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-schedule/appointment-schedule.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-schedule/appointment-schedule.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/constants/dropdown-constant.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/constants/dropdown-constant.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +89,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="database.data.extractors.current.export.id" value="Excel (xlsx)" />
+    <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs.protractor.protractor_package" value="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/protractor" />
@@ -245,14 +270,10 @@
       <workItem from="1635816297844" duration="357000" />
       <workItem from="1635922073661" duration="2808000" />
       <workItem from="1636644569469" duration="5987000" />
-      <workItem from="1636725642412" duration="7798000" />
-    </task>
-    <task id="LOCAL-00082" summary="Replace nz-sider with nz-drawer, add minimizeSidebar() after clicking menu item">
-      <created>1632322954391</created>
-      <option name="number" value="00082" />
-      <option name="presentableId" value="LOCAL-00082" />
-      <option name="project" value="LOCAL" />
-      <updated>1632322954391</updated>
+      <workItem from="1636725642412" duration="7885000" />
+      <workItem from="1636794738228" duration="8331000" />
+      <workItem from="1636819928226" duration="10854000" />
+      <workItem from="1636879360248" duration="14674000" />
     </task>
     <task id="LOCAL-00083" summary="Remove nz-steps in signup form">
       <created>1632322985138</created>
@@ -590,7 +611,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636735016405</updated>
     </task>
-    <option name="localTasksCounter" value="131" />
+    <task id="LOCAL-00131" summary="- Display community user fullName at appointment management">
+      <created>1636735517106</created>
+      <option name="number" value="00131" />
+      <option name="presentableId" value="LOCAL-00131" />
+      <option name="project" value="LOCAL" />
+      <updated>1636735517106</updated>
+    </task>
+    <option name="localTasksCounter" value="132" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -610,8 +638,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Add sidebar menu item - profile" />
-    <MESSAGE value="Add year column in HolidayBean" />
     <MESSAGE value="Disable update button if form is not touched / dirty" />
     <MESSAGE value="Disable update button if form is not touched / not dirty" />
     <MESSAGE value="Update gitignore to ignore index-dev.html" />
@@ -635,7 +661,9 @@
     <MESSAGE value="- Allow Super Admin to update account roles for admin" />
     <MESSAGE value="- Change appointment duration to 30 minutes&#10;- Update date-picker to disable public holiday and weekend" />
     <MESSAGE value="- Change appointment duration to 30 minutes&#10;- Update change appointment datetime modal" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Change appointment duration to 30 minutes&#10;- Update change appointment datetime modal" />
+    <MESSAGE value="- Display community user fullName at appointment management" />
+    <MESSAGE value="- Update AppointmentMngmtComponent (pending, my appointment, staff appointment)&#10;- Update confirmAppointment() and rescheduleAppointment() to handle exceptions&#10;- Add AppointmentTableComponent, RescheduleAppointmentComponent, PendingAppointmentComponent, MyAppointmentComponent&#10;- Remove feature for user to choose admin when scheduling appointment&#10;- Update AppointmentRestController to return AppointmentModel instead of AppointmentBean" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Update AppointmentMngmtComponent (pending, my appointment, staff appointment)&#10;- Update confirmAppointment() and rescheduleAppointment() to handle exceptions&#10;- Add AppointmentTableComponent, RescheduleAppointmentComponent, PendingAppointmentComponent, MyAppointmentComponent&#10;- Remove feature for user to choose admin when scheduling appointment&#10;- Update AppointmentRestController to return AppointmentModel instead of AppointmentBean" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
