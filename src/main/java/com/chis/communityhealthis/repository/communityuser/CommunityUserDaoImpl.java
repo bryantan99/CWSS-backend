@@ -5,7 +5,9 @@ import com.chis.communityhealthis.model.filter.CommunityUserBeanQuery;
 import com.chis.communityhealthis.repository.GenericDaoImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.query.Query;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.CollectionUtils;
 
 import javax.persistence.criteria.*;
 import java.util.ArrayList;
@@ -55,9 +57,7 @@ public class CommunityUserDaoImpl extends GenericDaoImpl<CommunityUserBean, Stri
             predicates.add(criteriaBuilder.equal(zoneBeanJoin.get("zoneId"), filter.getZoneId()));
         }
 
-        criteriaQuery.select(root).distinct(true).where(predicates.toArray(new Predicate[]{}));
-        Query<CommunityUserBean> query = currentSession().createQuery(criteriaQuery);
-        return query.getResultList();
+        return getResults(criteriaQuery, root, predicates);
     }
 
     @Override
@@ -66,15 +66,43 @@ public class CommunityUserDaoImpl extends GenericDaoImpl<CommunityUserBean, Stri
         CriteriaQuery<CommunityUserBean> criteriaQuery = criteriaBuilder.createQuery(CommunityUserBean.class);
         Root<CommunityUserBean> root = criteriaQuery.from(CommunityUserBean.class);
 
+        List<Predicate> predicates = new ArrayList<>();
+        predicates.add(criteriaBuilder.equal(root.get("username"), username));
+
+        fetchTables(root);
+        return getResult(criteriaQuery, root, predicates);
+    }
+
+    @Override
+    public List<CommunityUserBean> getAllCommunityUsers() {
+        CriteriaBuilder criteriaBuilder = currentSession().getCriteriaBuilder();
+        CriteriaQuery<CommunityUserBean> criteriaQuery = criteriaBuilder.createQuery(CommunityUserBean.class);
+        Root<CommunityUserBean> root = criteriaQuery.from(CommunityUserBean.class);
+
+        fetchTables(root);
+        return getResults(criteriaQuery, root, null);
+    }
+
+    private void fetchTables(Root<CommunityUserBean> root) {
         Fetch<CommunityUserBean, AddressBean> addressBeanFetch = root.fetch("addressBean", JoinType.LEFT);
         Fetch<AddressBean, ZoneBean> zoneBeanFetch = addressBeanFetch.fetch("zoneBean", JoinType.INNER);
         Fetch<CommunityUserBean, OccupationBean> occupationBeanFetch = root.fetch("occupationBean", JoinType.LEFT);
         Fetch<CommunityUserBean, HealthIssueBean> healthIssueBeanFetch = root.fetch("healthIssueBeans", JoinType.LEFT);
         Fetch<HealthIssueBean, AdminBean> adminBeanFetch = healthIssueBeanFetch.fetch("adminBean", JoinType.LEFT);
         Fetch<HealthIssueBean, DiseaseBean> diseaseBeanFetch = healthIssueBeanFetch.fetch("diseaseBean", JoinType.LEFT);
+    }
 
-        criteriaQuery.select(root).distinct(true).where(criteriaBuilder.equal(root.get("username"), username));
-        Query<CommunityUserBean> query = currentSession().createQuery(criteriaQuery);
+    private CommunityUserBean getResult(CriteriaQuery<CommunityUserBean> cq, Root<CommunityUserBean> root, @Nullable List<Predicate> predicates) {
+        predicates = CollectionUtils.isEmpty(predicates) ? new ArrayList<>() : predicates;
+        cq.select(root).distinct(true).where(predicates.toArray(new Predicate[]{}));
+        Query<CommunityUserBean> query = currentSession().createQuery(cq);
         return query.getSingleResult();
+    }
+
+    private List<CommunityUserBean> getResults(CriteriaQuery<CommunityUserBean> cq, Root<CommunityUserBean> root, @Nullable List<Predicate> predicates) {
+        predicates = CollectionUtils.isEmpty(predicates) ? new ArrayList<>() : predicates;
+        cq.select(root).distinct(true).where(predicates.toArray(new Predicate[]{}));
+        Query<CommunityUserBean> query = currentSession().createQuery(cq);
+        return query.getResultList();
     }
 }

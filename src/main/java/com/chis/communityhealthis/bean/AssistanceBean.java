@@ -22,6 +22,14 @@ public class AssistanceBean implements Serializable {
     public static final String LAST_UPDATED_BY = "LAST_UPDATED_BY";
     public static final String LAST_UPDATED_DATE = "LAST_UPDATED_DATE";
 
+    public static final String STATUS_PENDING = "pending";
+    public static final String STATUS_REJECTED = "rejected";
+    public static final String STATUS_PROCESSING = "processing";
+    public static final String STATUS_COMPLETED = "completed";
+    public static final String STATUS_CANCELLED = "cancelled";
+
+    public static final Integer CATEGORY_ID_NULL_CODE = -1;
+
     @Id
     @Column(name = ASSISTANCE_ID)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,6 +62,10 @@ public class AssistanceBean implements Serializable {
 
     @Column(name = LAST_UPDATED_DATE)
     private Date lastUpdatedDate;
+
+    @OneToOne
+    @JoinColumn(name = CATEGORY_ID, referencedColumnName = AssistanceCategoryBean.CATEGORY_ID, insertable = false, updatable = false)
+    private AssistanceCategoryBean categoryBean;
 
     @OneToOne
     @JoinColumn(name = USERNAME, referencedColumnName = CommunityUserBean.USERNAME, insertable = false, updatable = false)
@@ -165,6 +177,14 @@ public class AssistanceBean implements Serializable {
 
     public void setAdminBean(AdminBean adminBean) {
         this.adminBean = adminBean;
+    }
+
+    public AssistanceCategoryBean getCategoryBean() {
+        return categoryBean;
+    }
+
+    public void setCategoryBean(AssistanceCategoryBean categoryBean) {
+        this.categoryBean = categoryBean;
     }
 }
 

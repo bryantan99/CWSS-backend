@@ -4,6 +4,7 @@ import com.chis.communityhealthis.bean.*;
 import com.chis.communityhealthis.model.dropdown.DropdownChoiceModel;
 import com.chis.communityhealthis.repository.admin.AdminDao;
 import com.chis.communityhealthis.repository.appointment.AppointmentDao;
+import com.chis.communityhealthis.repository.assistancecategory.AssistanceCategoryDao;
 import com.chis.communityhealthis.repository.communityuser.CommunityUserDao;
 import com.chis.communityhealthis.repository.disease.DiseaseDao;
 import com.chis.communityhealthis.repository.holiday.HolidayDao;
@@ -40,6 +41,10 @@ public class DropdownChoiceServiceImpl implements DropdownChoiceService {
     @Autowired
     private ZoneDao zoneDao;
 
+    @Autowired
+    private AssistanceCategoryDao assistanceCategoryDao;
+
+
     @Override
     public List<DropdownChoiceModel<String>> getDiseaseDropdownList() {
         List<DiseaseBean> beans = diseaseDao.getAll();
@@ -67,12 +72,18 @@ public class DropdownChoiceServiceImpl implements DropdownChoiceService {
     }
 
     @Override
-    public List<DropdownChoiceModel<String>> getCommunityUserUsernameList() {
+    public List<DropdownChoiceModel<String>> getCommunityUserUsernameList(boolean hasNric) {
         List<DropdownChoiceModel<String>> list = new ArrayList<>();
-        List<CommunityUserBean> userBeans = communityUserDao.getAll();
+        List<CommunityUserBean> userBeans = communityUserDao.getAllCommunityUsers();
         if (!CollectionUtils.isEmpty(userBeans)) {
             for (CommunityUserBean userBean : userBeans) {
-                list.add(new DropdownChoiceModel<>(userBean.getUsername(), userBean.getFullName().toUpperCase()));
+                DropdownChoiceModel<String> model;
+                if (hasNric) {
+                    model = new DropdownChoiceModel<>(userBean.getUsername(), WordUtils.capitalizeFully(userBean.getFullName()) + " (" + userBean.getUsername()  + ")");
+                } else {
+                    model = new DropdownChoiceModel<>(userBean.getUsername(), WordUtils.capitalizeFully(userBean.getFullName()));
+                }
+                list.add(model);
             }
         }
         Collections.sort(list);
@@ -100,6 +111,19 @@ public class DropdownChoiceServiceImpl implements DropdownChoiceService {
         if (!CollectionUtils.isEmpty(zoneBeans)) {
             for (ZoneBean zoneBean : zoneBeans) {
                 list.add(new DropdownChoiceModel<>(zoneBean.getZoneId().toString(), WordUtils.capitalizeFully(zoneBean.getZoneName())));
+            }
+        }
+        Collections.sort(list);
+        return list;
+    }
+
+    @Override
+    public List<DropdownChoiceModel<String>> getAssistanceCategoryDropdownChoices() {
+        List<DropdownChoiceModel<String>> list = new ArrayList<>();
+        List<AssistanceCategoryBean> categoryBeans = assistanceCategoryDao.getAll();
+        if (!CollectionUtils.isEmpty(categoryBeans)) {
+            for (AssistanceCategoryBean bean : categoryBeans) {
+                list.add(new DropdownChoiceModel<>(bean.getCategoryId().toString(), WordUtils.capitalizeFully(bean.getCategoryName())));
             }
         }
         Collections.sort(list);

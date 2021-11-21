@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class AssistanceUpdateForm {
     private Integer assistanceId;
+    private Integer categoryId;
     private String title;
     private String description;
     private String status;
@@ -17,6 +18,14 @@ public class AssistanceUpdateForm {
 
     public void setAssistanceId(Integer assistanceId) {
         this.assistanceId = assistanceId;
+    }
+
+    public Integer getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getTitle() {

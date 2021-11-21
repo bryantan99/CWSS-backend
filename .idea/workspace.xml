@@ -5,33 +5,59 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Update AppointmentMngmtComponent (pending, my appointment, staff appointment)&#10;- Update confirmAppointment() and rescheduleAppointment() to handle exceptions&#10;- Add AppointmentTableComponent, RescheduleAppointmentComponent, PendingAppointmentComponent, MyAppointmentComponent&#10;- Remove feature for user to choose admin when scheduling appointment&#10;- Update AppointmentRestController to return AppointmentModel instead of AppointmentBean">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/AssistanceCategoryBean.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/TestRestController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/appointment/AppointmentModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-reschedule/appointment-reschedule.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-reschedule/appointment-reschedule.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-table/appointment-table.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-table/appointment-table.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/my-appointment/my-appointment.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/my-appointment/my-appointment.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/pending-appointment/pending-appointment.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/pending-appointment/pending-appointment.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/assistance/AssistanceModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/assistance/AssistanceQueryForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/assistance/AssistanceRejectForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/assistancecategory/AssistanceCategoryForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/assistancecategory/AssistanceCategoryDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/assistancecategory/AssistanceCategoryDaoImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/all-assistance/all-assistance.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/all-assistance/all-assistance.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance-category-mngmt/assistance-category-mngmt.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance-category-mngmt/assistance-category-mngmt.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance-table/assistance-table.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance-table/assistance-table.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/my-assistance/my-assistance.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/my-assistance/my-assistance.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/pending-assistance/pending-assistance.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/pending-assistance/pending-assistance.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AppointmentRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AppointmentRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/appointment/ConfirmationForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/appointment/ConfirmationForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/appointment/UpdateDatetimeForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/appointment/UpdateDatetimeForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/appointment/AppointmentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/appointment/AppointmentDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/appointment/AppointmentDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/appointment/AppointmentDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/appointment/AppointmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/appointment/AppointmentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/appointment/AppointmentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/appointment/AppointmentServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/utility/DatetimeUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/utility/DatetimeUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-form/appointment-form.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-form/appointment-form.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-mngmt/appointment-mngmt.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-mngmt/appointment-mngmt.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-mngmt/appointment-mngmt.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-mngmt/appointment-mngmt.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-schedule/appointment-schedule.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment-schedule/appointment-schedule.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/appointment.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/AssistanceBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/AssistanceBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AssistanceRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AssistanceRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/DropdownChoiceRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/DropdownChoiceRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/assistance/AssistanceUpdateForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/assistance/AssistanceUpdateForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/assistance/AssistanceDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/assistance/AssistanceDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/assistance/AssistanceDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/assistance/AssistanceDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/communityuser/CommunityUserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/communityuser/CommunityUserDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/communityuser/CommunityUserDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/communityuser/CommunityUserDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/assistance/AssistanceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/assistance/AssistanceService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/assistance/AssistanceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/assistance/AssistanceServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/dropdownchoice/DropdownChoiceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/dropdownchoice/DropdownChoiceService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/dropdownchoice/DropdownChoiceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/dropdownchoice/DropdownChoiceServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/ng-zorro-antd/core/pipe/ng-zorro-antd-core-pipe.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/ng-zorro-antd/core/pipe/ng-zorro-antd-core-pipe.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/ng-zorro-antd/core/pipe/nz-pipe.module.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/ng-zorro-antd/core/pipe/nz-pipe.module.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/ng-zorro-antd/core/pipe/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/ng-zorro-antd/core/pipe/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/ng-zorro-antd/core/pipe/time-range.pipe.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/ng-zorro-antd/core/pipe/time-range.pipe.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/ng-zorro-antd/statistic/countdown.component.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/ng-zorro-antd/statistic/countdown.component.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/ng-zorro-antd/statistic/ng-zorro-antd-statistic.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/ng-zorro-antd/statistic/ng-zorro-antd-statistic.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/ng-zorro-antd/statistic/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/ng-zorro-antd/statistic/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/ng-zorro-antd/statistic/statistic-number.component.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/ng-zorro-antd/statistic/statistic-number.component.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/ng-zorro-antd/statistic/statistic.component.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/ng-zorro-antd/statistic/statistic.component.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/ng-zorro-antd/statistic/statistic.module.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/ng-zorro-antd/statistic/statistic.module.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance-detail/assistance-detail.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance-detail/assistance-detail.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance-detail/assistance-detail.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance-detail/assistance-detail.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance-form/assistance-form.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance-form/assistance-form.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance-form/assistance-form.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance-form/assistance-form.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance-mngmt/assistance-mngmt.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance-mngmt/assistance-mngmt.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance-mngmt/assistance-mngmt.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance-mngmt/assistance-mngmt.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/constants/dropdown-constant.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/constants/dropdown-constant.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/services/dropdown-choice.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/services/dropdown-choice.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/shared-zorro.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/shared-zorro.module.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -274,6 +300,16 @@
       <workItem from="1636794738228" duration="8331000" />
       <workItem from="1636819928226" duration="10854000" />
       <workItem from="1636879360248" duration="14674000" />
+      <workItem from="1637028690018" duration="623000" />
+      <workItem from="1637074659080" duration="989000" />
+      <workItem from="1637076426118" duration="12453000" />
+      <workItem from="1637169015682" duration="690000" />
+      <workItem from="1637198043920" duration="809000" />
+      <workItem from="1637303201466" duration="1894000" />
+      <workItem from="1637332391171" duration="1212000" />
+      <workItem from="1637417586943" duration="8499000" />
+      <workItem from="1637426306494" duration="5028000" />
+      <workItem from="1637480318638" duration="7850000" />
     </task>
     <task id="LOCAL-00083" summary="Remove nz-steps in signup form">
       <created>1632322985138</created>

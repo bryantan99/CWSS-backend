@@ -9,4 +9,5 @@ import java.util.List;
 public interface CommunityUserDao extends GenericDao<CommunityUserBean, String> {
     List<CommunityUserBean> getCommunityUsers(CommunityUserBeanQuery filter);
     CommunityUserBean getCommunityUser(String username);
+    List<CommunityUserBean> getAllCommunityUsers();
 }
