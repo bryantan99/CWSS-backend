@@ -4,18 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Updated AssistanceMngmtComponent, AssistanceDetailComponent&#10;- Added PendingAssistance, MyAssistance, AllAssistance, AssistanceCategoryMngmt and AssistanceTable component&#10;- Added AssistanceCategoryBean, DAO and joined with AssistanceBean&#10;- Added AssistanceModel, AssistanceQueryForm and AssistanceRejectForm&#10;- Updated AssistanceUpdateForm&#10;- Added assistance category dropdown API&#10;- Refactored CommunityUserDaoImpl">
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Update UI 'Filter Settings' - 'Filter'&#10;- Update Drawer Title 'Filter Data' - 'Filter Settings'&#10;- Display full nz-option text">
       <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/TestRestController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/my-appointment/my-appointment.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/my-appointment/my-appointment.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/pending-appointment/pending-appointment.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/appointment/pending-appointment/pending-appointment.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/all-assistance/all-assistance.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/all-assistance/all-assistance.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/all-assistance/all-assistance.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/all-assistance/all-assistance.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/my-assistance/my-assistance.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/my-assistance/my-assistance.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/my-assistance/my-assistance.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/my-assistance/my-assistance.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/pending-assistance/pending-assistance.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/pending-assistance/pending-assistance.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/community-user/community-user.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/community-user/community-user.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/styles.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/homepage/about/about.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/homepage/about/about.component.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -267,14 +259,7 @@
       <workItem from="1637332391171" duration="1212000" />
       <workItem from="1637417586943" duration="8499000" />
       <workItem from="1637426306494" duration="5028000" />
-      <workItem from="1637480318638" duration="10720000" />
-    </task>
-    <task id="LOCAL-00084" summary="Wrap sidebar menu items in nzDrawerContent">
-      <created>1632323254976</created>
-      <option name="number" value="00084" />
-      <option name="presentableId" value="LOCAL-00084" />
-      <option name="project" value="LOCAL" />
-      <updated>1632323254976</updated>
+      <workItem from="1637480318638" duration="12184000" />
     </task>
     <task id="LOCAL-00085" summary="Added appointment route, allow retrieve appointment list, cancel and update appointment's datetime">
       <created>1632475463566</created>
@@ -612,7 +597,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637488699797</updated>
     </task>
-    <option name="localTasksCounter" value="133" />
+    <task id="LOCAL-00133" summary="- Update UI 'Filter Settings' - 'Filter'&#10;- Update Drawer Title 'Filter Data' - 'Filter Settings'&#10;- Display full nz-option text">
+      <created>1637491584024</created>
+      <option name="number" value="00133" />
+      <option name="presentableId" value="LOCAL-00133" />
+      <option name="project" value="LOCAL" />
+      <updated>1637491584025</updated>
+    </task>
+    <option name="localTasksCounter" value="134" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -632,7 +624,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Disable update button if form is not touched / not dirty" />
     <MESSAGE value="Update gitignore to ignore index-dev.html" />
     <MESSAGE value="Update angular.json to use index-dev.html" />
     <MESSAGE value="Add latitude &amp; longitude for AddressBean,&#10;Update AddressDao, OccupationDao, HealthIssueDao,&#10;Update getCommunityUsers() to query based on CommunityUserBeanJoinFilter,&#10;Delete CommunityUserTableModel" />
@@ -657,7 +648,8 @@
     <MESSAGE value="- Display community user fullName at appointment management" />
     <MESSAGE value="- Update AppointmentMngmtComponent (pending, my appointment, staff appointment)&#10;- Update confirmAppointment() and rescheduleAppointment() to handle exceptions&#10;- Add AppointmentTableComponent, RescheduleAppointmentComponent, PendingAppointmentComponent, MyAppointmentComponent&#10;- Remove feature for user to choose admin when scheduling appointment&#10;- Update AppointmentRestController to return AppointmentModel instead of AppointmentBean" />
     <MESSAGE value="- Updated AssistanceMngmtComponent, AssistanceDetailComponent&#10;- Added PendingAssistance, MyAssistance, AllAssistance, AssistanceCategoryMngmt and AssistanceTable component&#10;- Added AssistanceCategoryBean, DAO and joined with AssistanceBean&#10;- Added AssistanceModel, AssistanceQueryForm and AssistanceRejectForm&#10;- Updated AssistanceUpdateForm&#10;- Added assistance category dropdown API&#10;- Refactored CommunityUserDaoImpl" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Updated AssistanceMngmtComponent, AssistanceDetailComponent&#10;- Added PendingAssistance, MyAssistance, AllAssistance, AssistanceCategoryMngmt and AssistanceTable component&#10;- Added AssistanceCategoryBean, DAO and joined with AssistanceBean&#10;- Added AssistanceModel, AssistanceQueryForm and AssistanceRejectForm&#10;- Updated AssistanceUpdateForm&#10;- Added assistance category dropdown API&#10;- Refactored CommunityUserDaoImpl" />
+    <MESSAGE value="- Update UI 'Filter Settings' - 'Filter'&#10;- Update Drawer Title 'Filter Data' - 'Filter Settings'&#10;- Display full nz-option text" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Update UI 'Filter Settings' - 'Filter'&#10;- Update Drawer Title 'Filter Data' - 'Filter Settings'&#10;- Display full nz-option text" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
