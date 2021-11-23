@@ -18,6 +18,7 @@ import com.chis.communityhealthis.utility.AddressUtil;
 import com.chis.communityhealthis.utility.FlagConstant;
 import com.google.maps.model.LatLng;
 import io.jsonwebtoken.lang.Assert;
+import javassist.NotFoundException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -97,9 +98,11 @@ public class CommunityUserServiceImpl implements CommunityUserService {
     }
 
     @Override
-    public CommunityUserProfileModel getCommunityUserProfile(String username) {
+    public CommunityUserProfileModel getCommunityUserProfile(String username) throws NotFoundException {
         AccountBean accountBean = accountDao.findAccount(username);
-        Assert.notNull(accountBean, "Account [username: " + username + "] was not found.");
+        if (accountBean == null) {
+            throw new NotFoundException("Account [username: " + username + "] was not found.");
+        }
         CommunityUserBean communityUserBean = communityUserDao.getCommunityUser(username);
         return toCommunityUserProfileModel(accountBean, communityUserBean);
     }
@@ -158,21 +161,31 @@ public class CommunityUserServiceImpl implements CommunityUserService {
     }
 
     @Override
-    public void updateUserAccount(AccountRegistrationForm form) {
+    public void updateUserAccount(AccountRegistrationForm form) throws Exception {
         String username = form.getPersonalDetail().getUsername();
 
-        AccountBean accountBean = accountDao.find(username);
-        accountBean.setEmail(form.getPersonalDetail().getEmail());
-        accountDao.saveOrUpdate(accountBean);
+        AccountBean accountBean = accountDao.findAccount(username);
+        if (accountBean == null) {
+            throw new NotFoundException("Account [username: " + username + "] was not found.");
+        }
 
-        CommunityUserBean communityUserBean = communityUserDao.find(username);
+        accountBean.setEmail(form.getPersonalDetail().getEmail());
+        accountDao.update(accountBean);
+
+        CommunityUserBean communityUserBean = communityUserDao.getCommunityUser(username);
         updateCommunityUserBean(communityUserBean, form.getPersonalDetail());
 
         AddressBean addressBean = addressDao.find(username);
         updateAddressBean(addressBean, form.getAddress());
 
-        OccupationBean occupationBean = occupationDao.find(username);
-        updateOccupationBean(occupationBean, form.getOccupation());
+        if (form.getOccupation() != null) {
+            OccupationBean occupationBean = occupationDao.find(username);
+            if (occupationBean == null) {
+                occupationBean = new OccupationBean();
+                occupationBean.setUsername(username);
+            }
+            updateOccupationBean(occupationBean, form.getOccupation());
+        }
 
         if (form.getHealth() != null && !CollectionUtils.isEmpty(form.getHealth().getDiseaseList())) {
             List<HealthIssueBean> healthIssueBeans = healthIssueDao.findHealthIssueBeans(username);
@@ -211,7 +224,7 @@ public class CommunityUserServiceImpl implements CommunityUserService {
         addressBean.setPostcode(address.getPostcode());
         addressBean.setCity(address.getCity());
         addressBean.setState(address.getState());
-        addressDao.saveOrUpdate(addressBean);
+        addressDao.update(addressBean);
     }
 
     private void updateCommunityUserBean(CommunityUserBean communityUserBean, PersonalDetailForm personalDetail) {
@@ -219,7 +232,7 @@ public class CommunityUserServiceImpl implements CommunityUserService {
         communityUserBean.setNric(personalDetail.getNric());
         communityUserBean.setGender(personalDetail.getGender());
         communityUserBean.setEthnic(personalDetail.getEthnic());
-        communityUserDao.saveOrUpdate(communityUserBean);
+        communityUserDao.update(communityUserBean);
     }
 
     private CommunityUserProfileModel toCommunityUserProfileModel(AccountBean accountBean, CommunityUserBean communityUserBean) {

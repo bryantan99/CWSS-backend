@@ -9,6 +9,7 @@ import com.chis.communityhealthis.service.auth.AuthService;
 import com.chis.communityhealthis.utility.RoleConstant;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.lang.Assert;
+import javassist.NotFoundException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -44,7 +45,11 @@ public class AdminRestController {
             AdminDetailModel adminDetailModel = adminService.getAdmin(username);
             return ResponseHandler.generateResponse("Successfully retrieved " + username + " profile.", HttpStatus.OK, adminDetailModel);
         } catch (Exception e) {
-            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+            if (e instanceof NotFoundException) {
+                return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.NOT_FOUND, null);
+            } else {
+                return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+            }
         }
     }
 

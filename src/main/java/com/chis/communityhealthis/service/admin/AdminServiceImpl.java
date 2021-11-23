@@ -15,6 +15,7 @@ import com.chis.communityhealthis.service.auth.AuthService;
 import com.chis.communityhealthis.service.email.EmailService;
 import com.chis.communityhealthis.utility.*;
 import io.jsonwebtoken.lang.Assert;
+import javassist.NotFoundException;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.SerializationUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -66,15 +67,19 @@ public class AdminServiceImpl implements AdminService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public AdminDetailModel getAdmin(String username) {
+    public AdminDetailModel getAdmin(String username) throws NotFoundException {
         String currentLoggedInUsername = authService.getCurrentLoggedInUsername();
         Boolean isSuperAdmin = authService.hasRole(RoleConstant.SUPER_ADMIN);
 
         AdminBean adminBean = adminDao.find(username);
-        Assert.notNull(adminBean, "AdminBean [username: " + username + "] was not found!");
+        if (adminBean == null) {
+            throw new NotFoundException("Admin [username: " + username + "] was not found.");
+        }
 
         AccountBean accountBean = accountDao.findAccountWithRoles(username);
-        Assert.notNull(accountBean, "AccountBean [username: " + username + "] was not found!");
+        if (accountBean == null) {
+            throw new NotFoundException("Account [username: " + username + "] was not found.");
+        }
 
         AdminDetailModel adminDetailModel = toAdminDetailModel(accountBean, adminBean);
         Boolean deletable = isSuperAdmin && !StringUtils.equals(currentLoggedInUsername, adminBean.getUsername());

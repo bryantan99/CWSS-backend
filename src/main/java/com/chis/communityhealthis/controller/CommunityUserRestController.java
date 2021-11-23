@@ -8,6 +8,7 @@ import com.chis.communityhealthis.model.user.CommunityUserProfileModel;
 import com.chis.communityhealthis.service.auth.AuthService;
 import com.chis.communityhealthis.service.communityuser.CommunityUserService;
 import com.chis.communityhealthis.utility.FlagConstant;
+import javassist.NotFoundException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,7 +33,11 @@ public class CommunityUserRestController {
             CommunityUserProfileModel model = communityUserService.getCommunityUserProfile(username);
             return ResponseHandler.generateResponse("Successfully retrieved " + username + " profile.", HttpStatus.OK, model);
         } catch (Exception e) {
-            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+            if (e instanceof NotFoundException) {
+                return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.NOT_FOUND, null);
+            } else {
+                return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+            }
         }
     }
 
@@ -94,8 +99,12 @@ public class CommunityUserRestController {
     }
 
     @RequestMapping(value = "/update-user", method = RequestMethod.POST)
-    public ResponseEntity<Boolean> updateUserAccount(@RequestBody AccountRegistrationForm form) {
-        communityUserService.updateUserAccount(form);
-        return new ResponseEntity<>(true, HttpStatus.OK);
+    public ResponseEntity<Object> updateUserAccount(@RequestBody AccountRegistrationForm form) {
+        try {
+            communityUserService.updateUserAccount(form);
+            return ResponseHandler.generateResponse("Successfully updated user profile", HttpStatus.OK, null);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
     }
 }
