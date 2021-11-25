@@ -101,7 +101,9 @@ public class CommunityUserRestController {
     @RequestMapping(value = "/update-user", method = RequestMethod.POST)
     public ResponseEntity<Object> updateUserAccount(@RequestBody AccountRegistrationForm form) {
         try {
-            communityUserService.updateUserAccount(form);
+            String actionMaker = authService.getCurrentLoggedInUsername();
+            boolean isAdmin = authService.currentLoggedInUserIsAdmin();
+            communityUserService.updateUserAccount(form, actionMaker, isAdmin);
             return ResponseHandler.generateResponse("Successfully updated user profile", HttpStatus.OK, null);
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);

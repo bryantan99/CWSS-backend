@@ -16,6 +16,7 @@ import com.chis.communityhealthis.repository.healthissue.HealthIssueDao;
 import com.chis.communityhealthis.repository.occupation.OccupationDao;
 import com.chis.communityhealthis.utility.AddressUtil;
 import com.chis.communityhealthis.utility.FlagConstant;
+import com.chis.communityhealthis.utility.ListComparator;
 import com.google.maps.model.LatLng;
 import io.jsonwebtoken.lang.Assert;
 import javassist.NotFoundException;
@@ -161,7 +162,7 @@ public class CommunityUserServiceImpl implements CommunityUserService {
     }
 
     @Override
-    public void updateUserAccount(AccountRegistrationForm form) throws Exception {
+    public void updateUserAccount(AccountRegistrationForm form, String actionMaker, boolean isAdmin) throws Exception {
         String username = form.getPersonalDetail().getUsername();
 
         AccountBean accountBean = accountDao.findAccount(username);
@@ -187,14 +188,96 @@ public class CommunityUserServiceImpl implements CommunityUserService {
             updateOccupationBean(occupationBean, form.getOccupation());
         }
 
-        if (form.getHealth() != null && !CollectionUtils.isEmpty(form.getHealth().getDiseaseList())) {
+        if (form.getHealth() != null) {
             List<HealthIssueBean> healthIssueBeans = healthIssueDao.findHealthIssueBeans(username);
-            updateHealthIssueBeans(healthIssueBeans, form.getHealth());
+            updateHealthIssueBeans(healthIssueBeans, form.getHealth(), username, actionMaker, isAdmin);
         }
     }
 
-    private void updateHealthIssueBeans(List<HealthIssueBean> healthIssueBeans, HealthForm health) {
-        //  ToDo: Update Health Issue Beans
+    private void updateHealthIssueBeans(List<HealthIssueBean> healthIssueBeans, HealthForm form, String username, String actionMaker, boolean isAdmin) {
+        Map<Integer, HealthIssueBean> healthIssueBeanMap = initHealthIssueBeanMap(healthIssueBeans);
+        List<Integer> oriIds = new ArrayList<>(healthIssueBeanMap.keySet());
+        List<Integer> newIds = new ArrayList<>();
+
+        if (!CollectionUtils.isEmpty(form.getDiseaseList())) {
+            for (HealthIssueModel model : form.getDiseaseList()) {
+                HealthIssueBean bean;
+                if (model.getHealthIssueId() != null) {
+                    newIds.add(model.getHealthIssueId());
+                    bean = healthIssueBeanMap.get(model.getHealthIssueId());
+                    boolean hasChanges = false;
+                    boolean approvalHadChanges = isApproved(bean) != model.getIsApproved();
+                    if (!StringUtils.equals(model.getDescription(), bean.getIssueDescription()) || !bean.getDiseaseId().equals(model.getDiseaseId())) {
+                        hasChanges = true;
+                        bean.setDiseaseId(model.getDiseaseId());
+                        bean.setIssueDescription(model.getDescription());
+                    }
+                    if (hasChanges || approvalHadChanges) {
+                        updateHealthIssueBeanApproval(bean, model, hasChanges, isAdmin, actionMaker);
+                        healthIssueDao.update(bean);
+                    }
+                } else {
+                    bean = toHealthIssueBean(model);
+                    bean.setUsername(username);
+                    bean.setCreatedBy(actionMaker);
+                    bean.setCreatedDate(new Date());
+                    if (isAdmin) {
+                        bean.setApprovedBy(actionMaker);
+                        bean.setApprovedDate(new Date());
+                    }
+                    healthIssueDao.add(bean);
+                }
+            }
+        }
+
+        ListComparator<Integer> listComparator = new ListComparator<>(oriIds, newIds);
+        List<Integer> idsToBeDeleted = listComparator.getListToDelete();
+        if (!CollectionUtils.isEmpty(idsToBeDeleted)) {
+            List<HealthIssueBean> listToRemove = healthIssueBeans.stream().filter(bean -> idsToBeDeleted.contains(bean.getIssueId())).collect(Collectors.toList());
+            if (!CollectionUtils.isEmpty(listToRemove)) {
+                for (HealthIssueBean bean : listToRemove) {
+                    healthIssueDao.remove(bean);
+                }
+            }
+        }
+    }
+
+    private void updateHealthIssueBeanApproval(HealthIssueBean bean, HealthIssueModel model, boolean hasChanges, boolean isAdmin, String actionMaker) {
+        if (hasChanges) {
+            if (isAdmin) {
+                bean.setApprovedBy(actionMaker);
+                bean.setApprovedDate(new Date());
+            } else {
+                bean.setApprovedBy(null);
+                bean.setApprovedDate(null);
+            }
+        } else {
+            if (model.getIsApproved() && !isApproved(bean) && isAdmin) {
+                bean.setApprovedBy(actionMaker);
+                bean.setApprovedDate(new Date());
+            } else if (!isAdmin || !model.getIsApproved() && isApproved(bean)) {
+                bean.setApprovedBy(null);
+                bean.setApprovedDate(null);
+            }
+        }
+    }
+
+    private Map<Integer, HealthIssueBean> initHealthIssueBeanMap(List<HealthIssueBean> healthIssueBeans) {
+        Map<Integer, HealthIssueBean> map = new HashMap<>();
+        if (!CollectionUtils.isEmpty(healthIssueBeans)) {
+            for (HealthIssueBean bean : healthIssueBeans) {
+                map.put(bean.getIssueId(), bean);
+            }
+        }
+        return map;
+    }
+
+    private HealthIssueBean toHealthIssueBean(HealthIssueModel model) {
+        HealthIssueBean bean = new HealthIssueBean();
+        bean.setDiseaseId(model.getDiseaseId());
+        bean.setIssueDescription(model.getDescription());
+        bean.setCreatedDate(new Date());
+        return bean;
     }
 
     private void updateOccupationBean(OccupationBean occupationBean, OccupationForm form) {
@@ -326,5 +409,9 @@ public class CommunityUserServiceImpl implements CommunityUserService {
             model.setApprovedDate(bean.getApprovedDate());
         }
         return model;
+    }
+
+    private boolean isApproved(HealthIssueBean bean) {
+        return bean.getApprovedDate() != null && StringUtils.isNotBlank(bean.getApprovedBy());
     }
 }

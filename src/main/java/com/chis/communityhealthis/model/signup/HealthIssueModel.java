@@ -4,6 +4,7 @@ public class HealthIssueModel {
     private Integer healthIssueId;
     private Integer diseaseId;
     private String description;
+    private Boolean isApproved;
 
     public Integer getHealthIssueId() { return healthIssueId; }
 
@@ -23,5 +24,13 @@ public class HealthIssueModel {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Boolean getIsApproved() {
+        return isApproved;
+    }
+
+    public void setIsApproved(Boolean approved) {
+        isApproved = approved;
     }
 }

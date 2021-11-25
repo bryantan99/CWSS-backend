@@ -14,5 +14,5 @@ public interface CommunityUserService {
     Boolean approveUserAccount(String username, String adminUsername);
     Boolean rejectUserAccount(String username);
     void deleteUserAccount(String username);
-    void updateUserAccount(AccountRegistrationForm form) throws Exception;
+    void updateUserAccount(AccountRegistrationForm form, String actionMaker, boolean isAdmin) throws Exception;
 }
