@@ -109,43 +109,47 @@ public class CommunityUserServiceImpl implements CommunityUserService {
     }
 
     @Override
-    public Boolean approveUserAccount(String username, String adminUsername) {
+    public void approveUserAccount(String username, String adminUsername) throws Exception {
         AccountBean accountBean = accountDao.find(username);
-        Assert.notNull(accountBean, "Account [username: " + username + "] was not found.");
+        if (accountBean == null) {
+            throw new Exception("Account [username: " + username + "] was not found.");
+        }
         accountBean.setIsActive(FlagConstant.YES);
-        accountDao.saveOrUpdate(accountBean);
+        accountDao.update(accountBean);
 
         OccupationBean occupationBean = occupationDao.find(username);
-        Assert.notNull(occupationBean, "Occupation bean [username: " + username + "] was not found.");
-        occupationBean.setApprovedBy(adminUsername);
-        occupationBean.setApprovedDate(new Date());
-        occupationDao.saveOrUpdate(occupationBean);
+        if (occupationBean != null) {
+            occupationBean.setApprovedBy(adminUsername);
+            occupationBean.setApprovedDate(new Date());
+            occupationDao.update(occupationBean);
+        }
 
         List<HealthIssueBean> healthIssueBeans = healthIssueDao.findHealthIssueBeans(username);
         if (!CollectionUtils.isEmpty(healthIssueBeans)) {
             for (HealthIssueBean bean : healthIssueBeans) {
                 bean.setApprovedBy(adminUsername);
                 bean.setApprovedDate(new Date());
-                healthIssueDao.saveOrUpdate(bean);
+                healthIssueDao.update(bean);
             }
         }
-
-        return true;
     }
 
     @Override
-    public Boolean rejectUserAccount(String username) {
+    public void rejectUserAccount(String username) {
         deleteUserAccount(username);
-        return true;
     }
 
     @Override
     public void deleteUserAccount(String username) {
         OccupationBean occupationBean = occupationDao.find(username);
-        occupationDao.remove(occupationBean);
+        if (occupationBean != null) {
+            occupationDao.remove(occupationBean);
+        }
 
         AddressBean addressBean = addressDao.find(username);
-        addressDao.remove(addressBean);
+        if (addressBean != null) {
+            addressDao.remove(addressBean);
+        }
 
         List<HealthIssueBean> healthIssueBeans = healthIssueDao.findHealthIssueBeans(username);
         if (!CollectionUtils.isEmpty(healthIssueBeans)) {
@@ -155,10 +159,14 @@ public class CommunityUserServiceImpl implements CommunityUserService {
         }
 
         CommunityUserBean communityUserBean = communityUserDao.find(username);
-        communityUserDao.remove(communityUserBean);
+        if (communityUserBean != null) {
+            communityUserDao.remove(communityUserBean);
+        }
 
         AccountBean accountBean = accountDao.find(username);
-        accountDao.remove(accountBean);
+        if (accountBean != null) {
+            accountDao.remove(accountBean);
+        }
     }
 
     @Override
@@ -381,8 +389,9 @@ public class CommunityUserServiceImpl implements CommunityUserService {
             LatLng latLng = new LatLng(addressBean.getLatitude(), addressBean.getLongitude());
             model.setLatLng(latLng);
         }
-        model.setZoneName(addressBean.getZoneBean().getZoneName());
-
+        if (addressBean.getZoneBean() != null) {
+            model.setZoneName(addressBean.getZoneBean().getZoneName());
+        }
         return model;
     }
 

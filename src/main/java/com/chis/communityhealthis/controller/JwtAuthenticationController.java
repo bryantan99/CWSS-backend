@@ -54,8 +54,13 @@ public class JwtAuthenticationController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ResponseEntity<AccountModel> saveUser(@RequestBody AccountRegistrationForm accountRegistrationForm) throws Exception {
-        return new ResponseEntity<>(userDetailsService.createAccount(accountRegistrationForm), HttpStatus.CREATED);
+    public ResponseEntity<Object> saveUser(@RequestBody AccountRegistrationForm accountRegistrationForm) throws Exception {
+        try {
+            AccountModel model = userDetailsService.createAccount(accountRegistrationForm);
+            return ResponseHandler.generateResponse("Successfully created account.", HttpStatus.OK, model);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
     }
 
     private void authenticate(String username, String password) {

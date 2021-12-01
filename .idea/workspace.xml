@@ -4,8 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Allow user / admin to update user's disease profile">
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Delete UpdateProfileComponent">
       <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/TestRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/JwtAuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/JwtAuthenticationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/communityuser/CommunityUserDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/communityuser/CommunityUserDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/account/AccountServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/account/AccountServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/profile/user-profile/user-profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/profile/user-profile/user-profile.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/validators/custom-validators.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/validators/custom-validators.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-address-form/signup-address-form.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-address-form/signup-address-form.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-address-form/signup-address-form.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-address-form/signup-address-form.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-info/signup-info.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-info/signup-info.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-personal-detail-form/signup-personal-detail-form.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-personal-detail-form/signup-personal-detail-form.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-personal-detail-form/signup-personal-detail-form.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup-personal-detail-form/signup-personal-detail-form.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup/signup.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup/signup.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup/signup.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/signup/signup.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/user.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/user/user.module.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +82,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="database.data.extractors.current.export.id" value="Excel (xlsx)" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src" />
+    <property name="last_opened_file_path" value="D:/Coding Projects/FYP" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs.protractor.protractor_package" value="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/protractor" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -79,11 +97,11 @@
       <recent name="C:\Users\win 10\IdeaProjects\CHIS\src\main\resources\webapp\chis-app\src" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Coding Projects\FYP" />
       <recent name="C:\Users\win 10\IdeaProjects\CHIS\src\main\resources\webapp\chis-app\src\app\profile" />
       <recent name="C:\Users\win 10\IdeaProjects\CHIS\src\main\resources\webapp\chis-app\src\app\settings" />
       <recent name="C:\Users\win 10\IdeaProjects\CHIS\src\main\resources\webapp\chis-app\src\app\shared\utility" />
       <recent name="C:\Users\win 10\IdeaProjects\CHIS\src\main\resources\templates\email" />
-      <recent name="C:\Users\win 10\IdeaProjects\CHIS\src\main\resources\webapp\chis-app\src\app\user\admin" />
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.CommunityhealthisApplication">
@@ -260,14 +278,11 @@
       <workItem from="1637480318638" duration="12293000" />
       <workItem from="1637597088402" duration="7776000" />
       <workItem from="1637680475299" duration="12800000" />
-      <workItem from="1637827044801" duration="7892000" />
-    </task>
-    <task id="LOCAL-00089" summary="Add appointment's datetime and status filter into table, Update TableColumnItemModel">
-      <created>1632537811556</created>
-      <option name="number" value="00089" />
-      <option name="presentableId" value="LOCAL-00089" />
-      <option name="project" value="LOCAL" />
-      <updated>1632537811556</updated>
+      <workItem from="1637827044801" duration="10011000" />
+      <workItem from="1638243197355" duration="1094000" />
+      <workItem from="1638293072584" duration="226000" />
+      <workItem from="1638294195221" duration="580000" />
+      <workItem from="1638363619745" duration="7207000" />
     </task>
     <task id="LOCAL-00090" summary="Add imageService">
       <created>1632538109970</created>
@@ -605,7 +620,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637834949856</updated>
     </task>
-    <option name="localTasksCounter" value="138" />
+    <task id="LOCAL-00138" summary="- Delete UpdateProfileComponent">
+      <created>1637835184341</created>
+      <option name="number" value="00138" />
+      <option name="presentableId" value="LOCAL-00138" />
+      <option name="project" value="LOCAL" />
+      <updated>1637835184341</updated>
+    </task>
+    <option name="localTasksCounter" value="139" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -625,7 +647,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="- Add GoogleMaps API dependencies into pom.xml&#10;- Add GoogleMaps component&#10;- Create GeocodingService&#10;- Display google map in CommunityUserComponent&#10;- Update API endpoint in CommunityUserService" />
     <MESSAGE value="- Install Highcharts&#10;- Update getCommunityUsers() API to filter results&#10;- Add gender, ethnic and location pie chart" />
     <MESSAGE value="- Add disease form field to query community user&#10;- Move charts into CommunityUserGraphComponent&#10;- Update getCommunityUsers() to join disease, address and occupation in DAO&#10;- Add CommunityUserModel, EthnicUtil and GenderUtil" />
     <MESSAGE value="- Create AddressUtil&#10;- Add margin below Google Maps&#10;- Fix initMarker()" />
@@ -650,7 +671,8 @@
     <MESSAGE value="- Update UI" />
     <MESSAGE value="- Updated ProfileComponent&#10;- Added UserProfile and AdminProfile component&#10;- Updated UserProfile's UI" />
     <MESSAGE value="- Allow user / admin to update user's disease profile" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Allow user / admin to update user's disease profile" />
+    <MESSAGE value="- Delete UpdateProfileComponent" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Delete UpdateProfileComponent" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

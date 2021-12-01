@@ -73,8 +73,10 @@ public class AccountServiceImpl implements AccountService {
         AddressBean addressBean = createAddressBean(username, form.getAddress());
         addressDao.add(addressBean);
 
-        OccupationBean occupationBean = createOccupationBean(username, form.getOccupation());
-        occupationDao.add(occupationBean);
+        if (form.getOccupation() != null) {
+            OccupationBean occupationBean = createOccupationBean(username, form.getOccupation());
+            occupationDao.add(occupationBean);
+        }
 
         if (form.getHealth() != null && !CollectionUtils.isEmpty(form.getHealth().getDiseaseList())) {
             for (HealthIssueModel diseaseModel : form.getHealth().getDiseaseList()) {
@@ -186,7 +188,9 @@ public class AccountServiceImpl implements AccountService {
         bean.setUsername(personalDetail.getUsername());
         bean.setPw(bCryptPasswordEncoder.encode(personalDetail.getPassword()));
         bean.setIsActive(FlagConstant.NO);
-        bean.setEmail(StringUtils.isNotBlank(personalDetail.getEmail()) ? personalDetail.getEmail() : CommunityServiceCentreConstant.DEFAULT_EMAIL);
+        if (StringUtils.isNotBlank(personalDetail.getEmail())) {
+            bean.setEmail(personalDetail.getEmail());
+        }
         return bean;
     }
 
@@ -196,18 +200,22 @@ public class AccountServiceImpl implements AccountService {
         communityUserBean.setFullName(StringUtils.toRootUpperCase(personalDetail.getFullName()));
         communityUserBean.setContactNo(personalDetail.getContactNo());
         communityUserBean.setNric(personalDetail.getNric());
-        communityUserBean.setGender(StringUtils.toRootUpperCase(personalDetail.getGender()));
-        communityUserBean.setEthnic(StringUtils.toRootUpperCase(personalDetail.getEthnic()));
+        if (StringUtils.isNotBlank(personalDetail.getGender())) {
+            communityUserBean.setGender(StringUtils.toRootUpperCase(personalDetail.getGender()));
+        }
+        if (StringUtils.isNotBlank(personalDetail.getEthnic())) {
+            communityUserBean.setEthnic(StringUtils.toRootUpperCase(personalDetail.getEthnic()));
+        }
         return communityUserBean;
     }
 
     private AddressBean createAddressBean(String username, AddressForm addressForm) {
         AddressBean addressBean = new AddressBean();
         addressBean.setUsername(username);
-        addressBean.setAddressLine1(StringUtils.toRootUpperCase(addressForm.getAddressLine1()));
-        addressBean.setAddressLine2(StringUtils.toRootUpperCase(addressForm.getAddressLine2()));
+        addressBean.setAddressLine1(addressForm.getAddressLine1());
+        addressBean.setAddressLine2(addressForm.getAddressLine2());
         addressBean.setPostcode(addressForm.getPostcode());
-        addressBean.setCity(StringUtils.toRootUpperCase(addressForm.getCity()));
+        addressBean.setCity(addressForm.getCity());
         addressBean.setState(addressForm.getState());
         return addressBean;
     }

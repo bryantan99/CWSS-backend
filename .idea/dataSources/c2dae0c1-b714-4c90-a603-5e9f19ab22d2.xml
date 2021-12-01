@@ -1457,7 +1457,6 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     <column id="391" parent="296" name="GENDER">
       <Position>3</Position>
       <DataType>varchar(1)|0s</DataType>
-      <NotNull>1</NotNull>
     </column>
     <column id="392" parent="296" name="CONTACT_NO">
       <Position>4</Position>
@@ -1466,7 +1465,6 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     <column id="393" parent="296" name="ETHNIC">
       <Position>5</Position>
       <DataType>varchar(1)|0s</DataType>
-      <NotNull>1</NotNull>
     </column>
     <column id="394" parent="296" name="FULL_NAME">
       <Position>6</Position>
