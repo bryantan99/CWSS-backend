@@ -93,9 +93,13 @@ public class CommunityUserRestController {
     }
 
     @RequestMapping(value = "/delete-user/{username}", method = RequestMethod.DELETE)
-    public ResponseEntity<?> deleteUserAccount(@PathVariable String username) {
-        communityUserService.deleteUserAccount(username);
-        return new ResponseEntity<>(null, HttpStatus.OK);
+    public ResponseEntity<Object> deleteUserAccount(@PathVariable String username) {
+        try {
+            communityUserService.deleteUserAccount(username);
+            return ResponseHandler.generateResponse("Successfully deleted user account [username: " + username + "].", HttpStatus.OK, null);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
     }
 
     @RequestMapping(value = "/update-user", method = RequestMethod.POST)

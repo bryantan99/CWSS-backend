@@ -12,7 +12,7 @@ public interface CommunityUserService {
     List<CommunityUserModel> getCommunityUsers(CommunityUserBeanQuery filter);
     CommunityUserProfileModel getCommunityUserProfile(String username) throws NotFoundException;
     void approveUserAccount(String username, String adminUsername) throws Exception;
-    void rejectUserAccount(String username);
+    void rejectUserAccount(String username) throws Exception;
     void deleteUserAccount(String username);
     void updateUserAccount(AccountRegistrationForm form, String actionMaker, boolean isAdmin) throws Exception;
 }

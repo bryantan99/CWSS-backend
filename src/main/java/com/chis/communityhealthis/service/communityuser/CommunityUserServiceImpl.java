@@ -14,12 +14,13 @@ import com.chis.communityhealthis.repository.address.AddressDao;
 import com.chis.communityhealthis.repository.communityuser.CommunityUserDao;
 import com.chis.communityhealthis.repository.healthissue.HealthIssueDao;
 import com.chis.communityhealthis.repository.occupation.OccupationDao;
+import com.chis.communityhealthis.service.sms.SmsService;
 import com.chis.communityhealthis.utility.AddressUtil;
 import com.chis.communityhealthis.utility.FlagConstant;
 import com.chis.communityhealthis.utility.ListComparator;
 import com.google.maps.model.LatLng;
-import io.jsonwebtoken.lang.Assert;
 import javassist.NotFoundException;
+import org.apache.commons.lang3.SerializationUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,6 +48,9 @@ public class CommunityUserServiceImpl implements CommunityUserService {
 
     @Autowired
     private HealthIssueDao healthIssueDao;
+
+    @Autowired
+    private SmsService smsService;
 
     @Override
     public List<CommunityUserModel> getCommunityUsers(CommunityUserBeanQuery filter) {
@@ -132,11 +136,46 @@ public class CommunityUserServiceImpl implements CommunityUserService {
                 healthIssueDao.update(bean);
             }
         }
+
+        CommunityUserBean communityUserBean = communityUserDao.getCommunityUser(username);
+        smsService.sendSms(communityUserBean.getContactNo(), "Your account has been approved. You may login now.");
     }
 
     @Override
-    public void rejectUserAccount(String username) {
-        deleteUserAccount(username);
+    public void rejectUserAccount(String username) throws Exception {
+        OccupationBean occupationBean = occupationDao.find(username);
+        if (occupationBean != null) {
+            occupationDao.remove(occupationBean);
+        }
+
+        AddressBean addressBean = addressDao.find(username);
+        if (addressBean != null) {
+            addressDao.remove(addressBean);
+        }
+
+        List<HealthIssueBean> healthIssueBeans = healthIssueDao.findHealthIssueBeans(username);
+        if (!CollectionUtils.isEmpty(healthIssueBeans)) {
+            for (HealthIssueBean bean : healthIssueBeans) {
+                healthIssueDao.remove(bean);
+            }
+        }
+
+        CommunityUserBean communityUserBean = communityUserDao.find(username);
+        CommunityUserBean clonedBean = (CommunityUserBean) SerializationUtils.clone(communityUserBean);
+        if (communityUserBean != null) {
+            communityUserDao.remove(communityUserBean);
+        }
+
+        AccountBean accountBean = accountDao.find(username);
+        if (accountBean != null) {
+            accountDao.remove(accountBean);
+        }
+
+        try {
+            smsService.sendSms(clonedBean.getContactNo(), "Your account has been rejected. Please contact admin for more info.");
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 
     @Override
