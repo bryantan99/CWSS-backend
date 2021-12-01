@@ -12,7 +12,7 @@ public interface AccountService {
     Boolean isValidUsername(String username);
     Boolean isValidEmail(String email);
     void updateLastLogin(String username);
-    void requestResetPassword(String email);
+    void requestResetPassword(String username) throws Exception;
     Boolean validateOtp(PasswordResetRequestModel model);
     void resetPassword(PasswordResetRequestModel model);
     void changePassword(ChangePasswordRequestModel model);

@@ -44,7 +44,7 @@ public class AccountRestController {
     @PostMapping(value = "/request-password-reset")
     public ResponseEntity<Object> requestPasswordReset(@RequestBody PasswordResetRequestModel model) {
         try {
-            accountService.requestResetPassword(model.getEmail());
+            accountService.requestResetPassword(model.getUsername());
             return ResponseHandler.generateResponse("Successfully requested for password reset.", HttpStatus.OK, null);
         } catch (Exception e) {
             e.printStackTrace();
