@@ -1,5 +1,8 @@
 package com.chis.communityhealthis.utility;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class AuditConstant {
 
     public static final String MODULE_POST = "POST";
@@ -14,4 +17,5 @@ public class AuditConstant {
 
     public static final String MODULE_ADMIN = "ADMIN";
     public static final String ACTION_UPDATE_ADMIN = "Update admin [username: %username%]";
+    public static final List<String> MODULE_LIST = Arrays.asList(MODULE_POST, MODULE_ADMIN, MODULE_APPOINTMENT, MODULE_ASSISTANCE);
 }
