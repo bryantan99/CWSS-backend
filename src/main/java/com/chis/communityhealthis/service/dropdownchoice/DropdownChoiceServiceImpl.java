@@ -5,10 +5,12 @@ import com.chis.communityhealthis.model.dropdown.DropdownChoiceModel;
 import com.chis.communityhealthis.repository.admin.AdminDao;
 import com.chis.communityhealthis.repository.appointment.AppointmentDao;
 import com.chis.communityhealthis.repository.assistancecategory.AssistanceCategoryDao;
+import com.chis.communityhealthis.repository.audit.AuditLogDao;
 import com.chis.communityhealthis.repository.communityuser.CommunityUserDao;
 import com.chis.communityhealthis.repository.disease.DiseaseDao;
 import com.chis.communityhealthis.repository.holiday.HolidayDao;
 import com.chis.communityhealthis.repository.zone.ZoneDao;
+import com.chis.communityhealthis.utility.AuditConstant;
 import com.chis.communityhealthis.utility.DatetimeUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.WordUtils;
@@ -43,6 +45,9 @@ public class DropdownChoiceServiceImpl implements DropdownChoiceService {
 
     @Autowired
     private AssistanceCategoryDao assistanceCategoryDao;
+
+    @Autowired
+    private AuditLogDao auditLogDao;
 
 
     @Override
@@ -124,6 +129,19 @@ public class DropdownChoiceServiceImpl implements DropdownChoiceService {
         if (!CollectionUtils.isEmpty(categoryBeans)) {
             for (AssistanceCategoryBean bean : categoryBeans) {
                 list.add(new DropdownChoiceModel<>(bean.getCategoryId().toString(), WordUtils.capitalizeFully(bean.getCategoryName())));
+            }
+        }
+        Collections.sort(list);
+        return list;
+    }
+
+    @Override
+    public List<DropdownChoiceModel<String>> getModuleDropdownChoices() {
+        List<DropdownChoiceModel<String>> list = new ArrayList<>();
+        List<String> moduleList = AuditConstant.MODULE_LIST;
+        if (!CollectionUtils.isEmpty(moduleList)) {
+            for (String module : moduleList) {
+                list.add(new DropdownChoiceModel<>(module, WordUtils.capitalizeFully(module)));
             }
         }
         Collections.sort(list);
