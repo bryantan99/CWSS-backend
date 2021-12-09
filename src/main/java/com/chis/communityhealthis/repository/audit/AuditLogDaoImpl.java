@@ -6,10 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,8 +24,10 @@ public class AuditLogDaoImpl extends GenericDaoImpl<AuditBean, Integer> implemen
             predicates.add(criteriaBuilder.equal(root.get("module"), moduleName));
         }
 
-        criteriaQuery.select(root).distinct(true).where(predicates.toArray(new Predicate[]{}));
+        List<Order> orderList = new ArrayList<>();
+        orderList.add(criteriaBuilder.desc(root.get("actionDate")));
 
+        criteriaQuery.select(root).distinct(true).where(predicates.toArray(new Predicate[]{})).orderBy(orderList);
         Query<AuditBean> query = currentSession().createQuery(criteriaQuery);
         return query.list();
     }

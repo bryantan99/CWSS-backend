@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Allow super admin to view audit trails at Settings">
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Allow owner of the post to edit / delete post">
       <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/TestRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/components/post-feed/post-feed.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/shared/components/post-feed/post-feed.component.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -267,13 +265,6 @@
       <workItem from="1638293072584" duration="226000" />
       <workItem from="1638294195221" duration="580000" />
       <workItem from="1638363619745" duration="13108000" />
-    </task>
-    <task id="LOCAL-00093" summary="Merge userAssistance and adminAssistance component, delete assistanceRecordComponent">
-      <created>1632580691879</created>
-      <option name="number" value="00093" />
-      <option name="presentableId" value="LOCAL-00093" />
-      <option name="project" value="LOCAL" />
-      <updated>1632580691880</updated>
     </task>
     <task id="LOCAL-00094" summary="Update authenticate API to return specific errorMsg based on exception, update login to handle returnUrl">
       <created>1632584160089</created>
@@ -611,7 +602,14 @@
       <option name="project" value="LOCAL" />
       <updated>1639075378720</updated>
     </task>
-    <option name="localTasksCounter" value="142" />
+    <task id="LOCAL-00142" summary="- Allow owner of the post to edit / delete post">
+      <created>1639076425390</created>
+      <option name="number" value="00142" />
+      <option name="presentableId" value="LOCAL-00142" />
+      <option name="project" value="LOCAL" />
+      <updated>1639076425390</updated>
+    </task>
+    <option name="localTasksCounter" value="143" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -631,7 +629,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="- Add ZoneBean, ZoneDao and ZoneImpl&#10;- Join AddressBean with ZoneBean @OneToOne&#10;- Add filter by zoneId in CommunityUserComponent" />
     <MESSAGE value="- Add ZoneBean, ZoneDao and ZoneImpl&#10;- Join AddressBean with ZoneBean @OneToOne&#10;- Add filter by zoneId in CommunityUserComponent&#10;- Update location column chart to display by zone" />
     <MESSAGE value="- Add SettingsComponent and AccountSettingsComponent&#10;- Add settings routerLink into sidemenu&#10;- Add changePassword()&#10;- Add Commons Text dependency" />
     <MESSAGE value="- Add create post button on PostFeedComponent" />
@@ -656,7 +653,8 @@
     <MESSAGE value="- Update SignUpComponent (remove occupation &amp; health)&#10;- Add * to required fields (personal detail, address)" />
     <MESSAGE value="- Added Twilio&#10;- Send approval / reject message for community user account registration" />
     <MESSAGE value="- Allow super admin to view audit trails at Settings" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Allow super admin to view audit trails at Settings" />
+    <MESSAGE value="- Allow owner of the post to edit / delete post" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Allow owner of the post to edit / delete post" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
