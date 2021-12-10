@@ -76,7 +76,7 @@ public class AdminRestController {
             Boolean isSuperAdmin = authService.hasRole(RoleConstant.SUPER_ADMIN);
             Assert.isTrue(isSuperAdmin, "Unauthorized user.");
             Assert.isTrue(!StringUtils.equals(currentLoggedInUser, username), "User is attempting to delete self account.");
-            adminService.deleteStaff(username);
+            adminService.deleteStaff(username, currentLoggedInUser);
             return ResponseHandler.generateResponse("Successfully deleted admin [username: " + username + "]", HttpStatus.OK, null);
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);

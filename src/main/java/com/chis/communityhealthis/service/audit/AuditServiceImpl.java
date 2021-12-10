@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -33,6 +34,17 @@ public class AuditServiceImpl implements AuditService{
             }
         }
         return list;
+    }
+
+    @Override
+    public void saveLogs(AuditBean auditBean, Collection<AuditActionBean> auditActionBeans) {
+        Integer id = auditLogDao.add(auditBean);
+        if (!CollectionUtils.isEmpty(auditActionBeans)) {
+            for (AuditActionBean auditActionBean: auditActionBeans) {
+                auditActionBean.setAuditId(id);
+                auditActionDao.add(auditActionBean);
+            }
+        }
     }
 
     private AuditModel toAuditModel(AuditBean auditBean) {

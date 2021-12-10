@@ -1,5 +1,7 @@
 package com.chis.communityhealthis.bean;
 
+import org.javers.core.metamodel.annotation.TypeName;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -8,6 +10,7 @@ import java.util.Set;
 
 @Entity(name = "account")
 @Table(name = "account")
+@TypeName("AccountBean")
 public class AccountBean implements Serializable {
 
     private static final long serialVersionUID = -366641835277597847L;

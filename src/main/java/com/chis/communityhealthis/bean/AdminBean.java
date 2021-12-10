@@ -1,5 +1,7 @@
 package com.chis.communityhealthis.bean;
 
+import org.javers.core.metamodel.annotation.TypeName;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -8,6 +10,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "ADMIN")
+@TypeName("AdminBean")
 public class AdminBean implements Serializable {
 
     private static final long serialVersionUID = 2614607182089444001L;

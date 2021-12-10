@@ -9,8 +9,7 @@ import com.chis.communityhealthis.model.user.AdminDetailModel;
 import com.chis.communityhealthis.repository.account.AccountDao;
 import com.chis.communityhealthis.repository.accountrole.AccountRoleDao;
 import com.chis.communityhealthis.repository.admin.AdminDao;
-import com.chis.communityhealthis.repository.audit.AuditLogDao;
-import com.chis.communityhealthis.repository.auditaction.AuditActionDao;
+import com.chis.communityhealthis.service.audit.AuditService;
 import com.chis.communityhealthis.service.auth.AuthService;
 import com.chis.communityhealthis.service.email.EmailService;
 import com.chis.communityhealthis.utility.*;
@@ -52,16 +51,13 @@ public class AdminServiceImpl implements AdminService {
     private AccountRoleDao accountRoleDao;
 
     @Autowired
-    private AuditLogDao auditLogDao;
-
-    @Autowired
-    private AuditActionDao auditActionDao;
-
-    @Autowired
     private EmailService emailService;
 
     @Autowired
     private AuthService authService;
+
+    @Autowired
+    private AuditService auditService;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -150,6 +146,10 @@ public class AdminServiceImpl implements AdminService {
             accountRoleDao.add(roleBean);
         }
 
+        AuditBeanFactory auditFactory = new AuditBeanFactory(AuditConstant.MODULE_ADMIN, AuditConstant.formatActionAddAdmin(form.getUsername(), form.getFullName()), form.getCreatedBy());
+        AuditBean auditBean = auditFactory.createAuditBean();
+        auditService.saveLogs(auditBean, null);
+
         StaffAccountCreationEmailTemplateModel model = new StaffAccountCreationEmailTemplateModel(form.getFullName(), form.getUsername(), generatedPw);
         sendAccountCreationEmail(form.getEmail(), model);
         return adminBean;
@@ -191,7 +191,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public void deleteStaff(String username) {
+    public void deleteStaff(String username, String actionMakerUsername) {
         List<AccountRoleBean> roles = accountRoleDao.findUserRoles(username);
         if (!CollectionUtils.isEmpty(roles)) {
             for (AccountRoleBean role : roles) {
@@ -204,15 +204,16 @@ public class AdminServiceImpl implements AdminService {
 
         AccountBean accountBean = accountDao.find(username);
         accountDao.remove(accountBean);
+
+        AuditBeanFactory auditBeanFactory = new AuditBeanFactory(AuditConstant.MODULE_ADMIN, AuditConstant.formatActionDeleteAdmin(username, adminBean.getFullName()), actionMakerUsername);
+        AuditBean auditBean = auditBeanFactory.createAuditBean();
+        auditService.saveLogs(auditBean, null);
     }
 
     @Override
     public void updateAdmin(AdminForm adminForm) throws Exception {
-        AuditBean auditBean = new AuditBean(
-                AuditConstant.MODULE_ADMIN,
-                StringUtils.replace(AuditConstant.ACTION_UPDATE_ADMIN, "%username%", adminForm.getUsername()),
-                adminForm.getCreatedBy()
-        );
+        AuditBeanFactory auditBeanFactory = new AuditBeanFactory(AuditConstant.MODULE_ADMIN, AuditConstant.formatActionUpdateAdmin(adminForm.getUsername(), adminForm.getFullName()), adminForm.getCreatedBy());
+        AuditBean auditBean = auditBeanFactory.createAuditBean();
         List<AuditActionBean> auditActionBeans = new ArrayList<>();
 
         AdminBean adminBean = adminDao.find(adminForm.getUsername());
@@ -223,11 +224,10 @@ public class AdminServiceImpl implements AdminService {
         Assert.notNull(accountBean, "AccountBean [username: " + adminForm.getUsername() + "] was not found!");
         AccountBean accountBeanDeepCopy = SerializationUtils.clone(accountBean);
 
-        List<String> roleIds = accountBean.getRoles().stream().map(AccountRoleBean::getRoleName).collect(Collectors.toList());
-        List<String> newRoleIds = adminForm.getRoleList();
-        List<String> rolesToDelete = differenceBetweenList(roleIds, newRoleIds);
-        List<String> rolesToAdd = differenceBetweenList(newRoleIds, roleIds);
-        updateAdminRoles(adminBean.getUsername(), rolesToAdd, rolesToDelete);
+        AuditActionBean accountRoleAuditActionBean = updateAccountRoles(adminForm, accountBean);
+        if (accountRoleAuditActionBean != null) {
+            auditActionBeans.add(accountRoleAuditActionBean);
+        }
 
         adminBean.setFullName(adminForm.getFullName());
         adminBean.setContactNo(adminForm.getContactNo());
@@ -254,27 +254,48 @@ public class AdminServiceImpl implements AdminService {
         accountDao.update(accountBean);
         BeanComparator accountBeanComparator = new BeanComparator(accountBeanDeepCopy, accountBean);
 
-        auditActionBeans.add(new AuditActionBean(adminBeanComparator.toPrettyString()));
-        auditActionBeans.add(new AuditActionBean(accountBeanComparator.toPrettyString()));
-        saveLog(auditBean, auditActionBeans);
+        if (adminBeanComparator.hasChanges()) {
+            auditActionBeans.add(new AuditActionBean(adminBeanComparator.toPrettyString()));
+        }
+        if (accountBeanComparator.hasChanges()) {
+            auditActionBeans.add(new AuditActionBean(accountBeanComparator.toPrettyString()));
+        }
+
+        auditService.saveLogs(auditBean, auditActionBeans);
     }
 
-    private void updateAdminRoles(String username, List<String> rolesToAdd, List<String> rolesToDelete) {
-        List<AccountRoleBean> list = accountRoleDao.findUserRoles(username);
-        if (!CollectionUtils.isEmpty(list)) {
-            for (AccountRoleBean bean : list) {
+    private AuditActionBean updateAccountRoles(AdminForm adminForm, AccountBean accountBean) {
+        List<String> roleIds = accountBean.getRoles().stream().map(AccountRoleBean::getRoleName).collect(Collectors.toList());
+        List<String> newRoleIds = adminForm.getRoleList();
+        BeanComparator accountRolesComparator = new BeanComparator(roleIds, newRoleIds);
+        if (!accountRolesComparator.hasChanges()) {
+            return null;
+        }
+
+        List<String> rolesToDelete = differenceBetweenList(roleIds, newRoleIds);
+        List<String> rolesToAdd = differenceBetweenList(newRoleIds, roleIds);
+        Set<AccountRoleBean> currentAccountRoles = accountBean.getRoles();
+
+        if (!CollectionUtils.isEmpty(currentAccountRoles)) {
+            for (AccountRoleBean bean : currentAccountRoles) {
                 if (rolesToDelete.contains(bean.getRoleName())) {
                     accountRoleDao.remove(bean);
                 }
             }
         }
 
-        for (String newRole: rolesToAdd) {
-            AccountRoleBean roleBean = new AccountRoleBean();
-            roleBean.setUsername(username);
-            roleBean.setRoleName(newRole);
-            accountRoleDao.add(roleBean);
+        if (!CollectionUtils.isEmpty(rolesToAdd)) {
+            for (String role : rolesToAdd) {
+                AccountRoleBean roleBean = new AccountRoleBean();
+                roleBean.setRoleName(role);
+                roleBean.setUsername(adminForm.getUsername());
+                accountRoleDao.add(roleBean);
+            }
         }
+
+        AuditActionBean auditActionBean = new AuditActionBean();
+        auditActionBean.setActionDescription("Diff:\n* changes on account roles\n - current account roles : " + adminForm.getRoleList());
+        return auditActionBean;
     }
 
     private List<String> differenceBetweenList(List<String> list1, List<String> list2) {
@@ -290,18 +311,6 @@ public class AdminServiceImpl implements AdminService {
             if (files != null) {
                 for (File file : files) {
                     boolean isDeleted = file.delete();
-                }
-            }
-        }
-    }
-
-    private void saveLog(AuditBean auditBean, List<AuditActionBean> auditActionBeans) {
-        Integer auditId = auditLogDao.add(auditBean);
-        if (!CollectionUtils.isEmpty(auditActionBeans)) {
-            for (AuditActionBean bean : auditActionBeans) {
-                if (StringUtils.isNotBlank(bean.getActionDescription())) {
-                    bean.setAuditId(auditId);
-                    auditActionDao.add(bean);
                 }
             }
         }
