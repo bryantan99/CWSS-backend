@@ -1,11 +1,14 @@
 package com.chis.communityhealthis.bean;
 
+import org.javers.core.metamodel.annotation.TypeName;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
 
 @Entity
 @Table(name = "COMMUNITY_USER")
+@TypeName("CommunityUserBean")
 public class CommunityUserBean implements Serializable {
 
     private static final long serialVersionUID = -1198909767225283237L;

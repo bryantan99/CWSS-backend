@@ -84,7 +84,8 @@ public class CommunityUserRestController {
     @RequestMapping(value = "/reject-user", method = RequestMethod.GET)
     public ResponseEntity<Object> rejectUserAccount(@RequestParam String username) {
         try {
-            communityUserService.rejectUserAccount(username);
+            String currentLoggedInUsername = authService.getCurrentLoggedInUsername();
+            communityUserService.rejectUserAccount(username, currentLoggedInUsername);
             String msg = "Successfully rejected " + username + " profile.";
             return ResponseHandler.generateResponse(msg, HttpStatus.OK, null);
         } catch (Exception e) {
@@ -95,7 +96,8 @@ public class CommunityUserRestController {
     @RequestMapping(value = "/delete-user/{username}", method = RequestMethod.DELETE)
     public ResponseEntity<Object> deleteUserAccount(@PathVariable String username) {
         try {
-            communityUserService.deleteUserAccount(username);
+            String currentLoggedInUsername = authService.getCurrentLoggedInUsername();
+            communityUserService.deleteUserAccount(username, currentLoggedInUsername);
             return ResponseHandler.generateResponse("Successfully deleted user account [username: " + username + "].", HttpStatus.OK, null);
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);

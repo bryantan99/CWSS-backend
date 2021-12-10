@@ -1,10 +1,13 @@
 package com.chis.communityhealthis.bean;
 
+import org.javers.core.metamodel.annotation.TypeName;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "ADDRESS")
+@TypeName("AddressBean")
 public class AddressBean implements Serializable {
 
     private static final long serialVersionUID = -5507349330083306948L;

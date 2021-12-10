@@ -1,5 +1,7 @@
 package com.chis.communityhealthis.bean;
 
+import org.javers.core.metamodel.annotation.TypeName;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,6 +11,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "OCCUPATION")
+@TypeName("OccupationBean")
 public class OccupationBean implements Serializable {
 
     private static final long serialVersionUID = -6531027889635304041L;

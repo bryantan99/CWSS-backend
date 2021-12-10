@@ -11,8 +11,8 @@ import java.util.List;
 public interface CommunityUserService {
     List<CommunityUserModel> getCommunityUsers(CommunityUserBeanQuery filter);
     CommunityUserProfileModel getCommunityUserProfile(String username) throws NotFoundException;
-    void approveUserAccount(String username, String adminUsername) throws Exception;
-    void rejectUserAccount(String username) throws Exception;
-    void deleteUserAccount(String username);
+    void approveUserAccount(String username, String actionMakerUsername) throws Exception;
+    void rejectUserAccount(String username, String actionMakerUsername) throws Exception;
+    void deleteUserAccount(String username, String actionMakerUsername) throws Exception;
     void updateUserAccount(AccountRegistrationForm form, String actionMaker, boolean isAdmin) throws Exception;
 }
