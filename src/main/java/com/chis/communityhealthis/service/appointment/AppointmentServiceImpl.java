@@ -1,12 +1,14 @@
 package com.chis.communityhealthis.service.appointment;
 
 import com.chis.communityhealthis.bean.AppointmentBean;
-import com.chis.communityhealthis.model.appointment.AppointmentModel;
-import com.chis.communityhealthis.model.appointment.ConfirmationForm;
-import com.chis.communityhealthis.model.appointment.ScheduleAppointmentForm;
-import com.chis.communityhealthis.model.appointment.UpdateDatetimeForm;
+import com.chis.communityhealthis.bean.AssistanceBean;
+import com.chis.communityhealthis.bean.AssistanceCommentBean;
+import com.chis.communityhealthis.factory.AppointmentModelFactory;
+import com.chis.communityhealthis.model.appointment.*;
 import com.chis.communityhealthis.repository.admin.AdminDao;
 import com.chis.communityhealthis.repository.appointment.AppointmentDao;
+import com.chis.communityhealthis.repository.assistance.AssistanceDao;
+import com.chis.communityhealthis.repository.assistancecomment.AssistanceCommentDao;
 import com.chis.communityhealthis.utility.DatetimeUtil;
 import io.jsonwebtoken.lang.Assert;
 import org.apache.commons.lang3.StringUtils;
@@ -27,13 +29,19 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Autowired
     private AdminDao adminDao;
 
+    @Autowired
+    private AssistanceDao assistanceDao;
+
+    @Autowired
+    private AssistanceCommentDao assistanceCommentDao;
+
     @Override
     public List<AppointmentModel> getPendingAppointments(Integer appointmentId) {
         List<AppointmentBean> appointmentBeanList = appointmentDao.getPendingAdminAppointmentsWithoutAdminUsername(appointmentId);
         List<AppointmentModel> list = new ArrayList<>();
         if (!CollectionUtils.isEmpty(appointmentBeanList)) {
             for (AppointmentBean appointmentBean : appointmentBeanList) {
-                list.add(toAppointmentModel(appointmentBean));
+                list.add(AppointmentModelFactory.createAppointmentModel(appointmentBean));
             }
         }
         return list;
@@ -45,7 +53,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         List<AppointmentModel> list = new ArrayList<>();
         if (!CollectionUtils.isEmpty(appointmentBeanList)) {
             for (AppointmentBean appointmentBean : appointmentBeanList) {
-                list.add(toAppointmentModel(appointmentBean));
+                list.add(AppointmentModelFactory.createAppointmentModel(appointmentBean));
             }
         }
         return list;
@@ -73,7 +81,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         if (appointmentBean == null) {
             throw new Exception("Appointment [ID: " + appointmentId + "] was not found.");
         }
-        return toAppointmentModel(appointmentBean);
+        return AppointmentModelFactory.createAppointmentModel(appointmentBean);
     }
 
     @Override
@@ -106,6 +114,16 @@ public class AppointmentServiceImpl implements AppointmentService {
         appointmentBean.setLastUpdatedBy(form.getUpdatedBy());
         appointmentBean.setLastUpdatedDate(form.getUpdatedDate());
         appointmentDao.update(appointmentBean);
+
+        if (form.getAssistanceId() != null) {
+            AssistanceBean assistanceBean = assistanceDao.find(form.getAssistanceId());
+            if (assistanceBean != null && StringUtils.isBlank(assistanceBean.getAdminUsername()) && isAdmin) {
+                assistanceBean.setAdminUsername(form.getUpdatedBy());
+                assistanceBean.setLastUpdatedBy(form.getUpdatedBy());
+                assistanceBean.setLastUpdatedDate(form.getUpdatedDate());
+                assistanceDao.update(assistanceBean);
+            }
+        }
     }
 
     @Override
@@ -159,6 +177,16 @@ public class AppointmentServiceImpl implements AppointmentService {
         appointmentBean.setLastUpdatedBy(form.getConfirmedBy());
         appointmentBean.setLastUpdatedDate(form.getConfirmedDate());
         appointmentDao.update(appointmentBean);
+
+        if (form.getAssistanceId() != null) {
+            AssistanceBean assistanceBean = assistanceDao.find(form.getAssistanceId());
+            if (assistanceBean != null && StringUtils.isBlank(assistanceBean.getAdminUsername()) && isAdmin) {
+                assistanceBean.setAdminUsername(form.getConfirmedBy());
+                assistanceBean.setLastUpdatedBy(form.getConfirmedBy());
+                assistanceBean.setLastUpdatedDate(form.getConfirmedDate());
+                assistanceDao.update(assistanceBean);
+            }
+        }
     }
 
     @Override
@@ -185,11 +213,48 @@ public class AppointmentServiceImpl implements AppointmentService {
         List<AppointmentModel> list = new ArrayList<>();
         if (!CollectionUtils.isEmpty(appointmentBeanList)) {
             for (AppointmentBean appointmentBean : appointmentBeanList) {
-                list.add(toAppointmentModel(appointmentBean));
+                list.add(AppointmentModelFactory.createAppointmentModel(appointmentBean));
             }
         }
         Collections.sort(list);
         return list;
+    }
+
+    @Override
+    public void updateAppointmentStatus(UpdateAppointmentStatusForm form) throws Exception {
+        AppointmentBean appointmentBean = appointmentDao.find(form.getAppointmentId());
+        if (appointmentBean == null) {
+            throw new Exception("Appointment [ID: " + form.getAppointmentId() + "] was not found.");
+        }
+
+        appointmentBean.setAppointmentStatus(form.getAppointmentStatus());
+        appointmentBean.setLastUpdatedBy(form.getSubmittedBy());
+        appointmentBean.setLastUpdatedDate(form.getSubmittedDate());
+        appointmentDao.update(appointmentBean);
+
+        if (form.getAssistanceId() != null) {
+            AssistanceBean assistanceBean = assistanceDao.find(form.getAssistanceId());
+            assistanceBean.setAssistanceStatus(form.getAssistanceStatus());
+            assistanceBean.setLastUpdatedBy(form.getSubmittedBy());
+            assistanceBean.setLastUpdatedDate(form.getSubmittedDate());
+            if (StringUtils.isBlank(assistanceBean.getAdminUsername())) {
+                assistanceBean.setAdminUsername(form.getSubmittedBy());
+            }
+            assistanceDao.update(assistanceBean);
+
+            AssistanceCommentBean assistanceCommentBean = new AssistanceCommentBean();
+            assistanceCommentBean.setAssistanceId(form.getAssistanceId());
+            String desc = "I've ";
+            if (StringUtils.equals(AssistanceBean.STATUS_ACCEPTED, assistanceBean.getAssistanceStatus())) {
+                desc += "accepted this assistance request. (Reason: " + form.getReason() + ")";
+            } else if (StringUtils.equals(AssistanceBean.STATUS_REJECTED, assistanceBean.getAssistanceStatus())) {
+                desc += "rejected this assistance request. (Reason: " + form.getReason() + ")";
+            }
+            assistanceCommentBean.setCommentDesc(desc);
+            assistanceCommentBean.setCreatedDate(form.getSubmittedDate());
+            assistanceCommentBean.setCreatedBy(form.getSubmittedBy());
+            assistanceCommentDao.add(assistanceCommentBean);
+        }
     }
 
     private Date calculateEndDatetime(Date startDatetime) {
@@ -197,27 +262,6 @@ public class AppointmentServiceImpl implements AppointmentService {
         calendar.setTime(startDatetime);
         calendar.add(Calendar.MINUTE, 30);
         return calendar.getTime();
-    }
-
-    private AppointmentModel toAppointmentModel(AppointmentBean appointmentBean) {
-        AppointmentModel model = new AppointmentModel();
-        model.setAppointmentId(appointmentBean.getAppointmentId());
-        model.setPurpose(appointmentBean.getAppointmentPurpose());
-        model.setStartDatetime(appointmentBean.getAppointmentStartTime());
-        model.setEndDatetime(appointmentBean.getAppointmentEndTime());
-        model.setStatus(appointmentBean.getAppointmentStatus());
-        if (appointmentBean.getCommunityUserBean() != null) {
-            model.setUsername(appointmentBean.getUsername());
-            model.setUserFullName(appointmentBean.getCommunityUserBean().getFullName());
-        }
-        if (appointmentBean.getAdminBean() != null) {
-            model.setAdminUsername(appointmentBean.getAdminUsername());
-            model.setAdminFullName(appointmentBean.getAdminBean().getFullName());
-        }
-        if (appointmentBean.getLastUpdatedDate() != null) {
-            model.setLastUpdatedDate(appointmentBean.getLastUpdatedDate());
-        }
-        return model;
     }
 
     private boolean isPendingAdmin(String status) {

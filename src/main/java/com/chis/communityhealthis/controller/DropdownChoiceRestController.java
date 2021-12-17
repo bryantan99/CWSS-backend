@@ -54,9 +54,10 @@ public class DropdownChoiceRestController {
 
     @RequestMapping(value = "/appointment/timeslot", method = RequestMethod.GET)
     public ResponseEntity<Object> getAppointmentAvailableTimeslot(@RequestParam @DateTimeFormat(pattern = "yyyyMMdd") Date date,
-                                                                  @RequestParam(required = false) String adminUsername) {
+                                                                  @RequestParam(required = false) String adminUsername,
+                                                                  @RequestParam(required = false) String username) {
         try {
-            List<DropdownChoiceModel<Date>> list = dropdownChoiceService.getAppointmentAvailableTimeslot(date, adminUsername);
+            List<DropdownChoiceModel<Date>> list = dropdownChoiceService.getAppointmentAvailableTimeslot(date, adminUsername, username);
             return ResponseHandler.generateResponse("Successfully retrieved " + list.size() + " choice(s).", HttpStatus.OK, list);
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, new ArrayList<DropdownChoiceModel<Date>>());

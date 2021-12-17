@@ -9,7 +9,7 @@ public interface DropdownChoiceService {
     List<DropdownChoiceModel<String>> getDiseaseDropdownList();
     List<DropdownChoiceModel<String>> getAdminUsernameList();
     List<DropdownChoiceModel<String>> getCommunityUserUsernameList(boolean hasNric);
-    List<DropdownChoiceModel<Date>> getAppointmentAvailableTimeslot(Date date, String adminUsername);
+    List<DropdownChoiceModel<Date>> getAppointmentAvailableTimeslot(Date date, String adminUsername, String username);
     List<DropdownChoiceModel<String>> getZoneIdsList();
     List<DropdownChoiceModel<String>> getAssistanceCategoryDropdownChoices();
     List<DropdownChoiceModel<String>> getModuleDropdownChoices();

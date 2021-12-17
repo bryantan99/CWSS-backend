@@ -1,16 +1,18 @@
 package com.chis.communityhealthis.service.assistance;
 
-import com.chis.communityhealthis.bean.AdminBean;
-import com.chis.communityhealthis.bean.AssistanceBean;
-import com.chis.communityhealthis.bean.AssistanceCategoryBean;
-import com.chis.communityhealthis.bean.AssistanceCommentBean;
+import com.chis.communityhealthis.bean.*;
+import com.chis.communityhealthis.factory.AppointmentModelFactory;
+import com.chis.communityhealthis.model.appointment.AppointmentModel;
 import com.chis.communityhealthis.model.assistance.*;
 import com.chis.communityhealthis.model.assistancecategory.AssistanceCategoryForm;
 import com.chis.communityhealthis.repository.admin.AdminDao;
+import com.chis.communityhealthis.repository.appointment.AppointmentDao;
 import com.chis.communityhealthis.repository.assistance.AssistanceDao;
 import com.chis.communityhealthis.repository.assistancecategory.AssistanceCategoryDao;
 import com.chis.communityhealthis.repository.assistancecomment.AssistanceCommentDao;
+import com.chis.communityhealthis.utility.DatetimeUtil;
 import io.jsonwebtoken.lang.Assert;
+import javassist.NotFoundException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +39,9 @@ public class AssistanceServiceImpl implements AssistanceService {
     @Autowired
     private AssistanceCommentDao assistanceCommentDao;
 
+    @Autowired
+    private AppointmentDao appointmentDao;
+
     @Override
     public List<AssistanceModel> findUserAssistanceRecords(AssistanceQueryForm form) {
         List<AssistanceModel> list = new ArrayList<>();
@@ -51,23 +56,10 @@ public class AssistanceServiceImpl implements AssistanceService {
 
     @Override
     public AssistanceBean addAssistanceRequest(AssistanceRequestForm form) {
-        AssistanceBean bean = new AssistanceBean();
-        bean.setAssistanceTitle(form.getAssistanceTitle());
-        bean.setAssistanceDescription(form.getAssistanceDescription());
-        bean.setCreatedDate(new Date());
-        bean.setCreatedBy(form.getCreatedBy());
-        bean.setUsername(form.getUsername());
+        AppointmentBean appointmentBean = createAppointmentBean(form);
+        Integer appointmentId = appointmentDao.add(appointmentBean);
 
-        if (form.getCategoryId() != null) {
-            bean.setCategoryId(form.getCategoryId());
-        }
-
-        if (StringUtils.isNotBlank(form.getAdminUsername())) {
-            bean.setAdminUsername(form.getAdminUsername());
-            bean.setAssistanceStatus(AssistanceBean.STATUS_PROCESSING);
-        } else {
-            bean.setAssistanceStatus(AssistanceBean.STATUS_PENDING);
-        }
+        AssistanceBean bean = createAssistanceBean(form, appointmentId);
         assistanceDao.add(bean);
         return bean;
     }
@@ -75,21 +67,29 @@ public class AssistanceServiceImpl implements AssistanceService {
     @Override
     public void deleteAssistance(Integer assistanceId, String actionMakerUsername) throws Exception {
         AssistanceBean assistanceBean = assistanceDao.find(assistanceId);
-        Assert.notNull(assistanceBean, "Assistance bean with Id: " + assistanceId.toString() + " was not found!");
-        Assert.isTrue(assistanceBean.getAssistanceStatus().equals(AssistanceBean.STATUS_PENDING), "Assistance request's status is not in pending.");
-
         AdminBean adminBean = adminDao.find(actionMakerUsername);
-        if (assistanceBean.getUsername().equals(actionMakerUsername) || adminBean != null) {
-            assistanceDao.remove(assistanceBean);
-        } else {
+
+        if (assistanceBean == null) {
+            throw new Exception("Assistance bean [ID: " + assistanceId + "] was not found.");
+        } else if (!StringUtils.equals(assistanceBean.getAssistanceStatus(), AssistanceBean.STATUS_PENDING)) {
+            throw new Exception("Assistance request is not in pending status.");
+        } else if (!StringUtils.equals(assistanceBean.getUsername(), actionMakerUsername) && adminBean == null) {
             throw new Exception("Unauthorized to delete assistance! Action maker is not admin / assistance request applicant.");
         }
+
+        AppointmentBean appointmentBean = assistanceBean.getAppointmentBean();
+        if (appointmentBean != null) {
+            appointmentDao.remove(appointmentBean);
+        }
+        assistanceDao.remove(assistanceBean);
     }
 
     @Override
     public AssistanceModel getAssistanceRecordDetail(Integer assistanceId, String actionMakerUsername) throws Exception {
         AssistanceBean assistanceBean = assistanceDao.find(assistanceId);
-        Assert.notNull(assistanceBean, "Assistance bean with Id: " + assistanceId.toString() + " was not found!");
+        if (assistanceBean == null) {
+            throw new NotFoundException("Assistance [ID: " + assistanceId.toString() + "] was not found.");
+        }
 
         AdminBean adminBean = adminDao.find(actionMakerUsername);
         if (adminBean == null && !assistanceBean.getUsername().equals(actionMakerUsername)) {
@@ -170,11 +170,25 @@ public class AssistanceServiceImpl implements AssistanceService {
         } else if (StringUtils.isNotBlank(assistanceBean.getAdminUsername())) {
             throw new Exception("Assistance [ID: " + form.getAssistanceId() + "] was being handled by another person.");
         }
+
         assistanceBean.setAssistanceStatus(AssistanceBean.STATUS_PROCESSING);
         assistanceBean.setAdminUsername(form.getPersonInCharge());
         assistanceBean.setLastUpdatedBy(form.getUpdatedBy());
         assistanceBean.setLastUpdatedDate(form.getUpdatedDate());
         assistanceDao.update(assistanceBean);
+
+        AppointmentBean appointmentBean = assistanceBean.getAppointmentBean();
+        appointmentBean.setAdminUsername(form.getPersonInCharge());
+        if (form.getAppointmentStartDatetime() == null) {
+            appointmentBean.setAppointmentStatus(AppointmentBean.APPOINTMENT_STATUS_CONFIRMED);
+        } else {
+            appointmentBean.setAppointmentStatus(AppointmentBean.APPOINTMENT_STATUS_PENDING_USER);
+            appointmentBean.setAppointmentStartTime(form.getAppointmentStartDatetime());
+            appointmentBean.setAppointmentEndTime(DatetimeUtil.calculateAppointmentEndDatetime(form.getAppointmentStartDatetime()));
+        }
+        appointmentBean.setLastUpdatedDate(form.getUpdatedDate());
+        appointmentBean.setLastUpdatedBy(form.getUpdatedBy());
+        appointmentDao.update(appointmentBean);
     }
 
     @Override
@@ -188,9 +202,15 @@ public class AssistanceServiceImpl implements AssistanceService {
         assistanceBean.setLastUpdatedDate(form.getRejectedDate());
         assistanceDao.update(assistanceBean);
 
+        AppointmentBean appointmentBean = assistanceBean.getAppointmentBean();
+        appointmentBean.setAppointmentStatus(AppointmentBean.APPOINTMENT_STATUS_CANCELLED);
+        appointmentBean.setLastUpdatedDate(form.getRejectedDate());
+        appointmentBean.setLastUpdatedBy(form.getRejectedBy());
+        appointmentDao.update(appointmentBean);
+
         AssistanceCommentBean commentBean = new AssistanceCommentBean();
         commentBean.setAssistanceId(form.getAssistanceId());
-        commentBean.setCommentDesc("Rejected Reason : " + form.getReason());
+        commentBean.setCommentDesc("I've rejected the request. (Reason : " + form.getReason() + ")");
         commentBean.setCreatedBy(form.getRejectedBy());
         commentBean.setCreatedDate(form.getRejectedDate());
         assistanceCommentDao.add(commentBean);
@@ -222,22 +242,42 @@ public class AssistanceServiceImpl implements AssistanceService {
         categoryDao.update(bean);
     }
 
-    private AssistanceRecordTableModel toAssistanceRecordTableModel(AssistanceBean bean) {
-        AssistanceRecordTableModel model = new AssistanceRecordTableModel();
-        model.setAssistanceId(bean.getAssistanceId());
-        model.setUsername(bean.getUsername());
-        model.setAssistanceTitle(bean.getAssistanceTitle());
-        model.setStatus(bean.getAssistanceStatus());
-        model.setCreatedDate(bean.getCreatedDate());
+    private AssistanceBean createAssistanceBean(AssistanceRequestForm form, Integer appointmentId) {
+        AssistanceBean bean = new AssistanceBean();
+        bean.setAssistanceTitle(form.getAssistanceTitle());
+        bean.setAssistanceDescription(form.getAssistanceDescription());
+        bean.setCreatedDate(new Date());
+        bean.setCreatedBy(form.getCreatedBy());
+        bean.setUsername(form.getUsername());
+        bean.setAppointmentId(appointmentId);
 
-        if (bean.getCommunityUserBean() != null) {
-            model.setUserFullName(bean.getCommunityUserBean().getFullName());
+        if (form.getCategoryId() != null) {
+            bean.setCategoryId(form.getCategoryId());
         }
 
-        if (bean.getAdminBean() != null) {
-            model.setAdminFullName(bean.getAdminBean().getFullName());
+        if (StringUtils.isNotBlank(form.getAdminUsername())) {
+            bean.setAdminUsername(form.getAdminUsername());
+            bean.setAssistanceStatus(AssistanceBean.STATUS_PROCESSING);
+        } else {
+            bean.setAssistanceStatus(AssistanceBean.STATUS_PENDING);
         }
-        return model;
+        return bean;
+    }
+
+    private AppointmentBean createAppointmentBean(AssistanceRequestForm form) {
+        boolean isAdmin = adminDao.find(form.getCreatedBy()) != null;
+        String status = isAdmin ? AppointmentBean.APPOINTMENT_STATUS_PENDING_USER : AppointmentBean.APPOINTMENT_STATUS_PENDING_ADMIN;
+
+        AppointmentBean appointmentBean = new AppointmentBean();
+        appointmentBean.setAppointmentPurpose("Discuss about assistance request - " + form.getAssistanceTitle());
+        appointmentBean.setAppointmentStartTime(form.getAppointmentStartDatetime());
+        appointmentBean.setAppointmentEndTime(DatetimeUtil.calculateAppointmentEndDatetime(form.getAppointmentStartDatetime()));
+        appointmentBean.setAppointmentStatus(status);
+        appointmentBean.setCreatedBy(form.getCreatedBy());
+        appointmentBean.setCreatedDate(new Date());
+        appointmentBean.setAdminUsername(StringUtils.isNotBlank(form.getAdminUsername()) ? form.getAdminUsername() : null);
+        appointmentBean.setUsername(isAdmin ? form.getUsername() : form.getCreatedBy());
+        return appointmentBean;
     }
 
     private AssistanceModel toAssistanceModel(AssistanceBean bean) {
@@ -262,6 +302,13 @@ public class AssistanceServiceImpl implements AssistanceService {
             model.setAdminUsername(bean.getAdminUsername());
             model.setAdminFullName(bean.getAdminBean().getFullName());
         }
+
+        AppointmentBean appointmentBean = bean.getAppointmentBean();
+        if (appointmentBean != null) {
+            AppointmentModel appointmentModel = AppointmentModelFactory.createAppointmentModel(appointmentBean);
+            model.setAppointmentModel(appointmentModel);
+        }
+
         return model;
     }
 }

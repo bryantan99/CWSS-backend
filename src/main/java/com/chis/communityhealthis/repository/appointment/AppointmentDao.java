@@ -12,4 +12,5 @@ public interface AppointmentDao extends GenericDao<AppointmentBean, Integer> {
     List<AppointmentBean> getConfirmedAppointments(String username, boolean isAdmin, Date date);
     List<AppointmentBean> getPendingAdminAppointmentsWithoutAdminUsername(Integer appointmentId);
     AppointmentBean findClashedAppointment(String username, boolean isAdmin, Date appointmentStartTime);
+    List<AppointmentBean> getCommunityUserAppointments(String username, Date date);
 }

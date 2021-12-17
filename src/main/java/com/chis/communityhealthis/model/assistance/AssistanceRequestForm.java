@@ -11,6 +11,7 @@ public class AssistanceRequestForm {
     private Date createdDate;
     private String username;
     private String adminUsername;
+    private Date appointmentStartDatetime;
 
     public Integer getAssistanceId() {
         return assistanceId;
@@ -74,5 +75,13 @@ public class AssistanceRequestForm {
 
     public void setAdminUsername(String adminUsername) {
         this.adminUsername = adminUsername;
+    }
+
+    public Date getAppointmentStartDatetime() {
+        return appointmentStartDatetime;
+    }
+
+    public void setAppointmentStartDatetime(Date appointmentStartDatetime) {
+        this.appointmentStartDatetime = appointmentStartDatetime;
     }
 }

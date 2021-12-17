@@ -7,6 +7,7 @@ import com.chis.communityhealthis.model.response.ResponseHandler;
 import com.chis.communityhealthis.service.assistance.AssistanceService;
 import com.chis.communityhealthis.service.auth.AuthService;
 import io.jsonwebtoken.lang.Assert;
+import javassist.NotFoundException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -85,7 +86,11 @@ public class AssistanceRestController {
             AssistanceModel assistanceModel = assistanceService.getAssistanceRecordDetail(assistanceId, currentLoggedInUsername);
             return ResponseHandler.generateResponse("Successfully retrieved details of assistance request ID: " + assistanceId.toString() + ".", HttpStatus.OK, assistanceModel);
         } catch (Exception e) {
-            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+            if (e instanceof NotFoundException) {
+                return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.NOT_FOUND, null);
+            } else {
+                return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+            }
         }
     }
 

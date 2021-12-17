@@ -1,9 +1,6 @@
 package com.chis.communityhealthis.service.appointment;
 
-import com.chis.communityhealthis.model.appointment.AppointmentModel;
-import com.chis.communityhealthis.model.appointment.ConfirmationForm;
-import com.chis.communityhealthis.model.appointment.ScheduleAppointmentForm;
-import com.chis.communityhealthis.model.appointment.UpdateDatetimeForm;
+import com.chis.communityhealthis.model.appointment.*;
 
 import java.util.Date;
 import java.util.List;
@@ -17,4 +14,5 @@ public interface AppointmentService {
     void confirmAppointment(ConfirmationForm form) throws Exception;
     Integer scheduleAppointment(ScheduleAppointmentForm form);
     List<AppointmentModel> getConfirmedAppointments(String username, boolean isAdmin, Date date);
+    void updateAppointmentStatus(UpdateAppointmentStatusForm form) throws Exception;
 }

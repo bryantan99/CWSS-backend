@@ -1,4 +1,4 @@
-package com.chis.communityhealthis.utility;
+package com.chis.communityhealthis.factory;
 
 import com.chis.communityhealthis.bean.AuditBean;
 

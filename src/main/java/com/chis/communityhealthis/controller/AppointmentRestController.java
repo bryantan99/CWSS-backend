@@ -1,9 +1,6 @@
 package com.chis.communityhealthis.controller;
 
-import com.chis.communityhealthis.model.appointment.AppointmentModel;
-import com.chis.communityhealthis.model.appointment.ConfirmationForm;
-import com.chis.communityhealthis.model.appointment.ScheduleAppointmentForm;
-import com.chis.communityhealthis.model.appointment.UpdateDatetimeForm;
+import com.chis.communityhealthis.model.appointment.*;
 import com.chis.communityhealthis.model.response.ResponseHandler;
 import com.chis.communityhealthis.service.appointment.AppointmentService;
 import com.chis.communityhealthis.service.auth.AuthService;
@@ -125,6 +122,18 @@ public class AppointmentRestController {
             List<AppointmentModel> upcomingAppointmentStringList = appointmentService.getConfirmedAppointments(username, isAdmin, date);
             return ResponseHandler.generateResponse("Successfully retrieved " + upcomingAppointmentStringList.size() + " record(s).", HttpStatus.OK, upcomingAppointmentStringList);
         } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
+    @PostMapping(value = "/update-status")
+    public ResponseEntity<Object> updateAppointmentStatus(@RequestBody UpdateAppointmentStatusForm form) {
+        try {
+            form.setSubmittedBy(authService.getCurrentLoggedInUsername());
+            form.setSubmittedDate(new Date());
+            appointmentService.updateAppointmentStatus(form);
+            return ResponseHandler.generateResponse("Successfully updated appointment's status.", HttpStatus.OK, null);
+        }catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
     }

@@ -9,6 +9,7 @@ public class UpdateDatetimeForm {
     private Date datetime;
     private String updatedBy;
     private Date updatedDate;
+    private Integer assistanceId;
 
     public Integer getAppointmentId() {
         return appointmentId;
@@ -48,5 +49,13 @@ public class UpdateDatetimeForm {
 
     public void setUpdatedDate(Date updatedDate) {
         this.updatedDate = updatedDate;
+    }
+
+    public Integer getAssistanceId() {
+        return assistanceId;
+    }
+
+    public void setAssistanceId(Integer assistanceId) {
+        this.assistanceId = assistanceId;
     }
 }

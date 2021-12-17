@@ -1,5 +1,7 @@
 package com.chis.communityhealthis.model.assistance;
 
+import com.chis.communityhealthis.model.appointment.AppointmentModel;
+
 import java.util.Date;
 
 public class AssistanceModel {
@@ -17,6 +19,7 @@ public class AssistanceModel {
     private String userFullName;
     private String adminUsername;
     private String adminFullName;
+    private AppointmentModel appointmentModel;
 
     public Integer getAssistanceId() {
         return assistanceId;
@@ -128,5 +131,13 @@ public class AssistanceModel {
 
     public void setAdminFullName(String adminFullName) {
         this.adminFullName = adminFullName;
+    }
+
+    public AppointmentModel getAppointmentModel() {
+        return appointmentModel;
+    }
+
+    public void setAppointmentModel(AppointmentModel appointmentModel) {
+        this.appointmentModel = appointmentModel;
     }
 }

@@ -5,8 +5,17 @@ import java.util.Date;
 public class ConfirmationForm {
     private Integer appointmentId;
     private Date appointmentLastUpdatedDate;
+    private Integer assistanceId;
     private String confirmedBy;
     private Date confirmedDate;
+
+    public Integer getAssistanceId() {
+        return assistanceId;
+    }
+
+    public void setAssistanceId(Integer assistanceId) {
+        this.assistanceId = assistanceId;
+    }
 
     public Integer getAppointmentId() {
         return appointmentId;

@@ -1,6 +1,7 @@
 package com.chis.communityhealthis.service.communityuser;
 
 import com.chis.communityhealthis.bean.*;
+import com.chis.communityhealthis.factory.AuditBeanFactory;
 import com.chis.communityhealthis.model.address.AddressModel;
 import com.chis.communityhealthis.model.filter.CommunityUserBeanQuery;
 import com.chis.communityhealthis.model.health.HealthModel;

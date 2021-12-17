@@ -45,4 +45,11 @@ public class DatetimeUtil {
             return Objects.equals(date1.getTime(), date2.getTime());
         }
     }
+
+    public static Date calculateAppointmentEndDatetime(Date appointmentStartDatetime) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(appointmentStartDatetime);
+        calendar.add(Calendar.MINUTE, 30);
+        return calendar.getTime();
+    }
 }

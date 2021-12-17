@@ -21,8 +21,10 @@ public class AssistanceBean implements Serializable {
     public static final String ADMIN_USERNAME = "ADMIN_USERNAME";
     public static final String LAST_UPDATED_BY = "LAST_UPDATED_BY";
     public static final String LAST_UPDATED_DATE = "LAST_UPDATED_DATE";
+    public static final String APPOINTMENT_ID = "APPOINTMENT_ID";
 
     public static final String STATUS_PENDING = "pending";
+    public static final String STATUS_ACCEPTED = "accepted";
     public static final String STATUS_REJECTED = "rejected";
     public static final String STATUS_PROCESSING = "processing";
     public static final String STATUS_COMPLETED = "completed";
@@ -63,9 +65,16 @@ public class AssistanceBean implements Serializable {
     @Column(name = LAST_UPDATED_DATE)
     private Date lastUpdatedDate;
 
+    @Column(name = APPOINTMENT_ID)
+    private Integer appointmentId;
+
     @OneToOne
     @JoinColumn(name = CATEGORY_ID, referencedColumnName = AssistanceCategoryBean.CATEGORY_ID, insertable = false, updatable = false)
     private AssistanceCategoryBean categoryBean;
+
+    @OneToOne
+    @JoinColumn(name = APPOINTMENT_ID, referencedColumnName = AppointmentBean.APPOINTMENT_ID, insertable = false, updatable = false)
+    private AppointmentBean appointmentBean;
 
     @OneToOne
     @JoinColumn(name = USERNAME, referencedColumnName = CommunityUserBean.USERNAME, insertable = false, updatable = false)
@@ -161,6 +170,22 @@ public class AssistanceBean implements Serializable {
 
     public void setLastUpdatedDate(Date lastUpdatedDate) {
         this.lastUpdatedDate = lastUpdatedDate;
+    }
+
+    public Integer getAppointmentId() {
+        return appointmentId;
+    }
+
+    public void setAppointmentId(Integer appointmentId) {
+        this.appointmentId = appointmentId;
+    }
+
+    public AppointmentBean getAppointmentBean() {
+        return appointmentBean;
+    }
+
+    public void setAppointmentBean(AppointmentBean appointmentBean) {
+        this.appointmentBean = appointmentBean;
     }
 
     public CommunityUserBean getCommunityUserBean() {

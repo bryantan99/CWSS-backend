@@ -1,6 +1,7 @@
 package com.chis.communityhealthis.service.admin;
 
 import com.chis.communityhealthis.bean.*;
+import com.chis.communityhealthis.factory.AuditBeanFactory;
 import com.chis.communityhealthis.model.email.MailRequest;
 import com.chis.communityhealthis.model.email.template.StaffAccountCreationEmailTemplateModel;
 import com.chis.communityhealthis.model.role.RoleModel;

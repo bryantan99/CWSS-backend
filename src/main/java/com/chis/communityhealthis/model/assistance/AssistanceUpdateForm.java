@@ -11,6 +11,7 @@ public class AssistanceUpdateForm {
     private String personInCharge;
     private String updatedBy;
     private Date updatedDate;
+    private Date appointmentStartDatetime;
 
     public Integer getAssistanceId() {
         return assistanceId;
@@ -74,5 +75,13 @@ public class AssistanceUpdateForm {
 
     public void setUpdatedDate(Date updatedDate) {
         this.updatedDate = updatedDate;
+    }
+
+    public Date getAppointmentStartDatetime() {
+        return appointmentStartDatetime;
+    }
+
+    public void setAppointmentStartDatetime(Date appointmentStartDatetime) {
+        this.appointmentStartDatetime = appointmentStartDatetime;
     }
 }

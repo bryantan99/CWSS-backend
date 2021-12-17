@@ -46,7 +46,7 @@ public class AssistanceDaoImpl extends GenericDaoImpl<AssistanceBean, Integer> i
         Root<AssistanceBean> root = criteriaQuery.from(AssistanceBean.class);
 
         List<Predicate> predicates = new ArrayList<>();
-        predicates.add(criteriaBuilder.equal(root.get("assistanceStatus"), "pending"));
+        predicates.add(criteriaBuilder.equal(root.get("assistanceStatus"), AssistanceBean.STATUS_PENDING));
         predicates.add(criteriaBuilder.isNull(root.get("adminUsername")));
         if (assistanceId != null) {
             predicates.add(criteriaBuilder.equal(root.get("assistanceId"), assistanceId));
@@ -132,6 +132,7 @@ public class AssistanceDaoImpl extends GenericDaoImpl<AssistanceBean, Integer> i
         Fetch<CommunityUserBean, OccupationBean> occupationBeanFetch = communityUserBeanFetch.fetch("occupationBean", JoinType.LEFT);
         Fetch<AssistanceBean, AdminBean> adminBeanFetch = root.fetch("adminBean", JoinType.LEFT);
         Fetch<AssistanceBean, AssistanceCategoryBean> categoryBeanFetch = root.fetch("categoryBean", JoinType.LEFT);
+        Fetch<AssistanceBean, AppointmentBean> appointmentBeanFetch = root.fetch("appointmentBean", JoinType.LEFT);
     }
 
     private List<AssistanceBean> getResults(CriteriaQuery<AssistanceBean> cq, Root<AssistanceBean> root, List<Predicate> predicates) {
