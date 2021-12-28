@@ -23,9 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import static java.nio.file.Files.copy;
 import static java.nio.file.Paths.get;
@@ -62,7 +60,7 @@ public class PostServiceImpl implements PostService {
 
         PostBean postBean = postDao.getPostWithMedia(postForm.getPostId());
         Assert.notNull(postBean, "PostBean with ID: " + postForm.getPostId() + " was not found.");
-        PostBean deepCopy = (PostBean) SerializationUtils.clone(postBean);
+        PostBean deepCopy = SerializationUtils.clone(postBean);
 
         postBean.setPostDescription(postForm.getPostDescription());
         postDao.update(postBean);
@@ -84,24 +82,31 @@ public class PostServiceImpl implements PostService {
                 boolean fileIsDeleted = file.delete();
                 System.out.println("File is deleted: " + fileIsDeleted);
                 if (fileIsDeleted) {
+                    AuditActionBean auditActionBean = new AuditActionBean();
+                    String replacedMediaId = StringUtils.replace(AuditConstant.ACTION_DELETE_POST_MEDIA, "%postMediaId%", mediaBean.getMediaId().toString());
+                    String replacedMediaDirectory = StringUtils.replace(replacedMediaId, "%mediaDirectory%", mediaBean.getMediaDirectory());
+                    auditActionBean.setActionDescription(replacedMediaDirectory);
+                    auditActionBeans.add(auditActionBean);
                     postMediaDao.remove(mediaBean);
                 }
             }
-            AuditActionBean auditActionBean = new AuditActionBean();
-            auditActionBean.setActionDescription(StringUtils.replace(AuditConstant.ACTION_DELETE_POST_MEDIA, "%postMediaId%", postForm.getPostMediaIdsToBeDeleted().toString()));
-            auditActionBeans.add(auditActionBean);
+
         }
 
         if (!CollectionUtils.isEmpty(postForm.getFileList())) {
             String directoryName = createFolder(postForm.getPostId());
             List<String> filesUploaded = uploadPostMedia(directoryName, postForm.getFileList());
             Assert.isTrue(filesUploaded.size() == postForm.getFileList().size(), "There's an error when uploading files to folder.");
-            List<Integer> mediaIds = saveMediaDetail(postForm.getPostId(), postForm.getFileList());
+            Map<Integer, PostMediaBean> mediaBeanMap = saveMediaDetail(postForm.getPostId(), postForm.getFileList());
 
-            if (!CollectionUtils.isEmpty(mediaIds)) {
-                AuditActionBean auditActionBean = new AuditActionBean();
-                auditActionBean.setActionDescription(StringUtils.replace(AuditConstant.ACTION_CREATE_POST_MEDIA, "%postMediaId%", mediaIds.toString()));
-                auditActionBeans.add(auditActionBean);
+            if (!CollectionUtils.isEmpty(mediaBeanMap)) {
+                for (Map.Entry<Integer, PostMediaBean> entry : mediaBeanMap.entrySet()) {
+                    AuditActionBean auditActionBean = new AuditActionBean();
+                    String replacedMediaId = StringUtils.replace(AuditConstant.ACTION_CREATE_POST_MEDIA, "%postMediaId%", entry.getKey().toString());
+                    String replacedMediaName = StringUtils.replace(replacedMediaId, "%mediaDirectory%", entry.getValue().getMediaDirectory());
+                    auditActionBean.setActionDescription(replacedMediaName);
+                    auditActionBeans.add(auditActionBean);
+                }
             }
         }
 
@@ -125,12 +130,16 @@ public class PostServiceImpl implements PostService {
             String directoryName = createFolder(postId);
             List<String> filesUploaded = uploadPostMedia(directoryName, postForm.getFileList());
             Assert.isTrue(filesUploaded.size() == postForm.getFileList().size(), "There's an error when uploading files to folder.");
-            List<Integer> mediaIds = saveMediaDetail(postId, postForm.getFileList());
+            Map<Integer, PostMediaBean> mediaBeanMap = saveMediaDetail(postForm.getPostId(), postForm.getFileList());
 
-            if (!CollectionUtils.isEmpty(mediaIds)) {
-                AuditActionBean auditActionBean = new AuditActionBean();
-                auditActionBean.setActionDescription(StringUtils.replace(AuditConstant.ACTION_CREATE_POST_MEDIA, "%postMediaId%", mediaIds.toString()));
-                auditActionBeans.add(auditActionBean);
+            if (!CollectionUtils.isEmpty(mediaBeanMap)) {
+                for (Map.Entry<Integer, PostMediaBean> entry : mediaBeanMap.entrySet()) {
+                    AuditActionBean auditActionBean = new AuditActionBean();
+                    String replacedMediaId = StringUtils.replace(AuditConstant.ACTION_CREATE_POST_MEDIA, "%postMediaId%", entry.getKey().toString());
+                    String replacedMediaName = StringUtils.replace(replacedMediaId, "%mediaDirectory%", entry.getValue().getMediaDirectory());
+                    auditActionBean.setActionDescription(replacedMediaName);
+                    auditActionBeans.add(auditActionBean);
+                }
             }
         }
 
@@ -155,15 +164,13 @@ public class PostServiceImpl implements PostService {
         if (!CollectionUtils.isEmpty(postMediaBeans)) {
             File directory = new File(POST_MEDIA_DIRECTORY.concat("/").concat(postId.toString()));
             deleteDirectory(directory);
-            List<Integer> deletedIds = new ArrayList<>();
             for (PostMediaBean mediaBean : postMediaBeans) {
-                deletedIds.add(mediaBean.getMediaId());
-                postMediaDao.remove(mediaBean);
-            }
-            if (!CollectionUtils.isEmpty(deletedIds)) {
                 AuditActionBean auditActionBean = new AuditActionBean();
-                auditActionBean.setActionDescription(StringUtils.replace(AuditConstant.ACTION_DELETE_POST_MEDIA, "%postMediaId%", deletedIds.toString()));
+                String replacedMediaId = StringUtils.replace(AuditConstant.ACTION_DELETE_POST_MEDIA, "%postMediaId%", mediaBean.getMediaId().toString());
+                String replacedMediaDirectory = StringUtils.replace(replacedMediaId, "%mediaDirectory%", mediaBean.getMediaDirectory());
+                auditActionBean.setActionDescription(replacedMediaDirectory);
                 auditActionBeans.add(auditActionBean);
+                postMediaDao.remove(mediaBean);
             }
         }
 
@@ -213,17 +220,19 @@ public class PostServiceImpl implements PostService {
         return filenames;
     }
 
-    private List<Integer> saveMediaDetail(Integer postId, List<MultipartFile> fileList) {
-        List<Integer> mediaIds = new ArrayList<>();
+    private Map<Integer, PostMediaBean> saveMediaDetail(Integer postId, List<MultipartFile> fileList) {
+        Map<Integer, PostMediaBean> map = new HashMap<>();
         if (!CollectionUtils.isEmpty(fileList)) {
             for (MultipartFile file : fileList) {
                 PostMediaBean bean = createPostMediaBean(file);
                 bean.setPostId(postId);
                 Integer mediaId = postMediaDao.add(bean);
-                mediaIds.add(mediaId);
+                if (!map.containsKey(mediaId)) {
+                    map.put(mediaId, bean);
+                }
             }
         }
-        return mediaIds;
+        return map;
     }
 
     private PostMediaBean createPostMediaBean(MultipartFile file) {

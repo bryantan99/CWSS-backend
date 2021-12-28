@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Display actionMaker's full name at ActivityLogComponent&#10;- Hide action button at AppointmentTableComponent if the appointment's status is cancelled / completed&#10;- Add audit logs for appointment and assistance module&#10;- Allow admin to block/unblock user to request assistance">
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Fix lazyInitialization for appointmentBean and assistanceBean audit">
       <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/TestRestController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/appointment/AppointmentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/appointment/AppointmentServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance-detail/assistance-detail.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/assistance/assistance-detail/assistance-detail.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/post/PostServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/post/PostServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -289,14 +288,7 @@
       <workItem from="1640620420873" duration="224000" />
       <workItem from="1640620874199" duration="63000" />
       <workItem from="1640680578406" duration="6786000" />
-      <workItem from="1640697053574" duration="12360000" />
-    </task>
-    <task id="LOCAL-00100" summary="Add appointment schedule component to display confirmed appointment based on selected date, installed moment.js">
-      <created>1632742986476</created>
-      <option name="number" value="00100" />
-      <option name="presentableId" value="LOCAL-00100" />
-      <option name="project" value="LOCAL" />
-      <updated>1632742986476</updated>
+      <workItem from="1640697053574" duration="13544000" />
     </task>
     <task id="LOCAL-00101" summary="Add BeanComparator to compare object for auditing using Javers">
       <created>1632764961532</created>
@@ -634,7 +626,14 @@
       <option name="project" value="LOCAL" />
       <updated>1640709818226</updated>
     </task>
-    <option name="localTasksCounter" value="149" />
+    <task id="LOCAL-00149" summary="- Fix lazyInitialization for appointmentBean and assistanceBean audit">
+      <created>1640711014592</created>
+      <option name="number" value="00149" />
+      <option name="presentableId" value="LOCAL-00149" />
+      <option name="project" value="LOCAL" />
+      <updated>1640711014592</updated>
+    </task>
+    <option name="localTasksCounter" value="150" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -665,7 +664,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="- Fix ProfileComponent to not update display when parameter changed" />
     <MESSAGE value="- Fix Settings menu item" />
     <MESSAGE value="- Allow Super Admin to update account roles for admin" />
     <MESSAGE value="- Change appointment duration to 30 minutes&#10;- Update date-picker to disable public holiday and weekend" />
@@ -690,7 +688,8 @@
     <MESSAGE value="- Update assistance and appointment module (1:1 relationship)" />
     <MESSAGE value="- Update rescheduleAppointmentComponent's UI" />
     <MESSAGE value="- Display actionMaker's full name at ActivityLogComponent&#10;- Hide action button at AppointmentTableComponent if the appointment's status is cancelled / completed&#10;- Add audit logs for appointment and assistance module&#10;- Allow admin to block/unblock user to request assistance" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Display actionMaker's full name at ActivityLogComponent&#10;- Hide action button at AppointmentTableComponent if the appointment's status is cancelled / completed&#10;- Add audit logs for appointment and assistance module&#10;- Allow admin to block/unblock user to request assistance" />
+    <MESSAGE value="- Fix lazyInitialization for appointmentBean and assistanceBean audit" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Fix lazyInitialization for appointmentBean and assistanceBean audit" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
