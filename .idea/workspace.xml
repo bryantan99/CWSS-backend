@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Fix lazyInitialization for appointmentBean and assistanceBean audit">
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Fix audit for post module">
       <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/TestRestController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/post/PostServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/post/PostServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/settings/activity-log/activity-log.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/src/app/settings/activity-log/activity-log.component.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -288,14 +288,7 @@
       <workItem from="1640620420873" duration="224000" />
       <workItem from="1640620874199" duration="63000" />
       <workItem from="1640680578406" duration="6786000" />
-      <workItem from="1640697053574" duration="13544000" />
-    </task>
-    <task id="LOCAL-00101" summary="Add BeanComparator to compare object for auditing using Javers">
-      <created>1632764961532</created>
-      <option name="number" value="00101" />
-      <option name="presentableId" value="LOCAL-00101" />
-      <option name="project" value="LOCAL" />
-      <updated>1632764961532</updated>
+      <workItem from="1640697053574" duration="13950000" />
     </task>
     <task id="LOCAL-00102" summary="Update new-post-modal to handle postMediaIds to be deleted">
       <created>1632822896725</created>
@@ -633,7 +626,14 @@
       <option name="project" value="LOCAL" />
       <updated>1640711014592</updated>
     </task>
-    <option name="localTasksCounter" value="150" />
+    <task id="LOCAL-00150" summary="- Fix audit for post module">
+      <created>1640712321080</created>
+      <option name="number" value="00150" />
+      <option name="presentableId" value="LOCAL-00150" />
+      <option name="project" value="LOCAL" />
+      <updated>1640712321080</updated>
+    </task>
+    <option name="localTasksCounter" value="151" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -664,7 +664,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="- Fix Settings menu item" />
     <MESSAGE value="- Allow Super Admin to update account roles for admin" />
     <MESSAGE value="- Change appointment duration to 30 minutes&#10;- Update date-picker to disable public holiday and weekend" />
     <MESSAGE value="- Change appointment duration to 30 minutes&#10;- Update change appointment datetime modal" />
@@ -689,7 +688,8 @@
     <MESSAGE value="- Update rescheduleAppointmentComponent's UI" />
     <MESSAGE value="- Display actionMaker's full name at ActivityLogComponent&#10;- Hide action button at AppointmentTableComponent if the appointment's status is cancelled / completed&#10;- Add audit logs for appointment and assistance module&#10;- Allow admin to block/unblock user to request assistance" />
     <MESSAGE value="- Fix lazyInitialization for appointmentBean and assistanceBean audit" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Fix lazyInitialization for appointmentBean and assistanceBean audit" />
+    <MESSAGE value="- Fix audit for post module" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Fix audit for post module" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
