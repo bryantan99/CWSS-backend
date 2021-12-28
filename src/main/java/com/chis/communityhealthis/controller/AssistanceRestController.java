@@ -12,7 +12,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -143,22 +142,6 @@ public class AssistanceRestController {
         }
     }
 
-    @PostMapping(value = "/accept")
-    public ResponseEntity<Object> acceptAssistanceRequest(@RequestBody AssistanceUpdateForm form) {
-        try {
-            if (!authService.currentLoggedInUserIsAdmin()) {
-                throw new Exception("Unauthorized user.");
-            }
-            form.setPersonInCharge(authService.getCurrentLoggedInUsername());
-            form.setUpdatedDate(new Date());
-            form.setUpdatedBy(form.getPersonInCharge());
-            assistanceService.acceptAssistanceRequest(form);
-            return ResponseHandler.generateResponse("Successfully updated assistance request [ID: " + form.getAssistanceId() + "].", HttpStatus.OK, null);
-        } catch (Exception e) {
-            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
-        }
-    }
-
     @PostMapping(value = "/reject")
     public ResponseEntity<Object> rejectAssistanceRequest(@RequestBody AssistanceRejectForm form) {
         try {
@@ -177,10 +160,12 @@ public class AssistanceRestController {
     @DeleteMapping(value = "/category/{categoryId}")
     public ResponseEntity<Object> deleteAssistanceCategory(@PathVariable Integer categoryId) {
         try {
-            if (!authService.currentLoggedInUserIsAdmin()) {
+            String currentLoggedInUsername = authService.getCurrentLoggedInUsername();
+            boolean isAdmin = authService.currentLoggedInUserIsAdmin();
+            if (!isAdmin) {
                 throw new Exception("Unauthorized user.");
             }
-            assistanceService.deleteCategory(categoryId);
+            assistanceService.deleteCategory(categoryId, currentLoggedInUsername);
             return ResponseHandler.generateResponse("Successfully deleted category [ID: " + categoryId  + "].", HttpStatus.OK, null);
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
@@ -193,6 +178,8 @@ public class AssistanceRestController {
             if (!authService.currentLoggedInUserIsAdmin()) {
                 throw new Exception("Unauthorized user.");
             }
+            form.setActionBy(authService.getCurrentLoggedInUsername());
+            form.setActionDate(new Date());
             Integer categoryId = assistanceService.addCategory(form);
             return ResponseHandler.generateResponse("Successfully added category [ID: " + categoryId  + "].", HttpStatus.OK, null);
         } catch (Exception e) {
@@ -206,6 +193,8 @@ public class AssistanceRestController {
             if (!authService.currentLoggedInUserIsAdmin()) {
                 throw new Exception("Unauthorized user.");
             }
+            form.setActionBy(authService.getCurrentLoggedInUsername());
+            form.setActionDate(new Date());
             assistanceService.updateCategory(form);
             return ResponseHandler.generateResponse("Successfully updated category [ID: " + form.getCategoryId()  + "].", HttpStatus.OK, null);
         } catch (Exception e) {

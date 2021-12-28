@@ -2,6 +2,7 @@ package com.chis.communityhealthis.bean;
 
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
+import org.javers.core.metamodel.annotation.TypeName;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,6 +10,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "APPOINTMENT")
+@TypeName("AppointmentBean")
 public class AppointmentBean implements Serializable {
 
     private static final long serialVersionUID = 262380162656168802L;

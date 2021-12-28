@@ -3,6 +3,8 @@ package com.chis.communityhealthis.controller;
 import com.chis.communityhealthis.model.filter.CommunityUserBeanQuery;
 import com.chis.communityhealthis.model.response.ResponseHandler;
 import com.chis.communityhealthis.model.signup.AccountRegistrationForm;
+import com.chis.communityhealthis.model.user.BlockDetailModel;
+import com.chis.communityhealthis.model.user.BlockUserForm;
 import com.chis.communityhealthis.model.user.CommunityUserModel;
 import com.chis.communityhealthis.model.user.CommunityUserProfileModel;
 import com.chis.communityhealthis.service.auth.AuthService;
@@ -113,6 +115,51 @@ public class CommunityUserRestController {
             return ResponseHandler.generateResponse("Successfully updated user profile", HttpStatus.OK, null);
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
+    @PostMapping(value = "/block-user")
+    public ResponseEntity<Object> blockUser(@RequestBody BlockUserForm form) {
+        try {
+            String currentLoggedInUsername = authService.getCurrentLoggedInUsername();
+            boolean isAdmin = authService.currentLoggedInUserIsAdmin();
+            if (!isAdmin) {
+                throw new Exception("Unauthorized user.");
+            }
+            form.setActionBy(currentLoggedInUsername);
+            communityUserService.blockUser(form);
+            return ResponseHandler.generateResponse("Successfully blocked user [username: " + form.getUsername() +"]", HttpStatus.OK, null);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
+    @PostMapping(value = "/unblock-user")
+    public ResponseEntity<Object> unblockUser(@RequestBody BlockUserForm form) {
+        try {
+            String currentLoggedInUsername = authService.getCurrentLoggedInUsername();
+            boolean isAdmin = authService.currentLoggedInUserIsAdmin();
+            if (!isAdmin) {
+                throw new Exception("Unauthorized user.");
+            }
+            form.setActionBy(currentLoggedInUsername);
+            communityUserService.unblockUser(form);
+            return ResponseHandler.generateResponse("Successfully unblocked user [username: " + form.getUsername() +"]", HttpStatus.OK, null);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
+    @GetMapping(value = "/validate-user-eligibility")
+    public ResponseEntity<Object> validateIfUserIsEligibleToRequestAssistance(@RequestParam String username) {
+        try {
+            BlockDetailModel blockDetailModel = communityUserService.getBlockDetail(username);
+            return ResponseHandler.generateResponse("User [username: " + username + "] is " + (blockDetailModel != null ? "blocked." : "not blocked."), HttpStatus.OK, blockDetailModel);
+        } catch (Exception e) {
+            BlockDetailModel blockDetailModel = new BlockDetailModel();
+            blockDetailModel.setUsername(username);
+            blockDetailModel.setIsBlocked(true);
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, blockDetailModel);
         }
     }
 }

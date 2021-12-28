@@ -4,11 +4,16 @@ import com.chis.communityhealthis.model.address.AddressModel;
 import com.chis.communityhealthis.model.health.HealthModel;
 import com.chis.communityhealthis.model.occupation.OccupationModel;
 
+import java.util.Date;
 import java.util.List;
 
 public class CommunityUserProfileModel implements Comparable<CommunityUserProfileModel> {
     private String username;
     private String accIsActivate;
+    private String blockedBy;
+    private String blockedByFullName;
+    private Date blockedDate;
+    private String blockedMessage;
     private String email;
     private PersonalDetailModel personalDetail;
     private AddressModel address;
@@ -62,6 +67,38 @@ public class CommunityUserProfileModel implements Comparable<CommunityUserProfil
     public List<HealthModel> getHealthModelList() { return healthModelList; }
 
     public void setHealthModelList(List<HealthModel> healthModelList) { this.healthModelList = healthModelList; }
+
+    public String getBlockedBy() {
+        return blockedBy;
+    }
+
+    public void setBlockedBy(String blockedBy) {
+        this.blockedBy = blockedBy;
+    }
+
+    public String getBlockedByFullName() {
+        return blockedByFullName;
+    }
+
+    public void setBlockedByFullName(String blockedByFullName) {
+        this.blockedByFullName = blockedByFullName;
+    }
+
+    public Date getBlockedDate() {
+        return blockedDate;
+    }
+
+    public void setBlockedDate(Date blockedDate) {
+        this.blockedDate = blockedDate;
+    }
+
+    public String getBlockedMessage() {
+        return blockedMessage;
+    }
+
+    public void setBlockedMessage(String blockedMessage) {
+        this.blockedMessage = blockedMessage;
+    }
 
     @Override
     public int compareTo(CommunityUserProfileModel o) {

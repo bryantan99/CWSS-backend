@@ -1,5 +1,8 @@
 package com.chis.communityhealthis.bean;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -33,6 +36,16 @@ public class AuditBean implements Serializable {
 
     @Column(name = ACTION_DATE)
     private Date actionDate;
+
+    @OneToOne
+    @NotFound(action= NotFoundAction.IGNORE)
+    @JoinColumn(name = ACTION_BY, referencedColumnName = CommunityUserBean.USERNAME, updatable = false, insertable = false)
+    private CommunityUserBean communityUserBean;
+
+    @OneToOne
+    @NotFound(action= NotFoundAction.IGNORE)
+    @JoinColumn(name = ACTION_BY, referencedColumnName = AdminBean.USERNAME, updatable = false, insertable = false)
+    private AdminBean adminBean;
 
     @OneToMany
     @JoinColumn(name = AUDIT_ID, referencedColumnName = AuditActionBean.AUDIT_ID, updatable = false, insertable = false)
@@ -86,6 +99,22 @@ public class AuditBean implements Serializable {
 
     public void setActionDate(Date actionDate) {
         this.actionDate = actionDate;
+    }
+
+    public CommunityUserBean getCommunityUserBean() {
+        return communityUserBean;
+    }
+
+    public void setCommunityUserBean(CommunityUserBean communityUserBean) {
+        this.communityUserBean = communityUserBean;
+    }
+
+    public AdminBean getAdminBean() {
+        return adminBean;
+    }
+
+    public void setAdminBean(AdminBean adminBean) {
+        this.adminBean = adminBean;
     }
 
     public Set<AuditActionBean> getAuditActionBeans() {

@@ -7,9 +7,7 @@ import com.chis.communityhealthis.model.filter.CommunityUserBeanQuery;
 import com.chis.communityhealthis.model.health.HealthModel;
 import com.chis.communityhealthis.model.occupation.OccupationModel;
 import com.chis.communityhealthis.model.signup.*;
-import com.chis.communityhealthis.model.user.CommunityUserModel;
-import com.chis.communityhealthis.model.user.CommunityUserProfileModel;
-import com.chis.communityhealthis.model.user.PersonalDetailModel;
+import com.chis.communityhealthis.model.user.*;
 import com.chis.communityhealthis.repository.account.AccountDao;
 import com.chis.communityhealthis.repository.address.AddressDao;
 import com.chis.communityhealthis.repository.communityuser.CommunityUserDao;
@@ -255,6 +253,59 @@ public class CommunityUserServiceImpl implements CommunityUserService {
         auditService.saveLogs(auditBean, auditActionBeans);
     }
 
+    @Override
+    public void blockUser(BlockUserForm form) throws NotFoundException {
+        CommunityUserBean communityUserBean = communityUserDao.getCommunityUser(form.getUsername());
+        if (communityUserBean == null) {
+            throw new NotFoundException("Community user [username: " + form.getUsername() +"] was not found.");
+        }
+        communityUserBean.setBlockedBy(form.getActionBy());
+        communityUserBean.setBlockedDate(new Date());
+        communityUserBean.setBlockedMessage(form.getReason());
+        communityUserDao.update(communityUserBean);
+
+        AuditBean auditBean = new AuditBean(AuditConstant.MODULE_COMMUNITY_USER, AuditConstant.formatActionBlockUser(form.getUsername(), communityUserBean.getFullName()), form.getActionBy());
+        List<AuditActionBean> auditActionBeans = Collections.singletonList(new AuditActionBean("Reason : " + form.getReason()));
+        auditService.saveLogs(auditBean, auditActionBeans);
+    }
+
+    @Override
+    public void unblockUser(BlockUserForm form) throws NotFoundException {
+        CommunityUserBean communityUserBean = communityUserDao.getCommunityUser(form.getUsername());
+        if (communityUserBean == null) {
+            throw new NotFoundException("Community user [username: " + form.getUsername() +"] was not found.");
+        }
+        communityUserBean.setBlockedBy(null);
+        communityUserBean.setBlockedDate(null);
+        communityUserBean.setBlockedMessage(null);
+        communityUserDao.update(communityUserBean);
+
+        AuditBean auditBean = new AuditBean(AuditConstant.MODULE_COMMUNITY_USER, AuditConstant.formatActionUnblockUser(form.getUsername(), communityUserBean.getFullName()), form.getActionBy());
+        auditService.saveLogs(auditBean, null);
+    }
+
+    @Override
+    public BlockDetailModel getBlockDetail(String username) throws NotFoundException {
+        CommunityUserBean communityUserBean = communityUserDao.getCommunityUser(username);
+        if (communityUserBean == null) {
+            throw new NotFoundException("Community user [username: " + username + "] was not found.");
+        } else if (StringUtils.isEmpty(communityUserBean.getBlockedBy()) && communityUserBean.getBlockedDate() == null && StringUtils.isEmpty(communityUserBean.getBlockedMessage())) {
+            BlockDetailModel model = new BlockDetailModel();
+            model.setUsername(username);
+            model.setIsBlocked(false);
+            return model;
+        } else {
+            BlockDetailModel model = new BlockDetailModel();
+            model.setUsername(username);
+            model.setIsBlocked(true);
+            model.setBlockedBy(communityUserBean.getBlockedBy());
+            model.setBlockedByFullName(communityUserBean.getBlockedByAdminBean().getFullName());
+            model.setBlockedDate(communityUserBean.getBlockedDate());
+            model.setBlockedMessage(communityUserBean.getBlockedMessage());
+            return model;
+        }
+    }
+
     private List<AuditActionBean> getAuditActionBeans(BeanComparator accountBeanComparator,
                                                       BeanComparator communityUserBeanComparator,
                                                       BeanComparator addressBeanComparator,
@@ -460,6 +511,12 @@ public class CommunityUserServiceImpl implements CommunityUserService {
 
         if (communityUserBean != null) {
             model.setPersonalDetail(toPersonalDetailModel(communityUserBean));
+            if (StringUtils.isNotBlank(communityUserBean.getBlockedBy()) && communityUserBean.getBlockedDate() != null && StringUtils.isNotBlank(communityUserBean.getBlockedMessage())) {
+                model.setBlockedBy(communityUserBean.getBlockedBy());
+                model.setBlockedByFullName(communityUserBean.getBlockedByAdminBean().getFullName());
+                model.setBlockedDate(communityUserBean.getBlockedDate());
+                model.setBlockedMessage(communityUserBean.getBlockedMessage());
+            }
         }
 
         if (addressBean != null) {

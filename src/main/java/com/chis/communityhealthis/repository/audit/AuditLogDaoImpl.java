@@ -1,6 +1,8 @@
 package com.chis.communityhealthis.repository.audit;
 
+import com.chis.communityhealthis.bean.AdminBean;
 import com.chis.communityhealthis.bean.AuditBean;
+import com.chis.communityhealthis.bean.CommunityUserBean;
 import com.chis.communityhealthis.repository.GenericDaoImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.query.Query;
@@ -18,6 +20,8 @@ public class AuditLogDaoImpl extends GenericDaoImpl<AuditBean, Integer> implemen
         CriteriaBuilder criteriaBuilder = currentSession().getCriteriaBuilder();
         CriteriaQuery<AuditBean> criteriaQuery = criteriaBuilder.createQuery(AuditBean.class);
         Root<AuditBean> root = criteriaQuery.from(AuditBean.class);
+        Fetch<AuditBean, AdminBean> adminBeanFetch = root.fetch("adminBean", JoinType.LEFT);
+        Fetch<AuditBean, CommunityUserBean> communityUserBeanFetch = root.fetch("communityUserBean", JoinType.LEFT);
 
         List<Predicate> predicates = new ArrayList<>();
         if (StringUtils.isNotBlank(moduleName)) {

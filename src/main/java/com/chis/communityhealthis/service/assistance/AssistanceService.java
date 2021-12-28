@@ -15,9 +15,8 @@ public interface AssistanceService {
     void updateRecord(AssistanceUpdateForm form) throws Exception;
     List<AssistanceModel> getPendingAssistanceRecords(Integer assistanceId);
     List<AssistanceModel> getAdminHandledAssistanceRecords(AssistanceQueryForm queryForm);
-    void acceptAssistanceRequest(AssistanceUpdateForm form) throws Exception;
     void rejectAssistanceForm(AssistanceRejectForm form) throws Exception;
-    void deleteCategory(Integer categoryId) throws Exception;
+    void deleteCategory(Integer categoryId, String actionMakerUsername) throws Exception;
     Integer addCategory(AssistanceCategoryForm form);
     void updateCategory(AssistanceCategoryForm form) throws Exception;
 }

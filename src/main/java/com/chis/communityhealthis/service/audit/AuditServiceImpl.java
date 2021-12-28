@@ -52,7 +52,11 @@ public class AuditServiceImpl implements AuditService{
         auditModel.setAuditId(auditBean.getAuditId());
         auditModel.setModule(auditBean.getModule());
         auditModel.setActionBy(auditBean.getActionBy());
-        auditModel.setActionByFullName(null);
+        if (auditBean.getAdminBean() != null) {
+            auditModel.setActionByFullName(auditBean.getAdminBean().getFullName());
+        } else if (auditBean.getCommunityUserBean() != null) {
+            auditModel.setActionByFullName(auditBean.getCommunityUserBean().getFullName());
+        }
         auditModel.setActionName(auditBean.getActionName());
         auditModel.setActionDate(auditBean.getActionDate());
         if (!CollectionUtils.isEmpty(auditBean.getAuditActionBeans())) {

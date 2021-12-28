@@ -1,11 +1,14 @@
 package com.chis.communityhealthis.bean;
 
+import org.javers.core.metamodel.annotation.TypeName;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "ASSISTANCE")
+@TypeName("AssistanceBean")
 public class AssistanceBean implements Serializable {
 
     private static final long serialVersionUID = 2132065858891625782L;

@@ -4,6 +4,7 @@ import org.javers.core.metamodel.annotation.TypeName;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -19,6 +20,9 @@ public class CommunityUserBean implements Serializable {
     public static final String GENDER = "GENDER";
     public static final String CONTACT_NO = "CONTACT_NO";
     public static final String ETHNIC = "ETHNIC";
+    public static final String BLOCKED_BY = "BLOCKED_BY";
+    public static final String BLOCKED_DATE = "BLOCKED_DATE";
+    public static final String BLOCKED_MESSAGE = "BLOCKED_MESSAGE";
 
     @Id
     @Column(name = USERNAME)
@@ -38,6 +42,19 @@ public class CommunityUserBean implements Serializable {
 
     @Column(name = ETHNIC)
     private String ethnic;
+
+    @Column(name = BLOCKED_BY)
+    private String blockedBy;
+
+    @Column(name = BLOCKED_DATE)
+    private Date blockedDate;
+
+    @Column(name = BLOCKED_MESSAGE)
+    private String blockedMessage;
+
+    @OneToOne
+    @JoinColumn(name = BLOCKED_BY, referencedColumnName = AdminBean.USERNAME, insertable = false, updatable = false)
+    private AdminBean blockedByAdminBean;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = USERNAME, referencedColumnName = AddressBean.USERNAME, insertable = false, updatable = false)
@@ -97,6 +114,38 @@ public class CommunityUserBean implements Serializable {
 
     public void setEthnic(String ethnic) {
         this.ethnic = ethnic;
+    }
+
+    public Date getBlockedDate() {
+        return blockedDate;
+    }
+
+    public void setBlockedDate(Date blockedDate) {
+        this.blockedDate = blockedDate;
+    }
+
+    public String getBlockedMessage() {
+        return blockedMessage;
+    }
+
+    public void setBlockedMessage(String blockedMessage) {
+        this.blockedMessage = blockedMessage;
+    }
+
+    public String getBlockedBy() {
+        return blockedBy;
+    }
+
+    public void setBlockedBy(String blockedBy) {
+        this.blockedBy = blockedBy;
+    }
+
+    public AdminBean getBlockedByAdminBean() {
+        return blockedByAdminBean;
+    }
+
+    public void setBlockedByAdminBean(AdminBean blockedByAdminBean) {
+        this.blockedByAdminBean = blockedByAdminBean;
     }
 
     public AddressBean getAddressBean() {

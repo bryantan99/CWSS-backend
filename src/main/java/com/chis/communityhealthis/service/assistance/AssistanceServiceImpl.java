@@ -10,9 +10,13 @@ import com.chis.communityhealthis.repository.appointment.AppointmentDao;
 import com.chis.communityhealthis.repository.assistance.AssistanceDao;
 import com.chis.communityhealthis.repository.assistancecategory.AssistanceCategoryDao;
 import com.chis.communityhealthis.repository.assistancecomment.AssistanceCommentDao;
+import com.chis.communityhealthis.service.audit.AuditService;
+import com.chis.communityhealthis.utility.AuditConstant;
+import com.chis.communityhealthis.utility.BeanComparator;
 import com.chis.communityhealthis.utility.DatetimeUtil;
 import io.jsonwebtoken.lang.Assert;
 import javassist.NotFoundException;
+import org.apache.commons.lang3.SerializationUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,6 +46,9 @@ public class AssistanceServiceImpl implements AssistanceService {
     @Autowired
     private AppointmentDao appointmentDao;
 
+    @Autowired
+    private AuditService auditService;
+
     @Override
     public List<AssistanceModel> findUserAssistanceRecords(AssistanceQueryForm form) {
         List<AssistanceModel> list = new ArrayList<>();
@@ -60,7 +67,10 @@ public class AssistanceServiceImpl implements AssistanceService {
         Integer appointmentId = appointmentDao.add(appointmentBean);
 
         AssistanceBean bean = createAssistanceBean(form, appointmentId);
-        assistanceDao.add(bean);
+        Integer assistanceId = assistanceDao.add(bean);
+
+        AuditBean auditBean = new AuditBean(AuditConstant.MODULE_ASSISTANCE, AuditConstant.formatActionCreateAssistanceRequest(assistanceId), form.getCreatedBy());
+        auditService.saveLogs(auditBean, null);
         return bean;
     }
 
@@ -80,8 +90,12 @@ public class AssistanceServiceImpl implements AssistanceService {
         AppointmentBean appointmentBean = assistanceBean.getAppointmentBean();
         if (appointmentBean != null) {
             appointmentDao.remove(appointmentBean);
+            AuditBean appointmentAuditBean = new AuditBean(AuditConstant.MODULE_APPOINTMENT, AuditConstant.formatActionDeleteAppointment(appointmentBean.getAppointmentId()), actionMakerUsername);
+            auditService.saveLogs(appointmentAuditBean, null);
         }
         assistanceDao.remove(assistanceBean);
+        AuditBean assistanceAuditBean = new AuditBean(AuditConstant.MODULE_ASSISTANCE, AuditConstant.formatActionDeleteAssistanceRequest(assistanceId), actionMakerUsername);
+        auditService.saveLogs(assistanceAuditBean, null);
     }
 
     @Override
@@ -115,6 +129,7 @@ public class AssistanceServiceImpl implements AssistanceService {
     public void updateRecord(AssistanceUpdateForm form) throws Exception {
         AssistanceBean assistanceBean = assistanceDao.find(form.getAssistanceId());
         Assert.notNull(assistanceBean, "Assistance Bean [ID: " + form.getAssistanceId().toString() + "] was not found!");
+        AssistanceBean clonedAssistanceBean = SerializationUtils.clone(assistanceBean);
 
         boolean isAdmin = adminDao.find(form.getUpdatedBy()) != null;
 
@@ -134,6 +149,31 @@ public class AssistanceServiceImpl implements AssistanceService {
         assistanceBean.setLastUpdatedBy(form.getUpdatedBy());
         assistanceBean.setLastUpdatedDate(form.getUpdatedDate());
         assistanceDao.update(assistanceBean);
+        BeanComparator beanComparator = new BeanComparator(createPureAssistanceBean(clonedAssistanceBean), createPureAssistanceBean(assistanceBean));
+
+        AuditBean auditBean = new AuditBean(AuditConstant.MODULE_ASSISTANCE, AuditConstant.formatActionUpdateAssistanceRequest(form.getAssistanceId()), form.getUpdatedBy());
+        List<AuditActionBean> auditActionBeans = new ArrayList<>();
+        if (beanComparator.hasChanges()) {
+            auditActionBeans.add(new AuditActionBean(beanComparator.toPrettyString()));
+        }
+        auditService.saveLogs(auditBean, auditActionBeans);
+    }
+
+    private AssistanceBean createPureAssistanceBean(AssistanceBean assistanceBean) {
+        AssistanceBean bean = new AssistanceBean();
+        bean.setAssistanceId(assistanceBean.getAssistanceId());
+        bean.setUsername(assistanceBean.getUsername());
+        bean.setCategoryId(assistanceBean.getCategoryId());
+        bean.setAssistanceTitle(assistanceBean.getAssistanceTitle());
+        bean.setAssistanceDescription(assistanceBean.getAssistanceDescription());
+        bean.setAssistanceStatus(assistanceBean.getAssistanceStatus());
+        bean.setCreatedBy(assistanceBean.getCreatedBy());
+        bean.setCreatedDate(assistanceBean.getCreatedDate());
+        bean.setLastUpdatedBy(assistanceBean.getLastUpdatedBy());
+        bean.setLastUpdatedDate(assistanceBean.getLastUpdatedDate());
+        bean.setAdminUsername(assistanceBean.getAdminUsername());
+        bean.setAppointmentId(assistanceBean.getAppointmentId());
+        return bean;
     }
 
     @Override
@@ -158,37 +198,6 @@ public class AssistanceServiceImpl implements AssistanceService {
             }
         }
         return list;
-    }
-
-    @Override
-    public void acceptAssistanceRequest(AssistanceUpdateForm form) throws Exception {
-        AssistanceBean assistanceBean = assistanceDao.find(form.getAssistanceId());
-        if (assistanceBean == null) {
-            throw new Exception("Assistance [ID: " + form.getAssistanceId() + "] was not found.");
-        } else if (!StringUtils.equals(AssistanceBean.STATUS_PENDING, assistanceBean.getAssistanceStatus())) {
-            throw new Exception("Assistance [ID: " + form.getAssistanceId() + "] was not in pending status");
-        } else if (StringUtils.isNotBlank(assistanceBean.getAdminUsername())) {
-            throw new Exception("Assistance [ID: " + form.getAssistanceId() + "] was being handled by another person.");
-        }
-
-        assistanceBean.setAssistanceStatus(AssistanceBean.STATUS_PROCESSING);
-        assistanceBean.setAdminUsername(form.getPersonInCharge());
-        assistanceBean.setLastUpdatedBy(form.getUpdatedBy());
-        assistanceBean.setLastUpdatedDate(form.getUpdatedDate());
-        assistanceDao.update(assistanceBean);
-
-        AppointmentBean appointmentBean = assistanceBean.getAppointmentBean();
-        appointmentBean.setAdminUsername(form.getPersonInCharge());
-        if (form.getAppointmentStartDatetime() == null) {
-            appointmentBean.setAppointmentStatus(AppointmentBean.APPOINTMENT_STATUS_CONFIRMED);
-        } else {
-            appointmentBean.setAppointmentStatus(AppointmentBean.APPOINTMENT_STATUS_PENDING_USER);
-            appointmentBean.setAppointmentStartTime(form.getAppointmentStartDatetime());
-            appointmentBean.setAppointmentEndTime(DatetimeUtil.calculateAppointmentEndDatetime(form.getAppointmentStartDatetime()));
-        }
-        appointmentBean.setLastUpdatedDate(form.getUpdatedDate());
-        appointmentBean.setLastUpdatedBy(form.getUpdatedBy());
-        appointmentDao.update(appointmentBean);
     }
 
     @Override
@@ -217,18 +226,22 @@ public class AssistanceServiceImpl implements AssistanceService {
     }
 
     @Override
-    public void deleteCategory(Integer categoryId) throws Exception {
+    public void deleteCategory(Integer categoryId, String actionMakerUsername) throws Exception {
         AssistanceCategoryBean bean = categoryDao.find(categoryId);
         if (bean == null) {
             throw new Exception("Bean [ID: " + categoryId + "] was not found.");
         }
         categoryDao.remove(bean);
+        AuditBean auditBean = new AuditBean(AuditConstant.MODULE_ASSISTANCE, AuditConstant.formatActionDeleteAssistanceCategory(bean.getCategoryName()), actionMakerUsername);
+        auditService.saveLogs(auditBean, null);
     }
 
     @Override
     public Integer addCategory(AssistanceCategoryForm form) {
         AssistanceCategoryBean bean = new AssistanceCategoryBean();
         bean.setCategoryName(form.getCategoryName());
+        AuditBean auditBean = new AuditBean(AuditConstant.MODULE_ASSISTANCE, AuditConstant.formatActionCreateAssistanceCategory(bean.getCategoryName()), form.getActionBy());
+        auditService.saveLogs(auditBean, null);
         return categoryDao.add(bean);
     }
 
@@ -240,6 +253,8 @@ public class AssistanceServiceImpl implements AssistanceService {
         }
         bean.setCategoryName(form.getCategoryName());
         categoryDao.update(bean);
+        AuditBean auditBean = new AuditBean(AuditConstant.MODULE_ASSISTANCE, AuditConstant.formatActionUpdateAssistanceCategory(bean.getCategoryName()), form.getActionBy());
+        auditService.saveLogs(auditBean, null);
     }
 
     private AssistanceBean createAssistanceBean(AssistanceRequestForm form, Integer appointmentId) {

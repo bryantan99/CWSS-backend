@@ -1,16 +1,18 @@
 package com.chis.communityhealthis.service.appointment;
 
-import com.chis.communityhealthis.bean.AppointmentBean;
-import com.chis.communityhealthis.bean.AssistanceBean;
-import com.chis.communityhealthis.bean.AssistanceCommentBean;
+import com.chis.communityhealthis.bean.*;
 import com.chis.communityhealthis.factory.AppointmentModelFactory;
 import com.chis.communityhealthis.model.appointment.*;
 import com.chis.communityhealthis.repository.admin.AdminDao;
 import com.chis.communityhealthis.repository.appointment.AppointmentDao;
 import com.chis.communityhealthis.repository.assistance.AssistanceDao;
 import com.chis.communityhealthis.repository.assistancecomment.AssistanceCommentDao;
+import com.chis.communityhealthis.service.audit.AuditService;
+import com.chis.communityhealthis.utility.AuditConstant;
+import com.chis.communityhealthis.utility.BeanComparator;
 import com.chis.communityhealthis.utility.DatetimeUtil;
 import io.jsonwebtoken.lang.Assert;
+import org.apache.commons.lang3.SerializationUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +36,9 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Autowired
     private AssistanceCommentDao assistanceCommentDao;
+
+    @Autowired
+    private AuditService auditService;
 
     @Override
     public List<AppointmentModel> getPendingAppointments(Integer appointmentId) {
@@ -73,6 +78,9 @@ public class AppointmentServiceImpl implements AppointmentService {
         appointmentBean.setLastUpdatedBy(actionMakerUsername);
         appointmentBean.setLastUpdatedDate(new Date());
         appointmentDao.update(appointmentBean);
+
+        AuditBean auditBean = new AuditBean(AuditConstant.MODULE_APPOINTMENT, AuditConstant.formatActionCancelAppointment(appointmentId), actionMakerUsername);
+        auditService.saveLogs(auditBean, null);
     }
 
     @Override
@@ -108,12 +116,21 @@ public class AppointmentServiceImpl implements AppointmentService {
             throw new Exception("Unauthorized user to reschedule appointment.");
         }
 
+        boolean acceptToHandleAppointment = false;
         if (isAdmin && StringUtils.isBlank(appointmentBean.getAdminUsername())) {
+            acceptToHandleAppointment = true;
             appointmentBean.setAdminUsername(form.getUpdatedBy());
         }
         appointmentBean.setLastUpdatedBy(form.getUpdatedBy());
         appointmentBean.setLastUpdatedDate(form.getUpdatedDate());
         appointmentDao.update(appointmentBean);
+        AuditBean rescheduleAuditBean;
+        if (acceptToHandleAppointment) {
+            rescheduleAuditBean = new AuditBean(AuditConstant.MODULE_APPOINTMENT, AuditConstant.formatActionAcceptAndRescheduleAppointment(form.getAppointmentId()),form.getUpdatedBy());
+        } else {
+            rescheduleAuditBean = new AuditBean(AuditConstant.MODULE_APPOINTMENT, AuditConstant.formatActionRescheduleAppointment(form.getAppointmentId()),form.getUpdatedBy());
+        }
+        auditService.saveLogs(rescheduleAuditBean, null);
 
         if (form.getAssistanceId() != null) {
             AssistanceBean assistanceBean = assistanceDao.find(form.getAssistanceId());
@@ -122,6 +139,9 @@ public class AppointmentServiceImpl implements AppointmentService {
                 assistanceBean.setLastUpdatedBy(form.getUpdatedBy());
                 assistanceBean.setLastUpdatedDate(form.getUpdatedDate());
                 assistanceDao.update(assistanceBean);
+
+                AuditBean acceptToHandleAssistanceAuditBean = new AuditBean(AuditConstant.MODULE_ASSISTANCE, AuditConstant.formatActionAcceptToHandleAssistance(form.getAssistanceId()),form.getUpdatedBy());
+                auditService.saveLogs(acceptToHandleAssistanceAuditBean, null);
             }
         }
     }
@@ -177,6 +197,8 @@ public class AppointmentServiceImpl implements AppointmentService {
         appointmentBean.setLastUpdatedBy(form.getConfirmedBy());
         appointmentBean.setLastUpdatedDate(form.getConfirmedDate());
         appointmentDao.update(appointmentBean);
+        AuditBean confirmationAuditBean = new AuditBean(AuditConstant.MODULE_APPOINTMENT, AuditConstant.formatActionConfirmAppointment(appointmentBean.getAppointmentId()), form.getConfirmedBy());
+        auditService.saveLogs(confirmationAuditBean, null);
 
         if (form.getAssistanceId() != null) {
             AssistanceBean assistanceBean = assistanceDao.find(form.getAssistanceId());
@@ -185,6 +207,9 @@ public class AppointmentServiceImpl implements AppointmentService {
                 assistanceBean.setLastUpdatedBy(form.getConfirmedBy());
                 assistanceBean.setLastUpdatedDate(form.getConfirmedDate());
                 assistanceDao.update(assistanceBean);
+
+                AuditBean acceptToHandleAssistanceAuditBean = new AuditBean(AuditConstant.MODULE_ASSISTANCE, AuditConstant.formatActionAcceptToHandleAssistance(form.getAssistanceId()),form.getConfirmedBy());
+                auditService.saveLogs(acceptToHandleAssistanceAuditBean, null);
             }
         }
     }
@@ -226,14 +251,23 @@ public class AppointmentServiceImpl implements AppointmentService {
         if (appointmentBean == null) {
             throw new Exception("Appointment [ID: " + form.getAppointmentId() + "] was not found.");
         }
-
+        AppointmentBean appointmentBeanDeepCopy = SerializationUtils.clone(appointmentBean);
         appointmentBean.setAppointmentStatus(form.getAppointmentStatus());
         appointmentBean.setLastUpdatedBy(form.getSubmittedBy());
         appointmentBean.setLastUpdatedDate(form.getSubmittedDate());
         appointmentDao.update(appointmentBean);
 
+        BeanComparator appointmentBeanComparator = new BeanComparator(appointmentBeanDeepCopy, appointmentBean);
+        AuditBean appointmentAuditBean = new AuditBean(AuditConstant.MODULE_APPOINTMENT, AuditConstant.formatActionUpdateAppointmentStatus(appointmentBean.getAppointmentId()), form.getSubmittedBy());
+        List<AuditActionBean> appointmentAuditActions = new ArrayList<>();
+        if (appointmentBeanComparator.hasChanges()) {
+            appointmentAuditActions.add(new AuditActionBean(appointmentBeanComparator.toPrettyString()));
+        }
+        auditService.saveLogs(appointmentAuditBean, appointmentAuditActions);
+
         if (form.getAssistanceId() != null) {
             AssistanceBean assistanceBean = assistanceDao.find(form.getAssistanceId());
+            AssistanceBean assistanceBeanDeepCopy = SerializationUtils.clone(assistanceBean);
             assistanceBean.setAssistanceStatus(form.getAssistanceStatus());
             assistanceBean.setLastUpdatedBy(form.getSubmittedBy());
             assistanceBean.setLastUpdatedDate(form.getSubmittedDate());
@@ -241,6 +275,13 @@ public class AppointmentServiceImpl implements AppointmentService {
                 assistanceBean.setAdminUsername(form.getSubmittedBy());
             }
             assistanceDao.update(assistanceBean);
+            BeanComparator assistanceBeanComparator = new BeanComparator(assistanceBeanDeepCopy, assistanceBean);
+            AuditBean assistanceAuditBean = new AuditBean(AuditConstant.MODULE_APPOINTMENT, AuditConstant.formatActionUpdateAssistanceStatus(assistanceBean.getAssistanceId()), form.getSubmittedBy());
+            List<AuditActionBean> assistanceAuditActions = new ArrayList<>();
+            if (assistanceBeanComparator.hasChanges()) {
+                assistanceAuditActions.add(new AuditActionBean(assistanceBeanComparator.toPrettyString()));
+            }
+            auditService.saveLogs(assistanceAuditBean, assistanceAuditActions);
 
             AssistanceCommentBean assistanceCommentBean = new AssistanceCommentBean();
             assistanceCommentBean.setAssistanceId(form.getAssistanceId());

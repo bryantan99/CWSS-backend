@@ -1,6 +1,8 @@
 package com.chis.communityhealthis.service.communityuser;
 
 import com.chis.communityhealthis.model.signup.AccountRegistrationForm;
+import com.chis.communityhealthis.model.user.BlockDetailModel;
+import com.chis.communityhealthis.model.user.BlockUserForm;
 import com.chis.communityhealthis.model.user.CommunityUserModel;
 import com.chis.communityhealthis.model.user.CommunityUserProfileModel;
 import com.chis.communityhealthis.model.filter.CommunityUserBeanQuery;
@@ -15,4 +17,7 @@ public interface CommunityUserService {
     void rejectUserAccount(String username, String actionMakerUsername) throws Exception;
     void deleteUserAccount(String username, String actionMakerUsername) throws Exception;
     void updateUserAccount(AccountRegistrationForm form, String actionMaker, boolean isAdmin) throws Exception;
+    void blockUser(BlockUserForm form) throws NotFoundException;
+    void unblockUser(BlockUserForm form) throws NotFoundException;
+    BlockDetailModel getBlockDetail(String username) throws NotFoundException;
 }

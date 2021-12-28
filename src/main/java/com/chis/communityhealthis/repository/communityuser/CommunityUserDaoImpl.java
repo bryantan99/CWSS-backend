@@ -27,6 +27,7 @@ public class CommunityUserDaoImpl extends GenericDaoImpl<CommunityUserBean, Stri
         Fetch<CommunityUserBean, HealthIssueBean> healthIssueBeanFetch = root.fetch("healthIssueBeans", JoinType.LEFT);
         Fetch<HealthIssueBean, AdminBean> adminBeanFetch = healthIssueBeanFetch.fetch("adminBean", JoinType.LEFT);
         Fetch<HealthIssueBean, DiseaseBean> diseaseBeanFetch = healthIssueBeanFetch.fetch("diseaseBean", JoinType.LEFT);
+        Fetch<CommunityUserBean, AdminBean> blockedByAdminBeanFetch = root.fetch("blockedByAdminBean", JoinType.LEFT);
 
         List<Predicate> predicates = new ArrayList<>();
         if (StringUtils.isNotBlank(filter.getName())) {
@@ -90,6 +91,7 @@ public class CommunityUserDaoImpl extends GenericDaoImpl<CommunityUserBean, Stri
         Fetch<CommunityUserBean, HealthIssueBean> healthIssueBeanFetch = root.fetch("healthIssueBeans", JoinType.LEFT);
         Fetch<HealthIssueBean, AdminBean> adminBeanFetch = healthIssueBeanFetch.fetch("adminBean", JoinType.LEFT);
         Fetch<HealthIssueBean, DiseaseBean> diseaseBeanFetch = healthIssueBeanFetch.fetch("diseaseBean", JoinType.LEFT);
+        Fetch<CommunityUserBean, AdminBean> blockedByAdminBeanFetch = root.fetch("blockedByAdminBean", JoinType.LEFT);
     }
 
     private CommunityUserBean getResult(CriteriaQuery<CommunityUserBean> cq, Root<CommunityUserBean> root, @Nullable List<Predicate> predicates) {
