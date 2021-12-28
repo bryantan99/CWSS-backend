@@ -257,7 +257,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         appointmentBean.setLastUpdatedDate(form.getSubmittedDate());
         appointmentDao.update(appointmentBean);
 
-        BeanComparator appointmentBeanComparator = new BeanComparator(appointmentBeanDeepCopy, appointmentBean);
+        BeanComparator appointmentBeanComparator = new BeanComparator(createPureAppointmentBean(appointmentBeanDeepCopy), createPureAppointmentBean(appointmentBean));
         AuditBean appointmentAuditBean = new AuditBean(AuditConstant.MODULE_APPOINTMENT, AuditConstant.formatActionUpdateAppointmentStatus(appointmentBean.getAppointmentId()), form.getSubmittedBy());
         List<AuditActionBean> appointmentAuditActions = new ArrayList<>();
         if (appointmentBeanComparator.hasChanges()) {
@@ -275,7 +275,7 @@ public class AppointmentServiceImpl implements AppointmentService {
                 assistanceBean.setAdminUsername(form.getSubmittedBy());
             }
             assistanceDao.update(assistanceBean);
-            BeanComparator assistanceBeanComparator = new BeanComparator(assistanceBeanDeepCopy, assistanceBean);
+            BeanComparator assistanceBeanComparator = new BeanComparator(createPureAssistanceBean(assistanceBeanDeepCopy), createPureAssistanceBean(assistanceBean));
             AuditBean assistanceAuditBean = new AuditBean(AuditConstant.MODULE_APPOINTMENT, AuditConstant.formatActionUpdateAssistanceStatus(assistanceBean.getAssistanceId()), form.getSubmittedBy());
             List<AuditActionBean> assistanceAuditActions = new ArrayList<>();
             if (assistanceBeanComparator.hasChanges()) {
@@ -296,6 +296,39 @@ public class AppointmentServiceImpl implements AppointmentService {
             assistanceCommentBean.setCreatedBy(form.getSubmittedBy());
             assistanceCommentDao.add(assistanceCommentBean);
         }
+    }
+
+    private AssistanceBean createPureAssistanceBean(AssistanceBean assistanceBean) {
+        AssistanceBean bean = new AssistanceBean();
+        bean.setAssistanceId(assistanceBean.getAssistanceId());
+        bean.setUsername(assistanceBean.getUsername());
+        bean.setCategoryId(assistanceBean.getCategoryId());
+        bean.setAssistanceTitle(assistanceBean.getAssistanceTitle());
+        bean.setAssistanceDescription(assistanceBean.getAssistanceDescription());
+        bean.setAssistanceStatus(assistanceBean.getAssistanceStatus());
+        bean.setCreatedBy(assistanceBean.getCreatedBy());
+        bean.setCreatedDate(assistanceBean.getCreatedDate());
+        bean.setLastUpdatedBy(assistanceBean.getLastUpdatedBy());
+        bean.setLastUpdatedDate(assistanceBean.getLastUpdatedDate());
+        bean.setAdminUsername(assistanceBean.getAdminUsername());
+        bean.setAppointmentId(assistanceBean.getAppointmentId());
+        return bean;
+    }
+
+    private AppointmentBean createPureAppointmentBean(AppointmentBean appointmentBean) {
+        AppointmentBean bean = new AppointmentBean();
+        bean.setAppointmentId(appointmentBean.getAppointmentId());
+        bean.setAppointmentPurpose(appointmentBean.getAppointmentPurpose());
+        bean.setAppointmentStartTime(appointmentBean.getAppointmentStartTime());
+        bean.setAppointmentEndTime(appointmentBean.getAppointmentEndTime());
+        bean.setAppointmentStatus(appointmentBean.getAppointmentStatus());
+        bean.setCreatedBy(appointmentBean.getCreatedBy());
+        bean.setCreatedDate(appointmentBean.getCreatedDate());
+        bean.setUsername(appointmentBean.getUsername());
+        bean.setAdminUsername(appointmentBean.getAdminUsername());
+        bean.setLastUpdatedBy(appointmentBean.getLastUpdatedBy());
+        bean.setLastUpdatedDate(appointmentBean.getLastUpdatedDate());
+        return bean;
     }
 
     private Date calculateEndDatetime(Date startDatetime) {
