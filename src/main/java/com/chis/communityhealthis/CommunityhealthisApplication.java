@@ -1,5 +1,6 @@
 package com.chis.communityhealthis;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -12,6 +13,9 @@ import java.util.Arrays;
 @SpringBootApplication
 public class CommunityhealthisApplication {
 
+	@Value("${frontend.url}")
+	private String FRONTEND_URL;
+
 	public static void main(String[] args) {
 		SpringApplication.run(CommunityhealthisApplication.class, args);
 	}
@@ -20,7 +24,7 @@ public class CommunityhealthisApplication {
 	public CorsFilter corsFilter() {
 		CorsConfiguration corsConfiguration = new CorsConfiguration();
 		corsConfiguration.setAllowCredentials(true);
-		corsConfiguration.setAllowedOrigins(Arrays.asList("https://cwss-frontend-angular.herokuapp.com/"));
+		corsConfiguration.setAllowedOrigins(Arrays.asList(FRONTEND_URL));
 		corsConfiguration.setAllowedHeaders(Arrays.asList("Origin", "Access-Control-Allow-Origin", "Content-Type",
 				"Accept", "Authorization", "Origin, Accept", "X-Requested-With",
 				"Access-Control-Request-Method", "Access-Control-Request-Headers"));
