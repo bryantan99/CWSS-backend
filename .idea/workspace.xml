@@ -8,6 +8,7 @@
       <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/TestRestController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/server.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -299,14 +300,7 @@
       <workItem from="1640788299820" duration="5000" />
       <workItem from="1641481531567" duration="291000" />
       <workItem from="1641482918381" duration="1703000" />
-      <workItem from="1641520154996" duration="3844000" />
-    </task>
-    <task id="LOCAL-00104" summary="Create AuditBean and AuditActionBean, add audit for post module">
-      <created>1632822993559</created>
-      <option name="number" value="00104" />
-      <option name="presentableId" value="LOCAL-00104" />
-      <option name="project" value="LOCAL" />
-      <updated>1632822993559</updated>
+      <workItem from="1641520154996" duration="7957000" />
     </task>
     <task id="LOCAL-00105" summary="Standardize package naming, reorganize files in repository, service, model">
       <created>1632823549932</created>
@@ -644,7 +638,14 @@
       <option name="project" value="LOCAL" />
       <updated>1641520704741</updated>
     </task>
-    <option name="localTasksCounter" value="153" />
+    <task id="LOCAL-00153" summary="- updates to deploy frontend to heroku">
+      <created>1641537147558</created>
+      <option name="number" value="00153" />
+      <option name="presentableId" value="LOCAL-00153" />
+      <option name="project" value="LOCAL" />
+      <updated>1641537147558</updated>
+    </task>
+    <option name="localTasksCounter" value="154" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
