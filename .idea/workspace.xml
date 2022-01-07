@@ -4,38 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Allow clear for select module in ActivityLogComponent">
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- updates to deploy frontend to heroku">
       <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/TestRestController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/server.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/content-disposition/HISTORY.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/content-disposition/HISTORY.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/content-disposition/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/content-disposition/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/content-disposition/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/content-disposition/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/content-disposition/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/content-disposition/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/cookie/HISTORY.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/cookie/HISTORY.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/cookie/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/cookie/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/cookie/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/cookie/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/cookie/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/cookie/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/express/History.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/express/History.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/express/Readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/express/Readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/express/lib/application.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/express/lib/application.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/express/lib/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/express/lib/request.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/express/lib/response.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/express/lib/response.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/express/lib/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/express/lib/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/express/lib/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/express/lib/utils.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/express/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/express/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/send/HISTORY.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/send/HISTORY.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/send/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/send/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/send/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/send/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/send/node_modules/ms/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/send/node_modules/ms/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/send/node_modules/ms/license.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/send/node_modules/ms/license.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/send/node_modules/ms/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/send/node_modules/ms/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/send/node_modules/ms/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/send/node_modules/ms/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/send/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/send/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/serve-static/HISTORY.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/serve-static/HISTORY.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/serve-static/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/serve-static/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/serve-static/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/serve-static/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -328,14 +299,7 @@
       <workItem from="1640788299820" duration="5000" />
       <workItem from="1641481531567" duration="291000" />
       <workItem from="1641482918381" duration="1703000" />
-      <workItem from="1641520154996" duration="506000" />
-    </task>
-    <task id="LOCAL-00103" summary="Add hasChanges() for BeanComparator">
-      <created>1632822924855</created>
-      <option name="number" value="00103" />
-      <option name="presentableId" value="LOCAL-00103" />
-      <option name="project" value="LOCAL" />
-      <updated>1632822924855</updated>
+      <workItem from="1641520154996" duration="3844000" />
     </task>
     <task id="LOCAL-00104" summary="Create AuditBean and AuditActionBean, add audit for post module">
       <created>1632822993559</created>
@@ -673,7 +637,14 @@
       <option name="project" value="LOCAL" />
       <updated>1640712440491</updated>
     </task>
-    <option name="localTasksCounter" value="152" />
+    <task id="LOCAL-00152" summary="- updates to deploy frontend to heroku">
+      <created>1641520704741</created>
+      <option name="number" value="00152" />
+      <option name="presentableId" value="LOCAL-00152" />
+      <option name="project" value="LOCAL" />
+      <updated>1641520704741</updated>
+    </task>
+    <option name="localTasksCounter" value="153" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -704,7 +675,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="- Change appointment duration to 30 minutes&#10;- Update date-picker to disable public holiday and weekend" />
     <MESSAGE value="- Change appointment duration to 30 minutes&#10;- Update change appointment datetime modal" />
     <MESSAGE value="- Display community user fullName at appointment management" />
     <MESSAGE value="- Update AppointmentMngmtComponent (pending, my appointment, staff appointment)&#10;- Update confirmAppointment() and rescheduleAppointment() to handle exceptions&#10;- Add AppointmentTableComponent, RescheduleAppointmentComponent, PendingAppointmentComponent, MyAppointmentComponent&#10;- Remove feature for user to choose admin when scheduling appointment&#10;- Update AppointmentRestController to return AppointmentModel instead of AppointmentBean" />
@@ -729,7 +699,8 @@
     <MESSAGE value="- Fix lazyInitialization for appointmentBean and assistanceBean audit" />
     <MESSAGE value="- Fix audit for post module" />
     <MESSAGE value="- Allow clear for select module in ActivityLogComponent" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Allow clear for select module in ActivityLogComponent" />
+    <MESSAGE value="- updates to deploy frontend to heroku" />
+    <option name="LAST_COMMIT_MESSAGE" value="- updates to deploy frontend to heroku" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
