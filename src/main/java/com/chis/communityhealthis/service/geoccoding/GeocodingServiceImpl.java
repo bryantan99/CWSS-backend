@@ -10,6 +10,7 @@ import com.google.maps.model.GeocodingResult;
 import com.google.maps.model.LatLng;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -25,11 +26,14 @@ public class GeocodingServiceImpl implements GeocodingService {
     @Autowired
     private AddressDao addressDao;
 
+    @Value("${GOOGLE_API_KEY}")
+    private String googleApiKey;
+
     @Override
     public Map<String, LatLng> googleGeocode(List<String> addressList) throws IOException, InterruptedException, ApiException {
         Map<String, LatLng> map = new HashMap<>();
         if (!CollectionUtils.isEmpty(addressList)) {
-            GeoApiContext context = new GeoApiContext.Builder().apiKey("AIzaSyDM52dfVP_MjYHd6UB24KHPMhSACq-d6wA").build();
+            GeoApiContext context = new GeoApiContext.Builder().apiKey(googleApiKey).build();
             for (String address : addressList) {
                 GeocodingResult[] results = GeocodingApi.geocode(context, address).await();
                 map.put(address, results[0].geometry.location);
@@ -62,7 +66,7 @@ public class GeocodingServiceImpl implements GeocodingService {
     }
 
     private LatLng googleGeocode(String address) throws Exception {
-        GeoApiContext context = new GeoApiContext.Builder().apiKey("AIzaSyDM52dfVP_MjYHd6UB24KHPMhSACq-d6wA").build();
+        GeoApiContext context = new GeoApiContext.Builder().apiKey(googleApiKey).build();
         try {
             GeocodingResult[] results = GeocodingApi.geocode(context, address).await();
             return results != null && results.length > 0 ? results[0].geometry.location : null;

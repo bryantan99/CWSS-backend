@@ -4,16 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- deploying angular to heroku">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_googlecode_libphonenumber_libphonenumber_8_12_38.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_checkerframework_checker_qual_3_5_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_postgresql_postgresql_42_2_16.xml" afterDir="false" />
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- add postgreSQL dependency into maven&#10;- update Spring Profile">
       <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/TestRestController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/application-prod.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/communityhealthis.iml" beforeDir="false" afterPath="$PROJECT_DIR$/communityhealthis.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/webapp/chis-app/server.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -307,14 +301,7 @@
       <workItem from="1640788299820" duration="5000" />
       <workItem from="1641481531567" duration="291000" />
       <workItem from="1641482918381" duration="1703000" />
-      <workItem from="1641520154996" duration="14032000" />
-    </task>
-    <task id="LOCAL-00106" summary="Replaced CommunityUserProfileComponent with ProfileComponent, Allow update admin profile &amp;&amp; audit changes">
-      <created>1632908829320</created>
-      <option name="number" value="00106" />
-      <option name="presentableId" value="LOCAL-00106" />
-      <option name="project" value="LOCAL" />
-      <updated>1632908829321</updated>
+      <workItem from="1641520154996" duration="15628000" />
     </task>
     <task id="LOCAL-00107" summary="Add action dropdown button in ProfileComponent, Update UpdateProfileComponent to handle email &amp; receive ResponseModel">
       <created>1632909501474</created>
@@ -652,7 +639,14 @@
       <option name="project" value="LOCAL" />
       <updated>1641542169794</updated>
     </task>
-    <option name="localTasksCounter" value="155" />
+    <task id="LOCAL-00155" summary="- add postgreSQL dependency into maven&#10;- update Spring Profile">
+      <created>1641549380675</created>
+      <option name="number" value="00155" />
+      <option name="presentableId" value="LOCAL-00155" />
+      <option name="project" value="LOCAL" />
+      <updated>1641549380675</updated>
+    </task>
+    <option name="localTasksCounter" value="156" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -683,7 +677,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="- Display community user fullName at appointment management" />
     <MESSAGE value="- Update AppointmentMngmtComponent (pending, my appointment, staff appointment)&#10;- Update confirmAppointment() and rescheduleAppointment() to handle exceptions&#10;- Add AppointmentTableComponent, RescheduleAppointmentComponent, PendingAppointmentComponent, MyAppointmentComponent&#10;- Remove feature for user to choose admin when scheduling appointment&#10;- Update AppointmentRestController to return AppointmentModel instead of AppointmentBean" />
     <MESSAGE value="- Updated AssistanceMngmtComponent, AssistanceDetailComponent&#10;- Added PendingAssistance, MyAssistance, AllAssistance, AssistanceCategoryMngmt and AssistanceTable component&#10;- Added AssistanceCategoryBean, DAO and joined with AssistanceBean&#10;- Added AssistanceModel, AssistanceQueryForm and AssistanceRejectForm&#10;- Updated AssistanceUpdateForm&#10;- Added assistance category dropdown API&#10;- Refactored CommunityUserDaoImpl" />
     <MESSAGE value="- Update UI 'Filter Settings' - 'Filter'&#10;- Update Drawer Title 'Filter Data' - 'Filter Settings'&#10;- Display full nz-option text" />
@@ -708,7 +701,8 @@
     <MESSAGE value="- Allow clear for select module in ActivityLogComponent" />
     <MESSAGE value="- updates to deploy frontend to heroku" />
     <MESSAGE value="- deploying angular to heroku" />
-    <option name="LAST_COMMIT_MESSAGE" value="- deploying angular to heroku" />
+    <MESSAGE value="- add postgreSQL dependency into maven&#10;- update Spring Profile" />
+    <option name="LAST_COMMIT_MESSAGE" value="- add postgreSQL dependency into maven&#10;- update Spring Profile" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
