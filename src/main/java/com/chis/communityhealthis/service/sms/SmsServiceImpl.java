@@ -12,10 +12,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class SmsServiceImpl implements SmsService{
 
-    @Value("${TWILIO_ACCOUNT_SID}")
+    @Value("${twilio.account.sid}")
     private String ACCOUNT_SID;
 
-    @Value("${TWILIO_AUTH_TOKEN}")
+    @Value("${twilio.auth.token}")
     private String AUTH_TOKEN;
 
     public static final String FROM_PHONE_NO = "+13253355815";

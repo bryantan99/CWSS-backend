@@ -26,7 +26,7 @@ public class GeocodingServiceImpl implements GeocodingService {
     @Autowired
     private AddressDao addressDao;
 
-    @Value("${GOOGLE_API_KEY}")
+    @Value("${google.api.key}")
     private String googleApiKey;
 
     @Override
