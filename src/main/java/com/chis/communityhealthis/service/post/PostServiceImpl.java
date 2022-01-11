@@ -49,8 +49,12 @@ public class PostServiceImpl implements PostService {
 
 
     @Override
-    public PostBean getPostWithMedia(Integer postId) {
-        return postDao.getPostWithMedia(postId);
+    public PostBean getPostWithMedia(Integer postId) throws Exception {
+        PostBean postBean = postDao.getPostWithMedia(postId);
+        if (postBean == null) {
+            throw new Exception("PostBean [ID: " + postId.toString() + "] is not found.");
+        }
+        return postBean;
     }
 
     @Override
@@ -116,7 +120,8 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<PostBean> getPostsWithMedia() {
-        return postDao.getPostsWithMedia();
+        List<PostBean> list = postDao.getPostsWithMedia();
+        return CollectionUtils.isEmpty(list) ? new ArrayList<>() : list;
     }
 
     @Override

@@ -4,21 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- add postgreSQL dependency into maven&#10;- update Spring Profile">
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/user/LoggedInUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Updated AdminRestController to restrict API based on account type&#10;- Updated staff-account-creation.ftl to dynamic replace loginUrl&#10;- Added method to retrieve currentLoggedInUserDetail in AuthService">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AdminRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AdminRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/admin/AdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/admin/AdminService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/admin/AdminServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/admin/AdminServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/auth/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/auth/AuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/auth/AuthServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/auth/AuthServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/PostRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/PostRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/post/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/post/PostService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/post/PostServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/post/PostServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application-local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-local.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/email/staff-account-creation.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/email/staff-account-creation.ftl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -336,14 +328,7 @@
       <workItem from="1641733719125" duration="1484000" />
       <workItem from="1641736811034" duration="6885000" />
       <workItem from="1641892979340" duration="130000" />
-      <workItem from="1641893158233" duration="5837000" />
-    </task>
-    <task id="LOCAL-00107" summary="Add action dropdown button in ProfileComponent, Update UpdateProfileComponent to handle email &amp; receive ResponseModel">
-      <created>1632909501474</created>
-      <option name="number" value="00107" />
-      <option name="presentableId" value="LOCAL-00107" />
-      <option name="project" value="LOCAL" />
-      <updated>1632909501474</updated>
+      <workItem from="1641893158233" duration="12283000" />
     </task>
     <task id="LOCAL-00108" summary="Add sidebar menu item - profile">
       <created>1632910606801</created>
@@ -681,7 +666,14 @@
       <option name="project" value="LOCAL" />
       <updated>1641549380675</updated>
     </task>
-    <option name="localTasksCounter" value="156" />
+    <task id="LOCAL-00156" summary="- Updated AdminRestController to restrict API based on account type&#10;- Updated staff-account-creation.ftl to dynamic replace loginUrl&#10;- Added method to retrieve currentLoggedInUserDetail in AuthService">
+      <created>1641899765575</created>
+      <option name="number" value="00156" />
+      <option name="presentableId" value="LOCAL-00156" />
+      <option name="project" value="LOCAL" />
+      <updated>1641899765575</updated>
+    </task>
+    <option name="localTasksCounter" value="157" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -712,7 +704,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="- Update AppointmentMngmtComponent (pending, my appointment, staff appointment)&#10;- Update confirmAppointment() and rescheduleAppointment() to handle exceptions&#10;- Add AppointmentTableComponent, RescheduleAppointmentComponent, PendingAppointmentComponent, MyAppointmentComponent&#10;- Remove feature for user to choose admin when scheduling appointment&#10;- Update AppointmentRestController to return AppointmentModel instead of AppointmentBean" />
     <MESSAGE value="- Updated AssistanceMngmtComponent, AssistanceDetailComponent&#10;- Added PendingAssistance, MyAssistance, AllAssistance, AssistanceCategoryMngmt and AssistanceTable component&#10;- Added AssistanceCategoryBean, DAO and joined with AssistanceBean&#10;- Added AssistanceModel, AssistanceQueryForm and AssistanceRejectForm&#10;- Updated AssistanceUpdateForm&#10;- Added assistance category dropdown API&#10;- Refactored CommunityUserDaoImpl" />
     <MESSAGE value="- Update UI 'Filter Settings' - 'Filter'&#10;- Update Drawer Title 'Filter Data' - 'Filter Settings'&#10;- Display full nz-option text" />
     <MESSAGE value="- Update AboutComponent" />
@@ -737,7 +728,8 @@
     <MESSAGE value="- updates to deploy frontend to heroku" />
     <MESSAGE value="- deploying angular to heroku" />
     <MESSAGE value="- add postgreSQL dependency into maven&#10;- update Spring Profile" />
-    <option name="LAST_COMMIT_MESSAGE" value="- add postgreSQL dependency into maven&#10;- update Spring Profile" />
+    <MESSAGE value="- Updated AdminRestController to restrict API based on account type&#10;- Updated staff-account-creation.ftl to dynamic replace loginUrl&#10;- Added method to retrieve currentLoggedInUserDetail in AuthService" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Updated AdminRestController to restrict API based on account type&#10;- Updated staff-account-creation.ftl to dynamic replace loginUrl&#10;- Added method to retrieve currentLoggedInUserDetail in AuthService" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

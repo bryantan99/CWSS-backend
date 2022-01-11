@@ -10,6 +10,6 @@ public interface PostService {
     List<PostBean> getPostsWithMedia();
     PostBean addPost(PostForm postForm) throws IOException;
     void deletePost(Integer postId, String actionMaker);
-    PostBean getPostWithMedia(Integer postId);
+    PostBean getPostWithMedia(Integer postId) throws Exception;
     PostBean updatePost(PostForm postFormObj) throws IOException;
 }
