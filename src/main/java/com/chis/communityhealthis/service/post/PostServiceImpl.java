@@ -135,7 +135,7 @@ public class PostServiceImpl implements PostService {
             String directoryName = createFolder(postId);
             List<String> filesUploaded = uploadPostMedia(directoryName, postForm.getFileList());
             Assert.isTrue(filesUploaded.size() == postForm.getFileList().size(), "There's an error when uploading files to folder.");
-            Map<Integer, PostMediaBean> mediaBeanMap = saveMediaDetail(postForm.getPostId(), postForm.getFileList());
+            Map<Integer, PostMediaBean> mediaBeanMap = saveMediaDetail(postId, postForm.getFileList());
 
             if (!CollectionUtils.isEmpty(mediaBeanMap)) {
                 for (Map.Entry<Integer, PostMediaBean> entry : mediaBeanMap.entrySet()) {
