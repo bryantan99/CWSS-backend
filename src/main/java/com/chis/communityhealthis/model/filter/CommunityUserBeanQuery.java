@@ -7,9 +7,6 @@ public class CommunityUserBeanQuery {
     private String ethnic;
     private Integer diseaseId;
     private Integer zoneId;
-    private boolean includeAddress;
-    private boolean includeOccupation;
-    private boolean includeHealthIssue;
 
     public String getName() {
         return name;
@@ -57,29 +54,5 @@ public class CommunityUserBeanQuery {
 
     public void setZoneId(Integer zoneId) {
         this.zoneId = zoneId;
-    }
-
-    public boolean isIncludeAddress() {
-        return includeAddress;
-    }
-
-    public void setIncludeAddress(boolean includeAddress) {
-        this.includeAddress = includeAddress;
-    }
-
-    public boolean isIncludeOccupation() {
-        return includeOccupation;
-    }
-
-    public void setIncludeOccupation(boolean includeOccupation) {
-        this.includeOccupation = includeOccupation;
-    }
-
-    public boolean isIncludeHealthIssue() {
-        return includeHealthIssue;
-    }
-
-    public void setIncludeHealthIssue(boolean includeHealthIssue) {
-        this.includeHealthIssue = includeHealthIssue;
     }
 }

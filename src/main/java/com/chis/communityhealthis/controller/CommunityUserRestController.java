@@ -49,10 +49,7 @@ public class CommunityUserRestController {
                                                     @RequestParam(required = false) String gender,
                                                     @RequestParam(required = false) String ethnic,
                                                     @RequestParam(required = false) Integer diseaseId,
-                                                    @RequestParam(required = false) Integer zoneId,
-                                                    @RequestParam(required = false) String address,
-                                                    @RequestParam(required = false) String occupation,
-                                                    @RequestParam(required = false) String healthIssue) {
+                                                    @RequestParam(required = false) Integer zoneId) {
         try {
             CommunityUserBeanQuery filter = new CommunityUserBeanQuery();
             filter.setName(StringUtils.isBlank(name) ? null : name);
@@ -61,9 +58,6 @@ public class CommunityUserRestController {
             filter.setEthnic(StringUtils.isBlank(ethnic) ? null : ethnic);
             filter.setDiseaseId(diseaseId);
             filter.setZoneId(zoneId);
-            filter.setIncludeAddress(!StringUtils.isBlank(address) && StringUtils.equals(FlagConstant.YES, address));
-            filter.setIncludeOccupation(!StringUtils.isBlank(occupation) && StringUtils.equals(FlagConstant.YES, occupation));
-            filter.setIncludeHealthIssue(!StringUtils.isBlank(healthIssue) && StringUtils.equals(FlagConstant.YES, healthIssue));
 
             List<CommunityUserModel> list = communityUserService.getCommunityUsers(filter);
             return ResponseHandler.generateResponse("Successfully retrieved " + list.size() + " user record(s).", HttpStatus.OK, list);

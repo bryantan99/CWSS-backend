@@ -46,11 +46,9 @@ public class CommunityUserDaoImpl extends GenericDaoImpl<CommunityUserBean, Stri
             predicates.add(criteriaBuilder.equal(root.get("ethnic"), filter.getEthnic()));
         }
 
-        if (filter.isIncludeHealthIssue() || filter.getDiseaseId() != null) {
-            if (filter.getDiseaseId() != null) {
-                Join<CommunityUserBean, HealthIssueBean> healthIssueBeanJoin = (Join<CommunityUserBean, HealthIssueBean>) healthIssueBeanFetch;
-                predicates.add(criteriaBuilder.equal(healthIssueBeanJoin.get("diseaseId"), filter.getDiseaseId()));
-            }
+        if (filter.getDiseaseId() != null) {
+            Join<CommunityUserBean, HealthIssueBean> healthIssueBeanJoin = (Join<CommunityUserBean, HealthIssueBean>) healthIssueBeanFetch;
+            predicates.add(criteriaBuilder.equal(healthIssueBeanJoin.get("diseaseId"), filter.getDiseaseId()));
         }
 
         if (filter.getZoneId() != null) {

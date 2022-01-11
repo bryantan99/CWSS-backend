@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Fix add postId for uploaded postMedia">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AuditRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AuditRestController.java" afterDir="false" />
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Restrict audit logs for super admin only">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/CommunityUserRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/CommunityUserRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/filter/CommunityUserBeanQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/filter/CommunityUserBeanQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/communityuser/CommunityUserDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/communityuser/CommunityUserDaoImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application-local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-local.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
@@ -325,14 +327,7 @@
       <workItem from="1641733719125" duration="1484000" />
       <workItem from="1641736811034" duration="6885000" />
       <workItem from="1641892979340" duration="130000" />
-      <workItem from="1641893158233" duration="15916000" />
-    </task>
-    <task id="LOCAL-00110" summary="Disable update button if form is not touched / not dirty">
-      <created>1633439351998</created>
-      <option name="number" value="00110" />
-      <option name="presentableId" value="LOCAL-00110" />
-      <option name="project" value="LOCAL" />
-      <updated>1633439351998</updated>
+      <workItem from="1641893158233" duration="17324000" />
     </task>
     <task id="LOCAL-00111" summary="Update gitignore to ignore index-dev.html">
       <created>1633446157848</created>
@@ -670,7 +665,14 @@
       <option name="project" value="LOCAL" />
       <updated>1641916005768</updated>
     </task>
-    <option name="localTasksCounter" value="159" />
+    <task id="LOCAL-00159" summary="- Restrict audit logs for super admin only">
+      <created>1641919863219</created>
+      <option name="number" value="00159" />
+      <option name="presentableId" value="LOCAL-00159" />
+      <option name="project" value="LOCAL" />
+      <updated>1641919863219</updated>
+    </task>
+    <option name="localTasksCounter" value="160" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -701,7 +703,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="- Update AboutComponent" />
     <MESSAGE value="- Update UI" />
     <MESSAGE value="- Updated ProfileComponent&#10;- Added UserProfile and AdminProfile component&#10;- Updated UserProfile's UI" />
     <MESSAGE value="- Allow user / admin to update user's disease profile" />
@@ -726,7 +727,8 @@
     <MESSAGE value="- Updated AdminRestController to restrict API based on account type&#10;- Updated staff-account-creation.ftl to dynamic replace loginUrl&#10;- Added method to retrieve currentLoggedInUserDetail in AuthService" />
     <MESSAGE value="- Updated PostRestController to restrict API endpoints based on account types" />
     <MESSAGE value="- Fix add postId for uploaded postMedia" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Fix add postId for uploaded postMedia" />
+    <MESSAGE value="- Restrict audit logs for super admin only" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Restrict audit logs for super admin only" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
