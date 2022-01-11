@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Updated PostRestController to restrict API endpoints based on account types">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/post/PostServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/post/PostServiceImpl.java" afterDir="false" />
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Fix add postId for uploaded postMedia">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AuditRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AuditRestController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application-local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-local.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
@@ -325,14 +325,7 @@
       <workItem from="1641733719125" duration="1484000" />
       <workItem from="1641736811034" duration="6885000" />
       <workItem from="1641892979340" duration="130000" />
-      <workItem from="1641893158233" duration="14236000" />
-    </task>
-    <task id="LOCAL-00109" summary="Add year column in HolidayBean">
-      <created>1633439216221</created>
-      <option name="number" value="00109" />
-      <option name="presentableId" value="LOCAL-00109" />
-      <option name="project" value="LOCAL" />
-      <updated>1633439216222</updated>
+      <workItem from="1641893158233" duration="15916000" />
     </task>
     <task id="LOCAL-00110" summary="Disable update button if form is not touched / not dirty">
       <created>1633439351998</created>
@@ -670,7 +663,14 @@
       <option name="project" value="LOCAL" />
       <updated>1641911800533</updated>
     </task>
-    <option name="localTasksCounter" value="158" />
+    <task id="LOCAL-00158" summary="- Fix add postId for uploaded postMedia">
+      <created>1641916005768</created>
+      <option name="number" value="00158" />
+      <option name="presentableId" value="LOCAL-00158" />
+      <option name="project" value="LOCAL" />
+      <updated>1641916005768</updated>
+    </task>
+    <option name="localTasksCounter" value="159" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -701,7 +701,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="- Update UI 'Filter Settings' - 'Filter'&#10;- Update Drawer Title 'Filter Data' - 'Filter Settings'&#10;- Display full nz-option text" />
     <MESSAGE value="- Update AboutComponent" />
     <MESSAGE value="- Update UI" />
     <MESSAGE value="- Updated ProfileComponent&#10;- Added UserProfile and AdminProfile component&#10;- Updated UserProfile's UI" />
@@ -726,28 +725,10 @@
     <MESSAGE value="- add postgreSQL dependency into maven&#10;- update Spring Profile" />
     <MESSAGE value="- Updated AdminRestController to restrict API based on account type&#10;- Updated staff-account-creation.ftl to dynamic replace loginUrl&#10;- Added method to retrieve currentLoggedInUserDetail in AuthService" />
     <MESSAGE value="- Updated PostRestController to restrict API endpoints based on account types" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Updated PostRestController to restrict API endpoints based on account types" />
+    <MESSAGE value="- Fix add postId for uploaded postMedia" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Fix add postId for uploaded postMedia" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/PostRestController.java</url>
-          <line>54</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/PostRestController.java</url>
-          <line>55</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/post/PostServiceImpl.java</url>
-          <line>150</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="org.javers.core.diff.Diff" memberName="changes" />
