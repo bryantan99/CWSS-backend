@@ -20,6 +20,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.SerializationUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -62,6 +63,9 @@ public class AdminServiceImpl implements AdminService {
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Value("${frontend.url}")
+    private String FRONTEND_URL;
 
     @Override
     public AdminDetailModel getAdmin(String username) throws NotFoundException {
@@ -187,23 +191,25 @@ public class AdminServiceImpl implements AdminService {
         map.put("fullName", model.getFullName());
         map.put("username", model.getUsername());
         map.put("defaultPw", model.getGeneratedPw());
+        map.put("loginUrl", FRONTEND_URL + "/login");
 
         emailService.sendEmailWithTemplate(mailRequest, map);
     }
 
     @Override
-    public void deleteStaff(String username, String actionMakerUsername) {
+    public void deleteStaff(String username, String actionMakerUsername) throws Exception {
         List<AccountRoleBean> roles = accountRoleDao.findUserRoles(username);
-        if (!CollectionUtils.isEmpty(roles)) {
-            for (AccountRoleBean role : roles) {
-                accountRoleDao.remove(role);
-            }
+        AdminBean adminBean = adminDao.find(username);
+        AccountBean accountBean = accountDao.find(username);
+
+        if (accountBean == null || adminBean == null || CollectionUtils.isEmpty(roles)) {
+            throw new NotFoundException(username + " record is not found.");
         }
 
-        AdminBean adminBean = adminDao.find(username);
+        for (AccountRoleBean role : roles) {
+            accountRoleDao.remove(role);
+        }
         adminDao.remove(adminBean);
-
-        AccountBean accountBean = accountDao.find(username);
         accountDao.remove(accountBean);
 
         AuditBeanFactory auditBeanFactory = new AuditBeanFactory(AuditConstant.MODULE_ADMIN, AuditConstant.formatActionDeleteAdmin(username, adminBean.getFullName()), actionMakerUsername);

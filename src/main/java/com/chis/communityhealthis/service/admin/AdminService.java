@@ -12,6 +12,6 @@ public interface AdminService {
     AdminDetailModel getAdmin(String username) throws NotFoundException;
     List<AdminDetailModel> findAllAdmins();
     AdminBean addStaff(AdminForm form) throws IOException;
-    void deleteStaff(String username, String actionMakerUsername);
+    void deleteStaff(String username, String actionMakerUsername) throws Exception;
     void updateAdmin(AdminForm adminForm) throws Exception;
 }

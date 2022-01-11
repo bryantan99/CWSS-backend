@@ -22,7 +22,7 @@
                                 Password: ${defaultPw}
                             </p>
                             <p>
-                                To login your account, click <a href="http://localhost:4200/login">here</a>. Please
+                                To login your account, click <a href="${loginUrl}">here</a>. Please
                                 remember to change your password after you have logged in with your default password to
                                 prevent any unauthorized access from other people.
                             </p>

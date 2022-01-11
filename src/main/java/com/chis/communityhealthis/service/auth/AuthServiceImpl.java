@@ -2,6 +2,7 @@ package com.chis.communityhealthis.service.auth;
 
 import com.chis.communityhealthis.bean.AccountRoleBean;
 import com.chis.communityhealthis.bean.AdminBean;
+import com.chis.communityhealthis.model.user.LoggedInUser;
 import com.chis.communityhealthis.repository.accountrole.AccountRoleDao;
 import com.chis.communityhealthis.repository.admin.AdminDao;
 import org.apache.commons.lang3.StringUtils;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -59,5 +61,24 @@ public class AuthServiceImpl implements AuthService {
         }
 
         return hasRole;
+    }
+
+    @Override
+    public LoggedInUser getCurrentLoggedInUser() {
+        String username = getCurrentLoggedInUsername();
+        LoggedInUser user = null;
+        if (!StringUtils.isEmpty(username)) {
+            user = new LoggedInUser();
+            user.setUsername(username);
+            List<AccountRoleBean> roleBeans = accountRoleDao.findUserRoles(username);
+            List<String> roles = new ArrayList<>();
+            if (!CollectionUtils.isEmpty(roleBeans)) {
+                for (AccountRoleBean roleBean : roleBeans) {
+                    roles.add(roleBean.getRoleName());
+                }
+            }
+            user.setRoleList(roles);
+        }
+        return user;
     }
 }
