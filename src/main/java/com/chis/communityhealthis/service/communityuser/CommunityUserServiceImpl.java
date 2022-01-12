@@ -211,6 +211,9 @@ public class CommunityUserServiceImpl implements CommunityUserService {
     @Override
     public void updateUserAccount(AccountRegistrationForm form, String actionMaker, boolean isAdmin) throws Exception {
         String username = form.getPersonalDetail().getUsername();
+        if (!isAdmin && !StringUtils.equals(username, actionMaker)) {
+            throw new Exception("Unauthorized user.");
+        }
 
         AccountBean accountBean = accountDao.findAccount(username);
         if (accountBean == null) {

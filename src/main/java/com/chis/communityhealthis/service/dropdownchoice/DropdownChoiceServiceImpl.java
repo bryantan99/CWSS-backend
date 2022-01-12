@@ -99,15 +99,33 @@ public class DropdownChoiceServiceImpl implements DropdownChoiceService {
     public List<DropdownChoiceModel<Date>> getAppointmentAvailableTimeslot(Date date, String adminUsername, String username) {
         List<DropdownChoiceModel<Date>> list = new ArrayList<>();
         if (!DatetimeUtil.isWeekend(date) && !isPublicHoliday(date)) {
-            if (StringUtils.isNotBlank(adminUsername)) {
-                return initAdminAvailableTimeslots(date, adminUsername);
-            } else if (StringUtils.isNotBlank(username)) {
-                return initCommunityUserAvailableTimeslots(date, username);
+            if (StringUtils.isNotEmpty(username) || StringUtils.isNotEmpty(adminUsername)) {
+                return initAdminAndCommunityUserAvailableTimeslots(date, adminUsername, username);
             } else {
                 return initDefaultTimeslots(date);
             }
         }
         return list;
+    }
+
+    private List<DropdownChoiceModel<Date>> initAdminAndCommunityUserAvailableTimeslots(Date date, String adminUsername, String username) {
+        List<AppointmentBean> list = new ArrayList<>();
+        List<AppointmentBean> adminAppointments = appointmentDao.getAdminAppointments(adminUsername, date);
+        if (!CollectionUtils.isEmpty(adminAppointments)) {
+            list.addAll(adminAppointments);
+        }
+        List<AppointmentBean> userAppointments = appointmentDao.getCommunityUserAppointments(username, date);
+        if (!CollectionUtils.isEmpty(userAppointments)) {
+            list.addAll(userAppointments);
+        }
+
+        List<DropdownChoiceModel<Date>> outputList = initDefaultTimeslots(date);
+        if (!CollectionUtils.isEmpty(list)) {
+            for (AppointmentBean appointmentBean : list) {
+                outputList.removeIf(obj -> obj.getValue().equals(appointmentBean.getAppointmentStartTime()));
+            }
+        }
+        return outputList;
     }
 
     @Override
@@ -146,30 +164,6 @@ public class DropdownChoiceServiceImpl implements DropdownChoiceService {
             }
         }
         Collections.sort(list);
-        return list;
-    }
-
-    private List<DropdownChoiceModel<Date>> initAdminAvailableTimeslots(Date date, String adminUsername) {
-        List<AppointmentBean> appointmentBeanList = appointmentDao.getAdminAppointments(adminUsername, date);
-        List<DropdownChoiceModel<Date>> list = initDefaultTimeslots(date);
-
-        if (!CollectionUtils.isEmpty(appointmentBeanList)) {
-            for (AppointmentBean appointmentBean : appointmentBeanList) {
-                list.removeIf(obj -> obj.getValue().equals(appointmentBean.getAppointmentStartTime()));
-            }
-        }
-        return list;
-    }
-
-    private List<DropdownChoiceModel<Date>> initCommunityUserAvailableTimeslots(Date date, String username) {
-        List<AppointmentBean> appointmentBeanList = appointmentDao.getCommunityUserAppointments(username, date);
-        List<DropdownChoiceModel<Date>> list = initDefaultTimeslots(date);
-
-        if (!CollectionUtils.isEmpty(appointmentBeanList)) {
-            for (AppointmentBean appointmentBean : appointmentBeanList) {
-                list.removeIf(obj -> obj.getValue().equals(appointmentBean.getAppointmentStartTime()));
-            }
-        }
         return list;
     }
 
