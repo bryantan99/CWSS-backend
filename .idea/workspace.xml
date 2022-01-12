@@ -4,18 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- add restriction for updateUserAccount() to allow only admin / account owner&#10;- update getAppointmentAvailableTimeslot()">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" afterDir="false" />
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Removed appointmentId from AssistanceBean&#10;- Added assistanceId in AppointmentBean and AppointmentModel">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/AppointmentBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/AppointmentBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/AssistanceBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/AssistanceBean.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AppointmentRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AppointmentRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AssistanceRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AssistanceRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/factory/AppointmentModelFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/factory/AppointmentModelFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/appointment/AppointmentModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/appointment/AppointmentModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/appointment/AppointmentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/appointment/AppointmentServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/assistance/AssistanceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/assistance/AssistanceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/assistance/AssistanceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/assistance/AssistanceServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application-local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-local.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
@@ -93,7 +84,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
-    <property name="database.data.extractors.current.export.id" value="Excel (xlsx)" />
+    <property name="database.data.extractors.current.export.id" value="SQL Inserts" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../cwss-frontend" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
@@ -336,14 +327,7 @@
       <workItem from="1641736811034" duration="6885000" />
       <workItem from="1641892979340" duration="130000" />
       <workItem from="1641893158233" duration="19396000" />
-      <workItem from="1641953133661" duration="14153000" />
-    </task>
-    <task id="LOCAL-00113" summary="Add latitude &amp; longitude for AddressBean,&#10;Update AddressDao, OccupationDao, HealthIssueDao,&#10;Update getCommunityUsers() to query based on CommunityUserBeanJoinFilter,&#10;Delete CommunityUserTableModel">
-      <created>1633771712281</created>
-      <option name="number" value="00113" />
-      <option name="presentableId" value="LOCAL-00113" />
-      <option name="project" value="LOCAL" />
-      <updated>1633771712281</updated>
+      <workItem from="1641953133661" duration="16515000" />
     </task>
     <task id="LOCAL-00114" summary="- Replaced HomepageComponent with PostfeedComponent&#10;- Replaced ETHNIC_DROPDOWN choice">
       <created>1633771920095</created>
@@ -681,7 +665,14 @@
       <option name="project" value="LOCAL" />
       <updated>1642007200995</updated>
     </task>
-    <option name="localTasksCounter" value="162" />
+    <task id="LOCAL-00162" summary="- Removed appointmentId from AssistanceBean&#10;- Added assistanceId in AppointmentBean and AppointmentModel">
+      <created>1642008829695</created>
+      <option name="number" value="00162" />
+      <option name="presentableId" value="LOCAL-00162" />
+      <option name="project" value="LOCAL" />
+      <updated>1642008829695</updated>
+    </task>
+    <option name="localTasksCounter" value="163" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -712,7 +703,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="- Allow user / admin to update user's disease profile" />
     <MESSAGE value="- Delete UpdateProfileComponent" />
     <MESSAGE value="- Update SignUpComponent (remove occupation &amp; health)&#10;-" />
     <MESSAGE value="- Update SignUpComponent (remove occupation &amp; health)&#10;- Add * to required fields (personal detail, address)" />
@@ -737,7 +727,8 @@
     <MESSAGE value="- Restrict audit logs for super admin only" />
     <MESSAGE value="- update getCommunityUsers() to remove unnecessary parameters address, occupation and healthIssue" />
     <MESSAGE value="- add restriction for updateUserAccount() to allow only admin / account owner&#10;- update getAppointmentAvailableTimeslot()" />
-    <option name="LAST_COMMIT_MESSAGE" value="- add restriction for updateUserAccount() to allow only admin / account owner&#10;- update getAppointmentAvailableTimeslot()" />
+    <MESSAGE value="- Removed appointmentId from AssistanceBean&#10;- Added assistanceId in AppointmentBean and AppointmentModel" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Removed appointmentId from AssistanceBean&#10;- Added assistanceId in AppointmentBean and AppointmentModel" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

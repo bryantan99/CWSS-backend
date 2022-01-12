@@ -2,7 +2,10 @@ package com.chis.communityhealthis.service.appointment;
 
 import com.chis.communityhealthis.bean.*;
 import com.chis.communityhealthis.factory.AppointmentModelFactory;
-import com.chis.communityhealthis.model.appointment.*;
+import com.chis.communityhealthis.model.appointment.AppointmentModel;
+import com.chis.communityhealthis.model.appointment.ConfirmationForm;
+import com.chis.communityhealthis.model.appointment.UpdateAppointmentStatusForm;
+import com.chis.communityhealthis.model.appointment.UpdateDatetimeForm;
 import com.chis.communityhealthis.repository.admin.AdminDao;
 import com.chis.communityhealthis.repository.appointment.AppointmentDao;
 import com.chis.communityhealthis.repository.assistance.AssistanceDao;
@@ -11,7 +14,6 @@ import com.chis.communityhealthis.service.audit.AuditService;
 import com.chis.communityhealthis.utility.AuditConstant;
 import com.chis.communityhealthis.utility.BeanComparator;
 import com.chis.communityhealthis.utility.DatetimeUtil;
-import io.jsonwebtoken.lang.Assert;
 import org.apache.commons.lang3.SerializationUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,18 +43,6 @@ public class AppointmentServiceImpl implements AppointmentService {
     private AuditService auditService;
 
     @Override
-    public List<AppointmentModel> getPendingAppointments(Integer appointmentId) {
-        List<AppointmentBean> appointmentBeanList = appointmentDao.getPendingAdminAppointmentsWithoutAdminUsername(appointmentId);
-        List<AppointmentModel> list = new ArrayList<>();
-        if (!CollectionUtils.isEmpty(appointmentBeanList)) {
-            for (AppointmentBean appointmentBean : appointmentBeanList) {
-                list.add(AppointmentModelFactory.createAppointmentModel(appointmentBean));
-            }
-        }
-        return list;
-    }
-
-    @Override
     public List<AppointmentModel> getLoggedInUserAppointments(String username, boolean currentLoggedInUserIsAdmin, Integer appointmentId, String status) {
         List<AppointmentBean> appointmentBeanList = appointmentDao.getUserAppointments(username, currentLoggedInUserIsAdmin, appointmentId, status);
         List<AppointmentModel> list = new ArrayList<>();
@@ -62,25 +52,6 @@ public class AppointmentServiceImpl implements AppointmentService {
             }
         }
         return list;
-    }
-
-    @Override
-    public void cancelAppointment(Integer appointmentId, String actionMakerUsername) throws Exception {
-        AppointmentBean appointmentBean = appointmentDao.find(appointmentId);
-        Assert.notNull(appointmentBean, "AppointmentBean [ID: " + appointmentId.toString() + "] was not found.");
-
-        boolean isAdmin = adminDao.find(actionMakerUsername) != null;
-        if (!isAdmin && !StringUtils.equals(actionMakerUsername, appointmentBean.getUsername())) {
-            throw new Exception("User is unauthorized to cancel appointment [ID: " + appointmentId + ".");
-        }
-
-        appointmentBean.setAppointmentStatus(AppointmentBean.APPOINTMENT_STATUS_CANCELLED);
-        appointmentBean.setLastUpdatedBy(actionMakerUsername);
-        appointmentBean.setLastUpdatedDate(new Date());
-        appointmentDao.update(appointmentBean);
-
-        AuditBean auditBean = new AuditBean(AuditConstant.MODULE_APPOINTMENT, AuditConstant.formatActionCancelAppointment(appointmentId), actionMakerUsername);
-        auditService.saveLogs(auditBean, null);
     }
 
     @Override
@@ -212,24 +183,6 @@ public class AppointmentServiceImpl implements AppointmentService {
                 auditService.saveLogs(acceptToHandleAssistanceAuditBean, null);
             }
         }
-    }
-
-    @Override
-    public Integer scheduleAppointment(ScheduleAppointmentForm form) {
-        boolean isAdmin = adminDao.find(form.getCreatedBy()) != null;
-        String status = isAdmin ? AppointmentBean.APPOINTMENT_STATUS_PENDING_USER : AppointmentBean.APPOINTMENT_STATUS_PENDING_ADMIN;
-
-        AppointmentBean bean = new AppointmentBean();
-        bean.setAppointmentPurpose(form.getPurpose());
-        bean.setAppointmentStartTime(form.getDatetime());
-        bean.setAppointmentEndTime(calculateEndDatetime(form.getDatetime()));
-        bean.setAppointmentStatus(status);
-        bean.setCreatedBy(form.getCreatedBy());
-        bean.setCreatedDate(new Date());
-        bean.setAdminUsername(form.getAdminUsername());
-        bean.setUsername(isAdmin ? form.getUsername() : form.getCreatedBy());
-
-        return appointmentDao.add(bean);
     }
 
     @Override

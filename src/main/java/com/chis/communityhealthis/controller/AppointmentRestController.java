@@ -52,18 +52,6 @@ public class AppointmentRestController {
         }
     }
 
-    @DeleteMapping(value = "/{appointmentId}")
-    public ResponseEntity<Object> cancelAppointment(@PathVariable Integer appointmentId) {
-        try {
-            String actionMakerUsername = authService.getCurrentLoggedInUsername();
-            appointmentService.cancelAppointment(appointmentId, actionMakerUsername);
-            String msg = "Successfully cancelled appointment [ID: " + appointmentId.toString() + "].";
-            return ResponseHandler.generateResponse(msg, HttpStatus.OK, null);
-        } catch (Exception e) {
-            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
-        }
-    }
-
     @PostMapping(value = "/update-datetime")
     public ResponseEntity<Object> updateDatetime(@RequestBody UpdateDatetimeForm form) {
         try {
