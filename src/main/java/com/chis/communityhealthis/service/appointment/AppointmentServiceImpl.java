@@ -238,11 +238,13 @@ public class AppointmentServiceImpl implements AppointmentService {
 
             AssistanceCommentBean assistanceCommentBean = new AssistanceCommentBean();
             assistanceCommentBean.setAssistanceId(form.getAssistanceId());
-            String desc = "I've ";
+            String desc = "";
             if (StringUtils.equals(AssistanceBean.STATUS_ACCEPTED, assistanceBean.getAssistanceStatus())) {
-                desc += "accepted this assistance request. (Reason: " + form.getReason() + ")";
+                desc = "I've accepted this assistance request. (Reason: " + form.getReason() + ")";
             } else if (StringUtils.equals(AssistanceBean.STATUS_REJECTED, assistanceBean.getAssistanceStatus())) {
-                desc += "rejected this assistance request. (Reason: " + form.getReason() + ")";
+                desc = "I've rejected this assistance request. (Reason: " + form.getReason() + ")";
+            } else if (StringUtils.equals(AssistanceBean.STATUS_CANCELLED, assistanceBean.getAssistanceStatus())) {
+                desc = "This assistance request has been cancelled. (Reason: " + form.getReason() + ")";
             }
             assistanceCommentBean.setCommentDesc(desc);
             assistanceCommentBean.setCreatedDate(form.getSubmittedDate());
