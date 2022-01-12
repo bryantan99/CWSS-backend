@@ -1,10 +1,12 @@
 package com.chis.communityhealthis.controller;
 
-import com.chis.communityhealthis.model.appointment.*;
+import com.chis.communityhealthis.model.appointment.AppointmentModel;
+import com.chis.communityhealthis.model.appointment.ConfirmationForm;
+import com.chis.communityhealthis.model.appointment.UpdateAppointmentStatusForm;
+import com.chis.communityhealthis.model.appointment.UpdateDatetimeForm;
 import com.chis.communityhealthis.model.response.ResponseHandler;
 import com.chis.communityhealthis.service.appointment.AppointmentService;
 import com.chis.communityhealthis.service.auth.AuthService;
-import io.jsonwebtoken.lang.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -30,18 +32,6 @@ public class AppointmentRestController {
             AppointmentModel appointment = appointmentService.getAppointment(appointmentId);
             String msg = "Successfully retrieved appointment [ID: " + appointmentId.toString() + "].";
             return ResponseHandler.generateResponse(msg, HttpStatus.OK, appointment);
-        } catch (Exception e) {
-            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
-        }
-    }
-
-    @GetMapping(value = "/pending")
-    public ResponseEntity<Object> getPendingAppointments(@RequestParam(required = false) Integer appointmentId) {
-        try {
-            Assert.isTrue(authService.currentLoggedInUserIsAdmin(), "Unauthorized user.");
-            List<AppointmentModel> appointmentBeanList = appointmentService.getPendingAppointments(appointmentId);
-            String msg = "Successfully retrieved " + appointmentBeanList.size() + " record(s).";
-            return ResponseHandler.generateResponse(msg, HttpStatus.OK, appointmentBeanList);
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
@@ -94,19 +84,6 @@ public class AppointmentRestController {
             form.setConfirmedDate(new Date());
             appointmentService.confirmAppointment(form);
             String msg = "Successfully confirmed appointment [ID: " + form.getAppointmentId().toString() + "].";
-            return ResponseHandler.generateResponse(msg, HttpStatus.OK, null);
-        } catch (Exception e) {
-            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
-        }
-    }
-
-    @PostMapping
-    public ResponseEntity<Object> scheduleAppointment(@RequestBody ScheduleAppointmentForm form) {
-        try {
-            String actionMakerUsername = authService.getCurrentLoggedInUsername();
-            form.setCreatedBy(actionMakerUsername);
-            Integer appointmentId = appointmentService.scheduleAppointment(form);
-            String msg = "Successfully scheduled appointment [ID: " + appointmentId + "].";
             return ResponseHandler.generateResponse(msg, HttpStatus.OK, null);
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);

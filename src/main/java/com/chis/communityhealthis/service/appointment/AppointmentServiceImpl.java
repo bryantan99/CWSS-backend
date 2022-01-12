@@ -311,7 +311,6 @@ public class AppointmentServiceImpl implements AppointmentService {
         bean.setLastUpdatedBy(assistanceBean.getLastUpdatedBy());
         bean.setLastUpdatedDate(assistanceBean.getLastUpdatedDate());
         bean.setAdminUsername(assistanceBean.getAdminUsername());
-        bean.setAppointmentId(assistanceBean.getAppointmentId());
         return bean;
     }
 

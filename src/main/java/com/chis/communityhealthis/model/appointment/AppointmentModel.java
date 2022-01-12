@@ -13,6 +13,7 @@ public class AppointmentModel implements Comparable<AppointmentModel> {
     private String adminUsername;
     private String adminFullName;
     private Date lastUpdatedDate;
+    private Integer assistanceId;
 
     public Integer getAppointmentId() {
         return appointmentId;
@@ -92,6 +93,14 @@ public class AppointmentModel implements Comparable<AppointmentModel> {
 
     public void setLastUpdatedDate(Date lastUpdatedDate) {
         this.lastUpdatedDate = lastUpdatedDate;
+    }
+
+    public Integer getAssistanceId() {
+        return assistanceId;
+    }
+
+    public void setAssistanceId(Integer assistanceId) {
+        this.assistanceId = assistanceId;
     }
 
     @Override

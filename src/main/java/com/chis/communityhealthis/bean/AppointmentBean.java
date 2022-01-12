@@ -26,6 +26,7 @@ public class AppointmentBean implements Serializable {
     public static final String USERNAME = "USERNAME";
     public static final String LAST_UPDATED_BY = "LAST_UPDATED_BY";
     public static final String LAST_UPDATED_DATE = "LAST_UPDATED_DATE";
+    public static final String ASSISTANCE_ID = "ASSISTANCE_ID";
 
     public static final String APPOINTMENT_STATUS_PENDING_USER = "pending_user";
     public static final String APPOINTMENT_STATUS_PENDING_ADMIN = "pending_admin";
@@ -67,6 +68,13 @@ public class AppointmentBean implements Serializable {
 
     @Column(name = LAST_UPDATED_DATE)
     private Date lastUpdatedDate;
+
+    @Column(name = ASSISTANCE_ID)
+    private Integer assistanceId;
+
+    @OneToOne()
+    @JoinColumn(name = ASSISTANCE_ID, referencedColumnName = AssistanceBean.ASSISTANCE_ID, insertable = false, updatable = false)
+    private AssistanceBean assistanceBean;
 
     @OneToOne
     @JoinColumn(name = ADMIN_USERNAME, referencedColumnName = AdminBean.USERNAME, insertable = false, updatable = false)
@@ -166,6 +174,14 @@ public class AppointmentBean implements Serializable {
         this.lastUpdatedDate = lastUpdatedDate;
     }
 
+    public Integer getAssistanceId() {
+        return assistanceId;
+    }
+
+    public void setAssistanceId(Integer assistanceId) {
+        this.assistanceId = assistanceId;
+    }
+
     public AdminBean getAdminBean() {
         return adminBean;
     }
@@ -180,5 +196,13 @@ public class AppointmentBean implements Serializable {
 
     public void setCommunityUserBean(CommunityUserBean communityUserBean) {
         this.communityUserBean = communityUserBean;
+    }
+
+    public AssistanceBean getAssistanceBean() {
+        return assistanceBean;
+    }
+
+    public void setAssistanceBean(AssistanceBean assistanceBean) {
+        this.assistanceBean = assistanceBean;
     }
 }

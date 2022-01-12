@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface AssistanceService {
     List<AssistanceModel> findUserAssistanceRecords(AssistanceQueryForm form);
-    AssistanceBean addAssistanceRequest(AssistanceRequestForm form);
+    AssistanceBean addAssistanceRequest(AssistanceRequestForm form) throws Exception;
     void deleteAssistance(Integer assistanceId, String actionMakerUsername) throws Exception;
     AssistanceModel getAssistanceRecordDetail(Integer assistanceId, String actionMakerUsername) throws Exception;
     List<AssistanceModel> findAllAssistanceRecords(AssistanceQueryForm form);

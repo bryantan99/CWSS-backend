@@ -21,6 +21,7 @@ public class AppointmentModelFactory {
         }
         model.setStatus(appointmentBean.getAppointmentStatus());
         model.setLastUpdatedDate(appointmentBean.getLastUpdatedDate());
+        model.setAssistanceId(appointmentBean.getAssistanceId());
         return model;
     }
 }

@@ -62,12 +62,15 @@ public class AssistanceServiceImpl implements AssistanceService {
     }
 
     @Override
-    public AssistanceBean addAssistanceRequest(AssistanceRequestForm form) {
-        AppointmentBean appointmentBean = createAppointmentBean(form);
-        Integer appointmentId = appointmentDao.add(appointmentBean);
-
-        AssistanceBean bean = createAssistanceBean(form, appointmentId);
+    public AssistanceBean addAssistanceRequest(AssistanceRequestForm form) throws Exception {
+        AssistanceBean bean = createAssistanceBean(form);
         Integer assistanceId = assistanceDao.add(bean);
+        if (assistanceId == null) {
+            throw new Exception("There's an error when saving assistance bean.");
+        }
+        form.setAssistanceId(assistanceId);
+        AppointmentBean appointmentBean = createAppointmentBean(form);
+        appointmentDao.add(appointmentBean);
 
         AuditBean auditBean = new AuditBean(AuditConstant.MODULE_ASSISTANCE, AuditConstant.formatActionCreateAssistanceRequest(assistanceId), form.getCreatedBy());
         auditService.saveLogs(auditBean, null);
@@ -172,7 +175,6 @@ public class AssistanceServiceImpl implements AssistanceService {
         bean.setLastUpdatedBy(assistanceBean.getLastUpdatedBy());
         bean.setLastUpdatedDate(assistanceBean.getLastUpdatedDate());
         bean.setAdminUsername(assistanceBean.getAdminUsername());
-        bean.setAppointmentId(assistanceBean.getAppointmentId());
         return bean;
     }
 
@@ -257,14 +259,13 @@ public class AssistanceServiceImpl implements AssistanceService {
         auditService.saveLogs(auditBean, null);
     }
 
-    private AssistanceBean createAssistanceBean(AssistanceRequestForm form, Integer appointmentId) {
+    private AssistanceBean createAssistanceBean(AssistanceRequestForm form) {
         AssistanceBean bean = new AssistanceBean();
         bean.setAssistanceTitle(form.getAssistanceTitle());
         bean.setAssistanceDescription(form.getAssistanceDescription());
         bean.setCreatedDate(new Date());
         bean.setCreatedBy(form.getCreatedBy());
         bean.setUsername(form.getUsername());
-        bean.setAppointmentId(appointmentId);
 
         if (form.getCategoryId() != null) {
             bean.setCategoryId(form.getCategoryId());
@@ -292,6 +293,7 @@ public class AssistanceServiceImpl implements AssistanceService {
         appointmentBean.setCreatedDate(new Date());
         appointmentBean.setAdminUsername(StringUtils.isNotBlank(form.getAdminUsername()) ? form.getAdminUsername() : null);
         appointmentBean.setUsername(isAdmin ? form.getUsername() : form.getCreatedBy());
+        appointmentBean.setAssistanceId(form.getAssistanceId());
         return appointmentBean;
     }
 

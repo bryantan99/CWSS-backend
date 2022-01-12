@@ -4,8 +4,10 @@ import com.chis.communityhealthis.bean.AssistanceBean;
 import com.chis.communityhealthis.model.assistance.*;
 import com.chis.communityhealthis.model.assistancecategory.AssistanceCategoryForm;
 import com.chis.communityhealthis.model.response.ResponseHandler;
+import com.chis.communityhealthis.model.user.LoggedInUser;
 import com.chis.communityhealthis.service.assistance.AssistanceService;
 import com.chis.communityhealthis.service.auth.AuthService;
+import com.chis.communityhealthis.utility.RoleConstant;
 import io.jsonwebtoken.lang.Assert;
 import javassist.NotFoundException;
 import org.apache.commons.lang3.StringUtils;
@@ -111,17 +113,16 @@ public class AssistanceRestController {
     }
 
     @GetMapping("/handled")
-    public ResponseEntity<Object> getAdminHandledAssistanceRecords(@RequestParam(required = false) String adminUsername,
-                                                                   @RequestParam(required = false) Integer assistanceId,
+    public ResponseEntity<Object> getAdminHandledAssistanceRecords(@RequestParam(required = false) Integer assistanceId,
                                                                    @RequestParam(required = false) String title,
                                                                    @RequestParam(required = false) String status,
                                                                    @RequestParam(required = false) String username) {
         try {
-            String currentLoginUsername = authService.getCurrentLoggedInUsername();
-            boolean isAdmin = authService.currentLoggedInUserIsAdmin();
-            if (!isAdmin) {throw new Exception("Unauthorized user.");}
-            adminUsername = StringUtils.isBlank(adminUsername) ? currentLoginUsername : adminUsername;
-            AssistanceQueryForm queryForm = initQueryForm(assistanceId, null, title, status, null, username, adminUsername);
+            LoggedInUser user = authService.getCurrentLoggedInUser();
+            if (!user.getRoleList().contains(RoleConstant.ADMIN) && !user.getRoleList().contains(RoleConstant.SUPER_ADMIN)) {
+                throw new Exception("Unauthorized user.");
+            }
+            AssistanceQueryForm queryForm = initQueryForm(assistanceId, null, title, status, null, username, user.getUsername());
 
             List<AssistanceModel> list = assistanceService.getAdminHandledAssistanceRecords(queryForm);
             return ResponseHandler.generateResponse("Successfully retrieved " + list.size() + " assistance request record(s).", HttpStatus.OK, list);
@@ -151,7 +152,7 @@ public class AssistanceRestController {
             form.setRejectedBy(authService.getCurrentLoggedInUsername());
             form.setRejectedDate(new Date());
             assistanceService.rejectAssistanceForm(form);
-            return ResponseHandler.generateResponse("Successfully updated assistance request [ID: " + form.getAssistanceId() + "].", HttpStatus.OK, null);
+            return ResponseHandler.generateResponse("Successfully rejected assistance request [ID: " + form.getAssistanceId() + "].", HttpStatus.OK, null);
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
