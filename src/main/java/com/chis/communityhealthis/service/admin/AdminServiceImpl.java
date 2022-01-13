@@ -13,6 +13,7 @@ import com.chis.communityhealthis.repository.admin.AdminDao;
 import com.chis.communityhealthis.service.audit.AuditService;
 import com.chis.communityhealthis.service.auth.AuthService;
 import com.chis.communityhealthis.service.email.EmailService;
+import com.chis.communityhealthis.service.storage.StorageService;
 import com.chis.communityhealthis.utility.*;
 import io.jsonwebtoken.lang.Assert;
 import javassist.NotFoundException;
@@ -25,23 +26,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Path;
 import java.util.*;
 import java.util.stream.Collectors;
-
-import static java.nio.file.Files.copy;
-import static java.nio.file.Paths.get;
-import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 @Service
 @Transactional
 public class AdminServiceImpl implements AdminService {
-
-    private static final String ACCOUNT_PROFILE_PIC_DIRECTORY = System.getProperty("user.home") + "/Downloads/uploads/account/profile-pic";
 
     @Autowired
     private AdminDao adminDao;
@@ -60,6 +51,9 @@ public class AdminServiceImpl implements AdminService {
 
     @Autowired
     private AuditService auditService;
+
+    @Autowired
+    private StorageService storageService;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -126,22 +120,19 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public AdminBean addStaff(AdminForm form) throws IOException {
+    public AdminBean addStaff(AdminForm form) {
         String generatedPw = RandomStringUtils.randomAlphanumeric(8, 12);
         form.setPassword(generatedPw);
 
         AccountBean accountBean = createAccountBean(form);
         accountDao.add(accountBean);
 
-        String profilePicDirectory = null;
+        String fileName = null;
         if (form.getProfilePicFile() != null) {
-            String directoryName = createFolder(form.getUsername());
-            List<String> filesUploaded = uploadProfilePicture(directoryName, form.getProfilePicFile());
-            Assert.isTrue(filesUploaded.size() == 1, "There's an error when uploading profile picture to folder.");
-            profilePicDirectory = org.springframework.util.StringUtils.cleanPath(form.getProfilePicFile().getOriginalFilename());
+            fileName = storageService.uploadProfilePicture(form.getUsername(), form.getProfilePicFile());
         }
 
-        AdminBean adminBean = createAdminBean(form, profilePicDirectory);
+        AdminBean adminBean = createAdminBean(form, fileName);
         adminDao.add(adminBean);
 
         for (String role : form.getRoleList()) {
@@ -158,26 +149,6 @@ public class AdminServiceImpl implements AdminService {
         StaffAccountCreationEmailTemplateModel model = new StaffAccountCreationEmailTemplateModel(form.getFullName(), form.getUsername(), generatedPw);
         sendAccountCreationEmail(form.getEmail(), model);
         return adminBean;
-    }
-
-    private List<String> uploadProfilePicture(String directoryName, MultipartFile profilePicFile) throws IOException {
-        List<String> filenames = new ArrayList<>();
-        if (profilePicFile != null) {
-            String filename = org.springframework.util.StringUtils.cleanPath(profilePicFile.getOriginalFilename());
-            Path fileStorage = get(directoryName, filename).toAbsolutePath().normalize();
-            copy(profilePicFile.getInputStream(), fileStorage, REPLACE_EXISTING);
-            filenames.add(filename);
-        }
-        return filenames;
-    }
-
-    private String createFolder(String username) {
-        String directoryName = ACCOUNT_PROFILE_PIC_DIRECTORY.concat("/").concat(username);
-        File directory = new File(directoryName);
-        if (!directory.exists()) {
-            directory.mkdirs();
-        }
-        return directoryName;
     }
 
     private void sendAccountCreationEmail(String recipientEmail, StaffAccountCreationEmailTemplateModel model) {
@@ -206,6 +177,11 @@ public class AdminServiceImpl implements AdminService {
             throw new NotFoundException(username + " record is not found.");
         }
 
+        if (StringUtils.isNotEmpty(adminBean.getProfilePicDirectory())) {
+            String relativePathToFolder = DirectoryConstant.AWS_ACCOUNT_PROFILE_PIC_DIRECTORY + "/" + username;
+            storageService.deleteFolderWithItsContents(relativePathToFolder);
+        }
+
         for (AccountRoleBean role : roles) {
             accountRoleDao.remove(role);
         }
@@ -218,7 +194,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public void updateAdmin(AdminForm adminForm) throws Exception {
+    public void updateAdmin(AdminForm adminForm) {
         AuditBeanFactory auditBeanFactory = new AuditBeanFactory(AuditConstant.MODULE_ADMIN, AuditConstant.formatActionUpdateAdmin(adminForm.getUsername(), adminForm.getFullName()), adminForm.getCreatedBy());
         AuditBean auditBean = auditBeanFactory.createAuditBean();
         List<AuditActionBean> auditActionBeans = new ArrayList<>();
@@ -239,20 +215,12 @@ public class AdminServiceImpl implements AdminService {
         adminBean.setFullName(adminForm.getFullName());
         adminBean.setContactNo(adminForm.getContactNo());
         if (adminForm.getProfilePicFile() != null) {
-            String directoryName = DirectoryConstant.ACCOUNT_PROFILE_PIC_DIRECTORY.concat("/").concat(adminForm.getUsername());
-            File directory = new File(directoryName);
-            if (!directory.exists()) {
-                directoryName = createFolder(adminForm.getUsername());
-            } else {
-                deleteProfilePicture(directoryName);
+            if (StringUtils.isNotEmpty(adminBean.getProfilePicDirectory())) {
+                String fileNameToBeDeleted = DirectoryConstant.AWS_ACCOUNT_PROFILE_PIC_DIRECTORY + "/" + adminBean.getUsername() + "/" + adminBean.getProfilePicDirectory();
+                storageService.deleteFile(fileNameToBeDeleted);
             }
-            try {
-                uploadProfilePicture(directoryName, adminForm.getProfilePicFile());
-            } catch (IOException e) {
-                throw new Exception(e.getMessage());
-            }
-            String profilePicDirectory = org.springframework.util.StringUtils.cleanPath(adminForm.getProfilePicFile().getOriginalFilename());
-            adminBean.setProfilePicDirectory(profilePicDirectory);
+            String newFileName = storageService.uploadProfilePicture(adminForm.getUsername(), adminForm.getProfilePicFile());
+            adminBean.setProfilePicDirectory(newFileName);
         }
         adminDao.update(adminBean);
         BeanComparator adminBeanComparator = new BeanComparator(adminBeanDeepCopy, adminBean);
@@ -309,18 +277,6 @@ public class AdminServiceImpl implements AdminService {
         List<String> differences = new ArrayList<>(list1);
         differences.removeAll(list2);
         return differences;
-    }
-
-    private void deleteProfilePicture(String directoryName) {
-        File directory = new File(directoryName);
-        if (directory.exists()) {
-            File[] files = directory.listFiles();
-            if (files != null) {
-                for (File file : files) {
-                    boolean isDeleted = file.delete();
-                }
-            }
-        }
     }
 
     private AccountBean createAccountBean(AdminForm form) {

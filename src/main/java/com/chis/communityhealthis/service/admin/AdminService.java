@@ -13,5 +13,5 @@ public interface AdminService {
     List<AdminDetailModel> findAllAdmins();
     AdminBean addStaff(AdminForm form) throws IOException;
     void deleteStaff(String username, String actionMakerUsername) throws Exception;
-    void updateAdmin(AdminForm adminForm) throws Exception;
+    void updateAdmin(AdminForm adminForm);
 }
