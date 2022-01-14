@@ -54,7 +54,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                             "/account/current-user",
                             "/image/post/**",
                             "/image/account/profile-pic/**",
-                            "/dropdown/get-disease-choice-list")
+                            "/dropdown/get-disease-choice-list",
+                            "/dropdown/zoneId")
                     .permitAll()
                     .and()
                 .authorizeRequests()

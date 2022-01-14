@@ -210,6 +210,7 @@ public class AccountServiceImpl implements AccountService {
         addressBean.setPostcode(addressForm.getPostcode());
         addressBean.setCity(addressForm.getCity());
         addressBean.setState(addressForm.getState());
+        addressBean.setZoneId(addressForm.getZoneId());
         return addressBean;
     }
 

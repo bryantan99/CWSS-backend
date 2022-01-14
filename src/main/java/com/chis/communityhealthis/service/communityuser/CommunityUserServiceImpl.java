@@ -480,6 +480,7 @@ public class CommunityUserServiceImpl implements CommunityUserService {
         addressBean.setPostcode(address.getPostcode());
         addressBean.setCity(address.getCity());
         addressBean.setState(address.getState());
+        addressBean.setZoneId(address.getZoneId());
         addressDao.update(addressBean);
         return new BeanComparator(cloneAddressBean, addressBean);
     }
@@ -564,6 +565,7 @@ public class CommunityUserServiceImpl implements CommunityUserService {
             model.setLatLng(latLng);
         }
         if (addressBean.getZoneBean() != null) {
+            model.setZoneId(addressBean.getZoneBean().getZoneId());
             model.setZoneName(addressBean.getZoneBean().getZoneName());
         }
         return model;

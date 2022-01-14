@@ -6,6 +6,7 @@ public class AddressForm {
     private String postcode;
     private String city;
     private String state;
+    private Integer zoneId;
 
     public String getAddressLine1() {
         return addressLine1;
@@ -45,5 +46,13 @@ public class AddressForm {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public Integer getZoneId() {
+        return zoneId;
+    }
+
+    public void setZoneId(Integer zoneId) {
+        this.zoneId = zoneId;
     }
 }

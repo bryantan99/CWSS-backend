@@ -47,6 +47,9 @@ public class AddressBean implements Serializable {
     @Column(name = LONGITUDE)
     private Double longitude;
 
+    @Column(name = ZONE_ID)
+    private Integer zoneId;
+
     @OneToOne
     @JoinColumn(name = ZONE_ID, referencedColumnName = ZoneBean.ZONE_ID, insertable = false, updatable = false)
     private ZoneBean zoneBean;
@@ -113,6 +116,14 @@ public class AddressBean implements Serializable {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
+    }
+
+    public Integer getZoneId() {
+        return zoneId;
+    }
+
+    public void setZoneId(Integer zoneId) {
+        this.zoneId = zoneId;
     }
 
     public ZoneBean getZoneBean() {
