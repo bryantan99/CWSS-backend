@@ -16,4 +16,5 @@ public interface AccountService {
     Boolean validateOtp(PasswordResetRequestModel model);
     void resetPassword(PasswordResetRequestModel model);
     void changePassword(ChangePasswordRequestModel model);
+    Boolean isUniqueNric(String nric);
 }

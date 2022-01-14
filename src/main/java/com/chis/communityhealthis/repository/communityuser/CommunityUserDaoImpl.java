@@ -9,6 +9,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
+import javax.persistence.NoResultException;
 import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,6 +74,19 @@ public class CommunityUserDaoImpl extends GenericDaoImpl<CommunityUserBean, Stri
     }
 
     @Override
+    public CommunityUserBean getCommunityUserByNric(String nric) {
+        CriteriaBuilder criteriaBuilder = currentSession().getCriteriaBuilder();
+        CriteriaQuery<CommunityUserBean> criteriaQuery = criteriaBuilder.createQuery(CommunityUserBean.class);
+        Root<CommunityUserBean> root = criteriaQuery.from(CommunityUserBean.class);
+
+        List<Predicate> predicates = new ArrayList<>();
+        predicates.add(criteriaBuilder.equal(root.get("nric"), nric));
+
+        fetchTables(root);
+        return getResult(criteriaQuery, root, predicates);
+    }
+
+    @Override
     public List<CommunityUserBean> getAllCommunityUsers() {
         CriteriaBuilder criteriaBuilder = currentSession().getCriteriaBuilder();
         CriteriaQuery<CommunityUserBean> criteriaQuery = criteriaBuilder.createQuery(CommunityUserBean.class);
@@ -96,7 +110,11 @@ public class CommunityUserDaoImpl extends GenericDaoImpl<CommunityUserBean, Stri
         predicates = CollectionUtils.isEmpty(predicates) ? new ArrayList<>() : predicates;
         cq.select(root).distinct(true).where(predicates.toArray(new Predicate[]{}));
         Query<CommunityUserBean> query = currentSession().createQuery(cq);
-        return query.getSingleResult();
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 
     private List<CommunityUserBean> getResults(CriteriaQuery<CommunityUserBean> cq, Root<CommunityUserBean> root, @Nullable List<Predicate> predicates) {

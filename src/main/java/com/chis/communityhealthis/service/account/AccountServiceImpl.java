@@ -175,6 +175,12 @@ public class AccountServiceImpl implements AccountService {
         accountDao.update(accountBean);
     }
 
+    @Override
+    public Boolean isUniqueNric(String nric) {
+        CommunityUserBean userBean = communityUserDao.getCommunityUserByNric(nric);
+        return userBean == null;
+    }
+
     private AccountBean createAccountBean(PersonalDetailForm personalDetail) {
         Assert.isTrue(StringUtils.equals(personalDetail.getPassword(), personalDetail.getConfirmPassword()), "Password does not matched");
         AccountBean bean = new AccountBean();

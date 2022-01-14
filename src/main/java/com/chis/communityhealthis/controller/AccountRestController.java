@@ -41,6 +41,16 @@ public class AccountRestController {
         }
     }
 
+    @GetMapping(value = "/validation/nric")
+    public ResponseEntity<Object> isUniqueNric(@RequestParam String nric) {
+        try {
+            Boolean isUnique = this.accountService.isUniqueNric(nric);
+            return ResponseHandler.generateResponse(nric + (isUnique ? " is " : " is not ") + "unique.", HttpStatus.OK, isUnique);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
     @PostMapping(value = "/request-password-reset")
     public ResponseEntity<Object> requestPasswordReset(@RequestBody PasswordResetRequestModel model) {
         try {

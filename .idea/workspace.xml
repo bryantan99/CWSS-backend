@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- removed ImageService&#10;- added StorageService (Amazon s3)&#10;- replace file upload service to use aws s3&#10;- removed postgres dependency">
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- add zoneId in AddressForm&#10;- handle zoneId during creation / update of community user account">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/AddressBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/AddressBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/signup/AddressForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/signup/AddressForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/security/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/security/SecurityConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AccountRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AccountRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/communityuser/CommunityUserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/communityuser/CommunityUserDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/communityuser/CommunityUserDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/communityuser/CommunityUserDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/account/AccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/account/AccountService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/account/AccountServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/account/AccountServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application-local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-local.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
@@ -348,14 +348,7 @@
       <workItem from="1642083821450" duration="12890000" />
       <workItem from="1642144073688" duration="989000" />
       <workItem from="1642145293297" duration="3000" />
-      <workItem from="1642163895260" duration="3394000" />
-    </task>
-    <task id="LOCAL-00116" summary="- Install Highcharts&#10;- Update getCommunityUsers() API to filter results&#10;- Add gender, ethnic and location pie chart">
-      <created>1633793259743</created>
-      <option name="number" value="00116" />
-      <option name="presentableId" value="LOCAL-00116" />
-      <option name="project" value="LOCAL" />
-      <updated>1633793259743</updated>
+      <workItem from="1642163895260" duration="5967000" />
     </task>
     <task id="LOCAL-00117" summary="- Add disease form field to query community user&#10;- Move charts into CommunityUserGraphComponent&#10;- Update getCommunityUsers() to join disease, address and occupation in DAO&#10;- Add CommunityUserModel, EthnicUtil and GenderUtil">
       <created>1634748165643</created>
@@ -693,7 +686,14 @@
       <option name="project" value="LOCAL" />
       <updated>1642095893744</updated>
     </task>
-    <option name="localTasksCounter" value="165" />
+    <task id="LOCAL-00165" summary="- add zoneId in AddressForm&#10;- handle zoneId during creation / update of community user account">
+      <created>1642167572358</created>
+      <option name="number" value="00165" />
+      <option name="presentableId" value="LOCAL-00165" />
+      <option name="project" value="LOCAL" />
+      <updated>1642167572358</updated>
+    </task>
+    <option name="localTasksCounter" value="166" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -723,7 +723,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="- Added Twilio&#10;- Send approval / reject message for community user account registration" />
     <MESSAGE value="- Allow super admin to view audit trails at Settings" />
     <MESSAGE value="- Allow owner of the post to edit / delete post" />
     <MESSAGE value="- Sort audit logs by descending order (actionDate)" />
@@ -748,7 +747,8 @@
     <MESSAGE value="- removed unused appointment API methods" />
     <MESSAGE value="- removed ImageService&#10;- added StorageService (Amazon s3)&#10;- replace file upload service to use aws s3" />
     <MESSAGE value="- removed ImageService&#10;- added StorageService (Amazon s3)&#10;- replace file upload service to use aws s3&#10;- removed postgres dependency" />
-    <option name="LAST_COMMIT_MESSAGE" value="- removed ImageService&#10;- added StorageService (Amazon s3)&#10;- replace file upload service to use aws s3&#10;- removed postgres dependency" />
+    <MESSAGE value="- add zoneId in AddressForm&#10;- handle zoneId during creation / update of community user account" />
+    <option name="LAST_COMMIT_MESSAGE" value="- add zoneId in AddressForm&#10;- handle zoneId during creation / update of community user account" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -757,11 +757,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/admin/AdminServiceImpl.java</url>
           <line>32</line>
           <option name="timeStamp" value="36" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/account/AccountServiceImpl.java</url>
-          <line>213</line>
-          <option name="timeStamp" value="38" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
