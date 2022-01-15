@@ -47,7 +47,7 @@ public class PostRestController {
         }
     }
 
-    @PostMapping
+    @PostMapping(value = "/new")
     public ResponseEntity<Object> addAdminPosts(@RequestParam(value = "form") String postForm,
                                                 @RequestParam(value = "files", required = false) List<MultipartFile> multipartFileList) {
         try {
