@@ -16,7 +16,7 @@ import java.util.*;
 public class JwtUtils {
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
-    @Value("${jwt.expirationMs}")
+    @Value("${jwt.expiration.ms}")
     private long jwtExpirationMs;
 
     @Value("${jwt.secret}")
