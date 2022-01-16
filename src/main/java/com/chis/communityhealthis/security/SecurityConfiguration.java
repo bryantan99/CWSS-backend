@@ -46,6 +46,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                     .antMatchers(
                             "/authenticate",
+                            "/refresh-token",
                             "/register",
                             "/post",
                             "/account/validation/**",

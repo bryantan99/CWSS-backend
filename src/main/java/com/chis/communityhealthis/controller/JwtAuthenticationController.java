@@ -1,13 +1,15 @@
 package com.chis.communityhealthis.controller;
 
-import com.chis.communityhealthis.model.jwt.JwtRequestModel;
-import com.chis.communityhealthis.model.jwt.JwtResponseModel;
+import com.chis.communityhealthis.bean.RefreshTokenBean;
 import com.chis.communityhealthis.model.account.AccountModel;
+import com.chis.communityhealthis.model.jwt.*;
 import com.chis.communityhealthis.model.response.ResponseHandler;
 import com.chis.communityhealthis.model.signup.AccountRegistrationForm;
 import com.chis.communityhealthis.security.ChisUserDetailsService;
+import com.chis.communityhealthis.security.UserDetailsModel;
 import com.chis.communityhealthis.service.account.AccountService;
-import com.chis.communityhealthis.utility.JwtTokenUtil;
+import com.chis.communityhealthis.service.refreshtoken.RefreshTokenService;
+import com.chis.communityhealthis.utility.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,11 +17,12 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 public class JwtAuthenticationController {
@@ -28,7 +31,7 @@ public class JwtAuthenticationController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+    private JwtUtils jwtUtils;
 
     @Autowired
     private ChisUserDetailsService userDetailsService;
@@ -36,17 +39,24 @@ public class JwtAuthenticationController {
     @Autowired
     private AccountService accountService;
 
+    @Autowired
+    private RefreshTokenService refreshTokenService;
+
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public ResponseEntity<Object> createAuthenticationToken(@RequestBody JwtRequestModel authenticationRequest) throws Exception {
+    public ResponseEntity<Object> createAuthenticationToken(@RequestBody JwtRequestModel authenticationRequest) {
         try {
-            authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-            final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
-            final String token = jwtTokenUtil.generateToken(userDetails);
+            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword()));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            final UserDetailsModel userDetails = (UserDetailsModel) authentication.getPrincipal();
+            String jwt = jwtUtils.generateJwtToken(userDetails);
+            RefreshTokenBean refreshToken = refreshTokenService.createRefreshToken(userDetails.getUsername());
+
             accountService.updateLastLogin(userDetails.getUsername());
-            return ResponseHandler.generateResponse("Successfully authenticated user.", HttpStatus.OK, new JwtResponseModel(userDetails, token));
+            return ResponseHandler.generateResponse("Successfully authenticated user.", HttpStatus.OK, new JwtResponseModel(userDetails, jwt, refreshToken.getToken()));
         } catch (Exception e) {
             if (e instanceof BadCredentialsException || e instanceof DisabledException) {
-                return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.UNAUTHORIZED, null);
+                String msg = e instanceof BadCredentialsException ? "Incorrect username / password." : "User account has not been activated.";
+                return ResponseHandler.generateResponse(msg, HttpStatus.FORBIDDEN, null);
             } else {
                 return ResponseHandler.generateResponse("Internal server error.", HttpStatus.INTERNAL_SERVER_ERROR, null);
             }
@@ -54,7 +64,7 @@ public class JwtAuthenticationController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ResponseEntity<Object> saveUser(@RequestBody AccountRegistrationForm accountRegistrationForm) throws Exception {
+    public ResponseEntity<Object> saveUser(@RequestBody AccountRegistrationForm accountRegistrationForm) {
         try {
             AccountModel model = userDetailsService.createAccount(accountRegistrationForm);
             return ResponseHandler.generateResponse("Successfully created account.", HttpStatus.OK, model);
@@ -63,13 +73,13 @@ public class JwtAuthenticationController {
         }
     }
 
-    private void authenticate(String username, String password) {
-        try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-        } catch (DisabledException e) {
-            throw new DisabledException("User account has not been activated.", e);
-        } catch (BadCredentialsException e) {
-            throw new BadCredentialsException("Incorrect username / password.", e);
-        }
+    @PostMapping("/refresh-token")
+    public ResponseEntity<Object> refreshToken(@Valid @RequestBody TokenRefreshForm request) {
+        String requestRefreshToken = request.getRefreshToken();
+        RefreshTokenBean refreshTokenBean = refreshTokenService.getByToken(requestRefreshToken);
+        refreshTokenBean = refreshTokenService.verifyExpiration(refreshTokenBean);
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(refreshTokenBean.getUsername());
+        String token = jwtUtils.generateToken(userDetails);
+        return ResponseHandler.generateResponse("Successfully refresh token.", HttpStatus.OK, new TokenRefreshResponse(token, requestRefreshToken));
     }
 }

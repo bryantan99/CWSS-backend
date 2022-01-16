@@ -4,14 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- add zoneId in AddressForm&#10;- handle zoneId during creation / update of community user account">
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Add RefreshToken">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/RefreshTokenBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controlleradvice/TokenControllerAdvice.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/exception/TokenRefreshException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/jwt/LogOutRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/jwt/PayloadModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/jwt/TokenRefreshForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/jwt/TokenRefreshResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/refreshtoken/RefreshTokenDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/refreshtoken/RefreshTokenDaoImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/refreshtoken/RefreshTokenService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/refreshtoken/RefreshTokenServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/utility/JwtUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_simple_1_7_25.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AccountRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AccountRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/communityuser/CommunityUserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/communityuser/CommunityUserDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/communityuser/CommunityUserDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/communityuser/CommunityUserDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/account/AccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/account/AccountService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/account/AccountServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/account/AccountServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/communityhealthis.iml" beforeDir="false" afterPath="$PROJECT_DIR$/communityhealthis.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/JwtAuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/JwtAuthenticationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/jwt/JwtResponseModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/jwt/JwtResponseModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/security/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/security/SecurityConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/utility/JwtRequestFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/utility/JwtRequestFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/utility/JwtTokenUtil.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application-local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-local.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application-prod.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-prod.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -348,21 +366,10 @@
       <workItem from="1642083821450" duration="12890000" />
       <workItem from="1642144073688" duration="989000" />
       <workItem from="1642145293297" duration="3000" />
-      <workItem from="1642163895260" duration="5967000" />
-    </task>
-    <task id="LOCAL-00117" summary="- Add disease form field to query community user&#10;- Move charts into CommunityUserGraphComponent&#10;- Update getCommunityUsers() to join disease, address and occupation in DAO&#10;- Add CommunityUserModel, EthnicUtil and GenderUtil">
-      <created>1634748165643</created>
-      <option name="number" value="00117" />
-      <option name="presentableId" value="LOCAL-00117" />
-      <option name="project" value="LOCAL" />
-      <updated>1634748165643</updated>
-    </task>
-    <task id="LOCAL-00118" summary="- Create AddressUtil&#10;- Add margin below Google Maps&#10;- Fix initMarker()">
-      <created>1634832882213</created>
-      <option name="number" value="00118" />
-      <option name="presentableId" value="LOCAL-00118" />
-      <option name="project" value="LOCAL" />
-      <updated>1634832882213</updated>
+      <workItem from="1642163895260" duration="9762000" />
+      <workItem from="1642239114262" duration="1114000" />
+      <workItem from="1642241567271" duration="32080000" />
+      <workItem from="1642314260640" duration="17935000" />
     </task>
     <task id="LOCAL-00119" summary="- Add getCommunityUser() in DAO&#10;- Update CommunityUserProfileModel&#10;- Add OccupationModel, PersonalDetailModel&#10;- Update ProfileComponent">
       <created>1634835492984</created>
@@ -693,7 +700,21 @@
       <option name="project" value="LOCAL" />
       <updated>1642167572358</updated>
     </task>
-    <option name="localTasksCounter" value="166" />
+    <task id="LOCAL-00166" summary="- Add unique NRIC validation API">
+      <created>1642177441333</created>
+      <option name="number" value="00166" />
+      <option name="presentableId" value="LOCAL-00166" />
+      <option name="project" value="LOCAL" />
+      <updated>1642177441333</updated>
+    </task>
+    <task id="LOCAL-00167" summary="- Update Add Post API">
+      <created>1642262150391</created>
+      <option name="number" value="00167" />
+      <option name="presentableId" value="LOCAL-00167" />
+      <option name="project" value="LOCAL" />
+      <updated>1642262150391</updated>
+    </task>
+    <option name="localTasksCounter" value="168" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -723,9 +744,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="- Allow super admin to view audit trails at Settings" />
-    <MESSAGE value="- Allow owner of the post to edit / delete post" />
-    <MESSAGE value="- Sort audit logs by descending order (actionDate)" />
     <MESSAGE value="- Add Audit Trail for Admin Module (add/delete/update admin profile)" />
     <MESSAGE value="- Add Audit Trail for Community User Module (add/delete/update community user profile)" />
     <MESSAGE value="- Update assistance and appointment module (1:1 relationship)" />
@@ -748,7 +766,10 @@
     <MESSAGE value="- removed ImageService&#10;- added StorageService (Amazon s3)&#10;- replace file upload service to use aws s3" />
     <MESSAGE value="- removed ImageService&#10;- added StorageService (Amazon s3)&#10;- replace file upload service to use aws s3&#10;- removed postgres dependency" />
     <MESSAGE value="- add zoneId in AddressForm&#10;- handle zoneId during creation / update of community user account" />
-    <option name="LAST_COMMIT_MESSAGE" value="- add zoneId in AddressForm&#10;- handle zoneId during creation / update of community user account" />
+    <MESSAGE value="- Add unique NRIC validation API" />
+    <MESSAGE value="- Update Add Post API" />
+    <MESSAGE value="- Add RefreshToken" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Add RefreshToken" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
