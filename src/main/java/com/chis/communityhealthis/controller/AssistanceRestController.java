@@ -59,10 +59,11 @@ public class AssistanceRestController {
     @PostMapping(value = "/new-request")
     public ResponseEntity<Object> addNewAssistance(@RequestBody AssistanceRequestForm form) {
         try {
-            String currentUserUsername = authService.getCurrentLoggedInUsername();
-            form.setCreatedBy(currentUserUsername);
-            form.setUsername(StringUtils.isNotBlank(form.getUsername()) ? form.getUsername() : currentUserUsername);
-            AssistanceBean bean = assistanceService.addAssistanceRequest(form);
+            LoggedInUser user = authService.getCurrentLoggedInUser();
+            boolean isAdmin = user.getRoleList().contains(RoleConstant.ADMIN) || user.getRoleList().contains(RoleConstant.SUPER_ADMIN);
+            form.setCreatedBy(user.getUsername());
+            form.setUsername(StringUtils.isNotEmpty(form.getUsername()) ? form.getUsername() : user.getUsername());
+            AssistanceBean bean = isAdmin ? assistanceService.addAssistanceRequestByAdmin(form) : assistanceService.addAssistanceRequest(form);
             return ResponseHandler.generateResponse("Successfully added assistance.", HttpStatus.CREATED, bean);
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);

@@ -78,6 +78,34 @@ public class AssistanceServiceImpl implements AssistanceService {
     }
 
     @Override
+    public AssistanceBean addAssistanceRequestByAdmin(AssistanceRequestForm form) throws Exception {
+        AssistanceBean bean = new AssistanceBean();
+        bean.setCategoryId(form.getCategoryId());
+        bean.setAssistanceTitle(form.getAssistanceTitle());
+        bean.setAssistanceDescription(form.getAssistanceDescription());
+        bean.setAssistanceStatus(AssistanceBean.STATUS_ACCEPTED);
+        bean.setUsername(form.getUsername());
+        bean.setAdminUsername(form.getCreatedBy());
+        bean.setCreatedDate(new Date());
+        bean.setCreatedBy(form.getAdminUsername());
+
+        Integer assistanceId = assistanceDao.add(bean);
+        if (assistanceId == null) {
+            throw new Exception("There's an error when saving assistance bean.");
+        }
+
+        if (form.getAppointmentStartDatetime() != null) {
+            AppointmentBean appointmentBean = createAppointmentBean(form);
+            appointmentDao.add(appointmentBean);
+
+        }
+
+        AuditBean auditBean = new AuditBean(AuditConstant.MODULE_ASSISTANCE, AuditConstant.formatActionCreateAssistanceRequest(assistanceId), form.getCreatedBy());
+        auditService.saveLogs(auditBean, null);
+        return bean;
+    }
+
+    @Override
     public void deleteAssistance(Integer assistanceId, String actionMakerUsername) throws Exception {
         AssistanceBean assistanceBean = assistanceDao.find(assistanceId);
         AdminBean adminBean = adminDao.find(actionMakerUsername);
