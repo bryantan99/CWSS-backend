@@ -1727,7 +1727,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Position>2</Position>
     </column>
     <column id="450" parent="300" name="TOKEN">
-      <DataType>varchar(400)|0s</DataType>
+      <DataType>varchar(200)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>

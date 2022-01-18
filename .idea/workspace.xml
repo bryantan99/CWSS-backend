@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Add RefreshToken">
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Rename properties for jwt &amp; refresh token's expiration to jwt.expiration.ms and jwt.refresh.expiration.ms">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/refreshtoken/RefreshTokenServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/refreshtoken/RefreshTokenServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/utility/JwtUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/utility/JwtUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/dropdownchoice/DropdownChoiceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/dropdownchoice/DropdownChoiceServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application-local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-local.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-prod.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-prod.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -349,14 +348,9 @@
       <workItem from="1642163895260" duration="9762000" />
       <workItem from="1642239114262" duration="1114000" />
       <workItem from="1642241567271" duration="32080000" />
-      <workItem from="1642314260640" duration="19069000" />
-    </task>
-    <task id="LOCAL-00120" summary="- Add ZoneBean, ZoneDao and ZoneImpl&#10;- Join AddressBean with ZoneBean @OneToOne&#10;- Add filter by zoneId in CommunityUserComponent&#10;- Update location column chart to display by zone">
-      <created>1635360230907</created>
-      <option name="number" value="00120" />
-      <option name="presentableId" value="LOCAL-00120" />
-      <option name="project" value="LOCAL" />
-      <updated>1635360230907</updated>
+      <workItem from="1642314260640" duration="22879000" />
+      <workItem from="1642432704112" duration="2475000" />
+      <workItem from="1642490044769" duration="2424000" />
     </task>
     <task id="LOCAL-00121" summary="- Add SettingsComponent and AccountSettingsComponent&#10;- Add settings routerLink into sidemenu&#10;- Add changePassword()&#10;- Add Commons Text dependency">
       <created>1635448465658</created>
@@ -694,7 +688,14 @@
       <option name="project" value="LOCAL" />
       <updated>1642349638002</updated>
     </task>
-    <option name="localTasksCounter" value="169" />
+    <task id="LOCAL-00169" summary="- Rename properties for jwt &amp; refresh token's expiration to jwt.expiration.ms and jwt.refresh.expiration.ms">
+      <created>1642351024688</created>
+      <option name="number" value="00169" />
+      <option name="presentableId" value="LOCAL-00169" />
+      <option name="project" value="LOCAL" />
+      <updated>1642351024688</updated>
+    </task>
+    <option name="localTasksCounter" value="170" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -724,7 +725,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="- Add Audit Trail for Admin Module (add/delete/update admin profile)" />
     <MESSAGE value="- Add Audit Trail for Community User Module (add/delete/update community user profile)" />
     <MESSAGE value="- Update assistance and appointment module (1:1 relationship)" />
     <MESSAGE value="- Update rescheduleAppointmentComponent's UI" />
@@ -749,7 +749,8 @@
     <MESSAGE value="- Add unique NRIC validation API" />
     <MESSAGE value="- Update Add Post API" />
     <MESSAGE value="- Add RefreshToken" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Add RefreshToken" />
+    <MESSAGE value="- Rename properties for jwt &amp; refresh token's expiration to jwt.expiration.ms and jwt.refresh.expiration.ms" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Rename properties for jwt &amp; refresh token's expiration to jwt.expiration.ms and jwt.refresh.expiration.ms" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

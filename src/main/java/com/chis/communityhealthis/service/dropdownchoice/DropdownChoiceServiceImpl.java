@@ -84,7 +84,7 @@ public class DropdownChoiceServiceImpl implements DropdownChoiceService {
             for (CommunityUserBean userBean : userBeans) {
                 DropdownChoiceModel<String> model;
                 if (hasNric) {
-                    model = new DropdownChoiceModel<>(userBean.getUsername(), WordUtils.capitalizeFully(userBean.getFullName()) + " (" + userBean.getUsername()  + ")");
+                    model = new DropdownChoiceModel<>(userBean.getUsername(), WordUtils.capitalizeFully(userBean.getFullName()) + " (" + userBean.getNric()  + ")");
                 } else {
                     model = new DropdownChoiceModel<>(userBean.getUsername(), WordUtils.capitalizeFully(userBean.getFullName()));
                 }
