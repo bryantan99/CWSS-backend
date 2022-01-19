@@ -5,11 +5,15 @@ import com.chis.communityhealthis.model.account.PasswordResetRequestModel;
 import com.chis.communityhealthis.model.response.ResponseHandler;
 import com.chis.communityhealthis.service.account.AccountService;
 import com.chis.communityhealthis.service.auth.AuthService;
+import org.apache.commons.collections4.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/account")
@@ -88,11 +92,15 @@ public class AccountRestController {
             accountService.changePassword(model);
             return ResponseHandler.generateResponse("Successfully changed password.", HttpStatus.OK, true);
         } catch (Exception e) {
+            String errorMessage;
+            Map<String, Boolean> response = new HashMap<>();
             if (e instanceof BadCredentialsException) {
-                return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.UNAUTHORIZED, null);
+                errorMessage = "Incorrect old password.";
+                response.put("incorrectPassword", true);
             } else {
-                return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+                errorMessage = e.getMessage();
             }
+            return ResponseHandler.generateResponse(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR, MapUtils.isEmpty(response) ? null : response);
         }
     }
 

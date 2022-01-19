@@ -43,11 +43,19 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
     @Override
     @Transactional(noRollbackFor = TokenRefreshException.class)
     public RefreshTokenBean verifyExpiration(RefreshTokenBean token) {
-        if (token.getExpiryDate().compareTo(Instant.now()) < 0) {
+        if (token == null) {
+            throw new TokenRefreshException("Refresh token was not found.");
+        } else if (token.getExpiryDate().compareTo(Instant.now()) < 0) {
             refreshTokenDao.remove(token);
             throw new TokenRefreshException(token.getToken(), "Refresh token was expired. Please make a new sign in request");
         }
 
         return token;
+    }
+
+    @Override
+    @Transactional
+    public void deleteByUsername(String username) {
+        refreshTokenDao.deleteByUsername(username);
     }
 }

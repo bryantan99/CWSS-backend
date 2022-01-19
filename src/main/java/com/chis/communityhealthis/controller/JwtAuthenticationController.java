@@ -56,7 +56,7 @@ public class JwtAuthenticationController {
         } catch (Exception e) {
             if (e instanceof BadCredentialsException || e instanceof DisabledException) {
                 String msg = e instanceof BadCredentialsException ? "Incorrect username / password." : "User account has not been activated.";
-                return ResponseHandler.generateResponse(msg, HttpStatus.FORBIDDEN, null);
+                return ResponseHandler.generateResponse(msg, HttpStatus.UNAUTHORIZED, null);
             } else {
                 return ResponseHandler.generateResponse("Internal server error.", HttpStatus.INTERNAL_SERVER_ERROR, null);
             }

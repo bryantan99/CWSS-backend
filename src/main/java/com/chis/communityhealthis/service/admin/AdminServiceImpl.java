@@ -226,6 +226,7 @@ public class AdminServiceImpl implements AdminService {
         BeanComparator adminBeanComparator = new BeanComparator(adminBeanDeepCopy, adminBean);
 
         accountBean.setEmail(adminForm.getEmail());
+        accountBean.setIsActive(adminForm.getIsActive());
         accountDao.update(accountBean);
         BeanComparator accountBeanComparator = new BeanComparator(accountBeanDeepCopy, accountBean);
 
@@ -305,6 +306,7 @@ public class AdminServiceImpl implements AdminService {
         adminDetailModel.setFullName(adminBean.getFullName());
         adminDetailModel.setEmail(accountBean.getEmail());
         adminDetailModel.setContactNo(adminBean.getContactNo());
+        adminDetailModel.setIsActive(accountBean.getIsActive());
         adminDetailModel.setProfilePicDirectory(adminBean.getProfilePicDirectory());
         if (!CollectionUtils.isEmpty(accountBean.getRoles())) {
             List<RoleModel> roleList = new ArrayList<>();

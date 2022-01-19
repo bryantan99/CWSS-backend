@@ -1,6 +1,8 @@
 package com.chis.communityhealthis.utility;
 
+import com.chis.communityhealthis.exception.AccountDeactivatedException;
 import com.chis.communityhealthis.security.ChisUserDetailsService;
+import com.chis.communityhealthis.service.refreshtoken.RefreshTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,6 +27,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     @Autowired
     private JwtUtils jwtUtils;
 
+    @Autowired
+    private RefreshTokenService refreshTokenService;
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
@@ -34,6 +39,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 String username = jwtUtils.getUserNameFromJwtToken(jwt);
 
                 UserDetails userDetails = jwtUserDetailsService.loadUserByUsername(username);
+                if (!userDetails.isEnabled()) {
+                    refreshTokenService.deleteByUsername(username);
+                    throw new AccountDeactivatedException("Account [username: " + username + "] was not activated.");
+                }
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

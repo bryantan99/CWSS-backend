@@ -12,6 +12,7 @@ public class AdminForm {
     private List<String> roleList;
     private String password;
     private String createdBy;
+    private String isActive;
     private MultipartFile profilePicFile;
 
     public String getFullName() {
@@ -68,6 +69,14 @@ public class AdminForm {
 
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
+    }
+
+    public String getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(String isActive) {
+        this.isActive = isActive;
     }
 
     public MultipartFile getProfilePicFile() {

@@ -10,6 +10,7 @@ public class AdminDetailModel implements Comparable<AdminDetailModel>{
     private String fullName;
     private String email;
     private String contactNo;
+    private String isActive;
     private String profilePicDirectory;
     private Boolean isDeletable;
     private Collection<RoleModel> roleList;
@@ -45,6 +46,10 @@ public class AdminDetailModel implements Comparable<AdminDetailModel>{
     public void setContactNo(String contactNo) {
         this.contactNo = contactNo;
     }
+
+    public String getIsActive() {return isActive;}
+
+    public void setIsActive(String isActive) {this.isActive = isActive;}
 
     public Boolean getDeletable() {return isDeletable;}
 

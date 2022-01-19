@@ -4,10 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Rename properties for jwt &amp; refresh token's expiration to jwt.expiration.ms and jwt.refresh.expiration.ms">
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- allow admin to add assistance record for community user with optional appointment">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/exception/AccountDeactivatedException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/dropdownchoice/DropdownChoiceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/dropdownchoice/DropdownChoiceServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AccountRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AccountRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/JwtAuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/JwtAuthenticationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/signup/AdminForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/signup/AdminForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/user/AdminDetailModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/user/AdminDetailModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/admin/AdminServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/admin/AdminServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/refreshtoken/RefreshTokenService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/refreshtoken/RefreshTokenService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/refreshtoken/RefreshTokenServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/refreshtoken/RefreshTokenServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/utility/JwtRequestFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/utility/JwtRequestFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application-local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-local.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
@@ -350,21 +358,10 @@
       <workItem from="1642241567271" duration="32080000" />
       <workItem from="1642314260640" duration="22879000" />
       <workItem from="1642432704112" duration="2475000" />
-      <workItem from="1642490044769" duration="2424000" />
-    </task>
-    <task id="LOCAL-00121" summary="- Add SettingsComponent and AccountSettingsComponent&#10;- Add settings routerLink into sidemenu&#10;- Add changePassword()&#10;- Add Commons Text dependency">
-      <created>1635448465658</created>
-      <option name="number" value="00121" />
-      <option name="presentableId" value="LOCAL-00121" />
-      <option name="project" value="LOCAL" />
-      <updated>1635448465658</updated>
-    </task>
-    <task id="LOCAL-00122" summary="- Add create post button on PostFeedComponent">
-      <created>1635502046035</created>
-      <option name="number" value="00122" />
-      <option name="presentableId" value="LOCAL-00122" />
-      <option name="project" value="LOCAL" />
-      <updated>1635502046036</updated>
+      <workItem from="1642490044769" duration="7047000" />
+      <workItem from="1642514309278" duration="37000" />
+      <workItem from="1642525101697" duration="1364000" />
+      <workItem from="1642597214486" duration="14937000" />
     </task>
     <task id="LOCAL-00123" summary="- Update Admin Profile UI&#10;- Allow update Admin's FullName">
       <created>1635502169297</created>
@@ -695,7 +692,21 @@
       <option name="project" value="LOCAL" />
       <updated>1642351024688</updated>
     </task>
-    <option name="localTasksCounter" value="170" />
+    <task id="LOCAL-00170" summary="- Fix community user dropdown to replace username with NRIC">
+      <created>1642495070859</created>
+      <option name="number" value="00170" />
+      <option name="presentableId" value="LOCAL-00170" />
+      <option name="project" value="LOCAL" />
+      <updated>1642495070860</updated>
+    </task>
+    <task id="LOCAL-00171" summary="- allow admin to add assistance record for community user with optional appointment">
+      <created>1642512966116</created>
+      <option name="number" value="00171" />
+      <option name="presentableId" value="LOCAL-00171" />
+      <option name="project" value="LOCAL" />
+      <updated>1642512966116</updated>
+    </task>
+    <option name="localTasksCounter" value="172" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -725,8 +736,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="- Add Audit Trail for Community User Module (add/delete/update community user profile)" />
-    <MESSAGE value="- Update assistance and appointment module (1:1 relationship)" />
     <MESSAGE value="- Update rescheduleAppointmentComponent's UI" />
     <MESSAGE value="- Display actionMaker's full name at ActivityLogComponent&#10;- Hide action button at AppointmentTableComponent if the appointment's status is cancelled / completed&#10;- Add audit logs for appointment and assistance module&#10;- Allow admin to block/unblock user to request assistance" />
     <MESSAGE value="- Fix lazyInitialization for appointmentBean and assistanceBean audit" />
@@ -750,18 +759,11 @@
     <MESSAGE value="- Update Add Post API" />
     <MESSAGE value="- Add RefreshToken" />
     <MESSAGE value="- Rename properties for jwt &amp; refresh token's expiration to jwt.expiration.ms and jwt.refresh.expiration.ms" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Rename properties for jwt &amp; refresh token's expiration to jwt.expiration.ms and jwt.refresh.expiration.ms" />
+    <MESSAGE value="- Fix community user dropdown to replace username with NRIC" />
+    <MESSAGE value="- allow admin to add assistance record for community user with optional appointment" />
+    <option name="LAST_COMMIT_MESSAGE" value="- allow admin to add assistance record for community user with optional appointment" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/admin/AdminServiceImpl.java</url>
-          <line>32</line>
-          <option name="timeStamp" value="36" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="org.javers.core.diff.Diff" memberName="changes" />
