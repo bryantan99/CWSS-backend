@@ -1,5 +1,7 @@
 package com.chis.communityhealthis.bean;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.javers.core.metamodel.annotation.TypeName;
 
 import javax.persistence.*;
@@ -76,10 +78,12 @@ public class AssistanceBean implements Serializable {
 
     @OneToOne
     @JoinColumn(name = USERNAME, referencedColumnName = CommunityUserBean.USERNAME, insertable = false, updatable = false)
+    @NotFound(action= NotFoundAction.IGNORE)
     private CommunityUserBean communityUserBean;
 
     @OneToOne
     @JoinColumn(name = ADMIN_USERNAME, referencedColumnName = AdminBean.USERNAME, insertable = false, updatable = false)
+    @NotFound(action=NotFoundAction.IGNORE)
     private AdminBean adminBean;
 
     public Integer getAssistanceId() {
