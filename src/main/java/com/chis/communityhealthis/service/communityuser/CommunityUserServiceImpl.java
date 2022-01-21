@@ -5,7 +5,6 @@ import com.chis.communityhealthis.factory.AuditBeanFactory;
 import com.chis.communityhealthis.model.address.AddressModel;
 import com.chis.communityhealthis.model.filter.CommunityUserBeanQuery;
 import com.chis.communityhealthis.model.health.HealthModel;
-import com.chis.communityhealthis.model.occupation.OccupationModel;
 import com.chis.communityhealthis.model.signup.*;
 import com.chis.communityhealthis.model.user.*;
 import com.chis.communityhealthis.repository.account.AccountDao;
@@ -13,7 +12,6 @@ import com.chis.communityhealthis.repository.address.AddressDao;
 import com.chis.communityhealthis.repository.communityuser.CommunityUserDao;
 import com.chis.communityhealthis.repository.disease.DiseaseDao;
 import com.chis.communityhealthis.repository.healthissue.HealthIssueDao;
-import com.chis.communityhealthis.repository.occupation.OccupationDao;
 import com.chis.communityhealthis.service.audit.AuditService;
 import com.chis.communityhealthis.service.sms.SmsService;
 import com.chis.communityhealthis.utility.*;
@@ -43,9 +41,6 @@ public class CommunityUserServiceImpl implements CommunityUserService {
     private AddressDao addressDao;
 
     @Autowired
-    private OccupationDao occupationDao;
-
-    @Autowired
     private HealthIssueDao healthIssueDao;
 
     @Autowired
@@ -62,20 +57,8 @@ public class CommunityUserServiceImpl implements CommunityUserService {
         List<CommunityUserModel> list = new ArrayList<>();
         List<CommunityUserBean> communityUserBeans = communityUserDao.getCommunityUsers(filter);
         if (!CollectionUtils.isEmpty(communityUserBeans)) {
-            List<String> usernameList = communityUserBeans.stream()
-                    .map(CommunityUserBean::getUsername)
-                    .collect(Collectors.toList());
-            Map<String, AccountBean> accountBeanMap = new HashMap<>();
-            List<AccountBean> accountBeans = accountDao.findAccounts(usernameList);
-            if (!CollectionUtils.isEmpty(accountBeans)) {
-                for (AccountBean accountBean : accountBeans) {
-                    accountBeanMap.put(accountBean.getUsername(), accountBean);
-                }
-            }
-
-            for (CommunityUserBean userBean : communityUserBeans) {
-                AccountBean accountBean = accountBeanMap.getOrDefault(userBean.getUsername(), null);
-                list.add(toCommunityUserModel(userBean, accountBean));
+            for (CommunityUserBean userBean: communityUserBeans) {
+                list.add(toCommunityUserModel(userBean, userBean.getAccountBean()));
             }
         }
         Collections.sort(list);
@@ -93,6 +76,12 @@ public class CommunityUserServiceImpl implements CommunityUserService {
         model.setNric(userBean.getNric());
         model.setContactNo(userBean.getContactNo());
 
+        if (StringUtils.isNotEmpty(userBean.getBlockedBy()) && userBean.getBlockedDate() != null && StringUtils.isNotEmpty(userBean.getBlockedMessage())) {
+            model.setAccIsBlocked(FlagConstant.YES);
+        } else {
+            model.setAccIsBlocked(FlagConstant.NO);
+        }
+
         if (userBean.getAddressBean() != null) {
             model.setAddress(toAddressModel(userBean.getAddressBean()));
         }
@@ -108,13 +97,9 @@ public class CommunityUserServiceImpl implements CommunityUserService {
     }
 
     @Override
-    public CommunityUserProfileModel getCommunityUserProfile(String username) throws NotFoundException {
-        AccountBean accountBean = accountDao.findAccount(username);
-        if (accountBean == null) {
-            throw new NotFoundException("Account [username: " + username + "] was not found.");
-        }
+    public CommunityUserProfileModel getCommunityUserProfile(String username) {
         CommunityUserBean communityUserBean = communityUserDao.getCommunityUser(username);
-        return toCommunityUserProfileModel(accountBean, communityUserBean);
+        return toCommunityUserProfileModel(communityUserBean.getAccountBean(), communityUserBean);
     }
 
     @Override
@@ -125,13 +110,6 @@ public class CommunityUserServiceImpl implements CommunityUserService {
         }
         accountBean.setIsActive(FlagConstant.YES);
         accountDao.update(accountBean);
-
-        OccupationBean occupationBean = occupationDao.find(username);
-        if (occupationBean != null) {
-            occupationBean.setApprovedBy(actionMakerUsername);
-            occupationBean.setApprovedDate(new Date());
-            occupationDao.update(occupationBean);
-        }
 
         List<HealthIssueBean> healthIssueBeans = healthIssueDao.findHealthIssueBeans(username);
         if (!CollectionUtils.isEmpty(healthIssueBeans)) {
@@ -176,11 +154,6 @@ public class CommunityUserServiceImpl implements CommunityUserService {
     }
 
     private CommunityUserBean removeUser(String username) {
-        OccupationBean occupationBean = occupationDao.find(username);
-        if (occupationBean != null) {
-            occupationDao.remove(occupationBean);
-        }
-
         AddressBean addressBean = addressDao.find(username);
         if (addressBean != null) {
             addressDao.remove(addressBean);
@@ -231,16 +204,6 @@ public class CommunityUserServiceImpl implements CommunityUserService {
         AddressBean addressBean = addressDao.find(username);
         BeanComparator addressBeanComparator = updateAddressBean(addressBean, form.getAddress());
 
-        BeanComparator occupationBeanComparator = null;
-        if (form.getOccupation() != null) {
-            OccupationBean occupationBean = occupationDao.find(username);
-            if (occupationBean == null) {
-                occupationBean = new OccupationBean();
-                occupationBean.setUsername(username);
-            }
-            occupationBeanComparator = updateOccupationBean(occupationBean, form.getOccupation());
-        }
-
         List<AuditActionBean> healthIssueBeanAuditActionBeans = new ArrayList<>();
         if (form.getHealth() != null) {
             List<HealthIssueBean> healthIssueBeans = healthIssueDao.findHealthIssueBeans(username);
@@ -249,7 +212,7 @@ public class CommunityUserServiceImpl implements CommunityUserService {
 
         AuditBeanFactory auditBeanFactory = new AuditBeanFactory(AuditConstant.MODULE_COMMUNITY_USER, AuditConstant.formatActionUpdateCommunityUser(username, communityUserBean.getFullName()), actionMaker);
         AuditBean auditBean = auditBeanFactory.createAuditBean();
-        List<AuditActionBean> auditActionBeans = getAuditActionBeans(accountBeanComparator, communityUserBeanComparator, addressBeanComparator, occupationBeanComparator);
+        List<AuditActionBean> auditActionBeans = getAuditActionBeans(accountBeanComparator, communityUserBeanComparator, addressBeanComparator);
         if (!CollectionUtils.isEmpty(healthIssueBeanAuditActionBeans)) {
             auditActionBeans.addAll(healthIssueBeanAuditActionBeans);
         }
@@ -311,8 +274,7 @@ public class CommunityUserServiceImpl implements CommunityUserService {
 
     private List<AuditActionBean> getAuditActionBeans(BeanComparator accountBeanComparator,
                                                       BeanComparator communityUserBeanComparator,
-                                                      BeanComparator addressBeanComparator,
-                                                      BeanComparator occupationBeanComparator) {
+                                                      BeanComparator addressBeanComparator) {
         List<AuditActionBean> list = new ArrayList<>();
         if (accountBeanComparator.hasChanges()) {
             list.add(new AuditActionBean(accountBeanComparator.toPrettyString()));
@@ -322,9 +284,6 @@ public class CommunityUserServiceImpl implements CommunityUserService {
         }
         if (addressBeanComparator.hasChanges()) {
             list.add(new AuditActionBean(addressBeanComparator.toPrettyString()));
-        }
-        if (occupationBeanComparator != null && occupationBeanComparator.hasChanges()) {
-            list.add(new AuditActionBean(occupationBeanComparator.toPrettyString()));
         }
         return list;
     }
@@ -450,29 +409,6 @@ public class CommunityUserServiceImpl implements CommunityUserService {
         return bean;
     }
 
-    private BeanComparator updateOccupationBean(OccupationBean occupationBean, OccupationForm form) {
-        OccupationBean cloneOccupationBean = SerializationUtils.clone(occupationBean);
-
-        occupationBean.setEmploymentType(form.getEmploymentType());
-        if (StringUtils.equals("-", form.getEmploymentType())) {
-            occupationBean.setSalary(0.00);
-            occupationBean.setOccupationName(null);
-            occupationBean.setEmployerCompany(null);
-            occupationBean.setEmployerContactNo(null);
-        } else {
-            occupationBean.setSalary(form.getSalary());
-            occupationBean.setOccupationName(form.getOccupationName());
-
-            if (!StringUtils.equals("S/E", form.getEmploymentType())) {
-                occupationBean.setEmployerCompany(form.getEmployerCompany());
-                occupationBean.setEmployerContactNo(form.getEmployerContactNo());
-            }
-        }
-
-        occupationDao.update(occupationBean);
-        return new BeanComparator(cloneOccupationBean, occupationBean);
-    }
-
     private BeanComparator updateAddressBean(AddressBean addressBean, AddressForm address) {
         AddressBean cloneAddressBean = SerializationUtils.clone(addressBean);
         addressBean.setAddressLine1(address.getAddressLine1());
@@ -499,11 +435,9 @@ public class CommunityUserServiceImpl implements CommunityUserService {
         CommunityUserProfileModel model = new CommunityUserProfileModel();
 
         AddressBean addressBean = null;
-        OccupationBean occupationBean = null;
         Set<HealthIssueBean> healthIssueBeans = null;
         if (communityUserBean != null) {
             addressBean = communityUserBean.getAddressBean();
-            occupationBean = communityUserBean.getOccupationBean();
             healthIssueBeans = communityUserBean.getHealthIssueBeans();
         }
 
@@ -525,10 +459,6 @@ public class CommunityUserServiceImpl implements CommunityUserService {
 
         if (addressBean != null) {
             model.setAddress(toAddressModel(addressBean));
-        }
-
-        if (occupationBean != null) {
-            model.setOccupation(toOccupationModel(occupationBean));
         }
 
         if (!CollectionUtils.isEmpty(healthIssueBeans)) {
@@ -568,16 +498,6 @@ public class CommunityUserServiceImpl implements CommunityUserService {
             model.setZoneId(addressBean.getZoneBean().getZoneId());
             model.setZoneName(addressBean.getZoneBean().getZoneName());
         }
-        return model;
-    }
-
-    private OccupationModel toOccupationModel(OccupationBean occupationBean) {
-        OccupationModel model = new OccupationModel();
-        model.setEmploymentStatus(occupationBean.getEmploymentType());
-        model.setOccupationName(occupationBean.getOccupationName());
-        model.setSalary(occupationBean.getSalary());
-        model.setEmployerCompany(occupationBean.getEmployerCompany());
-        model.setEmployerContactNo(occupationBean.getEmployerContactNo());
         return model;
     }
 

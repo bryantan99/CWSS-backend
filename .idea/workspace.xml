@@ -4,18 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- allow admin to add assistance record for community user with optional appointment">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/exception/AccountDeactivatedException.java" afterDir="false" />
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Ignore adminBean and communityUserBean if not found when joining AssistanceBean">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AccountRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/AccountRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/JwtAuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/JwtAuthenticationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/signup/AdminForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/signup/AdminForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/user/AdminDetailModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/user/AdminDetailModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/admin/AdminServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/admin/AdminServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/refreshtoken/RefreshTokenService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/refreshtoken/RefreshTokenService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/refreshtoken/RefreshTokenServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/refreshtoken/RefreshTokenServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/utility/JwtRequestFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/utility/JwtRequestFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/AppointmentBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/AppointmentBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/CommunityUserBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/CommunityUserBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/OccupationBean.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/CommunityUserRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/CommunityUserRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/filter/CommunityUserBeanQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/filter/CommunityUserBeanQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/occupation/OccupationModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/user/CommunityUserModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/user/CommunityUserModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/user/CommunityUserProfileModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/user/CommunityUserProfileModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/assistance/AssistanceDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/assistance/AssistanceDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/assistancecomment/AssistanceCommentDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/assistancecomment/AssistanceCommentDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/audit/AuditLogDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/audit/AuditLogDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/communityuser/CommunityUserDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/communityuser/CommunityUserDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/occupation/OccupationDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/occupation/OccupationDaoImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/account/AccountServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/account/AccountServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application-local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-local.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
@@ -99,7 +106,7 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="database.data.extractors.current.export.id" value="SQL Inserts" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../CWSS-frontend" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs.protractor.protractor_package" value="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/protractor" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -361,21 +368,10 @@
       <workItem from="1642490044769" duration="7047000" />
       <workItem from="1642514309278" duration="37000" />
       <workItem from="1642525101697" duration="1364000" />
-      <workItem from="1642597214486" duration="14937000" />
-    </task>
-    <task id="LOCAL-00123" summary="- Update Admin Profile UI&#10;- Allow update Admin's FullName">
-      <created>1635502169297</created>
-      <option name="number" value="00123" />
-      <option name="presentableId" value="LOCAL-00123" />
-      <option name="project" value="LOCAL" />
-      <updated>1635502169297</updated>
-    </task>
-    <task id="LOCAL-00124" summary="- Add Profile Picture for admin&#10;- Allow add / update profile picture for admin&#10;- Display profile picture in ProfileComponent &amp; PostFeedComponent">
-      <created>1635688982945</created>
-      <option name="number" value="00124" />
-      <option name="presentableId" value="LOCAL-00124" />
-      <option name="project" value="LOCAL" />
-      <updated>1635688982946</updated>
+      <workItem from="1642597214486" duration="16403000" />
+      <workItem from="1642651745349" duration="5000" />
+      <workItem from="1642689657283" duration="8891000" />
+      <workItem from="1642764092175" duration="10671000" />
     </task>
     <task id="LOCAL-00125" summary="- Fix ProfileComponent to not update display when parameter changed&#10;- Allow admin to access AdminManagementComponent">
       <created>1635690818398</created>
@@ -706,7 +702,21 @@
       <option name="project" value="LOCAL" />
       <updated>1642512966116</updated>
     </task>
-    <option name="localTasksCounter" value="172" />
+    <task id="LOCAL-00172" summary="- Revoke access for account's status == N at doFilterInternal&#10;- Allow super admin to update admin's status (active / resigned)">
+      <created>1642613686976</created>
+      <option name="number" value="00172" />
+      <option name="presentableId" value="LOCAL-00172" />
+      <option name="project" value="LOCAL" />
+      <updated>1642613686976</updated>
+    </task>
+    <task id="LOCAL-00173" summary="- Ignore adminBean and communityUserBean if not found when joining AssistanceBean">
+      <created>1642707968106</created>
+      <option name="number" value="00173" />
+      <option name="presentableId" value="LOCAL-00173" />
+      <option name="project" value="LOCAL" />
+      <updated>1642707968106</updated>
+    </task>
+    <option name="localTasksCounter" value="174" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -736,8 +746,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="- Update rescheduleAppointmentComponent's UI" />
-    <MESSAGE value="- Display actionMaker's full name at ActivityLogComponent&#10;- Hide action button at AppointmentTableComponent if the appointment's status is cancelled / completed&#10;- Add audit logs for appointment and assistance module&#10;- Allow admin to block/unblock user to request assistance" />
     <MESSAGE value="- Fix lazyInitialization for appointmentBean and assistanceBean audit" />
     <MESSAGE value="- Fix audit for post module" />
     <MESSAGE value="- Allow clear for select module in ActivityLogComponent" />
@@ -761,9 +769,35 @@
     <MESSAGE value="- Rename properties for jwt &amp; refresh token's expiration to jwt.expiration.ms and jwt.refresh.expiration.ms" />
     <MESSAGE value="- Fix community user dropdown to replace username with NRIC" />
     <MESSAGE value="- allow admin to add assistance record for community user with optional appointment" />
-    <option name="LAST_COMMIT_MESSAGE" value="- allow admin to add assistance record for community user with optional appointment" />
+    <MESSAGE value="- Revoke access for account's status == N at doFilterInternal&#10;- Allow super admin to update admin's status (active / resigned)" />
+    <MESSAGE value="- Ignore adminBean and communityUserBean if not found when joining AssistanceBean" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Ignore adminBean and communityUserBean if not found when joining AssistanceBean" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/audit/AuditServiceImpl.java</url>
+          <line>30</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/assistancecomment/AssistanceCommentServiceImpl.java</url>
+          <line>24</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/assistancecomment/AssistanceCommentServiceImpl.java</url>
+          <line>25</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/audit/AuditServiceImpl.java</url>
+          <line>29</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="org.javers.core.diff.Diff" memberName="changes" />

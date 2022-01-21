@@ -22,9 +22,9 @@ public class CommunityUserDaoImpl extends GenericDaoImpl<CommunityUserBean, Stri
         CriteriaQuery<CommunityUserBean> criteriaQuery = criteriaBuilder.createQuery(CommunityUserBean.class);
         Root<CommunityUserBean> root = criteriaQuery.from(CommunityUserBean.class);
 
+        Fetch<CommunityUserBean, AccountBean> accountBeanFetch = root.fetch("accountBean", JoinType.LEFT);
         Fetch<CommunityUserBean, AddressBean> addressBeanFetch = root.fetch("addressBean", JoinType.LEFT);
         Fetch<AddressBean, ZoneBean> zoneBeanFetch = addressBeanFetch.fetch("zoneBean", JoinType.LEFT);
-        Fetch<CommunityUserBean, OccupationBean> occupationBeanFetch = root.fetch("occupationBean", JoinType.LEFT);
         Fetch<CommunityUserBean, HealthIssueBean> healthIssueBeanFetch = root.fetch("healthIssueBeans", JoinType.LEFT);
         Fetch<HealthIssueBean, AdminBean> adminBeanFetch = healthIssueBeanFetch.fetch("adminBean", JoinType.LEFT);
         Fetch<HealthIssueBean, DiseaseBean> diseaseBeanFetch = healthIssueBeanFetch.fetch("diseaseBean", JoinType.LEFT);
@@ -45,6 +45,11 @@ public class CommunityUserDaoImpl extends GenericDaoImpl<CommunityUserBean, Stri
 
         if (StringUtils.isNotBlank(filter.getEthnic())) {
             predicates.add(criteriaBuilder.equal(root.get("ethnic"), filter.getEthnic()));
+        }
+
+        if (StringUtils.isNotEmpty(filter.getIsActive())) {
+            Join<CommunityUserBean, AccountBean> accountBeanJoin = (Join<CommunityUserBean, AccountBean>) accountBeanFetch;
+            predicates.add(criteriaBuilder.equal(accountBeanJoin.get("isActive"), filter.getIsActive()));
         }
 
         if (filter.getDiseaseId() != null) {
@@ -97,9 +102,9 @@ public class CommunityUserDaoImpl extends GenericDaoImpl<CommunityUserBean, Stri
     }
 
     private void fetchTables(Root<CommunityUserBean> root) {
+        Fetch<CommunityUserBean, AccountBean> accountBeanFetch = root.fetch("accountBean", JoinType.LEFT);
         Fetch<CommunityUserBean, AddressBean> addressBeanFetch = root.fetch("addressBean", JoinType.LEFT);
         Fetch<AddressBean, ZoneBean> zoneBeanFetch = addressBeanFetch.fetch("zoneBean", JoinType.LEFT);
-        Fetch<CommunityUserBean, OccupationBean> occupationBeanFetch = root.fetch("occupationBean", JoinType.LEFT);
         Fetch<CommunityUserBean, HealthIssueBean> healthIssueBeanFetch = root.fetch("healthIssueBeans", JoinType.LEFT);
         Fetch<HealthIssueBean, AdminBean> adminBeanFetch = healthIssueBeanFetch.fetch("adminBean", JoinType.LEFT);
         Fetch<HealthIssueBean, DiseaseBean> diseaseBeanFetch = healthIssueBeanFetch.fetch("diseaseBean", JoinType.LEFT);

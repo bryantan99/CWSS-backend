@@ -15,6 +15,7 @@ public class CommunityUserModel implements Comparable<CommunityUserModel> {
     private AddressModel address;
     private List<HealthModel> healthIssues;
     private String accIsActivate;
+    private String accIsBlocked;
     private String email;
 
     public String getUsername() {
@@ -95,6 +96,14 @@ public class CommunityUserModel implements Comparable<CommunityUserModel> {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAccIsBlocked() {
+        return accIsBlocked;
+    }
+
+    public void setAccIsBlocked(String accIsBlocked) {
+        this.accIsBlocked = accIsBlocked;
     }
 
     @Override

@@ -126,13 +126,18 @@ public class AssistanceDaoImpl extends GenericDaoImpl<AssistanceBean, Integer> i
     }
 
     private void fetchTables(Root<AssistanceBean> root) {
-        Fetch<AssistanceBean, CommunityUserBean> communityUserBeanFetch = root.fetch("communityUserBean", JoinType.LEFT);
-        Fetch<CommunityUserBean, AddressBean> addressBeanFetch = communityUserBeanFetch.fetch("addressBean", JoinType.LEFT);
-        Fetch<AddressBean, ZoneBean> zoneBeanFetch = addressBeanFetch.fetch("zoneBean", JoinType.LEFT);
-        Fetch<CommunityUserBean, OccupationBean> occupationBeanFetch = communityUserBeanFetch.fetch("occupationBean", JoinType.LEFT);
+        fetchCommunityUserBean(root);
         Fetch<AssistanceBean, AdminBean> adminBeanFetch = root.fetch("adminBean", JoinType.LEFT);
         Fetch<AssistanceBean, AssistanceCategoryBean> categoryBeanFetch = root.fetch("categoryBean", JoinType.LEFT);
         Fetch<AssistanceBean, AppointmentBean> appointmentBeanFetch = root.fetch("appointmentBean", JoinType.LEFT);
+    }
+
+    private void fetchCommunityUserBean(Root<AssistanceBean> root) {
+        Fetch<AssistanceCommentBean, CommunityUserBean> communityUserBeanFetch = root.fetch("communityUserBean", JoinType.LEFT);
+        Fetch<CommunityUserBean, AccountBean> accountBeanFetch = communityUserBeanFetch.fetch("accountBean", JoinType.LEFT);
+        Fetch<CommunityUserBean, AdminBean> blockedByAdminBeanFetch = communityUserBeanFetch.fetch("blockedByAdminBean", JoinType.LEFT);
+        Fetch<CommunityUserBean, AddressBean> addressBeanFetch = communityUserBeanFetch.fetch("addressBean", JoinType.LEFT);
+        Fetch<AddressBean, ZoneBean> zoneBeanFetch = addressBeanFetch.fetch("zoneBean", JoinType.LEFT);
     }
 
     private List<AssistanceBean> getResults(CriteriaQuery<AssistanceBean> cq, Root<AssistanceBean> root, List<Predicate> predicates) {

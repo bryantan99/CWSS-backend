@@ -72,7 +72,7 @@ public class AppointmentBean implements Serializable {
     @Column(name = ASSISTANCE_ID)
     private Integer assistanceId;
 
-    @OneToOne()
+    @OneToOne
     @JoinColumn(name = ASSISTANCE_ID, referencedColumnName = AssistanceBean.ASSISTANCE_ID, insertable = false, updatable = false)
     private AssistanceBean assistanceBean;
 

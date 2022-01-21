@@ -35,11 +35,7 @@ public class CommunityUserRestController {
             CommunityUserProfileModel model = communityUserService.getCommunityUserProfile(username);
             return ResponseHandler.generateResponse("Successfully retrieved " + username + " profile.", HttpStatus.OK, model);
         } catch (Exception e) {
-            if (e instanceof NotFoundException) {
-                return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.NOT_FOUND, null);
-            } else {
-                return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
-            }
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
     }
 
@@ -49,7 +45,8 @@ public class CommunityUserRestController {
                                                     @RequestParam(required = false) String gender,
                                                     @RequestParam(required = false) String ethnic,
                                                     @RequestParam(required = false) Integer diseaseId,
-                                                    @RequestParam(required = false) Integer zoneId) {
+                                                    @RequestParam(required = false) Integer zoneId,
+                                                    @RequestParam(required = false) String isActive) {
         try {
             CommunityUserBeanQuery filter = new CommunityUserBeanQuery();
             filter.setName(StringUtils.isBlank(name) ? null : name);
@@ -58,6 +55,7 @@ public class CommunityUserRestController {
             filter.setEthnic(StringUtils.isBlank(ethnic) ? null : ethnic);
             filter.setDiseaseId(diseaseId);
             filter.setZoneId(zoneId);
+            filter.setIsActive(StringUtils.isEmpty(isActive) ? null : isActive);
 
             List<CommunityUserModel> list = communityUserService.getCommunityUsers(filter);
             return ResponseHandler.generateResponse("Successfully retrieved " + list.size() + " user record(s).", HttpStatus.OK, list);

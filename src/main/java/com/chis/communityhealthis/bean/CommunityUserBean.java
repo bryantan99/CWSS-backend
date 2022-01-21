@@ -53,16 +53,16 @@ public class CommunityUserBean implements Serializable {
     private String blockedMessage;
 
     @OneToOne
+    @JoinColumn(name = USERNAME, referencedColumnName = AccountBean.USERNAME, insertable = false, updatable = false)
+    private AccountBean accountBean;
+
+    @OneToOne
     @JoinColumn(name = BLOCKED_BY, referencedColumnName = AdminBean.USERNAME, insertable = false, updatable = false)
     private AdminBean blockedByAdminBean;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = USERNAME, referencedColumnName = AddressBean.USERNAME, insertable = false, updatable = false)
     private AddressBean addressBean;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = USERNAME, referencedColumnName = OccupationBean.USERNAME, insertable = false, updatable = false)
-    private OccupationBean occupationBean;
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = USERNAME, referencedColumnName = HealthIssueBean.USERNAME, insertable = false, updatable = false)
@@ -156,19 +156,19 @@ public class CommunityUserBean implements Serializable {
         this.addressBean = addressBean;
     }
 
-    public OccupationBean getOccupationBean() {
-        return occupationBean;
-    }
-
-    public void setOccupationBean(OccupationBean occupationBean) {
-        this.occupationBean = occupationBean;
-    }
-
     public Set<HealthIssueBean> getHealthIssueBeans() {
         return healthIssueBeans;
     }
 
     public void setHealthIssueBeans(Set<HealthIssueBean> healthIssueBeans) {
         this.healthIssueBeans = healthIssueBeans;
+    }
+
+    public AccountBean getAccountBean() {
+        return accountBean;
+    }
+
+    public void setAccountBean(AccountBean accountBean) {
+        this.accountBean = accountBean;
     }
 }

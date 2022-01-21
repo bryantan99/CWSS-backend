@@ -9,9 +9,7 @@ import com.chis.communityhealthis.repository.account.AccountDao;
 import com.chis.communityhealthis.repository.address.AddressDao;
 import com.chis.communityhealthis.repository.communityuser.CommunityUserDao;
 import com.chis.communityhealthis.repository.healthissue.HealthIssueDao;
-import com.chis.communityhealthis.repository.occupation.OccupationDao;
 import com.chis.communityhealthis.repository.resetpasswordrequest.ResetPasswordRequestDao;
-import com.chis.communityhealthis.service.email.EmailService;
 import com.chis.communityhealthis.service.sms.SmsService;
 import com.chis.communityhealthis.utility.FlagConstant;
 import io.jsonwebtoken.lang.Assert;
@@ -42,16 +40,10 @@ public class AccountServiceImpl implements AccountService {
     private AddressDao addressDao;
 
     @Autowired
-    private OccupationDao occupationDao;
-
-    @Autowired
     private HealthIssueDao healthIssueDao;
 
     @Autowired
     private ResetPasswordRequestDao resetPasswordRequestDao;
-
-    @Autowired
-    private EmailService emailService;
 
     @Autowired
     private SmsService smsService;
@@ -72,11 +64,6 @@ public class AccountServiceImpl implements AccountService {
 
         AddressBean addressBean = createAddressBean(username, form.getAddress());
         addressDao.add(addressBean);
-
-        if (form.getOccupation() != null) {
-            OccupationBean occupationBean = createOccupationBean(username, form.getOccupation());
-            occupationDao.add(occupationBean);
-        }
 
         if (form.getHealth() != null && !CollectionUtils.isEmpty(form.getHealth().getDiseaseList())) {
             for (HealthIssueModel diseaseModel : form.getHealth().getDiseaseList()) {
@@ -220,20 +207,6 @@ public class AccountServiceImpl implements AccountService {
         return addressBean;
     }
 
-    private OccupationBean createOccupationBean(String username, OccupationForm occupationForm) {
-        OccupationBean bean = new OccupationBean();
-        bean.setUsername(username);
-        bean.setEmploymentType(occupationForm.getEmploymentType());
-        bean.setOccupationName(StringUtils.toRootUpperCase(occupationForm.getOccupationName()));
-        bean.setSalary(occupationForm.getSalary());
-        if (isGovtEmployee(bean.getEmploymentType()) || isPrivateEmployee(bean.getEmploymentType())) {
-            bean.setEmployerCompany(StringUtils.toRootUpperCase(occupationForm.getEmployerCompany()));
-            bean.setEmployerContactNo(occupationForm.getEmployerContactNo());
-        }
-
-        return bean;
-    }
-
     private HealthIssueBean createHealthIssueBean(String username, HealthIssueModel diseaseModel) {
         HealthIssueBean bean = new HealthIssueBean();
         bean.setUsername(username);
@@ -242,13 +215,5 @@ public class AccountServiceImpl implements AccountService {
         bean.setCreatedBy(username);
         bean.setCreatedDate(new Date());
         return bean;
-    }
-
-    private boolean isPrivateEmployee(String employmentType) {
-        return StringUtils.equals(employmentType, OccupationBean.EMPLOYMENT_TYPE_PRIVATE);
-    }
-
-    private boolean isGovtEmployee(String employmentType) {
-        return StringUtils.equals(employmentType, OccupationBean.EMPLOYMENT_TYPE_GOVERNMENT);
     }
 }

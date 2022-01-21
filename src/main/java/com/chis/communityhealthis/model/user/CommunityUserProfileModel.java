@@ -2,7 +2,6 @@ package com.chis.communityhealthis.model.user;
 
 import com.chis.communityhealthis.model.address.AddressModel;
 import com.chis.communityhealthis.model.health.HealthModel;
-import com.chis.communityhealthis.model.occupation.OccupationModel;
 
 import java.util.Date;
 import java.util.List;
@@ -17,7 +16,6 @@ public class CommunityUserProfileModel implements Comparable<CommunityUserProfil
     private String email;
     private PersonalDetailModel personalDetail;
     private AddressModel address;
-    private OccupationModel occupation;
     private List<HealthModel> healthModelList;
 
     public String getUsername() {
@@ -54,14 +52,6 @@ public class CommunityUserProfileModel implements Comparable<CommunityUserProfil
 
     public void setAddress(AddressModel address) {
         this.address = address;
-    }
-
-    public OccupationModel getOccupation() {
-        return occupation;
-    }
-
-    public void setOccupation(OccupationModel occupation) {
-        this.occupation = occupation;
     }
 
     public List<HealthModel> getHealthModelList() { return healthModelList; }
