@@ -3,13 +3,10 @@ package com.chis.communityhealthis.controller;
 import com.chis.communityhealthis.model.filter.CommunityUserBeanQuery;
 import com.chis.communityhealthis.model.response.ResponseHandler;
 import com.chis.communityhealthis.model.signup.AccountRegistrationForm;
-import com.chis.communityhealthis.model.user.BlockDetailModel;
-import com.chis.communityhealthis.model.user.BlockUserForm;
-import com.chis.communityhealthis.model.user.CommunityUserModel;
-import com.chis.communityhealthis.model.user.CommunityUserProfileModel;
+import com.chis.communityhealthis.model.user.*;
 import com.chis.communityhealthis.service.auth.AuthService;
 import com.chis.communityhealthis.service.communityuser.CommunityUserService;
-import com.chis.communityhealthis.utility.FlagConstant;
+import com.chis.communityhealthis.utility.RoleConstant;
 import javassist.NotFoundException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,19 +32,28 @@ public class CommunityUserRestController {
             CommunityUserProfileModel model = communityUserService.getCommunityUserProfile(username);
             return ResponseHandler.generateResponse("Successfully retrieved " + username + " profile.", HttpStatus.OK, model);
         } catch (Exception e) {
-            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+            if (e instanceof NotFoundException) {
+                return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.NOT_FOUND, null);
+            } else {
+                return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+            }
         }
     }
 
     @GetMapping
-    public ResponseEntity<Object> getCommunityUsers(@RequestParam(required = false) String name,
-                                                    @RequestParam(required = false) String nric,
-                                                    @RequestParam(required = false) String gender,
-                                                    @RequestParam(required = false) String ethnic,
-                                                    @RequestParam(required = false) Integer diseaseId,
-                                                    @RequestParam(required = false) Integer zoneId,
-                                                    @RequestParam(required = false) String isActive) {
+    public ResponseEntity<Object> getApprovedCommunityUsers(@RequestParam(required = false) String name,
+                                                            @RequestParam(required = false) String nric,
+                                                            @RequestParam(required = false) String gender,
+                                                            @RequestParam(required = false) String ethnic,
+                                                            @RequestParam(required = false) Integer diseaseId,
+                                                            @RequestParam(required = false) Integer zoneId,
+                                                            @RequestParam(required = false) String isEligibleForAssistance) {
         try {
+            LoggedInUser user = authService.getCurrentLoggedInUser();
+            if (!user.getRoleList().contains(RoleConstant.ADMIN) && !user.getRoleList().contains(RoleConstant.SUPER_ADMIN)) {
+                throw new Exception("Unauthorized user.");
+            }
+
             CommunityUserBeanQuery filter = new CommunityUserBeanQuery();
             filter.setName(StringUtils.isBlank(name) ? null : name);
             filter.setNric(StringUtils.isBlank(nric) ? null : nric);
@@ -55,9 +61,27 @@ public class CommunityUserRestController {
             filter.setEthnic(StringUtils.isBlank(ethnic) ? null : ethnic);
             filter.setDiseaseId(diseaseId);
             filter.setZoneId(zoneId);
-            filter.setIsActive(StringUtils.isEmpty(isActive) ? null : isActive);
+            filter.setIsEligibleForAssistance(StringUtils.isEmpty(isEligibleForAssistance) ? null : isEligibleForAssistance);
 
-            List<CommunityUserModel> list = communityUserService.getCommunityUsers(filter);
+            List<CommunityUserModel> list = communityUserService.getApprovedCommunityUsers(filter);
+            return ResponseHandler.generateResponse("Successfully retrieved " + list.size() + " user record(s).", HttpStatus.OK, list);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
+    @GetMapping("/pending")
+    public ResponseEntity<Object> getPendingCommunityUsers(@RequestParam(required = false) String nric) {
+        try {
+            LoggedInUser user = authService.getCurrentLoggedInUser();
+            if (!user.getRoleList().contains(RoleConstant.ADMIN) && !user.getRoleList().contains(RoleConstant.SUPER_ADMIN)) {
+                throw new Exception("Unauthorized user.");
+            }
+
+            CommunityUserBeanQuery filter = new CommunityUserBeanQuery();
+            filter.setNric(StringUtils.isEmpty(nric) ? null : nric);
+
+            List<CommunityUserModel> list = communityUserService.getPendingCommunityUsers(filter);
             return ResponseHandler.generateResponse("Successfully retrieved " + list.size() + " user record(s).", HttpStatus.OK, list);
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);

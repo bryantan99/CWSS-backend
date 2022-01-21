@@ -3,6 +3,7 @@ package com.chis.communityhealthis.repository.communityuser;
 import com.chis.communityhealthis.bean.*;
 import com.chis.communityhealthis.model.filter.CommunityUserBeanQuery;
 import com.chis.communityhealthis.repository.GenericDaoImpl;
+import com.chis.communityhealthis.utility.FlagConstant;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.query.Query;
 import org.springframework.lang.Nullable;
@@ -17,7 +18,7 @@ import java.util.List;
 @Repository
 public class CommunityUserDaoImpl extends GenericDaoImpl<CommunityUserBean, String> implements CommunityUserDao {
     @Override
-    public List<CommunityUserBean> getCommunityUsers(CommunityUserBeanQuery filter) {
+    public List<CommunityUserBean> getApprovedCommunityUsers(CommunityUserBeanQuery filter) {
         CriteriaBuilder criteriaBuilder = currentSession().getCriteriaBuilder();
         CriteriaQuery<CommunityUserBean> criteriaQuery = criteriaBuilder.createQuery(CommunityUserBean.class);
         Root<CommunityUserBean> root = criteriaQuery.from(CommunityUserBean.class);
@@ -31,6 +32,8 @@ public class CommunityUserDaoImpl extends GenericDaoImpl<CommunityUserBean, Stri
         Fetch<CommunityUserBean, AdminBean> blockedByAdminBeanFetch = root.fetch("blockedByAdminBean", JoinType.LEFT);
 
         List<Predicate> predicates = new ArrayList<>();
+        predicates.add(criteriaBuilder.equal(((Join<CommunityUserBean, AccountBean>) accountBeanFetch).get("isActive"), FlagConstant.YES));
+
         if (StringUtils.isNotBlank(filter.getName())) {
             predicates.add(criteriaBuilder.like(root.get("fullName"), "%" + filter.getName() + "%"));
         }
@@ -47,19 +50,27 @@ public class CommunityUserDaoImpl extends GenericDaoImpl<CommunityUserBean, Stri
             predicates.add(criteriaBuilder.equal(root.get("ethnic"), filter.getEthnic()));
         }
 
-        if (StringUtils.isNotEmpty(filter.getIsActive())) {
-            Join<CommunityUserBean, AccountBean> accountBeanJoin = (Join<CommunityUserBean, AccountBean>) accountBeanFetch;
-            predicates.add(criteriaBuilder.equal(accountBeanJoin.get("isActive"), filter.getIsActive()));
+        if (StringUtils.isNotEmpty(filter.getIsEligibleForAssistance())) {
+            switch (filter.getIsEligibleForAssistance()) {
+                case FlagConstant.YES:
+                    predicates.add(criteriaBuilder.isNull(root.get("blockedBy")));
+                    predicates.add(criteriaBuilder.isNull(root.get("blockedDate")));
+                    predicates.add(criteriaBuilder.isNull(root.get("blockedMessage")));
+                    break;
+                case FlagConstant.NO:
+                    predicates.add(criteriaBuilder.isNotNull(root.get("blockedBy")));
+                    predicates.add(criteriaBuilder.isNotNull(root.get("blockedDate")));
+                    predicates.add(criteriaBuilder.isNotNull(root.get("blockedMessage")));
+                    break;
+            }
         }
 
         if (filter.getDiseaseId() != null) {
-            Join<CommunityUserBean, HealthIssueBean> healthIssueBeanJoin = (Join<CommunityUserBean, HealthIssueBean>) healthIssueBeanFetch;
-            predicates.add(criteriaBuilder.equal(healthIssueBeanJoin.get("diseaseId"), filter.getDiseaseId()));
+            predicates.add(criteriaBuilder.equal(((Join<CommunityUserBean, HealthIssueBean>) healthIssueBeanFetch).get("diseaseId"), filter.getDiseaseId()));
         }
 
         if (filter.getZoneId() != null) {
-            Join<AddressBean, ZoneBean> zoneBeanJoin = (Join<AddressBean, ZoneBean>) zoneBeanFetch;
-            predicates.add(criteriaBuilder.equal(zoneBeanJoin.get("zoneId"), filter.getZoneId()));
+            predicates.add(criteriaBuilder.equal(((Join<AddressBean, ZoneBean>) zoneBeanFetch).get("zoneId"), filter.getZoneId()));
         }
 
         return getResults(criteriaQuery, root, predicates);
@@ -99,6 +110,25 @@ public class CommunityUserDaoImpl extends GenericDaoImpl<CommunityUserBean, Stri
 
         fetchTables(root);
         return getResults(criteriaQuery, root, null);
+    }
+
+    @Override
+    public List<CommunityUserBean> getPendingCommunityUsers(CommunityUserBeanQuery filter) {
+        CriteriaBuilder criteriaBuilder = currentSession().getCriteriaBuilder();
+        CriteriaQuery<CommunityUserBean> criteriaQuery = criteriaBuilder.createQuery(CommunityUserBean.class);
+        Root<CommunityUserBean> root = criteriaQuery.from(CommunityUserBean.class);
+        Fetch<CommunityUserBean, AccountBean> accountBeanFetch = root.fetch("accountBean", JoinType.LEFT);
+        Fetch<CommunityUserBean, AddressBean> addressBeanFetch = root.fetch("addressBean", JoinType.LEFT);
+        Fetch<AddressBean, ZoneBean> zoneBeanFetch = addressBeanFetch.fetch("zoneBean", JoinType.LEFT);
+
+        List<Predicate> predicates = new ArrayList<>();
+        predicates.add(criteriaBuilder.equal(((Join<CommunityUserBean, AccountBean>) accountBeanFetch).get("isActive"), FlagConstant.NO));
+
+        if (StringUtils.isNotEmpty(filter.getNric())) {
+            predicates.add(criteriaBuilder.like(root.get("nric"), "%" + filter.getNric() + "%"));
+        }
+
+        return getResults(criteriaQuery, root, predicates);
     }
 
     private void fetchTables(Root<CommunityUserBean> root) {

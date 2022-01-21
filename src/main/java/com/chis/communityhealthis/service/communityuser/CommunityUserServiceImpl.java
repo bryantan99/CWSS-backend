@@ -53,22 +53,35 @@ public class CommunityUserServiceImpl implements CommunityUserService {
     private AuditService auditService;
 
     @Override
-    public List<CommunityUserModel> getCommunityUsers(CommunityUserBeanQuery filter) {
+    public List<CommunityUserModel> getApprovedCommunityUsers(CommunityUserBeanQuery filter) {
         List<CommunityUserModel> list = new ArrayList<>();
-        List<CommunityUserBean> communityUserBeans = communityUserDao.getCommunityUsers(filter);
+        List<CommunityUserBean> communityUserBeans = communityUserDao.getApprovedCommunityUsers(filter);
         if (!CollectionUtils.isEmpty(communityUserBeans)) {
             for (CommunityUserBean userBean: communityUserBeans) {
-                list.add(toCommunityUserModel(userBean, userBean.getAccountBean()));
+                list.add(toCommunityUserModel(userBean));
             }
         }
         Collections.sort(list);
         return list;
     }
 
-    private CommunityUserModel toCommunityUserModel(CommunityUserBean userBean, AccountBean accountBean) {
+    @Override
+    public List<CommunityUserModel> getPendingCommunityUsers(CommunityUserBeanQuery filter) {
+        List<CommunityUserModel> list = new ArrayList<>();
+        List<CommunityUserBean> communityUserBeans = communityUserDao.getPendingCommunityUsers(filter);
+        if (!CollectionUtils.isEmpty(communityUserBeans)) {
+            for (CommunityUserBean userBean: communityUserBeans) {
+                list.add(toCommunityUserModel(userBean));
+            }
+        }
+        Collections.sort(list);
+        return list;
+    }
+
+    private CommunityUserModel toCommunityUserModel(CommunityUserBean userBean) {
         CommunityUserModel model = new CommunityUserModel();
-        model.setAccIsActivate(accountBean.getIsActive());
-        model.setEmail(accountBean.getEmail());
+        model.setAccIsActivate(userBean.getAccountBean().getIsActive());
+        model.setEmail(userBean.getAccountBean().getEmail());
         model.setUsername(userBean.getUsername());
         model.setFullName(userBean.getFullName());
         model.setEthnic(userBean.getEthnic());
@@ -97,9 +110,12 @@ public class CommunityUserServiceImpl implements CommunityUserService {
     }
 
     @Override
-    public CommunityUserProfileModel getCommunityUserProfile(String username) {
+    public CommunityUserProfileModel getCommunityUserProfile(String username) throws Exception {
         CommunityUserBean communityUserBean = communityUserDao.getCommunityUser(username);
-        return toCommunityUserProfileModel(communityUserBean.getAccountBean(), communityUserBean);
+        if (communityUserBean == null) {
+            throw new NotFoundException("Community user profile [username: " + username + "] was not found.");
+        }
+        return toCommunityUserProfileModel(communityUserBean);
     }
 
     @Override
@@ -431,14 +447,17 @@ public class CommunityUserServiceImpl implements CommunityUserService {
         return new BeanComparator(clonedCommunityUserBean, communityUserBean);
     }
 
-    private CommunityUserProfileModel toCommunityUserProfileModel(AccountBean accountBean, CommunityUserBean communityUserBean) {
+    private CommunityUserProfileModel toCommunityUserProfileModel(CommunityUserBean communityUserBean) {
         CommunityUserProfileModel model = new CommunityUserProfileModel();
 
         AddressBean addressBean = null;
         Set<HealthIssueBean> healthIssueBeans = null;
+        AccountBean accountBean = null;
+
         if (communityUserBean != null) {
             addressBean = communityUserBean.getAddressBean();
             healthIssueBeans = communityUserBean.getHealthIssueBeans();
+            accountBean = communityUserBean.getAccountBean();
         }
 
         if (accountBean != null) {

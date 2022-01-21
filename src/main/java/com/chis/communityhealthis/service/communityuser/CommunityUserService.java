@@ -11,8 +11,9 @@ import javassist.NotFoundException;
 import java.util.List;
 
 public interface CommunityUserService {
-    List<CommunityUserModel> getCommunityUsers(CommunityUserBeanQuery filter);
-    CommunityUserProfileModel getCommunityUserProfile(String username) throws NotFoundException;
+    List<CommunityUserModel> getApprovedCommunityUsers(CommunityUserBeanQuery filter);
+    List<CommunityUserModel> getPendingCommunityUsers(CommunityUserBeanQuery filter);
+    CommunityUserProfileModel getCommunityUserProfile(String username) throws Exception;
     void approveUserAccount(String username, String actionMakerUsername) throws Exception;
     void rejectUserAccount(String username, String actionMakerUsername) throws Exception;
     void deleteUserAccount(String username, String actionMakerUsername) throws Exception;

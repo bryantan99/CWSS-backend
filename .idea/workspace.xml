@@ -4,24 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Ignore adminBean and communityUserBean if not found when joining AssistanceBean">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" afterDir="false" />
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Delete OccupationBean&#10;- Join CommunityUserBean with AccountBean&#10;- Update fetch CommunityUserBean in DaoImpl&#10;- Add parameter isActive for getCommunityUsers">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/AppointmentBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/AppointmentBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/CommunityUserBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/CommunityUserBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/OccupationBean.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/CommunityUserRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/CommunityUserRestController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/filter/CommunityUserBeanQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/filter/CommunityUserBeanQuery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/occupation/OccupationModel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/user/CommunityUserModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/user/CommunityUserModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/user/CommunityUserProfileModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/user/CommunityUserProfileModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/assistance/AssistanceDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/assistance/AssistanceDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/assistancecomment/AssistanceCommentDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/assistancecomment/AssistanceCommentDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/audit/AuditLogDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/audit/AuditLogDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/communityuser/CommunityUserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/communityuser/CommunityUserDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/communityuser/CommunityUserDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/communityuser/CommunityUserDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/occupation/OccupationDao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/occupation/OccupationDaoImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/account/AccountServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/account/AccountServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application-local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-local.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
@@ -371,14 +360,7 @@
       <workItem from="1642597214486" duration="16403000" />
       <workItem from="1642651745349" duration="5000" />
       <workItem from="1642689657283" duration="8891000" />
-      <workItem from="1642764092175" duration="10671000" />
-    </task>
-    <task id="LOCAL-00125" summary="- Fix ProfileComponent to not update display when parameter changed&#10;- Allow admin to access AdminManagementComponent">
-      <created>1635690818398</created>
-      <option name="number" value="00125" />
-      <option name="presentableId" value="LOCAL-00125" />
-      <option name="project" value="LOCAL" />
-      <updated>1635690818398</updated>
+      <workItem from="1642764092175" duration="17836000" />
     </task>
     <task id="LOCAL-00126" summary="- Fix ProfileComponent to not update display when parameter changed">
       <created>1635691423822</created>
@@ -716,7 +698,14 @@
       <option name="project" value="LOCAL" />
       <updated>1642707968106</updated>
     </task>
-    <option name="localTasksCounter" value="174" />
+    <task id="LOCAL-00174" summary="- Delete OccupationBean&#10;- Join CommunityUserBean with AccountBean&#10;- Update fetch CommunityUserBean in DaoImpl&#10;- Add parameter isActive for getCommunityUsers">
+      <created>1642781654494</created>
+      <option name="number" value="00174" />
+      <option name="presentableId" value="LOCAL-00174" />
+      <option name="project" value="LOCAL" />
+      <updated>1642781654494</updated>
+    </task>
+    <option name="localTasksCounter" value="175" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -746,7 +735,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="- Fix lazyInitialization for appointmentBean and assistanceBean audit" />
     <MESSAGE value="- Fix audit for post module" />
     <MESSAGE value="- Allow clear for select module in ActivityLogComponent" />
     <MESSAGE value="- updates to deploy frontend to heroku" />
@@ -771,7 +759,8 @@
     <MESSAGE value="- allow admin to add assistance record for community user with optional appointment" />
     <MESSAGE value="- Revoke access for account's status == N at doFilterInternal&#10;- Allow super admin to update admin's status (active / resigned)" />
     <MESSAGE value="- Ignore adminBean and communityUserBean if not found when joining AssistanceBean" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Ignore adminBean and communityUserBean if not found when joining AssistanceBean" />
+    <MESSAGE value="- Delete OccupationBean&#10;- Join CommunityUserBean with AccountBean&#10;- Update fetch CommunityUserBean in DaoImpl&#10;- Add parameter isActive for getCommunityUsers" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Delete OccupationBean&#10;- Join CommunityUserBean with AccountBean&#10;- Update fetch CommunityUserBean in DaoImpl&#10;- Add parameter isActive for getCommunityUsers" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

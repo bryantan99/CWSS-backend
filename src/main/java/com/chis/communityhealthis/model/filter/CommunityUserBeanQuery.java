@@ -7,7 +7,7 @@ public class CommunityUserBeanQuery {
     private String ethnic;
     private Integer diseaseId;
     private Integer zoneId;
-    private String isActive;
+    private String isEligibleForAssistance;
 
     public String getName() {
         return name;
@@ -57,11 +57,11 @@ public class CommunityUserBeanQuery {
         this.zoneId = zoneId;
     }
 
-    public String getIsActive() {
-        return isActive;
+    public String getIsEligibleForAssistance() {
+        return isEligibleForAssistance;
     }
 
-    public void setIsActive(String isActive) {
-        this.isActive = isActive;
+    public void setIsEligibleForAssistance(String isEligibleForAssistance) {
+        this.isEligibleForAssistance = isEligibleForAssistance;
     }
 }
