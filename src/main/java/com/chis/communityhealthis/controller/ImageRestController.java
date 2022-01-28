@@ -20,6 +20,18 @@ public class ImageRestController {
         return this.storageService.downloadFile(relativeToPostImg);
     }
 
+    @GetMapping(value = "/assistance/{assistanceCommentId}/{imageName:.+}", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_GIF_VALUE})
+    public @ResponseBody
+    byte[] getAssistanceImg(@PathVariable Integer assistanceCommentId, @PathVariable(name = "imageName") String imageName) {
+        try {
+            final String relativeToAssistanceCommentImg = DirectoryConstant.AWS_ASSISTANCE_COMMENT_MEDIA_DIRECTORY + "/" + assistanceCommentId.toString() + "/" + imageName;
+            return this.storageService.downloadFile(relativeToAssistanceCommentImg);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     @GetMapping(value = "/account/profile-pic/{username}/{imageName:.+}", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
     public @ResponseBody
     byte[] getProfilePic(@PathVariable String username, @PathVariable(name = "imageName") String imageName) {

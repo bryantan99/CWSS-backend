@@ -1,6 +1,7 @@
 package com.chis.communityhealthis.model.assistancecomment;
 
 import java.util.Date;
+import java.util.List;
 
 public class AssistanceCommentModel {
     private Integer commentId;
@@ -8,6 +9,7 @@ public class AssistanceCommentModel {
     private String createdBy;
     private String createdByFullName;
     private Date createdDate;
+    private List<AssistanceCommentMediaModel> mediaList;
 
     public Integer getCommentId() {
         return commentId;
@@ -47,5 +49,13 @@ public class AssistanceCommentModel {
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
+    }
+
+    public List<AssistanceCommentMediaModel> getMediaList() {
+        return mediaList;
+    }
+
+    public void setMediaList(List<AssistanceCommentMediaModel> mediaList) {
+        this.mediaList = mediaList;
     }
 }

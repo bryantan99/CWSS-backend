@@ -6,6 +6,7 @@ import org.hibernate.annotations.NotFoundAction;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "ASSISTANCE_COMMENT")
@@ -45,6 +46,10 @@ public class AssistanceCommentBean implements Serializable {
     @JoinColumn(name = CREATED_BY, referencedColumnName = CommunityUserBean.USERNAME, insertable = false, updatable = false)
     @NotFound(action= NotFoundAction.IGNORE)
     private CommunityUserBean communityUserBean;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = ASSISTANCE_COMMENT_ID, referencedColumnName = AssistanceCommentMediaBean.ASSISTANCE_COMMENT_ID, insertable = false, updatable = false)
+    private Set<AssistanceCommentMediaBean> mediaBeanSet;
 
     public Integer getAssistanceCommentId() {
         return assistanceCommentId;
@@ -100,5 +105,13 @@ public class AssistanceCommentBean implements Serializable {
 
     public void setCommunityUserBean(CommunityUserBean userBean) {
         this.communityUserBean = userBean;
+    }
+
+    public Set<AssistanceCommentMediaBean> getMediaBeanSet() {
+        return mediaBeanSet;
+    }
+
+    public void setMediaBeanSet(Set<AssistanceCommentMediaBean> mediaBeanSet) {
+        this.mediaBeanSet = mediaBeanSet;
     }
 }

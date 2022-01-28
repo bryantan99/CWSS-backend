@@ -2,6 +2,8 @@ package com.chis.communityhealthis.service.storage;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.*;
+import com.chis.communityhealthis.bean.AssistanceCommentMediaBean;
+import com.chis.communityhealthis.repository.admin.AdminDao;
 import com.chis.communityhealthis.utility.DirectoryConstant;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +49,30 @@ public class StorageServiceImpl implements StorageService {
             }
         }
         return fileNames;
+    }
+
+    @Override
+    public List<AssistanceCommentMediaBean> uploadAssistanceCommentMedias(Integer commentId, List<MultipartFile> fileList) {
+        List<AssistanceCommentMediaBean> mediaBeans = null;
+        if (!CollectionUtils.isEmpty(fileList)) {
+            mediaBeans = new ArrayList<>();
+            for (MultipartFile file : fileList) {
+                File fileObj = toFile(file);
+                String fileName = DirectoryConstant.AWS_ASSISTANCE_COMMENT_MEDIA_DIRECTORY + "/" + commentId.toString() + "/" + file.getOriginalFilename();
+                s3Client.putObject(new PutObjectRequest(bucketName, fileName, fileObj));
+                fileObj.delete();
+                mediaBeans.add(createAssistanceMediaBean(commentId, file));
+            }
+        }
+        return mediaBeans;
+    }
+
+    private AssistanceCommentMediaBean createAssistanceMediaBean(Integer commentId, MultipartFile file) {
+        AssistanceCommentMediaBean bean = new AssistanceCommentMediaBean();
+        bean.setAssistanceCommentId(commentId);
+        bean.setMediaName(file.getOriginalFilename());
+        bean.setMediaType(file.getContentType());
+        return bean;
     }
 
     @Override
