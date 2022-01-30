@@ -229,7 +229,7 @@ public class AppointmentServiceImpl implements AppointmentService {
             }
             assistanceDao.update(assistanceBean);
             BeanComparator assistanceBeanComparator = new BeanComparator(createPureAssistanceBean(assistanceBeanDeepCopy), createPureAssistanceBean(assistanceBean));
-            AuditBean assistanceAuditBean = new AuditBean(AuditConstant.MODULE_APPOINTMENT, AuditConstant.formatActionUpdateAssistanceStatus(assistanceBean.getAssistanceId()), form.getSubmittedBy());
+            AuditBean assistanceAuditBean = new AuditBean(AuditConstant.MODULE_ASSISTANCE, AuditConstant.formatActionUpdateAssistanceStatus(assistanceBean.getAssistanceId()), form.getSubmittedBy());
             List<AuditActionBean> assistanceAuditActions = new ArrayList<>();
             if (assistanceBeanComparator.hasChanges()) {
                 assistanceAuditActions.add(new AuditActionBean(assistanceBeanComparator.toPrettyString()));

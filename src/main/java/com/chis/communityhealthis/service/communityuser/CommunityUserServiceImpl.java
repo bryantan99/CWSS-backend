@@ -363,7 +363,7 @@ public class CommunityUserServiceImpl implements CommunityUserService {
                     HealthIssueBean clonedBean = SerializationUtils.clone(bean);
                     healthIssueDao.remove(bean);
                     String diseaseName = diseaseMap.getOrDefault(clonedBean.getDiseaseId(), "-");
-                    String msg = "Deleted health issue bean [diseaseName: " + diseaseName + "]";
+                    String msg = "Deleted health issue bean [healthIssueId: " + clonedBean.getIssueId() + "] [diseaseName: " + diseaseName + "]";
                     if (StringUtils.isNotBlank(clonedBean.getIssueDescription())) {
                         msg += " [diseaseDescription: " + bean.getIssueDescription() + "]";
                     }
