@@ -91,6 +91,16 @@ public class AssistanceDaoImpl extends GenericDaoImpl<AssistanceBean, Integer> i
         CriteriaQuery<AssistanceBean> criteriaQuery = criteriaBuilder.createQuery(AssistanceBean.class);
         Root<AssistanceBean> root = criteriaQuery.from(AssistanceBean.class);
 
+        Fetch<AssistanceBean, AdminBean> adminBeanFetch = root.fetch("adminBean", JoinType.LEFT);
+        Fetch<AssistanceBean, AssistanceCategoryBean> categoryBeanFetch = root.fetch("categoryBean", JoinType.LEFT);
+        Fetch<AssistanceBean, AppointmentBean> appointmentBeanFetch = root.fetch("appointmentBean", JoinType.LEFT);
+
+        Fetch<AssistanceBean, CommunityUserBean> communityUserBeanFetch = root.fetch("communityUserBean", JoinType.LEFT);
+        Fetch<CommunityUserBean, AccountBean> accountBeanFetch = communityUserBeanFetch.fetch("accountBean", JoinType.LEFT);
+        Fetch<CommunityUserBean, AdminBean> blockedByAdminBeanFetch = communityUserBeanFetch.fetch("blockedByAdminBean", JoinType.LEFT);
+        Fetch<CommunityUserBean, AddressBean> addressBeanFetch = communityUserBeanFetch.fetch("addressBean", JoinType.LEFT);
+        Fetch<AddressBean, ZoneBean> zoneBeanFetch = addressBeanFetch.fetch("zoneBean", JoinType.LEFT);
+
         List<Predicate> predicates = new ArrayList<>();
 
         if (form.getAssistanceId() != null) {
@@ -114,14 +124,13 @@ public class AssistanceDaoImpl extends GenericDaoImpl<AssistanceBean, Integer> i
         }
 
         if (StringUtils.isNotBlank(form.getNric())) {
-            predicates.add(criteriaBuilder.like(root.get("username"), "%" + form.getNric() + "%"));
+            predicates.add(criteriaBuilder.like(((Join<AssistanceBean, CommunityUserBean>) communityUserBeanFetch).get("nric"), "%" + form.getNric() + "%"));
         }
 
         if (StringUtils.isNotBlank(form.getAdminUsername())) {
             predicates.add(criteriaBuilder.equal(root.get("adminUsername"), form.getAdminUsername()));
         }
 
-        fetchTables(root);
         return getResults(criteriaQuery, root, predicates);
     }
 
@@ -133,7 +142,7 @@ public class AssistanceDaoImpl extends GenericDaoImpl<AssistanceBean, Integer> i
     }
 
     private void fetchCommunityUserBean(Root<AssistanceBean> root) {
-        Fetch<AssistanceCommentBean, CommunityUserBean> communityUserBeanFetch = root.fetch("communityUserBean", JoinType.LEFT);
+        Fetch<AssistanceBean, CommunityUserBean> communityUserBeanFetch = root.fetch("communityUserBean", JoinType.LEFT);
         Fetch<CommunityUserBean, AccountBean> accountBeanFetch = communityUserBeanFetch.fetch("accountBean", JoinType.LEFT);
         Fetch<CommunityUserBean, AdminBean> blockedByAdminBeanFetch = communityUserBeanFetch.fetch("blockedByAdminBean", JoinType.LEFT);
         Fetch<CommunityUserBean, AddressBean> addressBeanFetch = communityUserBeanFetch.fetch("addressBean", JoinType.LEFT);
