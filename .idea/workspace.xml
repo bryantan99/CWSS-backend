@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Update Twilio approved and reject message">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/assistance/AssistanceDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/assistance/AssistanceDaoImpl.java" afterDir="false" />
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Fix findAllAssistanceRecords()">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/DiseaseBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/DiseaseBean.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application-local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-local.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
@@ -366,14 +362,7 @@
       <workItem from="1643397518671" duration="20000" />
       <workItem from="1643478788817" duration="440000" />
       <workItem from="1643567110394" duration="2526000" />
-      <workItem from="1643624197944" duration="1489000" />
-    </task>
-    <task id="LOCAL-00129" summary="- Change appointment duration to 30 minutes&#10;- Update date-picker to disable public holiday and weekend">
-      <created>1636733084950</created>
-      <option name="number" value="00129" />
-      <option name="presentableId" value="LOCAL-00129" />
-      <option name="project" value="LOCAL" />
-      <updated>1636733084951</updated>
+      <workItem from="1643624197944" duration="1833000" />
     </task>
     <task id="LOCAL-00130" summary="- Change appointment duration to 30 minutes&#10;- Update change appointment datetime modal">
       <created>1636735016405</created>
@@ -711,7 +700,14 @@
       <option name="project" value="LOCAL" />
       <updated>1643624359355</updated>
     </task>
-    <option name="localTasksCounter" value="178" />
+    <task id="LOCAL-00178" summary="- Fix findAllAssistanceRecords()">
+      <created>1643625927850</created>
+      <option name="number" value="00178" />
+      <option name="presentableId" value="LOCAL-00178" />
+      <option name="project" value="LOCAL" />
+      <updated>1643625927850</updated>
+    </task>
+    <option name="localTasksCounter" value="179" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -741,7 +737,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="- deploying angular to heroku" />
     <MESSAGE value="- add postgreSQL dependency into maven&#10;- update Spring Profile" />
     <MESSAGE value="- Updated AdminRestController to restrict API based on account type&#10;- Updated staff-account-creation.ftl to dynamic replace loginUrl&#10;- Added method to retrieve currentLoggedInUserDetail in AuthService" />
     <MESSAGE value="- Updated PostRestController to restrict API endpoints based on account types" />
@@ -766,7 +761,8 @@
     <MESSAGE value="- Allow user to upload image as assistance comment" />
     <MESSAGE value="- Update audit log message" />
     <MESSAGE value="- Update Twilio approved and reject message" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Update Twilio approved and reject message" />
+    <MESSAGE value="- Fix findAllAssistanceRecords()" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Fix findAllAssistanceRecords()" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

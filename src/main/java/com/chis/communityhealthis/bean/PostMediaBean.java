@@ -1,10 +1,13 @@
 package com.chis.communityhealthis.bean;
 
+import org.javers.core.metamodel.annotation.TypeName;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "POST_MEDIA")
+@TypeName("PostMediaBean")
 public class PostMediaBean implements Serializable {
 
     private static final long serialVersionUID = -8900827186653454131L;
