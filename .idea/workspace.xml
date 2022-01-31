@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Allow user to upload image as assistance comment">
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Update audit log message">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/appointment/AppointmentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/appointment/AppointmentServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application-local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-local.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
@@ -363,14 +361,7 @@
       <workItem from="1643369433632" duration="10566000" />
       <workItem from="1643397518671" duration="20000" />
       <workItem from="1643478788817" duration="440000" />
-      <workItem from="1643567110394" duration="1265000" />
-    </task>
-    <task id="LOCAL-00127" summary="- Fix Settings menu item">
-      <created>1635691837483</created>
-      <option name="number" value="00127" />
-      <option name="presentableId" value="LOCAL-00127" />
-      <option name="project" value="LOCAL" />
-      <updated>1635691837483</updated>
+      <workItem from="1643567110394" duration="2526000" />
     </task>
     <task id="LOCAL-00128" summary="- Allow Super Admin to update account roles for admin">
       <created>1636646957996</created>
@@ -708,7 +699,14 @@
       <option name="project" value="LOCAL" />
       <updated>1643396782184</updated>
     </task>
-    <option name="localTasksCounter" value="176" />
+    <task id="LOCAL-00176" summary="- Update audit log message">
+      <created>1643568544211</created>
+      <option name="number" value="00176" />
+      <option name="presentableId" value="LOCAL-00176" />
+      <option name="project" value="LOCAL" />
+      <updated>1643568544211</updated>
+    </task>
+    <option name="localTasksCounter" value="177" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -738,7 +736,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="- Allow clear for select module in ActivityLogComponent" />
     <MESSAGE value="- updates to deploy frontend to heroku" />
     <MESSAGE value="- deploying angular to heroku" />
     <MESSAGE value="- add postgreSQL dependency into maven&#10;- update Spring Profile" />
@@ -763,7 +760,8 @@
     <MESSAGE value="- Ignore adminBean and communityUserBean if not found when joining AssistanceBean" />
     <MESSAGE value="- Delete OccupationBean&#10;- Join CommunityUserBean with AccountBean&#10;- Update fetch CommunityUserBean in DaoImpl&#10;- Add parameter isActive for getCommunityUsers" />
     <MESSAGE value="- Allow user to upload image as assistance comment" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Allow user to upload image as assistance comment" />
+    <MESSAGE value="- Update audit log message" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Update audit log message" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

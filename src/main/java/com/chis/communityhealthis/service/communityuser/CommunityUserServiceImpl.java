@@ -137,7 +137,7 @@ public class CommunityUserServiceImpl implements CommunityUserService {
         }
 
         CommunityUserBean communityUserBean = communityUserDao.getCommunityUser(username);
-        smsService.sendSms(communityUserBean.getContactNo(), "Your account has been approved. You may login now.");
+        smsService.sendSms(communityUserBean.getContactNo(), "[Community Welfare Support System] - Your account has been approved. You may login now.");
 
         AuditBeanFactory auditBeanFactory = new AuditBeanFactory(AuditConstant.MODULE_COMMUNITY_USER, AuditConstant.formatActionApproveCommunityUser(username, communityUserBean.getFullName()), actionMakerUsername);
         AuditBean auditBean = auditBeanFactory.createAuditBean();
@@ -148,7 +148,7 @@ public class CommunityUserServiceImpl implements CommunityUserService {
     public void rejectUserAccount(String username, String actionMakerUsername) throws Exception {
         try {
             CommunityUserBean communityUserBean = removeUser(username);
-            smsService.sendSms(communityUserBean.getContactNo(), "Your account has been rejected. Please contact admin for more info.");
+            smsService.sendSms(communityUserBean.getContactNo(), "[Community Welfare Support System] - Your account has been rejected. Please contact admin for more info.");
             AuditBeanFactory auditBeanFactory = new AuditBeanFactory(AuditConstant.MODULE_COMMUNITY_USER, AuditConstant.formatActionRejectCommunityUser(username, communityUserBean.getFullName()), actionMakerUsername);
             AuditBean auditBean = auditBeanFactory.createAuditBean();
             auditService.saveLogs(auditBean, null);
