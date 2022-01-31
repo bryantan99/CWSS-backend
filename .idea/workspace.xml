@@ -4,10 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Fix findAllAssistanceRecords()">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/DiseaseBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/DiseaseBean.java" afterDir="false" />
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Add @TypeName for PostBean and PostMediaBean">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/HolidayBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/bean/HolidayBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/HolidayRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/HolidayRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/holiday/HolidayServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/holiday/HolidayServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application-local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-local.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/excel/Perak Public Holiday 2021.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/excel/Perak Public Holiday 2021.xlsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -362,14 +367,7 @@
       <workItem from="1643397518671" duration="20000" />
       <workItem from="1643478788817" duration="440000" />
       <workItem from="1643567110394" duration="2526000" />
-      <workItem from="1643624197944" duration="1833000" />
-    </task>
-    <task id="LOCAL-00130" summary="- Change appointment duration to 30 minutes&#10;- Update change appointment datetime modal">
-      <created>1636735016405</created>
-      <option name="number" value="00130" />
-      <option name="presentableId" value="LOCAL-00130" />
-      <option name="project" value="LOCAL" />
-      <updated>1636735016405</updated>
+      <workItem from="1643624197944" duration="2740000" />
     </task>
     <task id="LOCAL-00131" summary="- Display community user fullName at appointment management">
       <created>1636735517106</created>
@@ -707,7 +705,14 @@
       <option name="project" value="LOCAL" />
       <updated>1643625927850</updated>
     </task>
-    <option name="localTasksCounter" value="179" />
+    <task id="LOCAL-00179" summary="- Add @TypeName for PostBean and PostMediaBean">
+      <created>1643626150216</created>
+      <option name="number" value="00179" />
+      <option name="presentableId" value="LOCAL-00179" />
+      <option name="project" value="LOCAL" />
+      <updated>1643626150216</updated>
+    </task>
+    <option name="localTasksCounter" value="180" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -737,7 +742,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="- add postgreSQL dependency into maven&#10;- update Spring Profile" />
     <MESSAGE value="- Updated AdminRestController to restrict API based on account type&#10;- Updated staff-account-creation.ftl to dynamic replace loginUrl&#10;- Added method to retrieve currentLoggedInUserDetail in AuthService" />
     <MESSAGE value="- Updated PostRestController to restrict API endpoints based on account types" />
     <MESSAGE value="- Fix add postId for uploaded postMedia" />
@@ -762,7 +766,8 @@
     <MESSAGE value="- Update audit log message" />
     <MESSAGE value="- Update Twilio approved and reject message" />
     <MESSAGE value="- Fix findAllAssistanceRecords()" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Fix findAllAssistanceRecords()" />
+    <MESSAGE value="- Add @TypeName for PostBean and PostMediaBean" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Add @TypeName for PostBean and PostMediaBean" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

@@ -12,7 +12,7 @@ public class HolidayBean implements Serializable {
     public static final String HOLIDAY_ID = "HOLIDAY_ID";
     public static final String HOLIDAY_NAME = "HOLIDAY_NAME";
     public static final String HOLIDAY_DATE = "HOLIDAY_DATE";
-    public static final String YEAR = "YEAR";
+    public static final String HOLIDAY_YEAR = "HOLIDAY_YEAR";
 
     @Id
     @Column(name = HOLIDAY_ID)
@@ -25,8 +25,8 @@ public class HolidayBean implements Serializable {
     @Column(name = HOLIDAY_DATE)
     private Date holidayDate;
 
-    @Column(name = YEAR)
-    private String year;
+    @Column(name = HOLIDAY_YEAR)
+    private String holidayYear;
 
     public Integer getHolidayId() {
         return holidayId;
@@ -52,11 +52,11 @@ public class HolidayBean implements Serializable {
         this.holidayDate = holidayDate;
     }
 
-    public String getYear() {
-        return year;
+    public String getHolidayYear() {
+        return holidayYear;
     }
 
-    public void setYear(String year) {
-        this.year = year;
+    public void setHolidayYear(String year) {
+        this.holidayYear = year;
     }
 }
