@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Allow admin to manage holiday">
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Add exception when approving and rejecting community user account">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c2dae0c1-b714-4c90-a603-5e9f19ab22d2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/security/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/security/SecurityConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application-local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-local.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
@@ -375,14 +374,9 @@
       <workItem from="1644138005602" duration="1227000" />
       <workItem from="1644162886134" duration="3101000" />
       <workItem from="1644172160432" duration="610000" />
-      <workItem from="1644399690918" duration="3884000" />
-    </task>
-    <task id="LOCAL-00133" summary="- Update UI 'Filter Settings' - 'Filter'&#10;- Update Drawer Title 'Filter Data' - 'Filter Settings'&#10;- Display full nz-option text">
-      <created>1637491584024</created>
-      <option name="number" value="00133" />
-      <option name="presentableId" value="LOCAL-00133" />
-      <option name="project" value="LOCAL" />
-      <updated>1637491584025</updated>
+      <workItem from="1644399690918" duration="5510000" />
+      <workItem from="1644427356986" duration="404000" />
+      <workItem from="1644427872636" duration="59000" />
     </task>
     <task id="LOCAL-00134" summary="- Update AboutComponent">
       <created>1637492661318</created>
@@ -720,7 +714,14 @@
       <option name="project" value="LOCAL" />
       <updated>1643642517269</updated>
     </task>
-    <option name="localTasksCounter" value="182" />
+    <task id="LOCAL-00182" summary="- Add exception when approving and rejecting community user account">
+      <created>1644422996983</created>
+      <option name="number" value="00182" />
+      <option name="presentableId" value="LOCAL-00182" />
+      <option name="project" value="LOCAL" />
+      <updated>1644422996983</updated>
+    </task>
+    <option name="localTasksCounter" value="183" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -750,7 +751,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="- Fix add postId for uploaded postMedia" />
     <MESSAGE value="- Restrict audit logs for super admin only" />
     <MESSAGE value="- update getCommunityUsers() to remove unnecessary parameters address, occupation and healthIssue" />
     <MESSAGE value="- add restriction for updateUserAccount() to allow only admin / account owner&#10;- update getAppointmentAvailableTimeslot()" />
@@ -775,7 +775,8 @@
     <MESSAGE value="- Add @TypeName for PostBean and PostMediaBean" />
     <MESSAGE value="- Fix upload excel for holiday" />
     <MESSAGE value="- Allow admin to manage holiday" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Allow admin to manage holiday" />
+    <MESSAGE value="- Add exception when approving and rejecting community user account" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Add exception when approving and rejecting community user account" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

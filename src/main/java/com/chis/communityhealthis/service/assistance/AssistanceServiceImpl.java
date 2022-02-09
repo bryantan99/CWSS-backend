@@ -112,8 +112,6 @@ public class AssistanceServiceImpl implements AssistanceService {
 
         if (assistanceBean == null) {
             throw new Exception("Assistance bean [ID: " + assistanceId + "] was not found.");
-        } else if (!StringUtils.equals(assistanceBean.getAssistanceStatus(), AssistanceBean.STATUS_PENDING)) {
-            throw new Exception("Assistance request is not in pending status.");
         } else if (!StringUtils.equals(assistanceBean.getUsername(), actionMakerUsername) && adminBean == null) {
             throw new Exception("Unauthorized to delete assistance! Action maker is not admin / assistance request applicant.");
         }
