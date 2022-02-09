@@ -4,19 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Fix upload excel for holiday">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/holiday/HolidayForm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/model/holiday/HolidayModel.java" afterDir="false" />
+    <list default="true" id="00d8701c-ac90-41ed-855e-07f9edd012d6" name="Default Changelist" comment="- Allow admin to manage holiday">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/HolidayRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/controller/HolidayRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/holiday/HolidayDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/holiday/HolidayDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/holiday/HolidayDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/repository/holiday/HolidayDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/holiday/HolidayService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/holiday/HolidayService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/holiday/HolidayServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/holiday/HolidayServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/utility/DirectoryConstant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/utility/DirectoryConstant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/security/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/security/SecurityConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chis/communityhealthis/service/communityuser/CommunityUserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application-local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-local.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/excel/Perak Public Holiday 2021.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/excel/Perak Public Holiday 2021.xlsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +91,7 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="database.data.extractors.current.export.id" value="SQL Inserts" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../CWSS-frontend" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs.protractor.protractor_package" value="$PROJECT_DIR$/src/main/resources/webapp/chis-app/node_modules/protractor" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -371,14 +364,18 @@
       <workItem from="1643397518671" duration="20000" />
       <workItem from="1643478788817" duration="440000" />
       <workItem from="1643567110394" duration="2526000" />
-      <workItem from="1643624197944" duration="12575000" />
-    </task>
-    <task id="LOCAL-00132" summary="- Updated AssistanceMngmtComponent, AssistanceDetailComponent&#10;- Added PendingAssistance, MyAssistance, AllAssistance, AssistanceCategoryMngmt and AssistanceTable component&#10;- Added AssistanceCategoryBean, DAO and joined with AssistanceBean&#10;- Added AssistanceModel, AssistanceQueryForm and AssistanceRejectForm&#10;- Updated AssistanceUpdateForm&#10;- Added assistance category dropdown API&#10;- Refactored CommunityUserDaoImpl">
-      <created>1637488699797</created>
-      <option name="number" value="00132" />
-      <option name="presentableId" value="LOCAL-00132" />
-      <option name="project" value="LOCAL" />
-      <updated>1637488699797</updated>
+      <workItem from="1643624197944" duration="13069000" />
+      <workItem from="1643646052192" duration="2879000" />
+      <workItem from="1643660272221" duration="1241000" />
+      <workItem from="1643683749226" duration="1646000" />
+      <workItem from="1644000117839" duration="4342000" />
+      <workItem from="1644033560657" duration="1547000" />
+      <workItem from="1644087090565" duration="331000" />
+      <workItem from="1644127091055" duration="1491000" />
+      <workItem from="1644138005602" duration="1227000" />
+      <workItem from="1644162886134" duration="3101000" />
+      <workItem from="1644172160432" duration="610000" />
+      <workItem from="1644399690918" duration="3884000" />
     </task>
     <task id="LOCAL-00133" summary="- Update UI 'Filter Settings' - 'Filter'&#10;- Update Drawer Title 'Filter Data' - 'Filter Settings'&#10;- Display full nz-option text">
       <created>1637491584024</created>
@@ -716,7 +713,14 @@
       <option name="project" value="LOCAL" />
       <updated>1643627195585</updated>
     </task>
-    <option name="localTasksCounter" value="181" />
+    <task id="LOCAL-00181" summary="- Allow admin to manage holiday">
+      <created>1643642517269</created>
+      <option name="number" value="00181" />
+      <option name="presentableId" value="LOCAL-00181" />
+      <option name="project" value="LOCAL" />
+      <updated>1643642517269</updated>
+    </task>
+    <option name="localTasksCounter" value="182" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -746,7 +750,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="- Updated PostRestController to restrict API endpoints based on account types" />
     <MESSAGE value="- Fix add postId for uploaded postMedia" />
     <MESSAGE value="- Restrict audit logs for super admin only" />
     <MESSAGE value="- update getCommunityUsers() to remove unnecessary parameters address, occupation and healthIssue" />
@@ -771,7 +774,8 @@
     <MESSAGE value="- Fix findAllAssistanceRecords()" />
     <MESSAGE value="- Add @TypeName for PostBean and PostMediaBean" />
     <MESSAGE value="- Fix upload excel for holiday" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Fix upload excel for holiday" />
+    <MESSAGE value="- Allow admin to manage holiday" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Allow admin to manage holiday" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

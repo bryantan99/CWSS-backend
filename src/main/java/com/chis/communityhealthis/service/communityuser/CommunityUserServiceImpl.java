@@ -123,6 +123,8 @@ public class CommunityUserServiceImpl implements CommunityUserService {
         AccountBean accountBean = accountDao.find(username);
         if (accountBean == null) {
             throw new Exception("Account [username: " + username + "] was not found.");
+        } else if (StringUtils.equals(FlagConstant.YES, accountBean.getIsActive())) {
+            throw new Exception("Account [username: " + username + "] has been activated. Please refreshed the page.");
         }
         accountBean.setIsActive(FlagConstant.YES);
         accountDao.update(accountBean);
@@ -147,6 +149,13 @@ public class CommunityUserServiceImpl implements CommunityUserService {
     @Override
     public void rejectUserAccount(String username, String actionMakerUsername) throws Exception {
         try {
+            AccountBean accountBean = accountDao.find(username);
+            if (accountBean == null) {
+                throw new Exception("Account [username: " + username + "] was not found.");
+            } else if (StringUtils.equals(FlagConstant.YES, accountBean.getIsActive())) {
+                throw new Exception("Account [username: " + username + "] has been activated. Please refreshed the page.");
+            }
+
             CommunityUserBean communityUserBean = removeUser(username);
             smsService.sendSms(communityUserBean.getContactNo(), "[Community Welfare Support System] - Your account has been rejected. Please contact admin for more info.");
             AuditBeanFactory auditBeanFactory = new AuditBeanFactory(AuditConstant.MODULE_COMMUNITY_USER, AuditConstant.formatActionRejectCommunityUser(username, communityUserBean.getFullName()), actionMakerUsername);
